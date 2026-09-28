@@ -20,7 +20,7 @@ Toda a documentação está em [`docs/`](docs/):
 | [TASKS](docs/TASKS.md) | Backlog e status das tarefas |
 | [MEMORY](docs/MEMORY.md) | Estado atual do projeto |
 | [DECISIONS](docs/DECISIONS.md) | Decisões técnicas e de produto |
-| [DATA_MODEL](docs/DATA_MODEL.md) · [DATA_SOURCES](docs/DATA_SOURCES.md) · [IMAGES](docs/IMAGES.md) | Dados, fontes e imagens |
+| [DATA_MODEL](docs/DATA_MODEL.md) · [DATA_SOURCES](docs/DATA_SOURCES.md) · [IMAGES](docs/IMAGES.md) · [CURATION](docs/CURATION.md) | Dados, fontes, imagens e catálogo proposto |
 | [SEO](docs/SEO.md) · [SECURITY](docs/SECURITY.md) · [ACCESSIBILITY](docs/ACCESSIBILITY.md) · [PERFORMANCE](docs/PERFORMANCE.md) · [ANIMATIONS](docs/ANIMATIONS.md) · [TESTING](docs/TESTING.md) | Requisitos de qualidade |
 | [CHANGELOG](docs/CHANGELOG.md) | Histórico de mudanças |
 
