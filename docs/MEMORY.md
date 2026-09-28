@@ -17,8 +17,13 @@
   - Componentes em `src/components/ui/`: Button, IconButton, Input, SearchInput, Badge, FilterChip, ActiveFilterChip, Card/CardLink, Skeleton; ícones só via `icons.ts`.
   - Husky + lint-staged no pre-commit; CI em `.github/workflows/ci.yml` (quality + e2e).
   - Tudo passando: `lint`, `format:check`, `typecheck`, `test` (46), `test:e2e` (30), `build`, `npm audit`.
-- **F1-14 concluída** no branch `feat/layout` (PR #1 já foi mesclado no `main`). Layout em `src/components/layout/` e menus em `src/config/nav.ts`.
-- **Próxima tarefa**: F1-15 (estados e página 404), F1-16 (mídia), depois F1-13 (Radix).
+- **F1-14, F1-15 e F1-16 concluídas** no branch `feat/layout` (PR #1 já foi mesclado no `main`; este branch ainda não tem PR).
+  - Layout em `src/components/layout/`, menus em `src/config/nav.ts`.
+  - Estados em `src/components/states/`; `not-found.tsx`, `error.tsx` (usa `retry`, API do Next 16) e `global-error.tsx`.
+  - Mídia em `src/components/media/` (EntityImage, ImageUnavailable, ImageCredit) e schema `src/schemas/image-asset.ts` (adiantado da F2-01).
+  - Testes: 78 unitários/componente, 61 E2E.
+- **Próxima tarefa**: abrir o PR de `feat/layout`; depois F1-13 (componentes Radix), última da Fase 1.
+- O usuário roda o próprio `npm run dev` (porta 3001). O Next 16 só permite um `next dev` por projeto: para prints em modo dev, usar o servidor dele em vez de iniciar outro (nunca encerrá-lo sem pedir).
 
 ## O que já foi feito
 

@@ -13,7 +13,11 @@ export default defineConfig([
       // RULES.md §2.1: `any` proibido sem justificativa
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/consistent-type-imports": "warn",
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      // ignoreRestSiblings: permite remover um campo com `const { campo, ...resto } = objeto`
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", ignoreRestSiblings: true },
+      ],
       // RULES.md §1.3: toda imagem tem `alt` (o Next deixa isso só como aviso)
       "jsx-a11y/alt-text": "error",
     },

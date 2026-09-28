@@ -8,6 +8,7 @@ export { CircleNotchIcon } from "@phosphor-icons/react/dist/ssr/CircleNotch";
 export { CompassIcon } from "@phosphor-icons/react/dist/ssr/Compass";
 export { HeartIcon } from "@phosphor-icons/react/dist/ssr/Heart";
 export { HouseIcon } from "@phosphor-icons/react/dist/ssr/House";
+export { ImageBrokenIcon } from "@phosphor-icons/react/dist/ssr/ImageBroken";
 export { InfoIcon } from "@phosphor-icons/react/dist/ssr/Info";
 export { MapTrifoldIcon } from "@phosphor-icons/react/dist/ssr/MapTrifold";
 export { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr/MagnifyingGlass";

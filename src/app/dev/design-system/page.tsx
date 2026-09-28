@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/layout/Container";
 
 import { ComponentsShowcase } from "./_components/ComponentsShowcase";
+import { MediaShowcase } from "./_components/MediaShowcase";
 import { Section } from "./_components/Section";
 import { StatesShowcase } from "./_components/StatesShowcase";
 
@@ -151,6 +152,7 @@ export default function DesignSystemPage() {
 
       <ComponentsShowcase />
       <StatesShowcase />
+      <MediaShowcase />
     </Container>
   );
 }
