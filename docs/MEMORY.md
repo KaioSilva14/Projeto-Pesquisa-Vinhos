@@ -7,8 +7,11 @@
 ## Estado atual (2026-09-28)
 
 - **Fase 0 concluída e APROVADA pelo usuário** em 2026-09-28. Todas as decisões (ADR-001 a ADR-020) estão aceitas.
-- **Fase 1 iniciada**: F1-01 (mover o projeto para `C:\dev\Projeto-Vinhos`) em andamento.
+- **Fase 1 iniciada**. Projeto agora em `C:\dev\Projeto-Vinhos` (o Windows exibe `C:\Dev`).
+  - F1-01: conteúdo da pasta antiga no OneDrive apagado (autorizado pelo usuário); restou só a pasta vazia `OneDrive\Desktop\Projeto-Vinhos`, travada pela janela antiga do VS Code. Apagar quando ela estiver fechada.
+  - F1-02: concluída. Repositório: https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos (branch `main`, remoto `origin`; o push funciona com as credenciais do Git do usuário).
 - **Nenhum código de aplicação** foi escrito ainda. Não há `package.json` nem `node_modules`.
+- **Próxima tarefa**: F1-03 (scaffold manual do Next.js).
 
 ## O que já foi feito
 
