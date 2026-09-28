@@ -80,6 +80,11 @@
   --text-overline--letter-spacing: 0.12em;
   --text-overline--font-weight: 600;
 
+  /* Larguras de contêiner (DESIGN.md §4.2). Texto corrido: max-w-prose (65ch, padrão do Tailwind) */
+  --container-content: 80rem;
+  --container-wide: 90rem;
+  --container-lead: 45ch;
+
   /* Raios (DESIGN.md §5.1): nenhum outro é permitido */
   --radius-media: 2px;
   --radius-sm: 4px;

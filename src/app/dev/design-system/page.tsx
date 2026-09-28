@@ -69,9 +69,9 @@ export default function DesignSystemPage() {
   if (process.env.NODE_ENV === "production") notFound();
 
   return (
-    <main className="mx-auto max-w-[80rem] px-4 py-16 sm:px-6 md:px-8 lg:px-10">
+    <main className="mx-auto max-w-content px-4 py-16 sm:px-6 md:px-8 lg:px-10">
       <h1 className="font-serif text-h1">Design system</h1>
-      <p className="mt-4 max-w-[45ch] text-lead text-text-muted">
+      <p className="mt-4 max-w-lead text-lead text-text-muted">
         Tokens do DESIGN.md renderizados no tema atual. Troque o tema do sistema para conferir o
         escuro.
       </p>
@@ -117,6 +117,20 @@ export default function DesignSystemPage() {
             </li>
           ))}
         </ul>
+        <p className="mt-10 font-serif text-h2">
+          Títulos com <em>ênfase em itálico</em> da mesma família
+        </p>
+        <p className="mt-4 text-small text-text-muted">
+          Acentos: ã â á à ç é ê í ó ô õ ú ü · Ñ ñ · Œ œ
+        </p>
+        <dl className="mt-6 grid max-w-xs grid-cols-2 gap-x-6 gap-y-1 text-body">
+          <dt className="text-text-muted">Números tabulares</dt>
+          <dd className="text-right">1111</dd>
+          <dt className="text-text-muted">alinhados à direita</dt>
+          <dd className="text-right">8888</dd>
+          <dt className="text-text-muted">em listas dl</dt>
+          <dd className="text-right">12,5</dd>
+        </dl>
       </Section>
 
       <Section title="Raios e sombras">
