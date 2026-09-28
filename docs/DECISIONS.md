@@ -137,3 +137,9 @@
 - **Decisão**: fixar `eslint@9.39.5`. O ESLint 10 só funcionaria com contornos (fixar a versão do React nas configurações) e sem garantia dos plugins.
 - **Consequências**: o npm avisa que a linha 9 não recebe mais suporte. O risco é baixo porque o ESLint é ferramenta de desenvolvimento e não vai para o site publicado. Reavaliar quando esses três plugins declararem suporte ao ESLint 10 (checar `npm view eslint-plugin-react peerDependencies`). Observação: o npm 11 avisa que o script de instalação do `unrs-resolver` (dependência do plugin `import`) não foi aprovado; ele não é necessário no Windows x64 (o binário nativo vem como dependência opcional) e o lint funciona sem ele, então fica sem aprovação.
 - **Data**: 2026-09-28 · **Status**: aceita
+
+## ADR-023 — Catálogo inicial aprovado
+- **Contexto**: a F2-05 propôs regiões, uvas e produtores dentro dos 6 países do ADR-019, cada um com fonte oficial confirmada (`CURATION.md`).
+- **Decisão**: aprovados 10 regiões (Chianti Classico, Barolo, Bordeaux, Champagne, Rioja, Rías Baixas, Napa Valley, Mendoza, Valle de Cafayate, Vale dos Vinhedos), 10 uvas (Sangiovese, Nebbiolo, Cabernet Sauvignon, Merlot, Chardonnay, Pinot Noir, Tempranillo, Albariño, Malbec, Torrontés Riojano) e 7 produtores (G.D. Vajra, Château Palmer, Louis Roederer, La Rioja Alta, Chateau Montelena, Catena Zapata e Miolo). Miolo entra com ressalva: só vinhos com ficha técnica publicada da safra. Chianti Classico fica sem produtor por enquanto.
+- **Consequências**: as tarefas F2-06 a F2-08 só trabalham com estes itens. Inclusões novas exigem aprovação e atualização do `CURATION.md`.
+- **Data**: 2026-09-28 · **Status**: aceita (itens 1 e 2 delegados pelo usuário; itens 3 e 4 escolhidos por ele)

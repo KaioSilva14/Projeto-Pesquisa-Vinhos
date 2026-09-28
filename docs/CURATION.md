@@ -1,6 +1,6 @@
 # CURATION — Proposta de catálogo inicial (F2-05)
 
-> Versão 0.1 · 2026-09-28 · **Status: aguardando aprovação do usuário**
+> Versão 1.0 · 2026-09-28 · **Status: aprovada pelo usuário em 2026-09-28** (ADR-023)
 > Escopo: os 6 países do ADR-019. Lotes conforme `DATA_SOURCES.md` §8.
 > Nesta etapa **nenhum dado foi registrado**: só foi confirmado que existe fonte oficial acessível para cada item. Os fatos (datas, percentuais, teores, regras) serão extraídos e conferidos nas tarefas F2-06 a F2-08, depois da aprovação.
 > Todas as fontes abaixo foram acessadas em **2026-09-28**.
@@ -50,18 +50,18 @@ Todas confirmadas no VIVC em 2026-09-28. O **nome no site** segue o uso no Brasi
 
 A ligação "uva ↔ região" (ex.: "a Sangiovese é a uva principal do Chianti Classico") também precisa de fonte: será confirmada nos documentos de cada denominação na F2-07.
 
-## Lote 2 — Produtores (7 confirmados + 2 pendentes)
+## Lote 2 — Produtores (6 confirmados + Miolo com ressalva)
 
 | País | Região | Produtor | Dados técnicos por safra no site oficial | Situação |
 |---|---|---|---|---|
 | Itália | Barolo | G.D. Vajra | [Fichas em PDF por safra](https://www.gdvajra.it/uploads/public/3188_fact-sheet-2021-barolo-albe-en-1-.pdf) (ex.: Barolo Albe 2020 e 2021) | Confirmado |
-| Itália | Chianti Classico | *a definir* | Fèlsina: só um pacote genérico de fichas, sem safras identificadas. Castello di Ama: não localizado | **Pendente** |
+| Itália | Chianti Classico | — | Fèlsina: só um pacote genérico de fichas, sem safras identificadas. Castello di Ama: não localizado | **Sem produtor por enquanto** (decisão do usuário) |
 | França | Bordeaux | Château Palmer | [Página por safra](https://www.chateau-palmer.com/en/wine-library) ("millésimes") | Confirmado |
 | França | Champagne | Louis Roederer | [Fichas técnicas em PDF por edição/safra](https://www.louis-roederer.com/sites/default/files/pdf/lr_tech_sheet_collection_244_en.pdf) | Confirmado |
 | Espanha | Rioja | La Rioja Alta, S.A. | [Fichas em PDF por safra](https://www.riojalta.com/vinos_rioja-alta/gran-reserva-904/) (Gran Reserva 904: 1982 a 2016) | Confirmado |
 | Estados Unidos | Napa Valley | Chateau Montelena | [Fichas em PDF por safra](https://montelena.com/resources/) (Cabernet Sauvignon 2016 a 2022) | Confirmado |
 | Argentina | Mendoza | Catena Zapata | [Página por safra de cada vinho](https://catenazapata.com/catena-zapata-malbec-argentino-2021/) | Confirmado |
-| Brasil | Vale dos Vinhedos | *a definir* | Miolo: PDF no site institucional só para algumas safras (ex.: Lote 43 2012). Casa Valduga e Pizzato: dados técnicos encontrados principalmente em lojas de terceiros; site da Pizzato não pôde ser lido automaticamente | **Pendente** |
+| Brasil | Vale dos Vinhedos | Miolo | [PDFs no site institucional](https://institucional.miolo.com.br/produtos/miolo-lote-43/) só para algumas safras (ex.: Lote 43 2012) | **Aprovado com ressalva**: no Lote 3 só entram vinhos com ficha técnica publicada da safra |
 
 Rías Baixas e Valle de Cafayate entram no Lote 1 (região e uva) sem produtor por enquanto: os limites de 1 a 2 produtores por país já são cobertos pelas outras regiões.
 
@@ -77,9 +77,13 @@ Só depois de aprovar os produtores: 2 a 4 vinhos por produtor (12 a 30 no total
 - **Imagens**: nenhuma foto foi avaliada ainda. Cada item poderá aparecer com "Imagem indisponível" até haver foto com licença verificada (F2-06 a F2-08).
 - **Direitos**: fatos das fichas técnicas podem ser usados; textos nunca serão copiados (`RULES.md` §1.2).
 
-## Decisões pedidas ao usuário
+## Decisões (2026-09-28)
 
-1. Aprovar, cortar ou acrescentar **regiões** e **uvas** do Lote 1.
-2. Aprovar os **7 produtores confirmados** do Lote 2.
-3. **Brasil**: seguir com a Miolo (fichas de poucas safras), procurar outro produtor, ou deixar o Brasil só com região e uva por enquanto.
-4. **Chianti Classico**: procurar outro produtor ou deixar a região sem produtor por enquanto.
+| Pergunta | Decisão |
+|---|---|
+| 1. Regiões e uvas do Lote 1 | Aprovadas as 10 regiões e as 10 uvas (o usuário delegou a escolha; mantida a proposta) |
+| 2. Produtores confirmados | Aprovados os 6 (idem). Obs.: a mensagem ao usuário dizia "7 confirmados" por erro de contagem; a lista sempre teve 6 |
+| 3. Brasil | **Miolo**, com a ressalva de só entrarem vinhos com ficha técnica publicada da safra |
+| 4. Chianti Classico | Região sem produtor por enquanto |
+
+Qualquer inclusão fora desta lista precisa de nova aprovação e atualização deste documento.
