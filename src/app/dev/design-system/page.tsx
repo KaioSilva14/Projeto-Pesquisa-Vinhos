@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import type { ReactNode } from "react";
+
+import { ComponentsShowcase } from "./_components/ComponentsShowcase";
+import { Section } from "./_components/Section";
 
 // Página interna para conferir os tokens do DESIGN.md. Não existe em produção.
 export const metadata: Metadata = {
@@ -55,15 +57,6 @@ const shadows = [
   { name: "md", className: "shadow-md" },
   { name: "lg", className: "shadow-lg" },
 ] as const;
-
-function Section({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <section className="border-t border-border py-12">
-      <h2 className="mb-8 font-serif text-h2">{title}</h2>
-      {children}
-    </section>
-  );
-}
 
 export default function DesignSystemPage() {
   if (process.env.NODE_ENV === "production") notFound();
@@ -152,6 +145,8 @@ export default function DesignSystemPage() {
           ))}
         </ul>
       </Section>
+
+      <ComponentsShowcase />
     </main>
   );
 }
