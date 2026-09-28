@@ -1,6 +1,6 @@
 // Configuração do ESLint (formato "flat config").
-// Só funciona depois da Fase 1, quando `eslint` e `eslint-config-next` forem instalados.
-// No Next 16 o comando `next lint` não existe mais: usamos `npx eslint .` (script `npm run lint`).
+// No Next 16 o comando `next lint` não existe mais: usamos `eslint .` (script `npm run lint`).
+// ESLint fixado na linha 9: os plugins do eslint-config-next ainda não suportam o 10 (ADR-022).
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
@@ -14,6 +14,8 @@ export default defineConfig([
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/consistent-type-imports": "warn",
       "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      // RULES.md §1.3: toda imagem tem `alt` (o Next deixa isso só como aviso)
+      "jsx-a11y/alt-text": "error",
     },
   },
   {
@@ -24,8 +26,14 @@ export default defineConfig([
         "error",
         {
           patterns: [
-            { group: ["@/data/*", "@/adapters/*"], message: "Use os services (via props) em vez de importar dados diretamente." },
-            { group: ["@/services/*"], message: "Services são server-only: receba os dados por props." },
+            {
+              group: ["@/data/*", "@/adapters/*"],
+              message: "Use os services (via props) em vez de importar dados diretamente.",
+            },
+            {
+              group: ["@/services/*"],
+              message: "Services são server-only: receba os dados por props.",
+            },
           ],
         },
       ],

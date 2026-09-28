@@ -143,7 +143,10 @@ export default function DesignSystemPage() {
         </ul>
         <ul className="mt-8 flex flex-wrap gap-6">
           {shadows.map((s) => (
-            <li key={s.name} className={`${s.className} rounded-md bg-surface px-6 py-8 text-small`}>
+            <li
+              key={s.name}
+              className={`${s.className} rounded-md bg-surface px-6 py-8 text-small`}
+            >
               shadow-{s.name}
             </li>
           ))}

@@ -67,7 +67,7 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 
 | Pacote | Versão | Uso |
 |---|---|---|
-| `eslint` + `eslint-config-next` | 10.11.0 + 16.3.6 | Lint (flat config). **`next lint` foi removido no Next 16** → usar `eslint` direto |
+| `eslint` + `eslint-config-next` | **9.39.5** + 16.3.6 | Lint (flat config). **`next lint` foi removido no Next 16** → usar `eslint` direto. ESLint 10 incompatível com os plugins do Next (ADR-022) |
 | `prettier` + `prettier-plugin-tailwindcss` | 3.9.9 + 0.8.1 | Formatação e ordenação de classes |
 | `husky` + `lint-staged` | 9.1.7 + 17.6.0 | Checagens antes do commit |
 | `vitest` + `@vitejs/plugin-react` + `jsdom` | 5.0.2 + 6.1.1 + 30.1.1 | Testes unitários e de componente |
