@@ -371,7 +371,7 @@ Tokens: `--duration-instant 100ms` · `--duration-fast 150ms` · `--duration-bas
 
 ## 13. Tokens Tailwind v4 (rascunho para a Fase 1)
 
-> **Implementado em `src/styles/globals.css` (F1-04), que passa a ser a fonte da verdade.** Diferenças em relação ao rascunho abaixo: as paletas, raios, sombras, easings e tamanhos de texto padrão do Tailwind foram zerados (`--color-*: initial` etc.), então só os tokens do Vinum existem; a variante `dark:` cobre tanto `data-theme="dark"` quanto a preferência do sistema; as durações ficam em `:root` (uso: `duration-(--duration-fast)`); a escala tipográfica virou tokens `--text-*` (classes `text-display`, `text-h1`… `text-overline`, esta junto com `uppercase`). Página interna de conferência: `/dev/design-system` (só em desenvolvimento).
+> **Implementado em `src/styles/globals.css` (F1-04), que passa a ser a fonte da verdade.** Diferenças em relação ao rascunho abaixo: as paletas, raios, sombras, easings e tamanhos de texto padrão do Tailwind foram zerados (`--color-*: initial` etc.), então só os tokens do Vinum existem; a variante `dark:` cobre tanto `data-theme="dark"` quanto a preferência do sistema; as durações ficam em `:root` (uso: `duration-(--duration-fast)`); a escala tipográfica virou tokens `--text-*` (classes `text-display`, `text-h1`… `text-overline`, esta junto com `uppercase`). Página interna de conferência: `/dev/design-system` (só em desenvolvimento). Tokens acrescentados depois: `--color-scrim` (fundo escurecido de diálogos: claro `rgb(28 28 31 / 0.45)`, escuro `rgb(8 8 10 / 0.7)`), contêineres `max-w-content`/`max-w-wide`/`max-w-lead` e as animações `animate-dialog-*`, `animate-sheet-*`, `animate-pop-*`, `animate-accordion-*` (ANIMATIONS.md A07, A08, A11).
 
 ```css
 /* src/styles/globals.css */

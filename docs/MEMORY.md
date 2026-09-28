@@ -7,23 +7,19 @@
 ## Estado atual (2026-09-28)
 
 - **Fase 0 concluída e APROVADA pelo usuário** em 2026-09-28. Todas as decisões (ADR-001 a ADR-020) estão aceitas. Na Fase 1 entraram ADR-021 (`AGENTS.md`) e ADR-022 (ESLint 9).
-- **Fase 1 iniciada**. Projeto agora em `C:\dev\Projeto-Vinhos` (o Windows exibe `C:\Dev`).
-  - F1-01: conteúdo da pasta antiga no OneDrive apagado (autorizado pelo usuário); restou só a pasta vazia `OneDrive\Desktop\Projeto-Vinhos`, travada pela janela antiga do VS Code. Apagar quando ela estiver fechada.
-  - F1-02: concluída. Repositório: https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos (branch `main`, remoto `origin`; o push funciona com as credenciais do Git do usuário).
-- **F1-03 a F1-12 concluídas**, no branch `feat/fundacao`, enviado ao GitHub (push autorizado pelo usuário em 2026-09-28). **PR #1** (`feat/fundacao` → `main`) aberto pelo usuário, com o CI verde (https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos/pull/1). O `gh` não está instalado: o usuário abre e faz merge de PRs pelo site.
+- **Fase 1 concluída** (F1-01 a F1-16) em 2026-09-28. Projeto em `C:\dev\Projeto-Vinhos` (o Windows exibe `C:\Dev`). Repositório: https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos.
+  - PR #1 (fundação) e PR #2 (layout, estados, mídia) mesclados no `main`. A F1-13 (Radix) está no branch `feat/radix`, aguardando o PR #3.
+  - Fluxo de trabalho combinado: um branch por bloco de tarefas → push → **o usuário abre o PR e faz o merge pelo site** (o `gh` não está instalado) → eu confiro o CI pela API pública e atualizo o `main` local.
+- **O que existe no código**:
   - Next 16.3.6 + React 19.3.0 + TS 6.0.3 estrito; Tailwind 4.3.3 com tokens em `src/styles/globals.css` (fonte da verdade do design system); fontes em `src/styles/fonts.ts`.
-  - Página interna `/dev/design-system` (só em dev; 404 em produção) mostra tokens e componentes. Axe: 0 violações nos dois temas.
-  - `src/lib/cn.ts` (tailwind-merge configurado com os tokens), `src/lib/normalize.ts`, `src/config/env.ts` (Zod) e `src/config/security-headers.ts` (CSP e headers).
-  - Componentes em `src/components/ui/`: Button, IconButton, Input, SearchInput, Badge, FilterChip, ActiveFilterChip, Card/CardLink, Skeleton; ícones só via `icons.ts`.
-  - Husky + lint-staged no pre-commit; CI em `.github/workflows/ci.yml` (quality + e2e).
-  - Tudo passando: `lint`, `format:check`, `typecheck`, `test` (46), `test:e2e` (30), `build`, `npm audit`.
-- **F1-14, F1-15 e F1-16 concluídas** no branch `feat/layout` (PR #1 já foi mesclado no `main`; este branch ainda não tem PR).
-  - Layout em `src/components/layout/`, menus em `src/config/nav.ts`.
-  - Estados em `src/components/states/`; `not-found.tsx`, `error.tsx` (usa `retry`, API do Next 16) e `global-error.tsx`.
-  - Mídia em `src/components/media/` (EntityImage, ImageUnavailable, ImageCredit) e schema `src/schemas/image-asset.ts` (adiantado da F2-01).
-  - Testes: 78 unitários/componente, 61 E2E.
-- **Próxima tarefa**: abrir o PR de `feat/layout`; depois F1-13 (componentes Radix), última da Fase 1.
+  - `src/components/ui/`: Button, IconButton, Input, SearchInput, Badge, FilterChip, ActiveFilterChip, Card/CardLink, Skeleton, Dialog, Sheet, Popover, Tooltip, Select, Checkbox, Accordion, Tabs. Ícones só via `icons.ts`.
+  - `src/components/layout/` (cabeçalho, rodapé com aviso 18+, BottomNav, trilha, PageHeader, Section, Container), `states/` (vazio, sem resultados, erro, dados incompletos, selo demo), `media/` (EntityImage, ImageUnavailable, ImageCredit).
+  - `src/app/`: home provisória, `not-found.tsx`, `error.tsx` (usa `retry`, API do Next 16), `global-error.tsx`, página interna `/dev/design-system` (só em dev).
+  - `src/config/` (env com Zod, headers de segurança, menus, site), `src/lib/` (cn, normalize), `src/schemas/image-asset.ts` (adiantado da F2-01).
+  - Qualidade: Husky + lint-staged, CI no GitHub Actions. Testes: 93 unitários/componente, 61 E2E (5 perfis de navegador), axe sem violações.
+- **Próxima tarefa**: PR #3 (`feat/radix`); depois **Fase 2**, começando pela **F2-05** (propor uvas, regiões e produtores dos 6 países, com fonte primária, e pedir aprovação do usuário) e pela F2-01 (schemas Zod das entidades).
 - O usuário roda o próprio `npm run dev` (porta 3001). O Next 16 só permite um `next dev` por projeto: para prints em modo dev, usar o servidor dele em vez de iniciar outro (nunca encerrá-lo sem pedir).
+- O usuário prefere que eu explique cada passo **enquanto** faço, em linguagem simples (pedido em 2026-09-28, após não entender onde estavam os commits).
 
 ## O que já foi feito
 
@@ -53,8 +49,8 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- Concluir F1-01: apagar a pasta vazia `OneDrive\Desktop\Projeto-Vinhos` quando a janela antiga do VS Code estiver fechada (pedir confirmação).
-- Merge do PR #1 pelo usuário (depois do CI verde no último commit); próximas tarefas em um branch novo a partir do `main`.
+- PR #3 (`feat/radix` → `main`) a ser aberto e mesclado pelo usuário.
+- Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
 ## Problemas conhecidos
 
@@ -64,14 +60,12 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 - Links para rotas que ainda não existem (fases 3 a 6) dão 404 no pré-carregamento do Next; no Chromium o Playwright vê essas requisições como "pendentes" para sempre. Por isso **não usar `waitForLoadState("networkidle")`** nos testes E2E.
 - O Firefox do Playwright falhava de forma intermitente (erros gráficos internos, `GraphicsCriticalError`) quando rodavam 8 navegadores em paralelo (16 núcleos, pouca memória livre). Resolvido limitando a 4 workers locais em `playwright.config.ts`; no CI fica o padrão.
 - No PowerShell 5.1, não editar arquivos com `Get-Content`/`Set-Content`: eles leem UTF-8 como ANSI e gravam BOM, corrompendo os acentos.
-
-- O `create-next-app` não roda em pasta com arquivos existentes → scaffold manual (ADR-017).
-- `eslint.config.mjs` e `.prettierrc` só funcionam depois da instalação das dependências (Fase 1).
+- Com a lista do `Select` aberta, o axe acusa `aria-hidden-focus`: falso positivo analisado (`ACCESSIBILITY.md` §5.1).
 
 ## Próximos passos
 
-1. Depois do merge do PR #1: `git switch main`, `git pull` e criar um branch novo (ex.: `feat/layout`).
-2. F1-14 (layout), F1-15 (estados de página), F1-16 (mídia), F1-13 (componentes Radix).
+1. Depois do merge do PR #3: `git switch main`, `git pull`, apagar o branch local e criar um novo para a Fase 2.
+2. F2-05: propor ao usuário a lista de uvas, regiões e produtores por país (ADR-019), cada item com a fonte primária identificada. **Nenhum dado entra no código antes da aprovação.**
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 
 ## Links importantes
