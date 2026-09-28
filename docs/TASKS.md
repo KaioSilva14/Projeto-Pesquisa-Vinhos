@@ -47,7 +47,7 @@
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F2-01 | Schemas Zod de todas as entidades + tipos derivados | Conforme `DATA_MODEL.md`; testes de schema | P0 | F1-03 | todo (o schema `ImageAsset` já foi feito na F1-16: `src/schemas/image-asset.ts`) |
+| F2-01 | Schemas Zod de todas as entidades + tipos derivados | Conforme `DATA_MODEL.md`; testes de schema | P0 | F1-03 | done |
 | F2-02 | `scripts/validate-data.ts` com as 13 regras de integridade | Falha com dados inválidos de teste; `npm run validate:data` no CI | P0 | F2-01 | todo |
 | F2-03 | Adapter local + services (get por slug, listas, relações) com `server-only` | Testes unitários | P0 | F2-01 | todo |
 | F2-04 | Dados demo em `src/data/demo/` (fictícios, `isDemo`) + flag de ambiente | Selo visível; bloqueados em produção | P1 | F2-03 | todo |
