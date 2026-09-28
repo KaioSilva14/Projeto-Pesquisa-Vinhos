@@ -44,7 +44,7 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 | Pacote | Versão | Uso | Justificativa |
 |---|---|---|---|
 | `zod` | 4.6.5 | Schemas das entidades, searchParams, favoritos | Tipos derivados com `z.infer`; valida dados no build e no CI |
-| `server-only` | (atual) | Marcar `services/` como exclusivo do servidor | Garante que o catálogo inteiro nunca vá para o bundle do cliente |
+| `server-only` | 0.0.1 | Marcar `services/` como exclusivo do servidor | Garante que o catálogo inteiro nunca vá para o bundle do cliente (testado: import num Client Component derruba o build) |
 | `zustand` | 5.0.15 | Favoritos com `persist` | Leve, sem provider, API simples para iniciante |
 | `nuqs` | 2.10.1 | Estado de filtros/busca na URL | Tipado, compatível com App Router, evita bugs de sincronização |
 | TanStack Query | — | **Não usar** enquanto os dados forem locais | Regra do CLAUDE.md 5.3 |
