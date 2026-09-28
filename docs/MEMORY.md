@@ -10,7 +10,7 @@
 - **Fase 1 iniciada**. Projeto agora em `C:\dev\Projeto-Vinhos` (o Windows exibe `C:\Dev`).
   - F1-01: conteúdo da pasta antiga no OneDrive apagado (autorizado pelo usuário); restou só a pasta vazia `OneDrive\Desktop\Projeto-Vinhos`, travada pela janela antiga do VS Code. Apagar quando ela estiver fechada.
   - F1-02: concluída. Repositório: https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos (branch `main`, remoto `origin`; o push funciona com as credenciais do Git do usuário).
-- **F1-03 a F1-12 concluídas** (exceto F1-10, que aguarda o primeiro PR), no branch `feat/fundacao`, **já enviado ao GitHub** (push autorizado pelo usuário em 2026-09-28). O `main` continua só com os docs. **Nenhum PR aberto ainda** (o `gh` não está instalado; o usuário abre pelo link `https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos/pull/new/feat/fundacao`).
+- **F1-03 a F1-12 concluídas**, no branch `feat/fundacao`, enviado ao GitHub (push autorizado pelo usuário em 2026-09-28). **PR #1** (`feat/fundacao` → `main`) aberto pelo usuário, com o CI verde (https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos/pull/1). O `gh` não está instalado: o usuário abre e faz merge de PRs pelo site.
   - Next 16.3.6 + React 19.3.0 + TS 6.0.3 estrito; Tailwind 4.3.3 com tokens em `src/styles/globals.css` (fonte da verdade do design system); fontes em `src/styles/fonts.ts`.
   - Página interna `/dev/design-system` (só em dev; 404 em produção) mostra tokens e componentes. Axe: 0 violações nos dois temas.
   - `src/lib/cn.ts` (tailwind-merge configurado com os tokens), `src/lib/normalize.ts`, `src/config/env.ts` (Zod) e `src/config/security-headers.ts` (CSP e headers).
@@ -48,7 +48,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 ## Pendências
 
 - Concluir F1-01: apagar a pasta vazia `OneDrive\Desktop\Projeto-Vinhos` quando a janela antiga do VS Code estiver fechada (pedir confirmação).
-- Usuário abrir o PR `feat/fundacao` → `main` (link acima) para o CI rodar pela primeira vez.
+- Merge do PR #1 pelo usuário (depois do CI verde no último commit); próximas tarefas em um branch novo a partir do `main`.
 
 ## Problemas conhecidos
 
@@ -62,7 +62,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Fechar a F1-10 quando o PR existir (CI verde; se falhar, ver o log do job no GitHub).
+1. Depois do merge do PR #1: `git switch main`, `git pull` e criar um branch novo (ex.: `feat/layout`).
 2. F1-14 (layout), F1-15 (estados de página), F1-16 (mídia), F1-13 (componentes Radix).
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 
