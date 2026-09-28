@@ -28,7 +28,7 @@
 |---|---|---|---|---|---|
 | F1-01 | Mover o projeto para fora do OneDrive (ADR-016) | Pasta em `C:\dev\Projeto-Vinhos` aberta no VS Code; cópia antiga removida com confirmação | P0 | F0-12 | doing (conteúdo antigo apagado; falta só remover a pasta vazia no OneDrive após fechar a janela antiga do VS Code) |
 | F1-02 | `git init` + primeiro commit dos docs + repositório no GitHub | `main` com os docs; `.gitignore` funcionando | P0 | F1-01 | done (github.com/KaioSilva14/Projeto-Pesquisa-Vinhos) |
-| F1-03 | Scaffold manual: `package.json`, Next 16, React 19, TS 6 (`strict`), `tsconfig` com alias `@/` | `npm run dev` abre página inicial vazia | P0 | F1-02 | todo |
+| F1-03 | Scaffold manual: `package.json`, Next 16, React 19, TS 6 (`strict`), `tsconfig` com alias `@/` | `npm run dev` abre página inicial vazia | P0 | F1-02 | done |
 | F1-04 | Tailwind v4 + tokens do `DESIGN.md` em `globals.css` (claro/escuro) | Tokens usados numa página de teste; contraste confirmado com axe | P0 | F1-03 | todo |
 | F1-05 | Fontes Newsreader + Hanken Grotesk via `next/font` | Sem CLS; acentos e números tabulares ok | P0 | F1-04 | todo |
 | F1-06 | ESLint + Prettier (+ plugin Tailwind) + scripts `lint`, `format`, `typecheck` | Comandos passam sem erros | P0 | F1-03 | todo |

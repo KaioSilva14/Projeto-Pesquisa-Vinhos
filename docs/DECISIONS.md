@@ -125,3 +125,9 @@
 - **Decisão**: a identidade visual segue exclusivamente o `DESIGN.md` (paleta "Adega", Newsreader + Hanken Grotesk, raios e componentes definidos).
 - **Consequências**: qualquer mudança visual relevante passa por atualização do `DESIGN.md` antes do código.
 - **Data**: 2026-09-28 · **Status**: aceita (pedido do usuário)
+
+## ADR-021 — `AGENTS.md` na raiz para proteger o `CLAUDE.md`
+- **Contexto**: o `next dev` 16 detecta quando é executado por um agente de IA e insere um bloco de regras no `AGENTS.md` ou, se ele não existir, no fim do `CLAUDE.md` (`node_modules/next/dist/server/lib/generate-agent-files.js`). Não há opção para desligar. O `CLAUDE.md` não deve ser alterado (pedido do usuário).
+- **Decisão**: manter um `AGENTS.md` na raiz, versionado, contendo o bloco gerenciado pelo Next. Com ele presente, o Next escreve apenas nesse arquivo.
+- **Consequências**: exceção ao ADR-018 (a raiz passa a ter `CLAUDE.md`, `README.md` e `AGENTS.md`). O bloco aponta a documentação da versão instalada em `node_modules/next/dist/docs/`, útil para consultar APIs do Next 16. Não apagar o `AGENTS.md`: sem ele o `CLAUDE.md` volta a ser modificado.
+- **Data**: 2026-09-28 · **Status**: aceita
