@@ -36,7 +36,7 @@
 | F1-08 | Playwright + axe + primeiro E2E (home carrega, sem violações) | `npm run test:e2e` verde | P1 | F1-03 | done (5 perfis: Chromium 360/768/1440, Firefox 1440, WebKit 360) |
 | F1-09 | Husky + lint-staged | Commit roda lint/format nos arquivos alterados | P1 | F1-06 | done |
 | F1-10 | GitHub Actions CI (lint, typecheck, test, build) | CI verde em PR | P0 | F1-06, F1-07 | doing (workflow criado; falta ver verde no primeiro PR) |
-| F1-11 | Headers de segurança + CSP (`SECURITY.md` §3) e `src/config/env.ts` com Zod | Headers presentes em `npm run start` | P1 | F1-03 | todo |
+| F1-11 | Headers de segurança + CSP (`SECURITY.md` §3) e `src/config/env.ts` com Zod | Headers presentes em `npm run start` | P1 | F1-03 | done |
 | F1-12 | Componentes `ui/`: Button, IconButton, Input, SearchInput, Badge, Chip, Card base, Skeleton | Variantes CVA, todos os estados, testes de componente | P0 | F1-04 | todo |
 | F1-13 | Componentes `ui/` sobre Radix: Dialog, Sheet, Popover, Tooltip, Select, Checkbox, Accordion, Tabs | Teclado/foco ok; testes | P1 | F1-12 | todo |
 | F1-14 | Layout: SiteHeader, SiteFooter (aviso 18+), BottomNav, SkipLink, Breadcrumbs, PageHeader, Section | Responsivo em 360/768/1440; axe ok | P0 | F1-12 | todo |
