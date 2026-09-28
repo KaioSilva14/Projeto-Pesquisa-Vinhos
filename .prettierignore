@@ -8,3 +8,6 @@ test-results/
 package-lock.json
 public/
 CLAUDE.md
+
+# Documentação escrita à mão: o Prettier realinharia todas as tabelas
+*.md

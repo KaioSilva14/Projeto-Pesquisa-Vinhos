@@ -65,6 +65,8 @@ const csp = [
 | `Permissions-Policy` | `camera=(), microphone=(), geolocation=(), payment=(), usb=()` |
 | `Cross-Origin-Opener-Policy` | `same-origin` |
 
+**Implementação (F1-11)**: `src/config/security-headers.ts`, aplicado em `next.config.ts` a todas as rotas e testado em `tests/unit/security-headers.test.ts` e `tests/e2e/security-headers.spec.ts`. `upgrade-insecure-requests` e `Strict-Transport-Security` só são enviados quando `VERCEL=1` (HTTPS garantido): no `localhost` em HTTP, o Safari/WebKit tentaria trocar os arquivos para HTTPS e o CSS quebraria.
+
 **Sobre `'unsafe-inline'` em scripts**: o Next injeta scripts inline para hidratação. Uma CSP com *nonce* exige renderização dinâmica de todas as páginas (perderíamos o SSG). Decisão v1: CSP sem nonce + demais controles. Fase 10: avaliar `experimental.sri` (hashes) para remover `'unsafe-inline'` mantendo páginas estáticas. Registrado como risco R14 em `ARCHITECTURE.md`.
 
 ## 4. Validação

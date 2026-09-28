@@ -2,7 +2,7 @@
 
 Plataforma digital de **pesquisa, descoberta e consulta de vinhos**, com a sensação de catálogo premium e enciclopédia moderna. **Não é loja**: não há preços, carrinho nem venda. Toda informação exibida tem fonte registrada.
 
-> **Status**: Fase 0 (documentação) concluída, aguardando aprovação. O código do site começa na Fase 1.
+> **Status**: Fase 1 (fundação) em andamento: Next.js, Tailwind com o design system, fontes, lint, testes unitários e E2E já configurados.
 > Consumo responsável: bebida alcoólica é proibida para menores de 18 anos.
 
 ---
@@ -41,7 +41,7 @@ Extensões recomendadas do VS Code: **ESLint**, **Prettier**, **Tailwind CSS Int
 
 ---
 
-## Como rodar (disponível a partir da Fase 1)
+## Como rodar
 
 Todos os comandos abaixo são para o **PowerShell**, dentro da pasta do projeto (no VS Code: menu *Terminal → Novo Terminal*).
 
@@ -67,10 +67,12 @@ Abre o servidor local em http://localhost:3000. A página atualiza sozinha quand
 ```powershell
 npm run lint           # procura problemas no código (ESLint)
 npm run typecheck      # confere os tipos do TypeScript sem gerar arquivos
-npm run validate:data  # confere se todos os dados têm fontes e imagens licenciadas
+npm run format:check   # confere se o código está formatado (Prettier)
+npm run format         # formata todo o código automaticamente
 npm run test           # roda os testes unitários e de componentes (Vitest)
-npm run test:e2e       # roda os testes de ponta a ponta no navegador (Playwright)
+npm run test:e2e       # faz o build e roda os testes no navegador (Playwright)
 ```
+A partir da Fase 2 haverá também `npm run validate:data`, que confere se todos os dados têm fontes e imagens licenciadas.
 Na primeira vez que for rodar os testes E2E, baixe os navegadores do Playwright:
 ```powershell
 npx playwright install

@@ -28,16 +28,16 @@
 |---|---|---|---|---|---|
 | F1-01 | Mover o projeto para fora do OneDrive (ADR-016) | Pasta em `C:\dev\Projeto-Vinhos` aberta no VS Code; cópia antiga removida com confirmação | P0 | F0-12 | doing (conteúdo antigo apagado; falta só remover a pasta vazia no OneDrive após fechar a janela antiga do VS Code) |
 | F1-02 | `git init` + primeiro commit dos docs + repositório no GitHub | `main` com os docs; `.gitignore` funcionando | P0 | F1-01 | done (github.com/KaioSilva14/Projeto-Pesquisa-Vinhos) |
-| F1-03 | Scaffold manual: `package.json`, Next 16, React 19, TS 6 (`strict`), `tsconfig` com alias `@/` | `npm run dev` abre página inicial vazia | P0 | F1-02 | todo |
-| F1-04 | Tailwind v4 + tokens do `DESIGN.md` em `globals.css` (claro/escuro) | Tokens usados numa página de teste; contraste confirmado com axe | P0 | F1-03 | todo |
-| F1-05 | Fontes Newsreader + Hanken Grotesk via `next/font` | Sem CLS; acentos e números tabulares ok | P0 | F1-04 | todo |
-| F1-06 | ESLint + Prettier (+ plugin Tailwind) + scripts `lint`, `format`, `typecheck` | Comandos passam sem erros | P0 | F1-03 | todo |
-| F1-07 | Vitest + Testing Library + primeiro teste (`cn`, `normalize`) | `npm run test` verde | P0 | F1-03 | todo |
-| F1-08 | Playwright + axe + primeiro E2E (home carrega, sem violações) | `npm run test:e2e` verde | P1 | F1-03 | todo |
-| F1-09 | Husky + lint-staged | Commit roda lint/format nos arquivos alterados | P1 | F1-06 | todo |
-| F1-10 | GitHub Actions CI (lint, typecheck, test, build) | CI verde em PR | P0 | F1-06, F1-07 | todo |
-| F1-11 | Headers de segurança + CSP (`SECURITY.md` §3) e `src/config/env.ts` com Zod | Headers presentes em `npm run start` | P1 | F1-03 | todo |
-| F1-12 | Componentes `ui/`: Button, IconButton, Input, SearchInput, Badge, Chip, Card base, Skeleton | Variantes CVA, todos os estados, testes de componente | P0 | F1-04 | todo |
+| F1-03 | Scaffold manual: `package.json`, Next 16, React 19, TS 6 (`strict`), `tsconfig` com alias `@/` | `npm run dev` abre página inicial vazia | P0 | F1-02 | done |
+| F1-04 | Tailwind v4 + tokens do `DESIGN.md` em `globals.css` (claro/escuro) | Tokens usados numa página de teste; contraste confirmado com axe | P0 | F1-03 | done (axe: 0 violações nos temas claro e escuro, 360 e 1440 px) |
+| F1-05 | Fontes Newsreader + Hanken Grotesk via `next/font` | Sem CLS; acentos e números tabulares ok | P0 | F1-04 | done (conferido com print nos dois temas) |
+| F1-06 | ESLint + Prettier (+ plugin Tailwind) + scripts `lint`, `format`, `typecheck` | Comandos passam sem erros | P0 | F1-03 | done |
+| F1-07 | Vitest + Testing Library + primeiro teste (`cn`, `normalize`) | `npm run test` verde | P0 | F1-03 | done |
+| F1-08 | Playwright + axe + primeiro E2E (home carrega, sem violações) | `npm run test:e2e` verde | P1 | F1-03 | done (5 perfis: Chromium 360/768/1440, Firefox 1440, WebKit 360) |
+| F1-09 | Husky + lint-staged | Commit roda lint/format nos arquivos alterados | P1 | F1-06 | done |
+| F1-10 | GitHub Actions CI (lint, typecheck, test, build) | CI verde em PR | P0 | F1-06, F1-07 | done (verde no PR #1) |
+| F1-11 | Headers de segurança + CSP (`SECURITY.md` §3) e `src/config/env.ts` com Zod | Headers presentes em `npm run start` | P1 | F1-03 | done |
+| F1-12 | Componentes `ui/`: Button, IconButton, Input, SearchInput, Badge, Chip, Card base, Skeleton | Variantes CVA, todos os estados, testes de componente | P0 | F1-04 | done |
 | F1-13 | Componentes `ui/` sobre Radix: Dialog, Sheet, Popover, Tooltip, Select, Checkbox, Accordion, Tabs | Teclado/foco ok; testes | P1 | F1-12 | todo |
 | F1-14 | Layout: SiteHeader, SiteFooter (aviso 18+), BottomNav, SkipLink, Breadcrumbs, PageHeader, Section | Responsivo em 360/768/1440; axe ok | P0 | F1-12 | todo |
 | F1-15 | Estados: EmptyState, ErrorState, NoResults, IncompleteDataNote, DemoBadge; `not-found.tsx`, `error.tsx` | Renderizam em página de teste | P0 | F1-12 | todo |

@@ -125,3 +125,15 @@
 - **Decisão**: a identidade visual segue exclusivamente o `DESIGN.md` (paleta "Adega", Newsreader + Hanken Grotesk, raios e componentes definidos).
 - **Consequências**: qualquer mudança visual relevante passa por atualização do `DESIGN.md` antes do código.
 - **Data**: 2026-09-28 · **Status**: aceita (pedido do usuário)
+
+## ADR-021 — `AGENTS.md` na raiz para proteger o `CLAUDE.md`
+- **Contexto**: o `next dev` 16 detecta quando é executado por um agente de IA e insere um bloco de regras no `AGENTS.md` ou, se ele não existir, no fim do `CLAUDE.md` (`node_modules/next/dist/server/lib/generate-agent-files.js`). Não há opção para desligar. O `CLAUDE.md` não deve ser alterado (pedido do usuário).
+- **Decisão**: manter um `AGENTS.md` na raiz, versionado, contendo o bloco gerenciado pelo Next. Com ele presente, o Next escreve apenas nesse arquivo.
+- **Consequências**: exceção ao ADR-018 (a raiz passa a ter `CLAUDE.md`, `README.md` e `AGENTS.md`). O bloco aponta a documentação da versão instalada em `node_modules/next/dist/docs/`, útil para consultar APIs do Next 16. Não apagar o `AGENTS.md`: sem ele o `CLAUDE.md` volta a ser modificado.
+- **Data**: 2026-09-28 · **Status**: aceita
+
+## ADR-022 — ESLint 9.39.5 em vez do 10
+- **Contexto**: na Fase 0 foi registrado o ESLint 10.11.0, conferindo só as dependências diretas. Na instalação (F1-06), o `eslint-config-next` 16.3.6 aceita ESLint ≥ 9, mas os plugins que ele traz (`eslint-plugin-react` 7.37.5, `eslint-plugin-jsx-a11y` 6.10.2, `eslint-plugin-import` 2.32.0, todos na última versão) declaram suporte só até o 9. Com o 10, o lint quebra (`contextOrFilename.getFilename is not a function` no `eslint-plugin-react`).
+- **Decisão**: fixar `eslint@9.39.5`. O ESLint 10 só funcionaria com contornos (fixar a versão do React nas configurações) e sem garantia dos plugins.
+- **Consequências**: o npm avisa que a linha 9 não recebe mais suporte. O risco é baixo porque o ESLint é ferramenta de desenvolvimento e não vai para o site publicado. Reavaliar quando esses três plugins declararem suporte ao ESLint 10 (checar `npm view eslint-plugin-react peerDependencies`). Observação: o npm 11 avisa que o script de instalação do `unrs-resolver` (dependência do plugin `import`) não foi aprovado; ele não é necessário no Windows x64 (o binário nativo vem como dependência opcional) e o lint funciona sem ele, então fica sem aprovação.
+- **Data**: 2026-09-28 · **Status**: aceita
