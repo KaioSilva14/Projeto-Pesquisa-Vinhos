@@ -11,6 +11,9 @@ const desktop = { width: 1440, height: 900 };
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: true,
+  // Localmente, no máximo 4 navegadores ao mesmo tempo: com mais, o Firefox falhava por falta
+  // de memória (erros gráficos internos). No CI fica o padrão do Playwright.
+  ...(process.env.CI ? {} : { workers: 4 }),
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? [["github"], ["html", { open: "never" }]] : "list",

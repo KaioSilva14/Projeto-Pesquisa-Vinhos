@@ -57,7 +57,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 - O ESLint 10 quebra os plugins do `eslint-config-next`, então fica fixado no 9.39.5 até eles suportarem o 10 (ADR-022).
 - O npm 11 avisa sobre o script de instalação não aprovado do `unrs-resolver`: pode ignorar (ADR-022).
 - Links para rotas que ainda não existem (fases 3 a 6) dão 404 no pré-carregamento do Next; no Chromium o Playwright vê essas requisições como "pendentes" para sempre. Por isso **não usar `waitForLoadState("networkidle")`** nos testes E2E.
-- O Firefox do Playwright nesta máquina falhou de forma intermitente (erros gráficos internos, `GraphicsCriticalError`) numa rodada lenta; repetido, passou. No CI (Linux) passa. Se voltar a acontecer, rodar `npx playwright test --project=firefox-1440` isolado antes de investigar o código.
+- O Firefox do Playwright falhava de forma intermitente (erros gráficos internos, `GraphicsCriticalError`) quando rodavam 8 navegadores em paralelo (16 núcleos, pouca memória livre). Resolvido limitando a 4 workers locais em `playwright.config.ts`; no CI fica o padrão.
 - No PowerShell 5.1, não editar arquivos com `Get-Content`/`Set-Content`: eles leem UTF-8 como ANSI e gravam BOM, corrompendo os acentos.
 
 - O `create-next-app` não roda em pasta com arquivos existentes → scaffold manual (ADR-017).

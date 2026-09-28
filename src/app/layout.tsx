@@ -13,7 +13,8 @@ import "@/styles/globals.css";
 export const metadata: Metadata = {
   // Base para URLs absolutas de canonical e Open Graph (SEO.md)
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
-  title: SITE.name,
+  // Cada página define só o próprio título; o modelo acrescenta o nome do site (SEO.md)
+  title: { default: `${SITE.name}: pesquise e descubra vinhos`, template: `%s | ${SITE.name}` },
   description: SITE.description,
 };
 

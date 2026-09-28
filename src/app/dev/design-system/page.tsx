@@ -5,6 +5,7 @@ import { Container } from "@/components/layout/Container";
 
 import { ComponentsShowcase } from "./_components/ComponentsShowcase";
 import { Section } from "./_components/Section";
+import { StatesShowcase } from "./_components/StatesShowcase";
 
 // Página interna para conferir os tokens do DESIGN.md. Não existe em produção.
 export const metadata: Metadata = {
@@ -149,6 +150,7 @@ export default function DesignSystemPage() {
       </Section>
 
       <ComponentsShowcase />
+      <StatesShowcase />
     </Container>
   );
 }
