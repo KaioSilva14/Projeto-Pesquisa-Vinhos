@@ -10,13 +10,14 @@
 - **Fase 1 iniciada**. Projeto agora em `C:\dev\Projeto-Vinhos` (o Windows exibe `C:\Dev`).
   - F1-01: conteúdo da pasta antiga no OneDrive apagado (autorizado pelo usuário); restou só a pasta vazia `OneDrive\Desktop\Projeto-Vinhos`, travada pela janela antiga do VS Code. Apagar quando ela estiver fechada.
   - F1-02: concluída. Repositório: https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos (branch `main`, remoto `origin`; o push funciona com as credenciais do Git do usuário).
-- **F1-03 a F1-08 concluídas** (sessão de 2026-09-28), no branch `feat/fundacao` (commits locais, **ainda sem push**; o `main` continua só com os docs).
+- **F1-03 a F1-12 concluídas** (exceto F1-10, que aguarda o primeiro PR), no branch `feat/fundacao`, **já enviado ao GitHub** (push autorizado pelo usuário em 2026-09-28). O `main` continua só com os docs. **Nenhum PR aberto ainda** (o `gh` não está instalado; o usuário abre pelo link `https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos/pull/new/feat/fundacao`).
   - Next 16.3.6 + React 19.3.0 + TS 6.0.3 estrito; Tailwind 4.3.3 com tokens em `src/styles/globals.css` (fonte da verdade do design system); fontes em `src/styles/fonts.ts`.
-  - Página interna `/dev/design-system` (só em dev; 404 em produção) mostra todos os tokens. Axe: 0 violações nos dois temas.
-  - `src/lib/cn.ts` (tailwind-merge configurado com os tokens) e `src/lib/normalize.ts`, com testes em `tests/unit/`.
-  - Playwright (`tests/e2e/`, porta 3100, roda contra o build) + axe, em 5 perfis de navegador.
-  - Tudo passando: `lint`, `format:check`, `typecheck`, `test` (14), `test:e2e` (20), `build`.
-- **Próxima tarefa**: F1-09 (Husky + lint-staged); depois F1-10 (CI, exige push para o GitHub), F1-11, F1-12…
+  - Página interna `/dev/design-system` (só em dev; 404 em produção) mostra tokens e componentes. Axe: 0 violações nos dois temas.
+  - `src/lib/cn.ts` (tailwind-merge configurado com os tokens), `src/lib/normalize.ts`, `src/config/env.ts` (Zod) e `src/config/security-headers.ts` (CSP e headers).
+  - Componentes em `src/components/ui/`: Button, IconButton, Input, SearchInput, Badge, FilterChip, ActiveFilterChip, Card/CardLink, Skeleton; ícones só via `icons.ts`.
+  - Husky + lint-staged no pre-commit; CI em `.github/workflows/ci.yml` (quality + e2e).
+  - Tudo passando: `lint`, `format:check`, `typecheck`, `test` (46), `test:e2e` (30), `build`, `npm audit`.
+- **Próxima tarefa**: F1-14 (layout: header, footer com aviso 18+, bottom nav…), depois F1-15, F1-16 (P0) e F1-13 (Radix, P1). Quando o PR existir, conferir o CI verde e fechar a F1-10.
 
 ## O que já foi feito
 
@@ -47,7 +48,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 ## Pendências
 
 - Concluir F1-01: apagar a pasta vazia `OneDrive\Desktop\Projeto-Vinhos` quando a janela antiga do VS Code estiver fechada (pedir confirmação).
-- Autorização do usuário para enviar o branch `feat/fundacao` ao GitHub (push) e abrir PR para o `main`.
+- Usuário abrir o PR `feat/fundacao` → `main` (link acima) para o CI rodar pela primeira vez.
 
 ## Problemas conhecidos
 
@@ -61,9 +62,9 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. F1-09 (Husky + lint-staged).
-2. F1-10 (GitHub Actions), depois do push do branch.
-3. F1-11 (headers de segurança + `env.ts`), F1-12 a F1-16 (componentes, layout, estados, mídia). Cada componente novo entra também na página `/dev/design-system`.
+1. Fechar a F1-10 quando o PR existir (CI verde; se falhar, ver o log do job no GitHub).
+2. F1-14 (layout), F1-15 (estados de página), F1-16 (mídia), F1-13 (componentes Radix).
+3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 
 ## Links importantes
 
