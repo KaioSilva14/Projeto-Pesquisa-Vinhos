@@ -1,7 +1,7 @@
 # DATA_MODEL — Modelo de dados
 
 > Versão 0.1 · Fase 0 · 2026-09-28
-> Implementação: schemas Zod em `src/schemas/`, tipos derivados em `src/types/`, dados em `src/data/`.
+> Implementação: schemas Zod em `src/schemas/` (F2-01), com os tipos derivados (`z.infer`) exportados no mesmo arquivo de cada schema; dados em `src/data/`. Os schemas são estritos: campo desconhecido é erro.
 > Regra de ouro: **campo sem fonte confiável não existe.**
 
 ---
@@ -112,7 +112,8 @@ type EditorialText = {
 ### 3.3 `Grape`
 | Campo | Tipo | Obrig. | Observação |
 |---|---|---|---|
-| `name` | `string` | ✔ | Nome principal (VIVC como referência) |
+| `name` | `string` | ✔ | Nome usado no site (uso no Brasil) |
+| `referenceName` | `Sourced<string>` | | Nome principal no VIVC, quando diferente do usado no site (ex.: "COT" para Malbec, "ALVARINHO" para Albariño). Acrescentado na F2-01 |
 | `synonyms` | `Sourced<string[]>` | | Sinônimos por país; alimenta a busca |
 | `color` | `Sourced<'tinta' \| 'branca' \| 'rosada' \| 'cinza'>` | | Cor da casca (terminologia a validar com VIVC) |
 | `origin` | `Sourced<string>` | | Origem conhecida/provável (com nuance) |

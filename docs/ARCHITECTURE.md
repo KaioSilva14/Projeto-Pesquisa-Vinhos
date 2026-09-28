@@ -75,7 +75,7 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 | `@playwright/test` + `@axe-core/playwright` | 1.63.0 + 4.13.0 | E2E + acessibilidade automatizada |
 | `@next/bundle-analyzer` | 16.3.6 | Tamanho dos bundles (fase 10) |
 | `schema-dts` | 2.0.0 | Tipos para JSON-LD (fase 10) |
-| `tsx` | (atual) | Rodar scripts TypeScript (validação de dados) |
+| `tsx` | 4.23.15 | Rodar scripts TypeScript (validação de dados: `npm run validate:data`) |
 
 > **Regra**: nenhuma dependência entra sem linha nesta tabela (nome, versão, motivo, alternativa). Pedir confirmação ao usuário antes de instalar.
 

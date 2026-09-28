@@ -20,7 +20,7 @@ Toda a documentação está em [`docs/`](docs/):
 | [TASKS](docs/TASKS.md) | Backlog e status das tarefas |
 | [MEMORY](docs/MEMORY.md) | Estado atual do projeto |
 | [DECISIONS](docs/DECISIONS.md) | Decisões técnicas e de produto |
-| [DATA_MODEL](docs/DATA_MODEL.md) · [DATA_SOURCES](docs/DATA_SOURCES.md) · [IMAGES](docs/IMAGES.md) | Dados, fontes e imagens |
+| [DATA_MODEL](docs/DATA_MODEL.md) · [DATA_SOURCES](docs/DATA_SOURCES.md) · [IMAGES](docs/IMAGES.md) · [CURATION](docs/CURATION.md) | Dados, fontes, imagens e catálogo proposto |
 | [SEO](docs/SEO.md) · [SECURITY](docs/SECURITY.md) · [ACCESSIBILITY](docs/ACCESSIBILITY.md) · [PERFORMANCE](docs/PERFORMANCE.md) · [ANIMATIONS](docs/ANIMATIONS.md) · [TESTING](docs/TESTING.md) | Requisitos de qualidade |
 | [CHANGELOG](docs/CHANGELOG.md) | Histórico de mudanças |
 
@@ -72,7 +72,11 @@ npm run format         # formata todo o código automaticamente
 npm run test           # roda os testes unitários e de componentes (Vitest)
 npm run test:e2e       # faz o build e roda os testes no navegador (Playwright)
 ```
-A partir da Fase 2 haverá também `npm run validate:data`, que confere se todos os dados têm fontes e imagens licenciadas.
+Para os dados do catálogo:
+```powershell
+npm run validate:data  # confere fontes, ligações entre entidades, fotos e dados de demonstração
+```
+Rode sempre que mexer em `src/data/`. O CI também roda, e um erro aqui bloqueia o PR.
 Na primeira vez que for rodar os testes E2E, baixe os navegadores do Playwright:
 ```powershell
 npx playwright install

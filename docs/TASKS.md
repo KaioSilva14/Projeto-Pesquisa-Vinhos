@@ -47,11 +47,11 @@
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F2-01 | Schemas Zod de todas as entidades + tipos derivados | Conforme `DATA_MODEL.md`; testes de schema | P0 | F1-03 | todo (o schema `ImageAsset` já foi feito na F1-16: `src/schemas/image-asset.ts`) |
-| F2-02 | `scripts/validate-data.ts` com as 13 regras de integridade | Falha com dados inválidos de teste; `npm run validate:data` no CI | P0 | F2-01 | todo |
+| F2-01 | Schemas Zod de todas as entidades + tipos derivados | Conforme `DATA_MODEL.md`; testes de schema | P0 | F1-03 | done |
+| F2-02 | `scripts/validate-data.ts` com as 13 regras de integridade | Falha com dados inválidos de teste; `npm run validate:data` no CI | P0 | F2-01 | done |
 | F2-03 | Adapter local + services (get por slug, listas, relações) com `server-only` | Testes unitários | P0 | F2-01 | todo |
 | F2-04 | Dados demo em `src/data/demo/` (fictícios, `isDemo`) + flag de ambiente | Selo visível; bloqueados em produção | P1 | F2-03 | todo |
-| F2-05 | Propor regiões, uvas e produtores de cada lote dentro dos 6 países (ADR-019) | Lista aprovada pelo usuário, com fonte primária identificada para cada item | P0 | F0-12 | todo |
+| F2-05 | Propor regiões, uvas e produtores de cada lote dentro dos 6 países (ADR-019) | Lista aprovada pelo usuário, com fonte primária identificada para cada item | P0 | F0-12 | done (aprovado em 2026-09-28, ADR-023; `docs/CURATION.md`) |
 | F2-06 | Curadoria lote 1a: uvas (8–12) com fontes e imagens licenciadas | `validate:data` verde; 100% com fonte | P0 | F2-02, F2-05 | todo |
 | F2-07 | Curadoria lote 1b: 6 países (Itália, França, Espanha, EUA, Argentina, Brasil) e 6–12 regiões | Idem | P0 | F2-06 | todo |
 | F2-08 | Curadoria lotes 2 e 3: produtores (6–12) e vinhos (12–30) com safras | Idem | P0 | F2-07 | todo |

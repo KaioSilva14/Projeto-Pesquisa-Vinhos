@@ -1,10 +1,8 @@
 import { z } from "zod";
 
-// ImageAsset (DATA_MODEL.md §3.11, IMAGES.md). Criado na F1-16 porque os componentes de mídia
-// dependem dele; os demais schemas de entidades entram na F2-01.
+import { httpsUrlSchema, idSchema, isoDateSchema } from "./common";
 
-const isoDate = z.iso.date({ error: "Use a data no formato AAAA-MM-DD." });
-const httpsUrl = z.url({ protocol: /^https$/, error: "A origem precisa ser um link https." });
+// ImageAsset (DATA_MODEL.md §3.11, IMAGES.md).
 
 export const imageSubjectTypes = [
   "wine",
@@ -16,8 +14,8 @@ export const imageSubjectTypes = [
 ] as const;
 
 export const imageAssetSchema = z
-  .object({
-    id: z.string().min(1),
+  .strictObject({
+    id: idSchema,
     // Arquivo local em public/images (sem hotlink): IMAGES.md §7
     src: z.string().startsWith("/images/", "A imagem precisa estar em public/images/."),
     alt: z.string().trim().min(10, "Escreva um texto alternativo descritivo."),
@@ -25,16 +23,18 @@ export const imageAssetSchema = z
     height: z.int().positive(),
     credit: z.string().trim().min(1),
     license: z.string().trim().min(1),
-    licenseUrl: httpsUrl.optional(),
-    sourceUrl: httpsUrl,
+    licenseUrl: httpsUrlSchema.optional(),
+    sourceUrl: httpsUrlSchema,
     subjectType: z.enum(imageSubjectTypes),
-    subjectId: z.string().min(1).optional(),
+    subjectId: idSchema.optional(),
     isIllustrative: z.literal(true).optional(),
-    focalPoint: z.object({ x: z.number().min(0).max(1), y: z.number().min(0).max(1) }).optional(),
+    focalPoint: z
+      .strictObject({ x: z.number().min(0).max(1), y: z.number().min(0).max(1) })
+      .optional(),
     blurDataURL: z.string().startsWith("data:image/").optional(),
     authorizationRef: z.string().min(1).optional(),
     modified: z.string().min(1).optional(),
-    accessedAt: isoDate,
+    accessedAt: isoDateSchema,
   })
   // Foto de uma entidade específica precisa dizer de qual entidade é
   .refine((image) => image.subjectType === "ambient" || image.subjectId, {
