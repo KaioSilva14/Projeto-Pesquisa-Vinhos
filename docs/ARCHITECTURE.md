@@ -70,8 +70,8 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 | `eslint` + `eslint-config-next` | **9.39.5** + 16.3.6 | Lint (flat config). **`next lint` foi removido no Next 16** → usar `eslint` direto. ESLint 10 incompatível com os plugins do Next (ADR-022) |
 | `prettier` + `prettier-plugin-tailwindcss` | 3.9.9 + 0.8.1 | Formatação e ordenação de classes |
 | `husky` + `lint-staged` | 9.1.7 + 17.6.0 | Checagens antes do commit |
-| `vitest` + `@vitejs/plugin-react` + `jsdom` | 5.0.2 + 6.1.1 + 30.1.1 | Testes unitários e de componente |
-| `@testing-library/react` + `jest-dom` + `user-event` | 16.3.3 + 7.0.1 + 14.6.7 | Testes de componente centrados no usuário |
+| `vitest` + `vite` + `@vitejs/plugin-react` + `jsdom` | 5.0.2 + 8.3.1 + 6.1.1 + 30.1.1 | Testes unitários e de componente. `vite` é peer dependency obrigatória do Vitest e do plugin React (este exige Vite 8) |
+| `@testing-library/react` + `dom` + `jest-dom` + `user-event` | 16.3.3 + 10.4.2 + 7.0.1 + 14.6.7 | Testes de componente centrados no usuário. `@testing-library/dom` é peer dependency obrigatória das outras três |
 | `@playwright/test` + `@axe-core/playwright` | 1.63.0 + 4.13.0 | E2E + acessibilidade automatizada |
 | `@next/bundle-analyzer` | 16.3.6 | Tamanho dos bundles (fase 10) |
 | `schema-dts` | 2.0.0 | Tipos para JSON-LD (fase 10) |

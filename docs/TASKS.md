@@ -32,7 +32,7 @@
 | F1-04 | Tailwind v4 + tokens do `DESIGN.md` em `globals.css` (claro/escuro) | Tokens usados numa página de teste; contraste confirmado com axe | P0 | F1-03 | doing (tokens prontos; falta conferir contraste com axe no F1-08) |
 | F1-05 | Fontes Newsreader + Hanken Grotesk via `next/font` | Sem CLS; acentos e números tabulares ok | P0 | F1-04 | doing (fontes self-hosted com fallback ajustado; falta conferência visual no F1-08) |
 | F1-06 | ESLint + Prettier (+ plugin Tailwind) + scripts `lint`, `format`, `typecheck` | Comandos passam sem erros | P0 | F1-03 | done |
-| F1-07 | Vitest + Testing Library + primeiro teste (`cn`, `normalize`) | `npm run test` verde | P0 | F1-03 | todo |
+| F1-07 | Vitest + Testing Library + primeiro teste (`cn`, `normalize`) | `npm run test` verde | P0 | F1-03 | done |
 | F1-08 | Playwright + axe + primeiro E2E (home carrega, sem violações) | `npm run test:e2e` verde | P1 | F1-03 | todo |
 | F1-09 | Husky + lint-staged | Commit roda lint/format nos arquivos alterados | P1 | F1-06 | todo |
 | F1-10 | GitHub Actions CI (lint, typecheck, test, build) | CI verde em PR | P0 | F1-06, F1-07 | todo |
