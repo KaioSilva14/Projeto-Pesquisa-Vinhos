@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { Container } from "@/components/layout/Container";
+
 import { ComponentsShowcase } from "./_components/ComponentsShowcase";
+import { MediaShowcase } from "./_components/MediaShowcase";
 import { Section } from "./_components/Section";
+import { StatesShowcase } from "./_components/StatesShowcase";
 
 // Página interna para conferir os tokens do DESIGN.md. Não existe em produção.
 export const metadata: Metadata = {
@@ -62,7 +66,7 @@ export default function DesignSystemPage() {
   if (process.env.NODE_ENV === "production") notFound();
 
   return (
-    <main className="mx-auto max-w-content px-4 py-16 sm:px-6 md:px-8 lg:px-10">
+    <Container className="py-16">
       <h1 className="font-serif text-h1">Design system</h1>
       <p className="mt-4 mb-12 max-w-lead text-lead text-text-muted">
         Tokens do DESIGN.md renderizados no tema atual. Troque o tema do sistema para conferir o
@@ -147,6 +151,8 @@ export default function DesignSystemPage() {
       </Section>
 
       <ComponentsShowcase />
-    </main>
+      <StatesShowcase />
+      <MediaShowcase />
+    </Container>
   );
 }

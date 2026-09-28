@@ -39,15 +39,15 @@
 | F1-11 | Headers de segurança + CSP (`SECURITY.md` §3) e `src/config/env.ts` com Zod | Headers presentes em `npm run start` | P1 | F1-03 | done |
 | F1-12 | Componentes `ui/`: Button, IconButton, Input, SearchInput, Badge, Chip, Card base, Skeleton | Variantes CVA, todos os estados, testes de componente | P0 | F1-04 | done |
 | F1-13 | Componentes `ui/` sobre Radix: Dialog, Sheet, Popover, Tooltip, Select, Checkbox, Accordion, Tabs | Teclado/foco ok; testes | P1 | F1-12 | todo |
-| F1-14 | Layout: SiteHeader, SiteFooter (aviso 18+), BottomNav, SkipLink, Breadcrumbs, PageHeader, Section | Responsivo em 360/768/1440; axe ok | P0 | F1-12 | todo |
-| F1-15 | Estados: EmptyState, ErrorState, NoResults, IncompleteDataNote, DemoBadge; `not-found.tsx`, `error.tsx` | Renderizam em página de teste | P0 | F1-12 | todo |
-| F1-16 | Mídia: EntityImage, ImageUnavailable, ImageCredit | Sem imagem → estado honesto sem CLS | P0 | F1-12 | todo |
+| F1-14 | Layout: SiteHeader, SiteFooter (aviso 18+), BottomNav, SkipLink, Breadcrumbs, PageHeader, Section | Responsivo em 360/768/1440; axe ok | P0 | F1-12 | done |
+| F1-15 | Estados: EmptyState, ErrorState, NoResults, IncompleteDataNote, DemoBadge; `not-found.tsx`, `error.tsx` | Renderizam em página de teste | P0 | F1-12 | done |
+| F1-16 | Mídia: EntityImage, ImageUnavailable, ImageCredit | Sem imagem → estado honesto sem CLS | P0 | F1-12 | done |
 
 ## Fase 2 — Dados e serviços
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F2-01 | Schemas Zod de todas as entidades + tipos derivados | Conforme `DATA_MODEL.md`; testes de schema | P0 | F1-03 | todo |
+| F2-01 | Schemas Zod de todas as entidades + tipos derivados | Conforme `DATA_MODEL.md`; testes de schema | P0 | F1-03 | todo (o schema `ImageAsset` já foi feito na F1-16: `src/schemas/image-asset.ts`) |
 | F2-02 | `scripts/validate-data.ts` com as 13 regras de integridade | Falha com dados inválidos de teste; `npm run validate:data` no CI | P0 | F2-01 | todo |
 | F2-03 | Adapter local + services (get por slug, listas, relações) com `server-only` | Testes unitários | P0 | F2-01 | todo |
 | F2-04 | Dados demo em `src/data/demo/` (fictícios, `isDemo`) + flag de ambiente | Selo visível; bloqueados em produção | P1 | F2-03 | todo |
