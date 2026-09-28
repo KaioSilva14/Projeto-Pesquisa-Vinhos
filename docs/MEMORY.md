@@ -17,7 +17,8 @@
   - Componentes em `src/components/ui/`: Button, IconButton, Input, SearchInput, Badge, FilterChip, ActiveFilterChip, Card/CardLink, Skeleton; ícones só via `icons.ts`.
   - Husky + lint-staged no pre-commit; CI em `.github/workflows/ci.yml` (quality + e2e).
   - Tudo passando: `lint`, `format:check`, `typecheck`, `test` (46), `test:e2e` (30), `build`, `npm audit`.
-- **Próxima tarefa**: F1-14 (layout: header, footer com aviso 18+, bottom nav…), depois F1-15, F1-16 (P0) e F1-13 (Radix, P1). Quando o PR existir, conferir o CI verde e fechar a F1-10.
+- **F1-14 concluída** no branch `feat/layout` (PR #1 já foi mesclado no `main`). Layout em `src/components/layout/` e menus em `src/config/nav.ts`.
+- **Próxima tarefa**: F1-15 (estados e página 404), F1-16 (mídia), depois F1-13 (Radix).
 
 ## O que já foi feito
 
@@ -55,6 +56,8 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 - O `next dev`, quando detecta um agente de IA, escreve um bloco de regras no `AGENTS.md` (ou no `CLAUDE.md`, se o `AGENTS.md` não existir). **Não apagar o `AGENTS.md`** (ADR-021).
 - O ESLint 10 quebra os plugins do `eslint-config-next`, então fica fixado no 9.39.5 até eles suportarem o 10 (ADR-022).
 - O npm 11 avisa sobre o script de instalação não aprovado do `unrs-resolver`: pode ignorar (ADR-022).
+- Links para rotas que ainda não existem (fases 3 a 6) dão 404 no pré-carregamento do Next; no Chromium o Playwright vê essas requisições como "pendentes" para sempre. Por isso **não usar `waitForLoadState("networkidle")`** nos testes E2E.
+- O Firefox do Playwright nesta máquina falhou de forma intermitente (erros gráficos internos, `GraphicsCriticalError`) numa rodada lenta; repetido, passou. No CI (Linux) passa. Se voltar a acontecer, rodar `npx playwright test --project=firefox-1440` isolado antes de investigar o código.
 - No PowerShell 5.1, não editar arquivos com `Get-Content`/`Set-Content`: eles leem UTF-8 como ANSI e gravam BOM, corrompendo os acentos.
 
 - O `create-next-app` não roda em pasta com arquivos existentes → scaffold manual (ADR-017).

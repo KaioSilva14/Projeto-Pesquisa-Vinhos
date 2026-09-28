@@ -13,14 +13,24 @@ test.describe("Headers de segurança", () => {
   });
 
   test("a CSP não bloqueia nada na página", async ({ page }) => {
-    const violations: string[] = [];
-    page.on("console", (message) => {
-      if (/Content[- ]Security[- ]Policy/i.test(message.text())) violations.push(message.text());
+    // O navegador dispara "securitypolicyviolation" a cada bloqueio da CSP; guardamos todos,
+    // desde antes do primeiro script da página rodar
+    await page.addInitScript(() => {
+      const store: string[] = [];
+      Object.assign(window, { __cspViolations: store });
+      document.addEventListener("securitypolicyviolation", (event) => {
+        store.push(`${event.violatedDirective}: ${event.blockedURI}`);
+      });
     });
 
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("load");
+    // Margem para scripts carregados depois do "load" (hidratação, prefetch)
+    await page.waitForTimeout(1000);
 
+    const violations = await page.evaluate(
+      () => (window as unknown as { __cspViolations: string[] }).__cspViolations,
+    );
     expect(violations).toEqual([]);
   });
 });

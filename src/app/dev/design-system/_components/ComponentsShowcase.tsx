@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Badge } from "@/components/ui/Badge";
 import { Button, buttonVariants } from "@/components/ui/Button";
 import { Card, CardLink } from "@/components/ui/Card";
@@ -16,6 +17,19 @@ const variants = ["primary", "secondary", "ghost", "link"] as const;
 export function ComponentsShowcase() {
   return (
     <>
+      <Section title="Trilha de navegação">
+        <p className="mb-4 text-small text-text-muted">
+          No celular aparece só o nível anterior; a partir de 768 px, a trilha completa.
+        </p>
+        <Breadcrumbs
+          items={[
+            { label: "Início", href: "/" },
+            { label: "Seção", href: "/dev/design-system#secao" },
+            { label: "Página atual", href: "/dev/design-system" },
+          ]}
+        />
+      </Section>
+
       <Section title="Botões">
         <div className="grid gap-6">
           {variants.map((variant) => (
