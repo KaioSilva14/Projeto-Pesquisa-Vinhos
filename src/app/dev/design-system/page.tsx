@@ -71,7 +71,7 @@ export default function DesignSystemPage() {
   return (
     <main className="mx-auto max-w-content px-4 py-16 sm:px-6 md:px-8 lg:px-10">
       <h1 className="font-serif text-h1">Design system</h1>
-      <p className="mt-4 max-w-lead text-lead text-text-muted">
+      <p className="mt-4 mb-12 max-w-lead text-lead text-text-muted">
         Tokens do DESIGN.md renderizados no tema atual. Troque o tema do sistema para conferir o
         escuro.
       </p>

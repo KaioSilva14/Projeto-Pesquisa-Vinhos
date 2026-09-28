@@ -6,12 +6,17 @@
 
 ## Estado atual (2026-09-28)
 
-- **Fase 0 concluída e APROVADA pelo usuário** em 2026-09-28. Todas as decisões (ADR-001 a ADR-020) estão aceitas.
+- **Fase 0 concluída e APROVADA pelo usuário** em 2026-09-28. Todas as decisões (ADR-001 a ADR-020) estão aceitas. Na Fase 1 entraram ADR-021 (`AGENTS.md`) e ADR-022 (ESLint 9).
 - **Fase 1 iniciada**. Projeto agora em `C:\dev\Projeto-Vinhos` (o Windows exibe `C:\Dev`).
   - F1-01: conteúdo da pasta antiga no OneDrive apagado (autorizado pelo usuário); restou só a pasta vazia `OneDrive\Desktop\Projeto-Vinhos`, travada pela janela antiga do VS Code. Apagar quando ela estiver fechada.
   - F1-02: concluída. Repositório: https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos (branch `main`, remoto `origin`; o push funciona com as credenciais do Git do usuário).
-- **Nenhum código de aplicação** foi escrito ainda. Não há `package.json` nem `node_modules`.
-- **Próxima tarefa**: F1-03 (scaffold manual do Next.js).
+- **F1-03 a F1-08 concluídas** (sessão de 2026-09-28), no branch `feat/fundacao` (commits locais, **ainda sem push**; o `main` continua só com os docs).
+  - Next 16.3.6 + React 19.3.0 + TS 6.0.3 estrito; Tailwind 4.3.3 com tokens em `src/styles/globals.css` (fonte da verdade do design system); fontes em `src/styles/fonts.ts`.
+  - Página interna `/dev/design-system` (só em dev; 404 em produção) mostra todos os tokens. Axe: 0 violações nos dois temas.
+  - `src/lib/cn.ts` (tailwind-merge configurado com os tokens) e `src/lib/normalize.ts`, com testes em `tests/unit/`.
+  - Playwright (`tests/e2e/`, porta 3100, roda contra o build) + axe, em 5 perfis de navegador.
+  - Tudo passando: `lint`, `format:check`, `typecheck`, `test` (14), `test:e2e` (20), `build`.
+- **Próxima tarefa**: F1-09 (Husky + lint-staged); depois F1-10 (CI, exige push para o GitHub), F1-11, F1-12…
 
 ## O que já foi feito
 
@@ -41,18 +46,24 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- Concluir F1-01: abrir o VS Code em `C:\dev\Projeto-Vinhos` e, após conferir, apagar a cópia antiga no OneDrive (pedir confirmação antes de apagar).
-- F1-02: criar o repositório no GitHub (pedir autorização antes de publicar).
-- F1-03 em diante: scaffold manual.
+- Concluir F1-01: apagar a pasta vazia `OneDrive\Desktop\Projeto-Vinhos` quando a janela antiga do VS Code estiver fechada (pedir confirmação).
+- Autorização do usuário para enviar o branch `feat/fundacao` ao GitHub (push) e abrir PR para o `main`.
 
 ## Problemas conhecidos
+
+- O `next dev`, quando detecta um agente de IA, escreve um bloco de regras no `AGENTS.md` (ou no `CLAUDE.md`, se o `AGENTS.md` não existir). **Não apagar o `AGENTS.md`** (ADR-021).
+- O ESLint 10 quebra os plugins do `eslint-config-next`, então fica fixado no 9.39.5 até eles suportarem o 10 (ADR-022).
+- O npm 11 avisa sobre o script de instalação não aprovado do `unrs-resolver`: pode ignorar (ADR-022).
+- No PowerShell 5.1, não editar arquivos com `Get-Content`/`Set-Content`: eles leem UTF-8 como ANSI e gravam BOM, corrompendo os acentos.
 
 - O `create-next-app` não roda em pasta com arquivos existentes → scaffold manual (ADR-017).
 - `eslint.config.mjs` e `.prettierrc` só funcionam depois da instalação das dependências (Fase 1).
 
 ## Próximos passos
 
-1. Continuar a Fase 1 a partir de `C:\dev\Projeto-Vinhos`, na ordem do `TASKS.md`.
+1. F1-09 (Husky + lint-staged).
+2. F1-10 (GitHub Actions), depois do push do branch.
+3. F1-11 (headers de segurança + `env.ts`), F1-12 a F1-16 (componentes, layout, estados, mídia). Cada componente novo entra também na página `/dev/design-system`.
 
 ## Links importantes
 
