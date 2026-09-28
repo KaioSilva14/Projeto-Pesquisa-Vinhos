@@ -101,3 +101,9 @@
 | Manual — leitor de tela | NVDA + Chrome/Firefox (Windows); VoiceOver (iOS) se disponível | Fim de cada fase |
 | Manual — zoom | 200% e 400% (reflow 320 px) | Fim de cada fase |
 | Manual — movimento reduzido | Ativar no Windows (Configurações → Acessibilidade → Efeitos visuais → Efeitos de animação desligado) | Fase 7 |
+
+### 5.1 Alertas conhecidos do axe (analisados)
+
+| Alerta | Quando aparece | Análise | Decisão |
+|---|---|---|---|
+| `aria-hidden-focus` (sério) no `SkipLink` e no cabeçalho | Só com a lista do `Select` (Radix) **aberta** | O Radix marca o resto da página com `aria-hidden` enquanto a lista está aberta. O axe vê elementos focáveis dentro dessa área, mas o foco fica **preso na lista**: testado em 2026-09-28 no Chromium e no Firefox, Tab não sai da lista. Nenhuma barreira real | Aceito (falso positivo). Em testes E2E que abrem o `Select` e rodam axe nesse estado, desativar só essa regra, com comentário apontando para esta seção |
