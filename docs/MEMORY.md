@@ -23,7 +23,7 @@
   - **F2-02**: `npm run validate:data` (`scripts/validate-data.ts` + `src/lib/validation/`), no CI.
   - **F2-03**: `src/adapters/` (DataAdapter + adapter local) e `src/services/` (todos com `import "server-only"`); as páginas usam `catalogService` de `@/services`.
   - **F2-04**: dados fictícios em `src/data/demo/` (5 vinhos "Vinho Exemplo 0X (demonstração)", país "xx"), carregados só com `NEXT_PUBLIC_ENABLE_DEMO_DATA=true`. O catálogo real (`src/data/*.ts`) ainda está **vazio**.
-- **F2-06 concluída** (branch `data/uvas`, PR #6 a abrir): 10 uvas reais em `src/data/grapes.ts`, fontes em `src/data/sources.ts` (fichas do VIVC, acessadas em 2026-09-29). Dados extraídos do HTML bruto do VIVC (não do resumo da WebFetch, que pode errar). Imagens: **F2-06b bloqueada** (fotos do VIVC com "© JKI", sem licença aberta confirmada).
+- **F2-06 e F2-06b concluídas**: 10 uvas reais em `src/data/grapes.ts` (fontes: fichas do VIVC em `src/data/sources.ts`) e 9 fotos do VIVC/JKI em `public/images/grapes/` com crédito exato (`src/data/images.ts`, `public/images/CREDITOS.md`, ADR-024). A janela de cada foto no VIVC diz "This photo can be reproduced. Please quote the source". Torrontés Riojano sem foto. Dados extraídos do HTML bruto do VIVC (não do resumo da WebFetch, que pode errar).
 - **Próxima tarefa**: F2-07 (6 países e 10 regiões, com a ligação uva ↔ região e `mainRegionIds` das uvas); depois F2-08 (produtores e vinhos).
 - O usuário roda o próprio `npm run dev` (porta 3001). O Next 16 só permite um `next dev` por projeto: para prints em modo dev, usar o servidor dele em vez de iniciar outro (nunca encerrá-lo sem pedir).
 - O usuário prefere que eu explique cada passo **enquanto** faço, em linguagem simples (pedido em 2026-09-28, após não entender onde estavam os commits).
@@ -56,8 +56,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- PR #6 (`data/uvas` → `main`) a ser aberto e mesclado pelo usuário.
-- Decisão do usuário sobre as imagens das uvas (F2-06b): pedir autorização ao JKI ou procurar fotos com licença livre.
+- PR #7 (`data/imagens-uvas` → `main`) a ser aberto e mesclado pelo usuário.
 - Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
 ## Problemas conhecidos
@@ -66,6 +65,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 - O ESLint 10 quebra os plugins do `eslint-config-next`, então fica fixado no 9.39.5 até eles suportarem o 10 (ADR-022).
 - O npm 11 avisa sobre o script de instalação não aprovado do `unrs-resolver`: pode ignorar (ADR-022).
 - Links para rotas que ainda não existem (fases 3 a 6) dão 404 no pré-carregamento do Next; no Chromium o Playwright vê essas requisições como "pendentes" para sempre. Por isso **não usar `waitForLoadState("networkidle")`** nos testes E2E.
+- **`sharp` também bloqueado** pelo Controle Inteligente de Aplicativos (2026-09-29): localmente o `next/image` entrega a foto original, sem otimizar (funciona, mas sem AVIF/WebP). Medir desempenho (Lighthouse, fase 10) no CI ou na Vercel, não localmente. Redimensionar imagens com `System.Drawing` do PowerShell (sem instalar nada).
 - **Firefox local bloqueado** (2026-09-29): o Controle Inteligente de Aplicativos do Windows 11 passou a bloquear o `firefox.exe` do Playwright (`spawn UNKNOWN`). Localmente os E2E rodam em Chromium e WebKit; o Firefox roda sempre no CI (`playwright.config.ts`, variável `PW_FIREFOX=1` para forçar). **Não** recomendar desligar a proteção do Windows.
 - O Firefox do Playwright falhava de forma intermitente (erros gráficos internos, `GraphicsCriticalError`) quando rodavam 8 navegadores em paralelo (16 núcleos, pouca memória livre). Resolvido limitando a 4 workers locais em `playwright.config.ts`; no CI fica o padrão.
 - No PowerShell 5.1, não editar arquivos com `Get-Content`/`Set-Content`: eles leem UTF-8 como ANSI e gravam BOM, corrompendo os acentos.
@@ -73,7 +73,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Depois do merge do PR #6: `git switch main`, `git pull`, apagar o branch local e criar `data/regioes` para a F2-07.
+1. Depois do merge do PR #7: `git switch main`, `git pull`, apagar o branch local e criar `data/regioes` para a F2-07.
 2. Na curadoria (F2-06+): só itens do `docs/CURATION.md`; cada fato conferido na fonte original, texto sempre próprio, commit do tipo `data:` citando as fontes.
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 

@@ -1,5 +1,6 @@
 import { EntityImage } from "@/components/media/EntityImage";
 import type { ImageAsset } from "@/schemas/image-asset";
+import { catalogService } from "@/services";
 
 import { Section } from "./Section";
 
@@ -19,10 +20,22 @@ const brokenImage: ImageAsset = {
   accessedAt: "2026-09-28",
 };
 
-// Vitrine de src/components/media (F1-16). Fotos reais entram a partir da F2-06, com licença.
-export function MediaShowcase() {
+// Vitrine de src/components/media (F1-16), com uma foto real do catálogo (F2-06b)
+export async function MediaShowcase() {
+  const malbec = await catalogService.getGrapeBySlug("malbec");
+  const malbecPhoto = await catalogService.getMainImage(malbec?.imageIds);
+
   return (
     <Section title="Mídia">
+      <div className="mb-10 grid max-w-sm gap-2">
+        <EntityImage
+          image={malbecPhoto}
+          variant="grape"
+          sizes="(min-width: 768px) 24rem, 100vw"
+          showCredit
+        />
+        <p className="text-caption text-text-subtle">Foto real do catálogo (Malbec), com crédito</p>
+      </div>
       <div className="grid grid-cols-2 items-start gap-6 md:grid-cols-4">
         <div className="grid gap-2">
           <EntityImage image={undefined} variant="bottle" sizes="25vw" />

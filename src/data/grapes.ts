@@ -1,5 +1,7 @@
 import type { Grape } from "@/schemas/grape";
 
+import { images } from "./images";
+
 // Uvas aprovadas em docs/CURATION.md (ADR-023). Fonte de todos os fatos: ficha da variedade
 // no VIVC (src/data/sources.ts), extraída do conteúdo bruto da página em 2026-09-29.
 // - Sinônimos: só nomes presentes na lista oficial do VIVC (conferidos um a um); ficam de fora
@@ -22,6 +24,10 @@ type GrapeFacts = {
 
 function fromVivc(facts: GrapeFacts): Grape {
   const source = [`src-vivc-${facts.vivcId}`] as [string];
+  // Fotos da própria uva cadastradas em ./images.ts (sem foto → "Imagem indisponível")
+  const imageIds = images
+    .filter((image) => image.subjectType === "grape" && image.subjectId === facts.id)
+    .map((image) => image.id);
   return {
     id: facts.id,
     slug: facts.id,
@@ -29,6 +35,7 @@ function fromVivc(facts: GrapeFacts): Grape {
     createdAt: "2026-09-29",
     updatedAt: "2026-09-29",
     sourceIds: source,
+    ...(imageIds.length > 0 && { imageIds }),
     name: facts.name,
     vivcId: String(facts.vivcId),
     ...(facts.referenceName && {

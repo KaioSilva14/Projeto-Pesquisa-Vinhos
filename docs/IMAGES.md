@@ -10,6 +10,7 @@
 | Fonte | Pode representar | Licença típica | Observações |
 |---|---|---|---|
 | **Wikimedia Commons** | Qualquer entidade, se a foto for realmente dela | CC0, CC BY, CC BY-SA, domínio público | Conferir a licença **do arquivo** (varia por imagem); registrar autor e link |
+| **VIVC (Julius Kühn-Institut)** | Uvas (fotos ampelográficas: cacho, folha, broto) | "This photo can be reproduced. Please quote the source as indicated below", na janela de cada foto | Usar só fotos com esse aviso (as "Historical picture" não têm); copiar o crédito exato; ver ADR-024 |
 | **Produtor / vinícola** (site, press kit) | Seus próprios vinhos, vinícolas, vinhedos | Direitos reservados → **exige autorização por escrito** | Guardar a autorização; `license: "Uso autorizado pelo produtor"` + `authorizationRef` |
 | **Órgãos oficiais / institutos** | Regiões, uvas, paisagens oficiais | Varia | Ler os termos do site |
 | **Fotos próprias** (tiradas pela equipe) | O que foi fotografado | Nossa | Registrar autor e data; atenção a rótulos (são marcas, mas fotografar o produto para fins informativos é prática comum; evitar uso que sugira endosso) |
