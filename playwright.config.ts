@@ -8,6 +8,11 @@ const mobile = { width: 360, height: 780 };
 const tablet = { width: 768, height: 1024 };
 const desktop = { width: 1440, height: 900 };
 
+// Firefox: sempre no CI. No computador de desenvolvimento, só com PW_FIREFOX=1, porque o
+// Controle Inteligente de Aplicativos do Windows 11 bloqueia o Firefox do Playwright ali
+// (erro "spawn UNKNOWN"; ver docs/TESTING.md §5)
+const runFirefox = Boolean(process.env.CI) || process.env.PW_FIREFOX === "1";
+
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: true,
@@ -26,7 +31,9 @@ export default defineConfig({
     { name: "chromium-360", use: { ...devices["Desktop Chrome"], viewport: mobile } },
     { name: "chromium-768", use: { ...devices["Desktop Chrome"], viewport: tablet } },
     { name: "chromium-1440", use: { ...devices["Desktop Chrome"], viewport: desktop } },
-    { name: "firefox-1440", use: { ...devices["Desktop Firefox"], viewport: desktop } },
+    ...(runFirefox
+      ? [{ name: "firefox-1440", use: { ...devices["Desktop Firefox"], viewport: desktop } }]
+      : []),
     { name: "webkit-360", use: { ...devices["iPhone 13"], viewport: mobile } },
   ],
   // Os testes rodam contra o build de produção, não contra o `next dev` (TESTING.md §4)

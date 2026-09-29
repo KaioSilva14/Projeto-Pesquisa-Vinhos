@@ -31,12 +31,29 @@ export default defineConfig([
         {
           patterns: [
             {
-              group: ["@/data/*", "@/adapters/*"],
+              group: ["@/data", "@/data/*", "@/adapters", "@/adapters/*"],
               message: "Use os services (via props) em vez de importar dados diretamente.",
             },
             {
-              group: ["@/services/*"],
+              group: ["@/services", "@/services/*"],
               message: "Services são server-only: receba os dados por props.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    // ARCHITECTURE.md §3: páginas pedem dados só aos services (nunca direto a data/adapters)
+    files: ["src/app/**/*.{ts,tsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/data", "@/data/*", "@/adapters", "@/adapters/*"],
+              message: "Use catalogService de @/services em vez de ler os dados diretamente.",
             },
           ],
         },
