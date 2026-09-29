@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { grapes } from "@/data/grapes";
+import { images } from "@/data/images";
 import { sources } from "@/data/sources";
 
 // Protege os dados reais das uvas (F2-06) contra mudanças acidentais.
@@ -65,5 +66,31 @@ describe("dados reais das uvas", () => {
 
   it("Torrontés Riojano não tem origem (a ficha do VIVC não informa)", () => {
     expect(grapes.find((grape) => grape.id === "torrontes-riojano")?.origin).toBeUndefined();
+  });
+});
+
+describe("fotos das uvas (F2-06b, ADR-024)", () => {
+  it("cada foto é da própria uva e vem da página de fotos da mesma variedade no VIVC", () => {
+    for (const grape of grapes) {
+      for (const imageId of grape.imageIds ?? []) {
+        const image = images.find((item) => item.id === imageId);
+        expect(image?.subjectType, imageId).toBe("grape");
+        expect(image?.subjectId, imageId).toBe(grape.id);
+        expect(image?.sourceUrl, imageId).toMatch(new RegExp(`id=${grape.vivcId}$`));
+      }
+    }
+  });
+
+  it("toda foto cita o JKI e registra a permissão e a modificação", () => {
+    for (const image of images) {
+      expect(image.credit, image.id).toContain("Julius Kühn-Institut (JKI)");
+      expect(image.license, image.id).toMatch(/permitida pelo JKI/);
+      expect(image.modified, image.id).toBeDefined();
+    }
+  });
+
+  it("9 uvas têm foto; a Torrontés Riojano não (o VIVC não tem foto dela)", () => {
+    expect(grapes.filter((grape) => grape.imageIds?.length).length).toBe(9);
+    expect(grapes.find((grape) => grape.id === "torrontes-riojano")?.imageIds).toBeUndefined();
   });
 });
