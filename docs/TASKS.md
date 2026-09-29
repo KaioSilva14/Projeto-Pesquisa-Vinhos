@@ -52,7 +52,8 @@
 | F2-03 | Adapter local + services (get por slug, listas, relações) com `server-only` | Testes unitários | P0 | F2-01 | done |
 | F2-04 | Dados demo em `src/data/demo/` (fictícios, `isDemo`) + flag de ambiente | Selo visível; bloqueados em produção | P1 | F2-03 | done (selo visível entra nas páginas das fases 3 e 4, com o `DemoBadge`) |
 | F2-05 | Propor regiões, uvas e produtores de cada lote dentro dos 6 países (ADR-019) | Lista aprovada pelo usuário, com fonte primária identificada para cada item | P0 | F0-12 | done (aprovado em 2026-09-28, ADR-023; `docs/CURATION.md`) |
-| F2-06 | Curadoria lote 1a: uvas (8–12) com fontes e imagens licenciadas | `validate:data` verde; 100% com fonte | P0 | F2-02, F2-05 | todo |
+| F2-06 | Curadoria lote 1a: uvas (8–12) com fontes | `validate:data` verde; 100% com fonte | P0 | F2-02, F2-05 | done (10 uvas com fonte no VIVC; imagens separadas na F2-06b) |
+| F2-06b | Imagens licenciadas das uvas | Foto real e correspondente a cada uva, com licença confirmada na fonte (`IMAGES.md`); sem isso, "Imagem indisponível" | P1 | F2-06 | blocked (fotos do VIVC com "© Julius Kühn-Institut", sem licença aberta confirmada no site; decidir: pedir autorização ao JKI ou buscar fotos com licença livre de coleções identificadas) |
 | F2-07 | Curadoria lote 1b: 6 países (Itália, França, Espanha, EUA, Argentina, Brasil) e 6–12 regiões | Idem | P0 | F2-06 | todo |
 | F2-08 | Curadoria lotes 2 e 3: produtores (6–12) e vinhos (12–30) com safras | Idem | P0 | F2-07 | todo |
 | F2-09 | Tabela de mapeamento sensorial (`lib/sensory-map.ts`) revisada | Termos das fontes reais cobertos | P1 | F2-08 | todo |

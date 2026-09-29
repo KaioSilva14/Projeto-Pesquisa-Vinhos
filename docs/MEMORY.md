@@ -23,7 +23,8 @@
   - **F2-02**: `npm run validate:data` (`scripts/validate-data.ts` + `src/lib/validation/`), no CI.
   - **F2-03**: `src/adapters/` (DataAdapter + adapter local) e `src/services/` (todos com `import "server-only"`); as páginas usam `catalogService` de `@/services`.
   - **F2-04**: dados fictícios em `src/data/demo/` (5 vinhos "Vinho Exemplo 0X (demonstração)", país "xx"), carregados só com `NEXT_PUBLIC_ENABLE_DEMO_DATA=true`. O catálogo real (`src/data/*.ts`) ainda está **vazio**.
-- **Próxima tarefa**: curadoria real, F2-06 (as 10 uvas), depois F2-07 (países e regiões) e F2-08 (produtores e vinhos). Os números do VIVC e as fontes de cada item já estão em `docs/CURATION.md`.
+- **F2-06 concluída** (branch `data/uvas`, PR #6 a abrir): 10 uvas reais em `src/data/grapes.ts`, fontes em `src/data/sources.ts` (fichas do VIVC, acessadas em 2026-09-29). Dados extraídos do HTML bruto do VIVC (não do resumo da WebFetch, que pode errar). Imagens: **F2-06b bloqueada** (fotos do VIVC com "© JKI", sem licença aberta confirmada).
+- **Próxima tarefa**: F2-07 (6 países e 10 regiões, com a ligação uva ↔ região e `mainRegionIds` das uvas); depois F2-08 (produtores e vinhos).
 - O usuário roda o próprio `npm run dev` (porta 3001). O Next 16 só permite um `next dev` por projeto: para prints em modo dev, usar o servidor dele em vez de iniciar outro (nunca encerrá-lo sem pedir).
 - O usuário prefere que eu explique cada passo **enquanto** faço, em linguagem simples (pedido em 2026-09-28, após não entender onde estavam os commits).
 
@@ -55,7 +56,8 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- PR #5 (`feat/camada-dados` → `main`) a ser aberto e mesclado pelo usuário.
+- PR #6 (`data/uvas` → `main`) a ser aberto e mesclado pelo usuário.
+- Decisão do usuário sobre as imagens das uvas (F2-06b): pedir autorização ao JKI ou procurar fotos com licença livre.
 - Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
 ## Problemas conhecidos
@@ -71,7 +73,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Depois do merge do PR #5: `git switch main`, `git pull`, apagar o branch local e criar `data/uvas` para a F2-06.
+1. Depois do merge do PR #6: `git switch main`, `git pull`, apagar o branch local e criar `data/regioes` para a F2-07.
 2. Na curadoria (F2-06+): só itens do `docs/CURATION.md`; cada fato conferido na fonte original, texto sempre próprio, commit do tipo `data:` citando as fontes.
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 
