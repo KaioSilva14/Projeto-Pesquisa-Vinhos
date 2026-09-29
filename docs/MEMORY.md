@@ -17,11 +17,13 @@
   - `src/app/`: home provisória, `not-found.tsx`, `error.tsx` (usa `retry`, API do Next 16), `global-error.tsx`, página interna `/dev/design-system` (só em dev).
   - `src/config/` (env com Zod, headers de segurança, menus, site), `src/lib/` (cn, normalize), `src/schemas/image-asset.ts` (adiantado da F2-01).
   - Qualidade: Husky + lint-staged, CI no GitHub Actions. Testes: 93 unitários/componente, 61 E2E (5 perfis de navegador), axe sem violações.
-- **Fase 2 em andamento** (branch `data/curadoria`, enviado ao GitHub, PR #4 a abrir):
-  - **F2-05 concluída**: catálogo aprovado em `docs/CURATION.md` (ADR-023): 10 regiões, 10 uvas, 7 produtores (Miolo com ressalva; Chianti Classico sem produtor).
-  - **F2-01 concluída**: schemas Zod estritos em `src/schemas/` (um arquivo por entidade + `common.ts` e `catalog.ts`).
-  - **F2-02 concluída**: `npm run validate:data` (`scripts/validate-data.ts` + `src/lib/validation/`), no CI. `src/data/` tem as coleções **vazias**.
-- **Próxima tarefa**: F2-03 (adapter local + services `server-only`), F2-04 (dados demo fictícios), depois a curadoria real: F2-06 (uvas), F2-07 (países e regiões), F2-08 (produtores e vinhos). Os números de catálogo do VIVC e as fontes de cada item já estão em `docs/CURATION.md`.
+- **Fase 2 em andamento**. PR #4 (F2-05, F2-01, F2-02) mesclado. Branch atual `feat/camada-dados` (F2-03, F2-04), PR #5 a abrir.
+  - **F2-05**: catálogo aprovado em `docs/CURATION.md` (ADR-023): 10 regiões, 10 uvas, 7 produtores (Miolo com ressalva; Chianti Classico sem produtor).
+  - **F2-01**: schemas Zod estritos em `src/schemas/` (um arquivo por entidade + `common.ts` e `catalog.ts`).
+  - **F2-02**: `npm run validate:data` (`scripts/validate-data.ts` + `src/lib/validation/`), no CI.
+  - **F2-03**: `src/adapters/` (DataAdapter + adapter local) e `src/services/` (todos com `import "server-only"`); as páginas usam `catalogService` de `@/services`.
+  - **F2-04**: dados fictícios em `src/data/demo/` (5 vinhos "Vinho Exemplo 0X (demonstração)", país "xx"), carregados só com `NEXT_PUBLIC_ENABLE_DEMO_DATA=true`. O catálogo real (`src/data/*.ts`) ainda está **vazio**.
+- **Próxima tarefa**: curadoria real, F2-06 (as 10 uvas), depois F2-07 (países e regiões) e F2-08 (produtores e vinhos). Os números do VIVC e as fontes de cada item já estão em `docs/CURATION.md`.
 - O usuário roda o próprio `npm run dev` (porta 3001). O Next 16 só permite um `next dev` por projeto: para prints em modo dev, usar o servidor dele em vez de iniciar outro (nunca encerrá-lo sem pedir).
 - O usuário prefere que eu explique cada passo **enquanto** faço, em linguagem simples (pedido em 2026-09-28, após não entender onde estavam os commits).
 
@@ -53,7 +55,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- PR #4 (`data/curadoria` → `main`) a ser aberto e mesclado pelo usuário.
+- PR #5 (`feat/camada-dados` → `main`) a ser aberto e mesclado pelo usuário.
 - Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
 ## Problemas conhecidos
@@ -69,7 +71,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Depois do merge do PR #4: `git switch main`, `git pull`, apagar o branch local e criar um novo (ex.: `feat/camada-dados` para F2-03 e F2-04).
+1. Depois do merge do PR #5: `git switch main`, `git pull`, apagar o branch local e criar `data/uvas` para a F2-06.
 2. Na curadoria (F2-06+): só itens do `docs/CURATION.md`; cada fato conferido na fonte original, texto sempre próprio, commit do tipo `data:` citando as fontes.
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 
