@@ -176,6 +176,7 @@ type EditorialText = {
 | `summary` | `EditorialText` | | |
 | `history` | `EditorialText` | | |
 | `sensory` | `SensoryProfile` | | Ver §5 |
+| `sparklingSweetness` | `Sourced<'brut-nature' \| 'extra-brut' \| 'brut' \| 'extra-dry' \| 'sec' \| 'demi-sec' \| 'doux'>` | | **Só espumantes.** Termo declarado pelo produtor; sem faixas em g/l até o texto oficial da UE ser lido (ADR-025) |
 | `aromaNotes` | `Sourced<string[]>` | | Descritores do produtor |
 | `flavorNotes` | `Sourced<string[]>` | | |
 | `servingTemperature` | `Sourced<{ minC: number; maxC: number }>` | | |
@@ -286,7 +287,7 @@ type SensoryProfile = {
 | 4 | médio a encorpado | média+ / viva | firmes / médios+ | doce |
 | 5 | encorpado | alta | intensos / altos | muito doce |
 
-(Tabela inicial a revisar na Fase 2 com as fontes efetivamente usadas. Termos de espumantes (brut, extra brut…) são mapeados separadamente com base na regulamentação citada.)
+(Revisada na F2-09, ADR-025: as fichas reais descrevem os vinhos em prosa, sem termos de escala, então a tabela não ganhou termos e os vinhos reais ficam sem perfil sensorial. Termos de espumantes (brut, extra brut…) não entram nesta tabela: ficam no campo `Wine.sparklingSweetness`, §3.7.)
 
 ---
 

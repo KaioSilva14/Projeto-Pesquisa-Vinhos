@@ -206,6 +206,20 @@ describe("wineSchema", () => {
       }),
     );
   });
+
+  it("categoria de doçura de espumante: só em espumante, só termo da lista, com fonte", () => {
+    const sparkling = { ...exampleWine, type: { value: "espumante", ...src } };
+    ok(wineSchema.safeParse({ ...sparkling, sparklingSweetness: { value: "brut", ...src } }));
+    fails(wineSchema.safeParse({ ...sparkling, sparklingSweetness: { value: "bruto", ...src } }));
+    fails(wineSchema.safeParse({ ...sparkling, sparklingSweetness: { value: "brut" } }));
+    fails(
+      wineSchema.safeParse({
+        ...exampleWine,
+        type: { value: "tinto", ...src },
+        sparklingSweetness: { value: "brut", ...src },
+      }),
+    );
+  });
 });
 
 describe("producer e pairing", () => {
