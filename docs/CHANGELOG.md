@@ -26,6 +26,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - 2026-09-30: F4-02, lista `/uvas` com cards (foto real com botão "Créditos", contagem de vinhos) e página de cada uva (ficha do VIVC, regiões onde é principal, vinhos com a uva, fontes numeradas, JSON-LD Article).
 - 2026-09-30: F4-03, `/regioes` (agrupadas por país), página de cada região (denominação, uvas principais com a nota da fonte, produtores, vinhos, fontes; JSON-LD Place), `/paises` e página de cada país.
 - 2026-09-30: F4-04, `/produtores` e página de cada produtor (ficha com site oficial, fundação e cidade quando a fonte informa, história, vinhos, fontes; JSON-LD Organization). F4-05 (vinícolas) sem dados distintos: sem páginas vazias.
+- 2026-09-30: F4-08 (1ª parte), fotos reais das 10 regiões e de 6 dos 7 produtores, do Wikimedia Commons (CC BY, CC BY-SA, CC0), com autor, licença e origem no site e em `public/images/CREDITOS.md`.
 
 ### Alterado
 - 2026-09-30: composição de uvas com soma abaixo de 99% passa a ser aceita quando a nota explica o que falta (uva fora do catálogo), em vez de ser sempre rejeitada.

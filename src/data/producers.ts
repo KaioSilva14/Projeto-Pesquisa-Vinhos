@@ -1,12 +1,16 @@
 import type { Producer } from "@/schemas/producer";
 
+import { imageIdsOf } from "./images";
+
 // Produtores aprovados em docs/CURATION.md (ADR-023). Fatos lidos nas fichas técnicas e páginas
 // oficiais citadas (src/data/sources.ts) em 2026-09-30. Certificações (orgânico etc.) não entram:
 // as fichas afirmam, mas não citam o registro da certificadora (DATA_MODEL.md §3.4).
 
 function producer(data: Omit<Producer, "status" | "createdAt" | "updatedAt" | "slug">): Producer {
+  const imageIds = imageIdsOf("producer", data.id);
   return {
     ...data,
+    ...(imageIds.length > 0 && { imageIds }),
     slug: data.id,
     status: "published",
     createdAt: "2026-09-30",
