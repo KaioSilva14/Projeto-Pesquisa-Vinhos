@@ -6,7 +6,7 @@ import { pairingSchema } from "@/schemas/pairing";
 import { producerSchema } from "@/schemas/producer";
 import { sourceSchema } from "@/schemas/source";
 import { vintageSchema } from "@/schemas/vintage";
-import { wineGrapesSchema, wineSchema } from "@/schemas/wine";
+import { sourcedWineGrapesSchema, wineGrapesSchema, wineSchema } from "@/schemas/wine";
 
 import {
   base,
@@ -125,12 +125,18 @@ describe("composição de uvas", () => {
     );
   });
 
-  it("recusa soma baixa quando todas informam percentual", () => {
-    fails(
-      wineGrapesSchema.safeParse([
-        { grapeId: "uva-a", percentage: 60 },
-        { grapeId: "uva-b", percentage: 20 },
-      ]),
+  it("soma baixa com todas as uvas em percentual exige nota explicando o que falta", () => {
+    const low = [
+      { grapeId: "uva-a", percentage: 60 },
+      { grapeId: "uva-b", percentage: 20 },
+    ];
+    fails(sourcedWineGrapesSchema.safeParse({ value: low, sourceIds: ["src-teste-01"] }));
+    ok(
+      sourcedWineGrapesSchema.safeParse({
+        value: low,
+        sourceIds: ["src-teste-01"],
+        notes: "Os outros 20% são uma uva fora do catálogo.",
+      }),
     );
   });
 

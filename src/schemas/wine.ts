@@ -26,10 +26,12 @@ export const wineGrapeSchema = z.strictObject({
   isMain: z.boolean().optional(),
 });
 
-/**
- * Composição de uvas: sem uvas repetidas; soma dos percentuais ≤ 101 (arredondamento) e,
- * quando todos informam percentual, entre 99 e 101.
- */
+/** Soma dos percentuais informados (uvas sem percentual não contam). */
+function totalPercentage(grapes: readonly { percentage?: number | undefined }[]) {
+  return grapes.reduce((sum, grape) => sum + (grape.percentage ?? 0), 0);
+}
+
+/** Composição de uvas: sem uvas repetidas; soma dos percentuais ≤ 101 (arredondamento). */
 export const wineGrapesSchema = z
   .array(wineGrapeSchema)
   .nonempty()
@@ -38,20 +40,28 @@ export const wineGrapesSchema = z
     if (new Set(ids).size !== ids.length) {
       ctx.addIssue({ code: "custom", message: "A mesma uva aparece duas vezes na composição." });
     }
-    const percentages = grapes.flatMap((grape) =>
-      grape.percentage === undefined ? [] : [grape.percentage],
-    );
-    const total = percentages.reduce((sum, value) => sum + value, 0);
+    const total = totalPercentage(grapes);
     if (total > 101) {
       ctx.addIssue({ code: "custom", message: `Percentuais somam ${total}%, acima de 100%.` });
     }
-    if (percentages.length === grapes.length && total < 99) {
-      ctx.addIssue({
-        code: "custom",
-        message: `Todas as uvas têm percentual, mas a soma é ${total}% (esperado ~100%).`,
-      });
-    }
   });
+
+/**
+ * Composição com fonte. Quando todas as uvas têm percentual e a soma fica abaixo de 99%, a nota
+ * é obrigatória e deve explicar o que falta (ex.: "4% de Petit Verdot, uva fora do catálogo").
+ * Sem nota, uma soma baixa é tratada como erro de digitação.
+ */
+export const sourcedWineGrapesSchema = sourced(wineGrapesSchema).superRefine((grapes, ctx) => {
+  const allHavePercentage = grapes.value.every((grape) => grape.percentage !== undefined);
+  const total = totalPercentage(grapes.value);
+  if (allHavePercentage && total < 99 && !grapes.notes) {
+    ctx.addIssue({
+      code: "custom",
+      path: ["notes"],
+      message: `Percentuais somam ${total}%: explique na nota o que completa os 100% (ex.: uva fora do catálogo).`,
+    });
+  }
+});
 
 /** Atributo sensorial: o nível só existe com o termo exato usado pela fonte (§5). */
 export const sensoryAttributeSchema = z.strictObject({
@@ -84,7 +94,7 @@ export const wineSchema = z.strictObject({
   styleId: idSchema.optional(),
   isNonVintage: sourced(z.boolean()).optional(),
   /** Composição típica, quando não varia por safra. */
-  grapes: sourced(wineGrapesSchema).optional(),
+  grapes: sourcedWineGrapesSchema.optional(),
   productionMethod: sourced(z.string().min(1)).optional(),
   /** Só com certificação ou declaração oficial. */
   productionTags: sourced(z.array(z.enum(productionTags)).nonempty()).optional(),
