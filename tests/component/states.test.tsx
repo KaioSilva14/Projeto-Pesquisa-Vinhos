@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import Link from "next/link";
 import { describe, expect, it, vi } from "vitest";
 
 import ErrorPage from "@/app/error";
@@ -15,7 +16,7 @@ describe("EmptyState", () => {
       <EmptyState
         headingLevel="h1"
         title="Nenhum favorito ainda"
-        action={<a href="/vinhos">Explorar vinhos</a>}
+        action={<Link href="/vinhos">Explorar vinhos</Link>}
       />,
     );
     expect(screen.getByRole("heading", { level: 1, name: "Nenhum favorito ainda" })).toBeVisible();

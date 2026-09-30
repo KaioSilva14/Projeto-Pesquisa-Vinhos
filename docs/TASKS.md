@@ -74,13 +74,13 @@
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F4-01 | Página do vinho (FactSheet, GrapeComposition, SensoryProfile, SourceList, relacionados) | Campos sem fonte ocultos; metadata; JSON-LD | P0 | F3-07 | todo |
+| F4-01 | Página do vinho (FactSheet, GrapeComposition, SensoryProfile, SourceList, relacionados) | Campos sem fonte ocultos; metadata; JSON-LD | P0 | F3-07 | done (notas de fonte numeradas por fato; harmonizações e mini mapa ficam para F4-06 e Fase 9) |
 | F4-02 | Uvas (lista + individual) | E2E-05 | P0 | F4-01 | todo |
 | F4-03 | Regiões e países (lista + individual, hierarquia) | E2E-05 | P0 | F4-01 | todo |
 | F4-04 | Produtores (lista + individual) | E2E-05 | P0 | F4-01 | todo |
 | F4-05 | Vinícolas (só se houver dados reais distintos) | Sem páginas vazias | P2 | F4-04 | todo |
 | F4-06 | Harmonizações (básico) | Linguagem de orientação; fontes | P1 | F4-01 | todo |
-| F4-07 | `services/related.ts` (mesma região, mesma uva, mesmo produtor) | Testes unitários | P0 | F2-03 | todo |
+| F4-07 | `services/related.ts` (mesma região, mesma uva, mesmo produtor) | Testes unitários | P0 | F2-03 | done (função pura em `lib/wines/related.ts`) |
 
 ## Fase 5 — Home e storytelling
 

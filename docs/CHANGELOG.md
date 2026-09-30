@@ -22,6 +22,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - 2026-09-30: Fase 3 iniciada. Busca tolerante a acentos e erros de digitação (`src/lib/search/`, ADR-026), índice estático em `/api/search-index` (F3-02) e página `/pesquisa` com filtro por tipo e paginação, funcionando sem JavaScript (F3-04).
 - 2026-09-30: F3-03, autocomplete acessível (combobox WAI-ARIA) no cabeçalho e em `/pesquisa`: sugestões agrupadas por tipo, índice baixado só no primeiro foco, atalhos `/` e `Ctrl+K`.
 - 2026-09-30: F3-05 a F3-07, página `/vinhos` com filtros combinados (tipo, país, região, uva, produtor) na URL, contagem por opção, filtros ativos removíveis, ordenação, "Carregar mais", painel inferior no celular e `WineCard`. **Fase 3 concluída.**
+- 2026-09-30: F4-01 e F4-07, página de cada vinho (`/vinhos/[slug]`, estática): ficha técnica em blocos, safras, perfil sensorial só com fonte, relacionados pelos dados, lista de fontes com nota numerada em cada fato, metadados e JSON-LD sem preço.
 
 ### Alterado
 - 2026-09-30: composição de uvas com soma abaixo de 99% passa a ser aceita quando a nota explica o que falta (uva fora do catálogo), em vez de ser sempre rejeitada.
