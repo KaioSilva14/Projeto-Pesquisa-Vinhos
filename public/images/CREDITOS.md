@@ -24,7 +24,9 @@ Se você é detentor de direitos de alguma destas imagens e deseja a remoção, 
 | `grapes/albarino-01.jpg` | ALVARINHO | Doris Schneider, Ursula Brühl, Julius Kühn-Institut (JKI), Federal Research Centre for Cultivated Plants, Institute for Grapevine Breeding Geilweilerhof - 76833 Siebeldingen, GERMANY | [VIVC 15689](https://www.vivc.de/index.php?r=passport/photoviewresult&id=15689) |
 | `grapes/malbec-01.jpg` | COT | Ursula Brühl, Julius Kühn-Institut (JKI), Federal Research Centre for Cultivated Plants, Institute for Grapevine Breeding Geilweilerhof - 76833 Siebeldingen, GERMANY | [VIVC 2889](https://www.vivc.de/index.php?r=passport/photoviewresult&id=2889) |
 
-A Torrontés Riojano não tem foto no VIVC: no site ela aparece com o aviso "Imagem indisponível".
+### Torrontés Riojano (`grapes/torrontes-riojano-01.jpg`)
+
+O VIVC não tem foto desta variedade. A foto vem do **Instituto Nacional de Vitivinicultura (INV), Argentina**, [Informe variedad Torrontés 2022](https://www.argentina.gob.ar/sites/default/files/2018/10/01-torrontes_2022.pdf), página 3. O conteúdo do site argentina.gob.ar é licenciado em [Creative Commons Atribuição 4.0 Internacional](https://creativecommons.org/licenses/by/4.0/) (conferido em 2026-09-30). **Modificação:** imagem copiada de dentro do PDF, sem outras alterações. **Identificação:** a foto não tem legenda própria no relatório; ela ilustra o parágrafo que descreve o Torrontés Riojano, e o texto alternativo no site diz isso.
 
 ## Regiões (`regions/`) e produtores (`producers/`)
 
@@ -51,11 +53,11 @@ A Torrontés Riojano não tem foto no VIVC: no site ela aparece com o aviso "Ima
 | `producers/miolo-01.jpg` | Sintegrity | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bento_Gon%C3%A7alves_-_Vin%C3%ADcola_Miolo_04.jpg) |
 | `producers/gd-vajra-01.jpg` | Isidoro Barolo | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:G.D._VAJRA_Costabella.jpg) |
 
-A La Rioja Alta, S.A. não tem foto no Commons: no site ela aparece com o aviso "Imagem indisponível".
+A La Rioja Alta, S.A. não tem foto no Commons: a foto dela vem do site oficial (seção abaixo).
 
-## Garrafas dos vinhos (`wines/`)
+## Fotos dos sites oficiais dos produtores (`wines/` e `producers/la-rioja-alta-01.jpg`)
 
-**Fonte:** o site oficial de cada produtor. **Estas fotos não têm licença livre:** os direitos são dos produtores. Foram reproduzidas **sem autorização expressa**, com crédito, porque o Vinum é um projeto de estudo sem público e sem fins comerciais (decisão registrada no ADR-028). Se você é o produtor e deseja a remoção, abra uma issue: a foto será retirada.
+**Fonte:** o site oficial de cada produtor (páginas, biblioteca de mídia ou fichas técnicas em PDF, de onde a imagem foi copiada). **Estas fotos não têm licença livre:** os direitos são dos produtores. Foram reproduzidas **sem autorização expressa**, com crédito, porque o Vinum é um projeto de estudo sem público e sem fins comerciais (decisão registrada no ADR-028). Se você é o produtor e deseja a remoção, abra uma issue: a foto será retirada.
 **Correspondência:** cada foto é do vinho da página; foto de outra safra não foi usada. Quando a safra não é legível na foto, o texto alternativo diz isso.
 
 | Arquivo | Produtor | Origem | Modificação |
@@ -68,5 +70,11 @@ A La Rioja Alta, S.A. não tem foto no Commons: no site ela aparece com o aviso 
 | `wines/la-rioja-alta-gran-reserva-904-01.png` | La Rioja Alta, S.A. | [arquivo no site oficial](https://www.riojalta.com/media/GR904_2016.png) | — |
 | `wines/lagar-de-cervera-01.jpg` | La Rioja Alta, S.A. | [arquivo no site oficial](https://www.riojalta.com/media/Lagar_de_Cervera_2025.jpg) | — |
 | `wines/miolo-lote-43-01.png` | Miolo Wine Group | [arquivo no site oficial](https://institucional.miolo.com.br/wp-content/uploads/2017/08/lote-43.png) | — |
+| `wines/montelena-napa-valley-chardonnay-01.jpg` | Chateau Montelena | [arquivo no site oficial](https://montelena.com/wp-content/uploads/2024/03/CHM_Chardonnay_Straight_2021-scaled.jpg) | reduzida para 1600 px de altura |
+| `wines/roederer-collection-245-01.jpg` | Champagne Louis Roederer | [arquivo no site oficial](https://www.louis-roederer.com/sites/default/files/pdf/lr_tech_sheet_collection_245_en.pdf) | copiada de dentro da ficha técnica em PDF |
+| `wines/roederer-brut-nature-01.jpg` | Champagne Louis Roederer | [arquivo no site oficial](https://www.louis-roederer.com/sites/all/themes/roederer/files/LR_Tech%20sheet_BRUT%20NATURE%202015_Blanc%20EN.pdf) | copiada de dentro da ficha técnica em PDF e reduzida para 1600 px de altura |
+| `wines/catena-malbec-01.png` | Bodega Catena Zapata | [arquivo no site oficial](https://catenazapata.com/wp-content/uploads/2025/05/catenamalbec-2022.png) | girada 90° para ficar em pé e recortada nas margens brancas |
+| `wines/catena-zapata-malbec-argentino-01.jpg` | Bodega Catena Zapata | [arquivo no site oficial](https://catenazapata.com/wp-content/uploads/2025/03/Catena-Zapata-Malbec-Argentino.jpg) | recodificada em JPEG, no mesmo tamanho |
+| `producers/la-rioja-alta-01.jpg` | La Rioja Alta, S.A. | [arquivo no site oficial](https://www.riojalta.com/media/LaRiojaAltaSA.jpg) | reduzida para 1600 px de largura, sem os dados da câmera (EXIF) |
 
 Os mesmos créditos aparecem abaixo de cada foto no site (componente `ImageCredit`) e estão registrados em `src/data/images.ts`.

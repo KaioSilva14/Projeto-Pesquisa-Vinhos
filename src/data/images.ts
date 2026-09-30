@@ -5,7 +5,7 @@ import type { ImageAsset } from "@/schemas/image-asset";
 // Uvas (F2-06b): fotos do VIVC, Julius Kühn-Institut (JKI). A janela de cada foto no VIVC diz:
 // "This photo can be reproduced. Please quote the source as indicated below" — o crédito abaixo
 // é o texto exato indicado pelo JKI para cada foto. Conferido em 2026-09-29. Ver ADR-024.
-// A Torrontés Riojano não tem foto no VIVC: continua com "Imagem indisponível".
+// A Torrontés Riojano não tem foto no VIVC: a foto dela vem do INV (ver torrontesPhoto, abaixo).
 
 const JKI_ADDRESS =
   "Julius Kühn-Institut (JKI), Federal Research Centre for Cultivated Plants, Institute for Grapevine Breeding Geilweilerhof - 76833 Siebeldingen, GERMANY";
@@ -119,7 +119,8 @@ const grapePhotos: ImageAsset[] = [
 
 // Regiões e produtores (F4-08): fotos do Wikimedia Commons com licença livre (CC BY, CC BY-SA,
 // CC0), conferida na página de cada arquivo em 2026-09-30. A descrição da página confirma o lugar
-// fotografado. Crédito = autor como aparece no Commons. La Rioja Alta: nenhuma foto no Commons.
+// fotografado. Crédito = autor como aparece no Commons. La Rioja Alta: nenhuma foto no Commons (a
+// foto dela vem do site oficial, em bottlePhotos).
 
 const LICENSES = {
   "CC BY 2.0": "https://creativecommons.org/licenses/by/2.0",
@@ -316,14 +317,16 @@ function commonsPhotos(): ImageAsset[] {
 // livre. Usadas com crédito, em projeto de estudo sem fins comerciais, por decisão do usuário
 // (ADR-028); retiradas a pedido do detentor. Só entram fotos do vinho certo: safra diferente da
 // cadastrada nunca entra; safra ilegível na foto fica dita no texto alternativo.
-// Sem foto conferida: Montelena Chardonnay (só há a da safra 2023), Roederer Collection 245 e
-// Brut Nature (páginas sem imagem acessível), Catena Malbec e Catena Zapata Malbec Argentino
-// (só fotos de outra safra ou deitadas em baixa resolução).
+// Onde procurar: a biblioteca de mídia do WordPress (/wp-json/wp/v2/media?search=) e as fichas
+// técnicas em PDF, que trazem a garrafa da safra (imagem JPEG copiada de dentro do PDF). A mesma
+// regra vale para a foto da vinícola La Rioja Alta, tirada do site dela (ADR-028).
 
 const PRODUCER_SITE_LICENSE =
   "Direitos reservados ao produtor; reproduzida sem autorização expressa, com crédito, em projeto de estudo sem fins comerciais (ADR-028)";
 
 type ProducerSitePhoto = {
+  /** Vinho (garrafa) ou produtor (vinícola) fotografado. */
+  subjectType?: "wine" | "producer";
   wineId: string;
   /** Extensão do arquivo em public/images/wines/. */
   ext: "jpg" | "png" | "webp";
@@ -338,15 +341,15 @@ type ProducerSitePhoto = {
 
 function producerSitePhoto(photo: ProducerSitePhoto): ImageAsset {
   return {
-    id: `img-vinho-${photo.wineId}-01`,
-    src: `/images/wines/${photo.wineId}-01.${photo.ext}`,
+    id: `img-${photo.subjectType === "producer" ? "produtor" : "vinho"}-${photo.wineId}-01`,
+    src: `/images/${photo.subjectType === "producer" ? "producers" : "wines"}/${photo.wineId}-01.${photo.ext}`,
     alt: photo.alt,
     width: photo.width,
     height: photo.height,
     credit: `${photo.producer} (site oficial)`,
     license: PRODUCER_SITE_LICENSE,
     sourceUrl: photo.fileUrl,
-    subjectType: "wine",
+    subjectType: photo.subjectType ?? "wine",
     subjectId: photo.wineId,
     ...(photo.modified && { modified: photo.modified }),
     accessedAt: "2026-09-30",
@@ -430,9 +433,100 @@ const bottlePhotos: ImageAsset[] = [
     height: 783,
     alt: "Garrafa do Miolo Lote 43 (a safra não é legível na foto).",
   }),
+  producerSitePhoto({
+    wineId: "montelena-napa-valley-chardonnay",
+    ext: "jpg",
+    fileUrl:
+      "https://montelena.com/wp-content/uploads/2024/03/CHM_Chardonnay_Straight_2021-scaled.jpg",
+    producer: "Chateau Montelena",
+    width: 1067,
+    height: 1600,
+    alt: "Garrafa do Chateau Montelena Napa Valley Chardonnay 2021, de vidro verde, com o rótulo de frente.",
+    modified: "reduzida para 1600 px de altura",
+  }),
+  producerSitePhoto({
+    wineId: "roederer-collection-245",
+    ext: "jpg",
+    fileUrl:
+      "https://www.louis-roederer.com/sites/default/files/pdf/lr_tech_sheet_collection_245_en.pdf",
+    producer: "Champagne Louis Roederer",
+    width: 640,
+    height: 1158,
+    alt: "Garrafa do Louis Roederer Collection 245, com o número 245 no rótulo.",
+    modified: "copiada de dentro da ficha técnica em PDF",
+  }),
+  producerSitePhoto({
+    wineId: "roederer-brut-nature",
+    ext: "jpg",
+    fileUrl:
+      "https://www.louis-roederer.com/sites/all/themes/roederer/files/LR_Tech%20sheet_BRUT%20NATURE%202015_Blanc%20EN.pdf",
+    producer: "Champagne Louis Roederer",
+    width: 838,
+    height: 1600,
+    alt: "Garrafa do Louis Roederer Brut Nature 2015, com o rótulo branco assinado com Philippe Starck.",
+    modified: "copiada de dentro da ficha técnica em PDF e reduzida para 1600 px de altura",
+  }),
+  producerSitePhoto({
+    wineId: "catena-malbec",
+    ext: "png",
+    fileUrl: "https://catenazapata.com/wp-content/uploads/2025/05/catenamalbec-2022.png",
+    producer: "Bodega Catena Zapata",
+    width: 160,
+    height: 597,
+    alt: "Garrafa do Catena Malbec 2022, com o rótulo claro e o desenho dos Andes.",
+    modified: "girada 90° para ficar em pé e recortada nas margens brancas",
+  }),
+  producerSitePhoto({
+    wineId: "catena-zapata-malbec-argentino",
+    ext: "jpg",
+    fileUrl:
+      "https://catenazapata.com/wp-content/uploads/2025/03/Catena-Zapata-Malbec-Argentino.jpg",
+    producer: "Bodega Catena Zapata",
+    width: 400,
+    height: 600,
+    alt: "Garrafa do Catena Zapata Malbec Argentino, com o rótulo ilustrado (a safra não é legível na foto).",
+    modified: "recodificada em JPEG, no mesmo tamanho",
+  }),
+  producerSitePhoto({
+    subjectType: "producer",
+    wineId: "la-rioja-alta",
+    ext: "jpg",
+    fileUrl: "https://www.riojalta.com/media/LaRiojaAltaSA.jpg",
+    producer: "La Rioja Alta, S.A.",
+    width: 1600,
+    height: 825,
+    alt: "Salão da bodega La Rioja Alta, S.A., com o letreiro ao fundo, teto de vigas de madeira e antigas tampas de cubas no chão.",
+    modified: "reduzida para 1600 px de largura, sem os dados da câmera (EXIF)",
+  }),
 ];
 
-export const images: ImageAsset[] = [...grapePhotos, ...commonsPhotos(), ...bottlePhotos];
+// Torrontés Riojano (sem foto no VIVC): foto ampelográfica do relatório de variedade do INV
+// (Instituto Nacional de Vitivinicultura, Argentina). O conteúdo do argentina.gob.ar é licenciado
+// em CC BY 4.0 (rodapé do site, conferido em 2026-09-30). A foto não tem legenda própria: fica ao
+// lado do parágrafo que descreve o Torrontés Riojano (cachos grandes, bagas esféricas amarelo-
+// douradas), e o texto alternativo diz isso.
+const torrontesPhoto: ImageAsset = {
+  id: "img-uva-torrontes-riojano-01",
+  src: "/images/grapes/torrontes-riojano-01.jpg",
+  alt: "Cacho de uvas brancas de bagas amarelo-esverdeadas sobre fundo claro, ilustrando a descrição do Torrontés Riojano no relatório de variedade do INV.",
+  width: 716,
+  height: 1123,
+  credit: "Instituto Nacional de Vitivinicultura (INV), Argentina, Informe variedad Torrontés 2022",
+  license: "CC BY 4.0",
+  licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+  sourceUrl: "https://www.argentina.gob.ar/sites/default/files/2018/10/01-torrontes_2022.pdf",
+  subjectType: "grape",
+  subjectId: "torrontes-riojano",
+  modified: "copiada de dentro do relatório em PDF",
+  accessedAt: "2026-09-30",
+};
+
+export const images: ImageAsset[] = [
+  ...grapePhotos,
+  torrontesPhoto,
+  ...commonsPhotos(),
+  ...bottlePhotos,
+];
 
 /** Fotos cadastradas para a entidade (sem foto → "Imagem indisponível"). */
 export function imageIdsOf(subjectType: ImageAsset["subjectType"], subjectId: string): string[] {
