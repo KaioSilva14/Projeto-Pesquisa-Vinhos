@@ -62,7 +62,7 @@
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F3-01 | `lib/normalize.ts` + testes (acentos, erros) | Casos do `TESTING.md` §2 | P0 | F1-07 | todo |
+| F3-01 | `lib/normalize.ts` + testes (acentos, erros) | Casos do `TESTING.md` §2 | P0 | F1-07 | done (`lib/search/`: Fuse.js 7.5.0, cada termo precisa aparecer em algum campo) |
 | F3-02 | Índice de busca estático `/api/search-index` | ≤ 150 KB; gerado no build | P0 | F2-03 | todo |
 | F3-03 | `SearchCombobox` (autocomplete agrupado, lazy, atalhos `/` e `Ctrl+K`) | Padrão APG; E2E-01/02 | P0 | F3-02, F1-13 | todo |
 | F3-04 | Página `/pesquisa?q=` (servidor) com NoResults | E2E-01 | P0 | F3-01 | todo |
