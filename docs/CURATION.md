@@ -67,7 +67,7 @@ Rías Baixas e Valle de Cafayate entram no Lote 1 (região e uva) sem produtor p
 
 ## Lote 3 — Vinhos
 
-Só depois de aprovar os produtores: 2 a 4 vinhos por produtor (12 a 30 no total), escolhidos entre os que têm ficha técnica por safra.
+Registrado na F2-08 (2026-09-30): 13 vinhos, 12 safras. Montelena (Napa Valley Cabernet Sauvignon 2018, Napa Valley Chardonnay 2021), Vajra (Barolo Albe 2021, Barolo Bricco delle Viole 2022), Palmer (Château Palmer 2022, Alter Ego 2022), Roederer (Collection 245, multissafra; Brut Nature 2015), La Rioja Alta (Gran Reserva 904 2016, Lagar de Cervera 2025 na D.O. Rías Baixas), Catena Zapata (Malbec Argentino 2021, Catena Malbec 2022) e Miolo (Lote 43 2012). Da Miolo ficaram de fora o Reserva Merlot (uvas da Campanha Meridional e ficha sem safra) e o Merlot Terroir (página sem safra).
 
 ---
 

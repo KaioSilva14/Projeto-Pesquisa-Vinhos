@@ -154,4 +154,102 @@ export const sources: Source[] = [
     accessedAt: "2026-09-30",
     reliability: "primary",
   },
+
+  // F2-08: fichas técnicas e páginas oficiais dos produtores (texto bruto lido em 2026-09-30)
+  producer(
+    "src-montelena-cs-2018",
+    "Ficha técnica 2018 Napa Valley Cabernet Sauvignon",
+    "Chateau Montelena",
+    "https://montelena.com/wp-content/uploads/2020/12/2018-Napa-Valley-Cabernet-Sauvignon.pdf",
+  ),
+  producer(
+    "src-montelena-ch-2021",
+    "Ficha técnica 2021 Napa Valley Chardonnay",
+    "Chateau Montelena",
+    "https://montelena.com/wp-content/uploads/2024/06/2021-Napa-Valley-Chardonnay.pdf",
+  ),
+  producer(
+    "src-vajra-albe-2021",
+    "Fact sheet Barolo Albe 2021",
+    "G.D. Vajra",
+    "https://www.gdvajra.it/uploads/public/3188_fact-sheet-2021-barolo-albe-en-1-.pdf",
+  ),
+  producer(
+    "src-vajra-bdv-2022",
+    "Fact sheet Barolo Bricco delle Viole 2022",
+    "G.D. Vajra",
+    "https://www.gdvajra.it/uploads/public/3624_fact-sheet-2022-barolo-bricco-delle-viole-fs-eng.pdf",
+  ),
+  producer(
+    "src-palmer-2022",
+    "Vintage sheet 2022 (Château Palmer e Alter Ego)",
+    "Château Palmer",
+    "https://cdn.prod.website-files.com/63a45b1a311ee6a3ffd1671d/65e22ba9ba0fcbbcd080dee8_Vintage_sheet_EN_2022.pdf",
+  ),
+  producer(
+    "src-palmer-wine-library",
+    "The Vintages Library of Château Palmer",
+    "Château Palmer",
+    "https://www.chateau-palmer.com/en/wine-library",
+  ),
+  producer(
+    "src-roederer-collection-245",
+    "Tech sheet Collection 245",
+    "Champagne Louis Roederer",
+    "https://www.louis-roederer.com/sites/default/files/pdf/lr_tech_sheet_collection_245_en.pdf",
+  ),
+  producer(
+    "src-roederer-brut-nature-2015",
+    "Tech sheet Brut Nature 2015",
+    "Champagne Louis Roederer",
+    "https://www.louis-roederer.com/sites/all/themes/roederer/files/LR_Tech%20sheet_BRUT%20NATURE%202015_Blanc%20EN.pdf",
+  ),
+  producer(
+    "src-riojalta-904",
+    "Gran Reserva 904 (página da safra 2016)",
+    "La Rioja Alta, S.A.",
+    "https://www.riojalta.com/vinos_rioja-alta/gran-reserva-904/",
+  ),
+  producer(
+    "src-riojalta-lagar-de-cervera",
+    "Lagar de Cervera (página da safra 2025)",
+    "La Rioja Alta, S.A.",
+    "https://www.riojalta.com/vinos_lagar-de-fornelos/lagar-de-cervera/",
+  ),
+  producer(
+    "src-catena-argentino-2021",
+    "Catena Zapata Malbec Argentino 2021",
+    "Bodega Catena Zapata",
+    "https://catenazapata.com/catena-zapata-malbec-argentino-2021/",
+  ),
+  producer(
+    "src-catena-malbec-2022",
+    "Catena Malbec 2022",
+    "Bodega Catena Zapata",
+    "https://catenazapata.com/catena-malbec-2022/",
+  ),
+  producer(
+    "src-miolo-lote-43-pagina",
+    "Miolo Lote 43 (página do produto, safra 2012)",
+    "Miolo Wine Group",
+    "https://institucional.miolo.com.br/produtos/miolo-lote-43/",
+  ),
+  producer(
+    "src-miolo-lote-43-ficha",
+    "Ficha completa Miolo Lote 43 (ligada à safra 2012 na página do produto)",
+    "Miolo Wine Group",
+    "https://institucional.miolo.com.br/wp-content/uploads/2017/12/Miolo-Lote-43.pdf",
+  ),
 ];
+
+function producer(id: string, label: string, publisher: string, url: string): Source {
+  return {
+    id,
+    kind: "producer",
+    label,
+    publisher,
+    url,
+    accessedAt: "2026-09-30",
+    reliability: "primary",
+  };
+}
