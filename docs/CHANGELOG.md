@@ -14,6 +14,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - 2026-09-28: F1-13, componentes interativos sobre Radix (Dialog, Sheet, Popover, Tooltip, Select, Checkbox, Accordion, Tabs) com animações do catálogo e token `--color-scrim`. **Fase 1 concluída.**
 - 2026-09-29: Fase 2 (F2-05, F2-01 a F2-04): catálogo inicial aprovado (`CURATION.md`, ADR-023); schemas Zod estritos de todas as entidades; `npm run validate:data` no CI; adapter local e services `server-only`; dados de demonstração fictícios em `src/data/demo/`.
 - 2026-09-29: primeiros dados reais: 10 uvas com fatos das fichas do VIVC (F2-06) e 9 fotos do VIVC/JKI com crédito e permissão de reprodução (F2-06b, ADR-024); o `validate:data` passa a conferir se o arquivo de cada imagem existe.
+- 2026-09-30: F2-07, 6 países e 10 regiões com fontes oficiais (regulamentos, interprofissões, TTB, INV, Embrapa) e ligação uva ↔ região nos dois sentidos.
 
 ### Alterado
 - 2026-09-28: ESLint 9.39.5 no lugar do 10.11.0 previsto (ADR-022); `vite` e `@testing-library/dom` incluídos como peer dependencies obrigatórias.
