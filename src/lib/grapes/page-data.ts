@@ -1,3 +1,4 @@
+import type { EntityListItem } from "@/lib/entity-list";
 import type { WineListItem } from "@/lib/wines/list-item";
 import type { Grape } from "@/schemas/grape";
 import type { ImageAsset } from "@/schemas/image-asset";
@@ -8,16 +9,7 @@ import type { Source } from "@/schemas/source";
 /** Um lugar citado com link (região, país). */
 export type PlaceRef = { name: string; slug: string };
 
-export type GrapeListItem = {
-  id: string;
-  name: string;
-  href: string;
-  /** "Uva tinta · Itália", com o que estiver cadastrado. */
-  context?: string;
-  image?: ImageAsset;
-  /** Vinhos do catálogo com esta uva na composição. */
-  wineCount: number;
-};
+export type GrapeListItem = EntityListItem;
 
 export type GrapePageData = {
   grape: Grape;

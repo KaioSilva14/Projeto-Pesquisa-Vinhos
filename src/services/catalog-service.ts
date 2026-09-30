@@ -5,6 +5,7 @@ import type { DataAdapter } from "@/adapters/types";
 import { createGeographyService } from "./geography";
 import { createGrapePagesService } from "./grape-pages";
 import { createGrapeService } from "./grapes";
+import { createPlacePagesService } from "./place-pages";
 import { createProducerService } from "./producers";
 import { createReferenceService } from "./references";
 import { createSearchService } from "./search";
@@ -16,6 +17,7 @@ import { createWineService } from "./wines";
 export function createCatalogService(adapter: DataAdapter) {
   return {
     ...createGeographyService(adapter),
+    ...createPlacePagesService(adapter),
     ...createGrapeService(adapter),
     ...createGrapePagesService(adapter),
     ...createProducerService(adapter),

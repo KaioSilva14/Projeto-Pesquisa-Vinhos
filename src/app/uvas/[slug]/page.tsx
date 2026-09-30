@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { GrapeFacts } from "@/components/grape/GrapeFacts";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { Container } from "@/components/layout/Container";
 import { ContentSection } from "@/components/layout/ContentSection";
+import { EntityLayout } from "@/components/layout/EntityLayout";
 import { EntityImage } from "@/components/media/EntityImage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Cite } from "@/components/sources/Cite";
@@ -63,11 +62,9 @@ export default async function GrapePage({ params }: GrapePageProps) {
   return (
     <>
       <JsonLd data={grapeJsonLd(data, breadcrumbs, env.NEXT_PUBLIC_SITE_URL)} />
-      <Container className="pt-6 md:pt-10">
-        <Breadcrumbs items={breadcrumbs} />
-      </Container>
-      <Container className="grid gap-10 pt-6 pb-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-        <div className="lg:sticky lg:top-24 lg:self-start">
+      <EntityLayout
+        breadcrumbs={breadcrumbs}
+        media={
           <EntityImage
             image={data.image}
             variant="grape"
@@ -75,45 +72,43 @@ export default async function GrapePage({ params }: GrapePageProps) {
             priority
             showCredit
           />
-        </div>
+        }
+      >
+        <header className="grid gap-4">
+          <h1 className="font-serif text-h1 text-balance">{grape.name}</h1>
+          {grape.color && (
+            <Badge className="justify-self-start">{GRAPE_COLOR_LABELS[grape.color.value]}</Badge>
+          )}
+          {grape.summary && (
+            <p className="max-w-lead text-lead">
+              {grape.summary.text}
+              <Cite ids={grape.summary.basedOnSourceIds} numbers={numbers} />
+            </p>
+          )}
+        </header>
 
-        <div className="grid min-w-0 content-start gap-14">
-          <header className="grid gap-4">
-            <h1 className="font-serif text-h1 text-balance">{grape.name}</h1>
-            {grape.color && (
-              <Badge className="justify-self-start">{GRAPE_COLOR_LABELS[grape.color.value]}</Badge>
-            )}
-            {grape.summary && (
-              <p className="max-w-lead text-lead">
-                {grape.summary.text}
-                <Cite ids={grape.summary.basedOnSourceIds} numbers={numbers} />
-              </p>
-            )}
-          </header>
+        <ContentSection title="Ficha da uva">
+          <GrapeFacts data={data} numbers={numbers} />
+        </ContentSection>
 
-          <ContentSection title="Ficha da uva">
-            <GrapeFacts data={data} numbers={numbers} />
-          </ContentSection>
+        <ContentSection title="Vinhos com esta uva">
+          {data.wines.length > 0 ? (
+            <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {data.wines.map((wine) => (
+                <li key={wine.id}>
+                  <WineCard wine={wine} headingLevel="h3" />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-text-muted">Ainda não há vinhos com esta uva no catálogo.</p>
+          )}
+        </ContentSection>
 
-          <ContentSection title="Vinhos com esta uva">
-            {data.wines.length > 0 ? (
-              <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {data.wines.map((wine) => (
-                  <li key={wine.id}>
-                    <WineCard wine={wine} headingLevel="h3" />
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-text-muted">Ainda não há vinhos com esta uva no catálogo.</p>
-            )}
-          </ContentSection>
-
-          <ContentSection title="Fontes" id="fontes">
-            <SourceList sources={data.sources} />
-          </ContentSection>
-        </div>
-      </Container>
+        <ContentSection title="Fontes" id="fontes">
+          <SourceList sources={data.sources} />
+        </ContentSection>
+      </EntityLayout>
     </>
   );
 }
