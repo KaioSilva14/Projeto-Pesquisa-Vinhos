@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { createSearcher, MAX_QUERY_LENGTH, queryTerms } from "@/lib/search/search";
+import { createSearcher, MAX_QUERY_LENGTH, queryTerms, typoDistance } from "@/lib/search/search";
 import type { SearchDocument } from "@/lib/search/types";
 
 // Documentos fictícios: só testam o algoritmo, não afirmam nada sobre vinhos reais.
@@ -57,6 +57,21 @@ describe("queryTerms", () => {
   });
 });
 
+describe("typoDistance", () => {
+  it("conta letras trocadas, faltando, sobrando e invertidas", () => {
+    expect(typoDistance("malbec", "malbec", 2)).toBe(0);
+    expect(typoDistance("malbek", "malbec", 2)).toBe(1);
+    expect(typoDistance("nebiolo", "nebbiolo", 2)).toBe(1);
+    expect(typoDistance("malbce", "malbec", 2)).toBe(1);
+    expect(typoDistance("sauvinhon", "sauvignon", 2)).toBe(2);
+  });
+
+  it("para de contar quando passa do limite", () => {
+    expect(typoDistance("tinto", "argentino", 1)).toBe(2);
+    expect(typoDistance("abc", "xyz", 1)).toBe(2);
+  });
+});
+
 describe("createSearcher", () => {
   it('tolera erro de digitação: "sauvinhon" encontra Sauvignon Blanc em primeiro', () => {
     expect(idsFor("sauvinhon")[0]).toBe("grape:sauvignon-blanc");
@@ -86,6 +101,29 @@ describe("createSearcher", () => {
     expect(() => search("(tinto)*[ ^$ \\ |")).not.toThrow();
     expect(idsFor("(tinto)*[")).toContain("wine:exemplo-01");
     expect(() => search("sauvignon ".repeat(10_000))).not.toThrow();
+  });
+
+  it("compara palavra com palavra: um trecho dentro de outra palavra não conta", () => {
+    // "tinto" está a 1 letra de "tino", que aparece dentro de "italiano"/"argentino"
+    const withDemonym = createSearcher([
+      {
+        id: "country:ar",
+        kind: "country",
+        name: "País Exemplo",
+        keywords: ["argentino"],
+        href: "/x",
+      },
+    ]);
+    expect(withDemonym("tinto")).toEqual([]);
+  });
+
+  it("encontra pelo começo da palavra (quem ainda está digitando)", () => {
+    expect(idsFor("sauvig")[0]).toBe("grape:sauvignon-blanc");
+  });
+
+  it("não tolera erro em termos curtos (3 letras ou menos)", () => {
+    expect(search("sau")).not.toEqual([]);
+    expect(search("sxu")).toEqual([]);
   });
 
   it("devolve lista vazia quando nada parece com a consulta", () => {

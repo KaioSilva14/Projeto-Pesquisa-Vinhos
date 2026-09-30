@@ -93,7 +93,22 @@ describe("busca no catálogo real", () => {
     );
   });
 
-  it('"malbek" encontra a uva Malbec em primeiro', async () => {
-    expect((await idsFor("malbek"))[0]).toBe("grape:malbec");
+  it('"malbek" encontra a uva Malbec em primeiro e nada sem Malbec', async () => {
+    const ids = await idsFor("malbek");
+    expect(ids[0]).toBe("grape:malbec");
+    expect(ids).not.toContain("wine:vajra-barolo-albe");
+  });
+
+  it('"tinto" não traz a Argentina só porque "argentino" contém "tino"', async () => {
+    expect(await idsFor("tinto")).not.toContain("country:ar");
+  });
+
+  it('"napa" não traz a Catena Zapata só porque "zapa" parece "napa"', async () => {
+    expect(await idsFor("napa")).not.toContain("producer:catena-zapata");
+  });
+
+  it('"rioja" traz a região Rioja antes do produtor La Rioja Alta', async () => {
+    const ids = await idsFor("rioja");
+    expect(ids.indexOf("region:rioja")).toBeLessThan(ids.indexOf("producer:la-rioja-alta"));
   });
 });

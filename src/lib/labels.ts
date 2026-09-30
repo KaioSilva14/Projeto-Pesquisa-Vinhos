@@ -1,3 +1,4 @@
+import type { SearchKind } from "@/lib/search/types";
 import type { WineType } from "@/schemas/common";
 import type { SparklingSweetness } from "@/schemas/wine";
 
@@ -21,4 +22,13 @@ export const SPARKLING_SWEETNESS_LABELS: Record<SparklingSweetness, string> = {
   sec: "Sec",
   "demi-sec": "Demi-Sec",
   doux: "Doux",
+};
+
+/** Tipo de resultado da busca, no singular (linha do resultado) e no plural (filtro). */
+export const SEARCH_KIND_LABELS: Record<SearchKind, { one: string; many: string }> = {
+  wine: { one: "Vinho", many: "Vinhos" },
+  grape: { one: "Uva", many: "Uvas" },
+  region: { one: "Região", many: "Regiões" },
+  country: { one: "País", many: "Países" },
+  producer: { one: "Produtor", many: "Produtores" },
 };

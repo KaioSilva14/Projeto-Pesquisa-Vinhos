@@ -1,33 +1,14 @@
-import Fuse, { type Expression, type IFuseOptions } from "fuse.js";
-
 import { normalize } from "@/lib/normalize";
 
 import type { SearchDocument, SearchResult } from "./types";
 
-// Busca tolerante a erros de digitação e acentos (ARCHITECTURE.md §8, ADR-008). O mesmo código
-// roda no autocomplete (navegador) e na página /pesquisa (servidor).
+// Busca tolerante a erros de digitação e acentos (ARCHITECTURE.md §8, ADR-026). Compara palavra
+// com palavra: "tinto" não casa com "argentino" só porque "tino" aparece dentro dele. O mesmo
+// código roda no autocomplete (navegador) e na página /pesquisa (servidor).
 
 /** Limites que protegem a busca de entradas gigantes. */
 export const MAX_QUERY_LENGTH = 100;
 const MAX_TERMS = 8;
-
-/** Campos pesquisados e peso de cada um: acertar o nome vale mais. */
-const FIELDS = [
-  { name: "name", weight: 0.6 },
-  { name: "keywords", weight: 0.2 },
-  { name: "subtitle", weight: 0.2 },
-] as const;
-
-type Entry = { document: SearchDocument } & Record<(typeof FIELDS)[number]["name"], string>;
-
-const OPTIONS: IFuseOptions<Entry> = {
-  keys: [...FIELDS],
-  // 0 exige texto idêntico, 1 aceita qualquer coisa. 0,35 aceita cerca de 1 erro a cada 3 letras.
-  threshold: 0.35,
-  // Procura o termo em qualquer posição do texto, não só no começo
-  ignoreLocation: true,
-  includeScore: true,
-};
 
 /** Palavras genéricas que não ajudam a achar nada: "vinho argentino" = "argentino". */
 const STOPWORDS = new Set(
@@ -52,28 +33,121 @@ export function queryTerms(query: string): string[] {
   return (meaningful.length > 0 ? meaningful : terms).slice(0, MAX_TERMS);
 }
 
+/** Erros de digitação tolerados: nenhum em termos curtos, 1 até 7 letras, 2 a partir de 8. */
+function allowedTypos(term: string): number {
+  if (term.length < 4) return 0;
+  return term.length < 8 ? 1 : 2;
+}
+
+/**
+ * Distância entre duas palavras: letras trocadas, faltando, sobrando ou invertidas ("malbce").
+ * Para de calcular quando passa de `max` (só interessa saber se cabe no limite).
+ */
+export function typoDistance(a: string, b: string, max: number): number {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let beforePrevious: number[] = [];
+  let previous = Array.from({ length: b.length + 1 }, (_, index) => index);
+  for (let i = 1; i <= a.length; i++) {
+    const current = [i];
+    let rowMin = i;
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      let value = Math.min(previous[j]! + 1, current[j - 1]! + 1, previous[j - 1]! + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+        value = Math.min(value, beforePrevious[j - 2]! + 1);
+      }
+      current.push(value);
+      rowMin = Math.min(rowMin, value);
+    }
+    if (rowMin > max) return max + 1;
+    beforePrevious = previous;
+    previous = current;
+  }
+  return previous[b.length]!;
+}
+
+/**
+ * Qualidade do encontro entre um termo e uma palavra (0 = idêntico; undefined = não casa).
+ * Aceita a palavra inteira, o começo dela (quem ainda está digitando) e grafias parecidas.
+ */
+function matchWord(term: string, word: string): number | undefined {
+  if (word === term) return 0;
+  if (word.startsWith(term)) return 0.15;
+  const max = allowedTypos(term);
+  if (max === 0) return undefined;
+  const whole = typoDistance(term, word, max);
+  if (whole <= max) return 0.3 + (0.3 * whole) / term.length;
+  // Erro no começo de uma palavra mais longa só a partir de 6 letras: em termos curtos isso
+  // traria ruído ("napa" casaria com o começo de "Zapata")
+  if (term.length < 6) return undefined;
+  const start = typoDistance(term, word.slice(0, term.length), max);
+  if (start <= max) return 0.45 + (0.3 * start) / term.length;
+  return undefined;
+}
+
+/** Acertar o nome vale mais que acertar uma palavra extra ou o subtítulo. */
+const FIELD_PENALTY = { name: 0, keywords: 0.2, subtitle: 0.25 } as const;
+type Field = keyof typeof FIELD_PENALTY;
+
+type Entry = { document: SearchDocument; words: Record<Field, string[]> };
+
+const wordsOf = (text: string) => [...new Set(normalize(text).split(" ").filter(Boolean))];
+
+function bestMatch(term: string, entry: Entry): { score: number; inName: boolean } | undefined {
+  let best: { score: number; inName: boolean } | undefined;
+  for (const field of Object.keys(FIELD_PENALTY) as Field[]) {
+    for (const word of entry.words[field]) {
+      const quality = matchWord(term, word);
+      if (quality === undefined) continue;
+      const score = quality + FIELD_PENALTY[field];
+      if (!best || score < best.score) best = { score, inName: field === "name" };
+    }
+  }
+  return best;
+}
+
+/** Nota do documento: todos os termos precisam casar ("tinto frances" = tinto E francês). */
+function scoreEntry(terms: readonly string[], entry: Entry): number | undefined {
+  let total = 0;
+  let nameHits = 0;
+  for (const term of terms) {
+    const match = bestMatch(term, entry);
+    if (!match) return undefined;
+    total += match.score;
+    if (match.inName) nameHits++;
+  }
+  // Entre nomes que casam, prefere o que a consulta cobre mais: "rioja" → Rioja antes de
+  // "La Rioja Alta"
+  const nameWords = entry.words.name.length;
+  const coverage = nameWords > 0 ? Math.min(nameHits / nameWords, 1) : 0;
+  return total / terms.length + (nameHits > 0 ? 0.1 * (1 - coverage) : 0);
+}
+
 export type Searcher = (query: string, limit?: number) => SearchResult[];
 
 /** Prepara os documentos uma vez e devolve a função de busca. */
 export function createSearcher(documents: readonly SearchDocument[]): Searcher {
   const entries: Entry[] = documents.map((document) => ({
     document,
-    name: normalize(document.name),
-    keywords: normalize((document.keywords ?? []).join(" ")),
-    subtitle: normalize(document.subtitle ?? ""),
+    words: {
+      name: wordsOf(document.name),
+      keywords: wordsOf((document.keywords ?? []).join(" ")),
+      subtitle: wordsOf(document.subtitle ?? ""),
+    },
   }));
-  const fuse = new Fuse(entries, OPTIONS);
 
   return (query, limit) => {
     const terms = queryTerms(query);
     if (terms.length === 0) return [];
 
-    // Cada termo precisa aparecer em algum campo: "tinto frances" = tinto E francês
-    const expression: Expression = {
-      $and: terms.map((term) => ({ $or: FIELDS.map(({ name }) => ({ [name]: term })) })),
-    };
-    return fuse
-      .search(expression, limit === undefined ? undefined : { limit })
-      .map(({ item, score }) => ({ document: item.document, score: score ?? 0 }));
+    const results: SearchResult[] = [];
+    for (const entry of entries) {
+      const score = scoreEntry(terms, entry);
+      if (score !== undefined) results.push({ document: entry.document, score });
+    }
+    results.sort(
+      (a, b) => a.score - b.score || a.document.name.localeCompare(b.document.name, "pt-BR"),
+    );
+    return limit === undefined ? results : results.slice(0, limit);
   };
 }
