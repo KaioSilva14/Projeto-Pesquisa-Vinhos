@@ -1,6 +1,7 @@
 import type { Grape } from "@/schemas/grape";
 
 import { images } from "./images";
+import { regions } from "./regions";
 
 // Uvas aprovadas em docs/CURATION.md (ADR-023). Fonte de todos os fatos: ficha da variedade
 // no VIVC (src/data/sources.ts), extraída do conteúdo bruto da página em 2026-09-29.
@@ -8,7 +9,8 @@ import { images } from "./images";
 //   nomes ambíguos na busca (ex.: "Auxerrois", "Malvasia", que também designam outras uvas).
 // - Parentesco: só quando o VIVC confirma os DOIS genitores por marcadores genéticos.
 // - Origem: país informado pelo VIVC; ausente quando a ficha não informa.
-// - Regiões principais (mainRegionIds) entram na F2-07, com a fonte de cada denominação.
+// - Regiões principais (mainRegionIds): derivadas de src/data/regions.ts, com as mesmas fontes
+//   que ligam a região à uva (as duas pontas nunca ficam em desacordo).
 
 type GrapeFacts = {
   id: string;
@@ -28,6 +30,11 @@ function fromVivc(facts: GrapeFacts): Grape {
   const imageIds = images
     .filter((image) => image.subjectType === "grape" && image.subjectId === facts.id)
     .map((image) => image.id);
+  // Regiões que citam esta uva como principal, e as fontes dessas ligações
+  const linked = regions.filter((region) => region.mainGrapeIds?.value.includes(facts.id));
+  const regionSources = [
+    ...new Set(linked.flatMap((region) => region.mainGrapeIds?.sourceIds ?? [])),
+  ];
   return {
     id: facts.id,
     slug: facts.id,
@@ -36,6 +43,12 @@ function fromVivc(facts: GrapeFacts): Grape {
     updatedAt: "2026-09-29",
     sourceIds: source,
     ...(imageIds.length > 0 && { imageIds }),
+    ...(linked.length > 0 && {
+      mainRegionIds: {
+        value: linked.map((region) => region.id) as [string, ...string[]],
+        sourceIds: regionSources as [string, ...string[]],
+      },
+    }),
     name: facts.name,
     vivcId: String(facts.vivcId),
     ...(facts.referenceName && {

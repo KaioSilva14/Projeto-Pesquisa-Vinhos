@@ -24,7 +24,8 @@
   - **F2-03**: `src/adapters/` (DataAdapter + adapter local) e `src/services/` (todos com `import "server-only"`); as páginas usam `catalogService` de `@/services`.
   - **F2-04**: dados fictícios em `src/data/demo/` (5 vinhos "Vinho Exemplo 0X (demonstração)", país "xx"), carregados só com `NEXT_PUBLIC_ENABLE_DEMO_DATA=true`. O catálogo real (`src/data/*.ts`) ainda está **vazio**.
 - **F2-06 e F2-06b concluídas**: 10 uvas reais em `src/data/grapes.ts` (fontes: fichas do VIVC em `src/data/sources.ts`) e 9 fotos do VIVC/JKI em `public/images/grapes/` com crédito exato (`src/data/images.ts`, `public/images/CREDITOS.md`, ADR-024). A janela de cada foto no VIVC diz "This photo can be reproduced. Please quote the source". Torrontés Riojano sem foto. Dados extraídos do HTML bruto do VIVC (não do resumo da WebFetch, que pode errar).
-- **Próxima tarefa**: F2-07 (6 países e 10 regiões, com a ligação uva ↔ região e `mainRegionIds` das uvas); depois F2-08 (produtores e vinhos).
+- **F2-07 concluída** (branch `data/regioes`, PR #8 a abrir): 6 países (`src/data/countries.ts`) e 10 regiões (`src/data/regions.ts`) com fontes oficiais (MASAF, CIVB, Comité Champagne, DOCa Rioja, BOE, TTB, INV, Embrapa; NVV como secundária). `mainRegionIds` das uvas derivado das regiões. Pendência: Torrontés Riojano ↔ Valle de Cafayate sem fonte específica.
+- **Próxima tarefa**: F2-08 (produtores e vinhos: 7 produtores aprovados, 2 a 4 vinhos cada, com fichas técnicas por safra).
 - O usuário roda o próprio `npm run dev` (porta 3001). O Next 16 só permite um `next dev` por projeto: para prints em modo dev, usar o servidor dele em vez de iniciar outro (nunca encerrá-lo sem pedir).
 - O usuário prefere que eu explique cada passo **enquanto** faço, em linguagem simples (pedido em 2026-09-28, após não entender onde estavam os commits).
 
@@ -56,7 +57,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- PR #7 (`data/imagens-uvas` → `main`) a ser aberto e mesclado pelo usuário.
+- PR #8 (`data/regioes` → `main`) a ser aberto e mesclado pelo usuário.
 - Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
 ## Problemas conhecidos
@@ -73,7 +74,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Depois do merge do PR #7: `git switch main`, `git pull`, apagar o branch local e criar `data/regioes` para a F2-07.
+1. Depois do merge do PR #8: `git switch main`, `git pull`, apagar o branch local e criar `data/produtores` para a F2-08.
 2. Na curadoria (F2-06+): só itens do `docs/CURATION.md`; cada fato conferido na fonte original, texto sempre próprio, commit do tipo `data:` citando as fontes.
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 

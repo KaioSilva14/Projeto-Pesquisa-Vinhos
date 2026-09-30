@@ -44,12 +44,16 @@ describe("dados reais das uvas", () => {
     }
   });
 
-  it("cada uva cita só a própria ficha do VIVC, que existe nas fontes", () => {
+  it("fatos da uva citam só a própria ficha do VIVC; outras fontes só na ligação com regiões", () => {
     const sourceIds = new Set(sources.map((source) => source.id));
     for (const grape of grapes) {
       const expected = `src-vivc-${grape.vivcId}`;
-      expect([...citedSources(grape)], grape.id).toEqual([expected]);
+      const { mainRegionIds, ...facts } = grape;
+      expect([...citedSources(facts)], grape.id).toEqual([expected]);
       expect(sourceIds.has(expected), grape.id).toBe(true);
+      for (const id of mainRegionIds?.sourceIds ?? []) {
+        expect(sourceIds.has(id), `${grape.id}: ${id}`).toBe(true);
+      }
     }
   });
 

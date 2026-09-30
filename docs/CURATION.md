@@ -73,6 +73,9 @@ Só depois de aprovar os produtores: 2 a 4 vinhos por produtor (12 a 30 no total
 
 ## Riscos e observações
 
+- **Pendência (F2-07)**: a ligação Torrontés Riojano ↔ Valle de Cafayate ainda não tem fonte específica. O INV associa a uva aos "Valles Calchaquíes de Salta" e à Região Noroeste inteira, não a Cafayate. Até achar fonte oficial que fale de Cafayate, a região fica sem uva principal e a uva sem região.
+- **Fontes com ressalva (F2-07)**: regulamento do Chianti Classico na versão do registro do MASAF (alterações até 2014; a alteração de 2023 não foi conferida); regulamento de Rías Baixas de 1997 (versões posteriores não conferidas); dado de Napa Valley vem da associação de vinícolas (fonte secundária).
+
 - **Brasil** é o país com menos dados técnicos públicos por safra nos sites oficiais. Alternativas: aceitar produtores com fichas de poucas safras; ou pedir as fichas diretamente aos produtores (modelo de e-mail em `IMAGES.md` §8, adaptável).
 - **Imagens**: nenhuma foto foi avaliada ainda. Cada item poderá aparecer com "Imagem indisponível" até haver foto com licença verificada (F2-06 a F2-08).
 - **Direitos**: fatos das fichas técnicas podem ser usados; textos nunca serão copiados (`RULES.md` §1.2).
