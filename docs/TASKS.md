@@ -80,7 +80,7 @@
 | F4-04 | Produtores (lista + individual) | E2E-05 | P0 | F4-01 | done (E2E-05 completo: vinho → uva → região → produtor → vinho) |
 | F4-05 | Vinícolas (só se houver dados reais distintos) | Sem páginas vazias | P2 | F4-04 | não se aplica por enquanto (catálogo sem vinícola distinta do produtor; reabrir quando houver) |
 | F4-06 | Harmonizações (básico) | Linguagem de orientação; fontes | P1 | F4-01 | todo |
-| F4-08 | Imagens licenciadas de regiões, produtores e vinhos | Foto real e correspondente a cada entidade, com autor, licença e origem registrados (`IMAGES.md`); regiões e produtores via Wikimedia Commons (CC) ou site oficial; garrafas só do site oficial do produtor, do vinho certo; sem confirmação → "Imagem indisponível" | P1 | F4-03, F4-04 | doing (regiões e produtores: 16 fotos do Commons, PR #18; La Rioja Alta sem foto no Commons; garrafas no próximo PR) |
+| F4-08 | Imagens licenciadas de regiões, produtores e vinhos | Foto real e correspondente a cada entidade, com autor, licença e origem registrados (`IMAGES.md`); regiões e produtores via Wikimedia Commons (CC) ou site oficial; garrafas só do site oficial do produtor, do vinho certo; sem confirmação → "Imagem indisponível" | P1 | F4-03, F4-04 | done (16 fotos do Commons, PR #18; 8 garrafas dos sites dos produtores, ADR-028; sem foto: La Rioja Alta e 5 vinhos, ver ADR-028) |
 | F4-07 | `services/related.ts` (mesma região, mesma uva, mesmo produtor) | Testes unitários | P0 | F2-03 | done (função pura em `lib/wines/related.ts`) |
 
 ## Fase 5 — Home e storytelling

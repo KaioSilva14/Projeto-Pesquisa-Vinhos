@@ -312,7 +312,127 @@ function commonsPhotos(): ImageAsset[] {
   ];
 }
 
-export const images: ImageAsset[] = [...grapePhotos, ...commonsPhotos()];
+// Garrafas (F4-08, 2ª parte): fotos publicadas pelo próprio produtor no site oficial, sem licença
+// livre. Usadas com crédito, em projeto de estudo sem fins comerciais, por decisão do usuário
+// (ADR-028); retiradas a pedido do detentor. Só entram fotos do vinho certo: safra diferente da
+// cadastrada nunca entra; safra ilegível na foto fica dita no texto alternativo.
+// Sem foto conferida: Montelena Chardonnay (só há a da safra 2023), Roederer Collection 245 e
+// Brut Nature (páginas sem imagem acessível), Catena Malbec e Catena Zapata Malbec Argentino
+// (só fotos de outra safra ou deitadas em baixa resolução).
+
+const PRODUCER_SITE_LICENSE =
+  "Direitos reservados ao produtor; reproduzida sem autorização expressa, com crédito, em projeto de estudo sem fins comerciais (ADR-028)";
+
+type ProducerSitePhoto = {
+  wineId: string;
+  /** Extensão do arquivo em public/images/wines/. */
+  ext: "jpg" | "png" | "webp";
+  /** Endereço exato do arquivo no site do produtor. */
+  fileUrl: string;
+  producer: string;
+  width: number;
+  height: number;
+  alt: string;
+  modified?: string;
+};
+
+function producerSitePhoto(photo: ProducerSitePhoto): ImageAsset {
+  return {
+    id: `img-vinho-${photo.wineId}-01`,
+    src: `/images/wines/${photo.wineId}-01.${photo.ext}`,
+    alt: photo.alt,
+    width: photo.width,
+    height: photo.height,
+    credit: `${photo.producer} (site oficial)`,
+    license: PRODUCER_SITE_LICENSE,
+    sourceUrl: photo.fileUrl,
+    subjectType: "wine",
+    subjectId: photo.wineId,
+    ...(photo.modified && { modified: photo.modified }),
+    accessedAt: "2026-09-30",
+  };
+}
+
+const bottlePhotos: ImageAsset[] = [
+  producerSitePhoto({
+    wineId: "montelena-napa-valley-cabernet-sauvignon",
+    ext: "jpg",
+    fileUrl: "https://montelena.com/wp-content/uploads/2020/12/CHM_Shop_NapaCab_2018_Detail.png",
+    producer: "Chateau Montelena",
+    width: 1021,
+    height: 1600,
+    alt: "Detalhe da garrafa do Chateau Montelena Napa Valley Cabernet Sauvignon 2018, com o rótulo em primeiro plano.",
+    modified: "reduzida para 1600 px de altura e convertida para JPEG",
+  }),
+  producerSitePhoto({
+    wineId: "vajra-barolo-albe",
+    ext: "png",
+    fileUrl: "https://www.gdvajra.it/uploads/public/2237_bottle-nv-barolo-albe.png",
+    producer: "G.D. Vajra",
+    width: 362,
+    height: 976,
+    alt: "Garrafa do Barolo Albe, da G.D. Vajra (a safra não é legível na foto).",
+  }),
+  producerSitePhoto({
+    wineId: "vajra-barolo-bricco-delle-viole",
+    ext: "png",
+    fileUrl:
+      "https://www.gdvajra.it/uploads/public/3122_2259-bottle-nv-barolo-bricco-delle-viole.075.png",
+    producer: "G.D. Vajra",
+    width: 362,
+    height: 976,
+    alt: "Garrafa do Barolo Bricco delle Viole, da G.D. Vajra (a safra não é legível na foto).",
+  }),
+  producerSitePhoto({
+    wineId: "chateau-palmer",
+    ext: "webp",
+    fileUrl:
+      "https://cdn.prod.website-files.com/63a417a748979747a3239e66/649c412d157dcc572cf05141_chateau-palmer_vins_chateau-palmer_00_cover-p-1600.webp",
+    producer: "Château Palmer",
+    width: 1600,
+    height: 1778,
+    alt: "Duas garrafas do Château Palmer, de 750 ml e magnum, diante de uma parede escura (a safra não aparece no rótulo).",
+  }),
+  producerSitePhoto({
+    wineId: "palmer-alter-ego",
+    ext: "webp",
+    fileUrl:
+      "https://cdn.prod.website-files.com/63a417a748979747a3239e66/649c412ec74b1e1d298f2a82_chateau-palmer_vins_alter-ego_00_cover-p-1600.webp",
+    producer: "Château Palmer",
+    width: 1600,
+    height: 1778,
+    alt: "Duas garrafas do Alter Ego, do Château Palmer, magnum e 750 ml (a safra não aparece no rótulo).",
+  }),
+  producerSitePhoto({
+    wineId: "la-rioja-alta-gran-reserva-904",
+    ext: "png",
+    fileUrl: "https://www.riojalta.com/media/GR904_2016.png",
+    producer: "La Rioja Alta, S.A.",
+    width: 300,
+    height: 1061,
+    alt: "Garrafa do Gran Reserva 904 2016, da La Rioja Alta.",
+  }),
+  producerSitePhoto({
+    wineId: "lagar-de-cervera",
+    ext: "jpg",
+    fileUrl: "https://www.riojalta.com/media/Lagar_de_Cervera_2025.jpg",
+    producer: "La Rioja Alta, S.A.",
+    width: 1271,
+    height: 1203,
+    alt: "Rótulo do Lagar de Cervera Albariño 2025.",
+  }),
+  producerSitePhoto({
+    wineId: "miolo-lote-43",
+    ext: "png",
+    fileUrl: "https://institucional.miolo.com.br/wp-content/uploads/2017/08/lote-43.png",
+    producer: "Miolo Wine Group",
+    width: 259,
+    height: 783,
+    alt: "Garrafa do Miolo Lote 43 (a safra não é legível na foto).",
+  }),
+];
+
+export const images: ImageAsset[] = [...grapePhotos, ...commonsPhotos(), ...bottlePhotos];
 
 /** Fotos cadastradas para a entidade (sem foto → "Imagem indisponível"). */
 export function imageIdsOf(subjectType: ImageAsset["subjectType"], subjectId: string): string[] {

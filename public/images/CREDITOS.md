@@ -53,4 +53,20 @@ A Torrontés Riojano não tem foto no VIVC: no site ela aparece com o aviso "Ima
 
 A La Rioja Alta, S.A. não tem foto no Commons: no site ela aparece com o aviso "Imagem indisponível".
 
+## Garrafas dos vinhos (`wines/`)
+
+**Fonte:** o site oficial de cada produtor. **Estas fotos não têm licença livre:** os direitos são dos produtores. Foram reproduzidas **sem autorização expressa**, com crédito, porque o Vinum é um projeto de estudo sem público e sem fins comerciais (decisão registrada no ADR-028). Se você é o produtor e deseja a remoção, abra uma issue: a foto será retirada.
+**Correspondência:** cada foto é do vinho da página; foto de outra safra não foi usada. Quando a safra não é legível na foto, o texto alternativo diz isso.
+
+| Arquivo | Produtor | Origem | Modificação |
+|---|---|---|---|
+| `wines/montelena-napa-valley-cabernet-sauvignon-01.jpg` | Chateau Montelena | [arquivo no site oficial](https://montelena.com/wp-content/uploads/2020/12/CHM_Shop_NapaCab_2018_Detail.png) | reduzida para 1600 px de altura e convertida para JPEG |
+| `wines/vajra-barolo-albe-01.png` | G.D. Vajra | [arquivo no site oficial](https://www.gdvajra.it/uploads/public/2237_bottle-nv-barolo-albe.png) | — |
+| `wines/vajra-barolo-bricco-delle-viole-01.png` | G.D. Vajra | [arquivo no site oficial](https://www.gdvajra.it/uploads/public/3122_2259-bottle-nv-barolo-bricco-delle-viole.075.png) | — |
+| `wines/chateau-palmer-01.webp` | Château Palmer | [arquivo no site oficial](https://cdn.prod.website-files.com/63a417a748979747a3239e66/649c412d157dcc572cf05141_chateau-palmer_vins_chateau-palmer_00_cover-p-1600.webp) | — |
+| `wines/palmer-alter-ego-01.webp` | Château Palmer | [arquivo no site oficial](https://cdn.prod.website-files.com/63a417a748979747a3239e66/649c412ec74b1e1d298f2a82_chateau-palmer_vins_alter-ego_00_cover-p-1600.webp) | — |
+| `wines/la-rioja-alta-gran-reserva-904-01.png` | La Rioja Alta, S.A. | [arquivo no site oficial](https://www.riojalta.com/media/GR904_2016.png) | — |
+| `wines/lagar-de-cervera-01.jpg` | La Rioja Alta, S.A. | [arquivo no site oficial](https://www.riojalta.com/media/Lagar_de_Cervera_2025.jpg) | — |
+| `wines/miolo-lote-43-01.png` | Miolo Wine Group | [arquivo no site oficial](https://institucional.miolo.com.br/wp-content/uploads/2017/08/lote-43.png) | — |
+
 Os mesmos créditos aparecem abaixo de cada foto no site (componente `ImageCredit`) e estão registrados em `src/data/images.ts`.

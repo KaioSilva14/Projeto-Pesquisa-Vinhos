@@ -6,7 +6,7 @@ import { WINE_TYPE_LABELS } from "@/lib/labels";
 import type { WineListItem } from "@/lib/wines/list-item";
 import { wineTypes } from "@/schemas/common";
 
-import { publishedOf, sortByName } from "./shared";
+import { pickByIds, publishedOf, sortByName } from "./shared";
 
 const byLabel = (options: Iterable<FilterOption>) =>
   [...new Map([...options].map((option) => [option.value, option])).values()].sort((a, b) =>
@@ -19,13 +19,14 @@ const byLabel = (options: Iterable<FilterOption>) =>
  */
 export function createWineListService(adapter: DataAdapter) {
   async function getWineList(): Promise<{ items: WineListItem[]; options: FilterOptions }> {
-    const [wines, vintages, grapes, regions, countries, producers] = await Promise.all([
+    const [wines, vintages, grapes, regions, countries, producers, images] = await Promise.all([
       publishedOf(adapter, "wines"),
       adapter.getAll("vintages"),
       publishedOf(adapter, "grapes"),
       publishedOf(adapter, "regions"),
       publishedOf(adapter, "countries"),
       publishedOf(adapter, "producers"),
+      adapter.getAll("images"),
     ]);
     const lookup = <T extends { id: string }>(list: readonly T[]) => {
       const map = new Map(list.map((item) => [item.id, item]));
@@ -63,6 +64,7 @@ export function createWineListService(adapter: DataAdapter) {
 
       const place = [wineRegion?.name, wineCountry?.name].filter(Boolean).join(", ");
       const years = wineVintages.map((vintage) => vintage.year);
+      const [image] = pickByIds(images, wine.imageIds ?? []);
       return {
         id: wine.id,
         name: wine.name,
@@ -72,6 +74,7 @@ export function createWineListService(adapter: DataAdapter) {
         typeLabel: WINE_TYPE_LABELS[wine.type.value],
         ...(years.length > 0 && { latestYear: Math.max(...years) }),
         isNonVintage: wine.isNonVintage?.value === true,
+        ...(image && { image }),
         facets: {
           tipo: [wine.type.value],
           pais: wineCountry ? [wineCountry.slug] : [],

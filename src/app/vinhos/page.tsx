@@ -8,7 +8,7 @@ import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { NoResults } from "@/components/states/NoResults";
 import { buttonVariants } from "@/components/ui/Button";
-import { WineCard } from "@/components/wine/WineCard";
+import { WineGrid } from "@/components/wine/WineGrid";
 import { keepKnownValues, parseWineListParams } from "@/lib/filters/params";
 import {
   applyFilters,
@@ -88,13 +88,7 @@ export default async function WinesPage({ searchParams }: WinesPageProps) {
             <NoResults clearHref={winesHref({ sort: state.sort })} />
           ) : (
             <>
-              <ul aria-label="Lista de vinhos" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {visible.map((wine) => (
-                  <li key={wine.id}>
-                    <WineCard wine={wine} />
-                  </li>
-                ))}
-              </ul>
+              <WineGrid wines={visible} label="Lista de vinhos" />
               {visible.length < filtered.length && (
                 <div className="grid justify-items-center gap-3">
                   <p className="text-small text-text-muted">

@@ -9,7 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Cite } from "@/components/sources/Cite";
 import { SourceList } from "@/components/sources/SourceList";
 import { Badge } from "@/components/ui/Badge";
-import { WineCard } from "@/components/wine/WineCard";
+import { WineGrid } from "@/components/wine/WineGrid";
 import { env } from "@/config/env";
 import { numberCitations } from "@/lib/citations";
 import { GRAPE_COLOR_LABELS } from "@/lib/labels";
@@ -93,13 +93,7 @@ export default async function GrapePage({ params }: GrapePageProps) {
 
         <ContentSection title="Vinhos com esta uva">
           {data.wines.length > 0 ? (
-            <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {data.wines.map((wine) => (
-                <li key={wine.id}>
-                  <WineCard wine={wine} headingLevel="h3" />
-                </li>
-              ))}
-            </ul>
+            <WineGrid wines={data.wines} headingLevel="h3" />
           ) : (
             <p className="text-text-muted">Ainda não há vinhos com esta uva no catálogo.</p>
           )}

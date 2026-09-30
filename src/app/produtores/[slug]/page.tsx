@@ -9,7 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Cite } from "@/components/sources/Cite";
 import { SourceList } from "@/components/sources/SourceList";
 import { IncompleteDataNote } from "@/components/states/IncompleteDataNote";
-import { WineCard } from "@/components/wine/WineCard";
+import { WineGrid } from "@/components/wine/WineGrid";
 import { env } from "@/config/env";
 import { numberCitations } from "@/lib/citations";
 import { producerDescription, producerJsonLd, producerTitle } from "@/lib/seo/producer";
@@ -92,13 +92,7 @@ export default async function ProducerPage({ params }: ProducerPageProps) {
 
         <ContentSection title="Vinhos do produtor">
           {data.wines.length > 0 ? (
-            <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {data.wines.map((wine) => (
-                <li key={wine.id}>
-                  <WineCard wine={wine} headingLevel="h3" />
-                </li>
-              ))}
-            </ul>
+            <WineGrid wines={data.wines} headingLevel="h3" />
           ) : (
             <p className="text-text-muted">Ainda não há vinhos deste produtor no catálogo.</p>
           )}

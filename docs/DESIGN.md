@@ -280,7 +280,7 @@ Usados **só quando agrupam uma entidade clicável**. Nunca "três cards iguais"
 
 | Card | Estrutura | Proporção da imagem |
 |---|---|---|
-| `WineCard` | Imagem da garrafa/rótulo (só se houver foto real; sem foto, o card não reserva área de imagem, ADR-027), nome (serif), produtor, região · país, badges de tipo/safra (ou "Multissafra"), `FavoriteButton` (Fase 6) | 3:4 vertical (garrafas); imagem com `object-contain` sobre `sunken` |
+| `WineCard` | Imagem da garrafa/rótulo com botão "Créditos" (numa grade `WineGrid`, se algum vinho tem foto, todos reservam a área; se nenhum tem, nenhum reserva, ADR-027), nome (serif), produtor, região · país, badges de tipo/safra (ou "Multissafra"), `FavoriteButton` (Fase 6) | 3:4 vertical (garrafas); imagem com `object-contain` sobre `sunken` |
 | `EntityCard` (uva, região, produtor, país) | Imagem, nome, 1 linha de contexto, contagem de vinhos; crédito no botão "Créditos". Numa grade (`EntityGrid`) em que nenhum card tem foto, nenhum reserva a área; se algum tem, todos reservam ("Imagem indisponível" nos que faltam) | 4:3 ou 3:2 |
 | `EditorialCard` | Imagem grande, título, resumo curto | 16:9 ou 3:2 |
 | `CompactResult` | Linha para autocomplete/listas densas: título, subtítulo, tipo. Miniatura de 48 px só quando houver solução para o crédito da foto (IMAGES.md §3); até lá, sem miniatura | 1:1 |
