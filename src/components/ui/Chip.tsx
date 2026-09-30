@@ -1,4 +1,5 @@
-import type { ComponentProps } from "react";
+import Link from "next/link";
+import type { ComponentProps, ReactNode } from "react";
 
 import { cn } from "@/lib/cn";
 
@@ -9,6 +10,33 @@ const chipBase = cn(
   "inline-flex h-11 items-center gap-1.5 rounded-pill border px-3.5 text-small md:h-9",
   "transition-colors duration-(--duration-fast) ease-out [&_svg]:size-4",
 );
+
+const chipState = (selected: boolean) =>
+  selected
+    ? "border-accent bg-accent-soft text-accent"
+    : "border-border-strong text-text hover:bg-sunken";
+
+function ChipContent({
+  selected,
+  count,
+  children,
+}: {
+  selected: boolean;
+  count: number | undefined;
+  children: ReactNode;
+}) {
+  return (
+    <>
+      {selected && <CheckIcon aria-hidden />}
+      {children}
+      {count !== undefined && (
+        <span className="text-text-subtle tabular-nums">
+          <span className="sr-only">,</span> {count}
+        </span>
+      )}
+    </>
+  );
+}
 
 type FilterChipProps = Omit<ComponentProps<"button">, "aria-pressed"> & {
   selected: boolean;
@@ -29,23 +57,42 @@ export function FilterChip({
     <button
       type={type}
       aria-pressed={selected}
-      className={cn(
-        chipBase,
-        selected
-          ? "border-accent bg-accent-soft text-accent"
-          : "border-border-strong text-text hover:bg-sunken",
-        className,
-      )}
+      className={cn(chipBase, chipState(selected), className)}
       {...props}
     >
-      {selected && <CheckIcon aria-hidden />}
-      {children}
-      {count !== undefined && (
-        <span className="text-text-subtle tabular-nums">
-          <span className="sr-only">,</span> {count}
-        </span>
-      )}
+      <ChipContent selected={selected} count={count}>
+        {children}
+      </ChipContent>
     </button>
+  );
+}
+
+type FilterChipLinkProps = Omit<ComponentProps<typeof Link>, "aria-current"> & {
+  selected: boolean;
+  count?: number;
+};
+
+/**
+ * Opção de filtro que é um link (a URL guarda o filtro): funciona sem JavaScript.
+ * A opção ativa é marcada com aria-current.
+ */
+export function FilterChipLink({
+  selected,
+  count,
+  className,
+  children,
+  ...props
+}: FilterChipLinkProps) {
+  return (
+    <Link
+      aria-current={selected ? "page" : undefined}
+      className={cn(chipBase, chipState(selected), className)}
+      {...props}
+    >
+      <ChipContent selected={selected} count={count}>
+        {children}
+      </ChipContent>
+    </Link>
   );
 }
 

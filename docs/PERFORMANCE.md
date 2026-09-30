@@ -24,7 +24,7 @@
 | JS de primeiro carregamento, páginas de entidade | ≤ 150 KB |
 | JS de primeiro carregamento, home | ≤ 170 KB |
 | JS de primeiro carregamento, `/vinhos` com filtros | ≤ 180 KB |
-| Chunk do autocomplete (Fuse + UI), sob demanda | ≤ 25 KB |
+| Chunk do autocomplete (busca + UI), sob demanda | ≤ 25 KB |
 | Índice de busca (`/api/search-index`) | ≤ 150 KB na v1 (alerta no CI acima de 300 KB) |
 | Chunk 3D (three + R3F + drei usado), sob demanda | ≤ 250 KB, nunca no primeiro carregamento |
 | Chunk de mapa (MapLibre), sob demanda | carregado só na página de região ao entrar na viewport |
@@ -67,7 +67,7 @@
 - Medir Lighthouse **com e sem** 3D; se piorar a nota abaixo da meta, o 3D sai.
 
 ### 3.7 Busca
-- Índice e Fuse baixados só no primeiro foco/atalho; memorizados em módulo.
+- Índice e buscador baixados só no primeiro foco/atalho; memorizados em módulo.
 - Debounce 120 ms; resultados limitados (5 por grupo).
 - Se o índice passar do orçamento → migrar (ver `ARCHITECTURE.md` §8).
 

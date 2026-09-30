@@ -62,13 +62,13 @@
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F3-01 | `lib/normalize.ts` + testes (acentos, erros) | Casos do `TESTING.md` §2 | P0 | F1-07 | todo |
-| F3-02 | Índice de busca estático `/api/search-index` | ≤ 150 KB; gerado no build | P0 | F2-03 | todo |
+| F3-01 | `lib/normalize.ts` + testes (acentos, erros) | Casos do `TESTING.md` §2 | P0 | F1-07 | done (`lib/search/`: comparação palavra por palavra, todos os termos precisam casar; ADR-026) |
+| F3-02 | Índice de busca estático `/api/search-index` | ≤ 150 KB; gerado no build | P0 | F2-03 | done (46 documentos, ~9 KB) |
 | F3-03 | `SearchCombobox` (autocomplete agrupado, lazy, atalhos `/` e `Ctrl+K`) | Padrão APG; E2E-01/02 | P0 | F3-02, F1-13 | todo |
-| F3-04 | Página `/pesquisa?q=` (servidor) com NoResults | E2E-01 | P0 | F3-01 | todo |
+| F3-04 | Página `/pesquisa?q=` (servidor) com NoResults | E2E-01 | P0 | F3-01 | done (filtro por tipo e paginação pela URL; funciona sem JS) |
 | F3-05 | Filtros: schema, facetas, `/vinhos` dinâmico, nuqs | E2E-03; opções vazias não aparecem | P0 | F2-03 | todo |
 | F3-06 | FilterPanel (desktop) + bottom sheet (mobile) + ActiveFilters + ordenação + "Carregar mais" | E2E-04 | P0 | F3-05 | todo |
-| F3-07 | WineCard, EntityCard, CompactResult | Estados; testes | P0 | F1-16 | todo |
+| F3-07 | WineCard, EntityCard, CompactResult | Estados; testes | P0 | F1-16 | doing (CompactResult pronto, sem miniatura: foto exige crédito visível) |
 
 ## Fase 4 — Páginas de entidade
 

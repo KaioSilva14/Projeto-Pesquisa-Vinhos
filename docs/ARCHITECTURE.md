@@ -53,7 +53,7 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 
 | Pacote | Versão | Uso | Justificativa |
 |---|---|---|---|
-| `fuse.js` | 7.5.0 | Busca fuzzy do autocomplete | Simples, sem servidor, adequado a milhares de itens. Carregado **sob demanda** (ADR-008) |
+| ~~`fuse.js`~~ | — | Removido na F3-04 | Procurava trechos dentro das palavras e trazia resultados sem relação. Substituído por busca própria palavra por palavra em `src/lib/search/search.ts`, sem dependência (ADR-026) |
 
 ### 2.5 Animação, 3D e mapas (instalar só na fase correspondente)
 
@@ -235,10 +235,13 @@ Next 16: `params` e `searchParams` são **assíncronos** (`await params`). Turbo
 ## 8. Estratégia de busca
 
 - **Normalização** (`lib/normalize.ts`): minúsculas, remoção de acentos (`NFD` + remoção de diacríticos), remoção de pontuação, espaços colapsados. Aplicada no índice e na consulta.
-- **Autocomplete (cliente)**: Fuse.js importado dinamicamente no primeiro foco; índice baixado uma vez e memorizado. `threshold` ~0,35, `ignoreLocation: true`, pesos: nome 0,6 · sinônimos 0,2 · subtítulo 0,2. Resultados agrupados por tipo (máx. 5 por grupo). Debounce 120 ms.
-- **Resultados (servidor)**: `/pesquisa?q=` usa o mesmo algoritmo no servidor (Fuse também roda em Node), retornando lista completa paginada.
+- **Algoritmo** (`lib/search/search.ts`, ADR-026): cada termo é comparado com cada **palavra** do documento: igual, começo da palavra ou grafia parecida (distância de edição com inversão; 0 erro até 3 letras, 1 de 4 a 7, 2 a partir de 8). Penalidade por campo: nome 0 · palavras extras 0,2 · subtítulo 0,25; entre nomes, vence o mais coberto pela consulta; empate em ordem alfabética.
+- **Autocomplete (cliente)**: buscador e índice carregados no primeiro foco; índice baixado uma vez e memorizado. Resultados agrupados por tipo (máx. 5 por grupo). Debounce 120 ms.
+- **Consulta** (`lib/search/search.ts`, F3-01): cada palavra da consulta precisa casar com alguma palavra de algum campo (nome, palavras extras ou subtítulo), então "tinto frances" traz só tintos franceses. Palavras de uma letra e palavras genéricas ("vinho", "uva", "de", "do"…) são ignoradas, a menos que a consulta só tenha elas. Consulta limitada a 100 caracteres e 8 palavras.
+- **Índice** (`lib/search/documents.ts` + `services/search.ts`, F3-02): um documento por vinho, uva, região, país e produtor publicados, com `id` `{tipo}:{id}`, nome, subtítulo de contexto, palavras extras e `href`. Palavras extras saem só dos dados já cadastrados (tipo, categoria do espumante, uvas do rótulo e das safras, sinônimos do VIVC, país) mais os gentílicos dos 6 países (`lib/search/demonyms.ts`, palavras do português, não dados de vinho). Com o catálogo inicial: 46 documentos, cerca de 9 KB.
+- **Resultados (servidor)**: `/pesquisa?q=` usa o mesmo algoritmo no servidor, com lista completa paginada (20 por página, `?pagina=`) e filtro por tipo (`?tipo=vinhos|uvas|regioes|paises|produtores`), só com os tipos que têm resultados.
 - **Acessibilidade**: padrão WAI-ARIA combobox (ver `ACCESSIBILITY.md`).
-- **Limite**: Fuse no cliente é adequado até ~5–10 mil documentos / índice ≤ ~500 KB gzip. Acima disso → migrar para Orama/MiniSearch (índice pré-computado) ou Meilisearch/Typesense (serviço). Monitorar tamanho do índice no CI.
+- **Limite**: a busca percorre todos os documentos; adequada até ~5–10 mil documentos / índice ≤ ~500 KB gzip. Acima disso → migrar para Orama/MiniSearch (índice pré-computado) ou Meilisearch/Typesense (serviço). Monitorar tamanho do índice no CI.
 
 ## 9. Estratégia de filtros
 

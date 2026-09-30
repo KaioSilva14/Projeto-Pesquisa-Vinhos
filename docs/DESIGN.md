@@ -283,7 +283,7 @@ Usados **só quando agrupam uma entidade clicável**. Nunca "três cards iguais"
 | `WineCard` | Imagem da garrafa/rótulo, nome (serif), produtor, região · país, badges de tipo/safra, `FavoriteButton` | 3:4 vertical (garrafas); imagem com `object-contain` sobre `sunken` |
 | `EntityCard` (uva, região, produtor, país) | Imagem, nome, 1 linha de contexto, contagem de vinhos | 4:3 ou 3:2 |
 | `EditorialCard` | Imagem grande, título, resumo curto | 16:9 ou 3:2 |
-| `CompactResult` | Linha para autocomplete/listas densas: miniatura 48 px, título, subtítulo, tipo | 1:1 |
+| `CompactResult` | Linha para autocomplete/listas densas: título, subtítulo, tipo. Miniatura de 48 px só quando houver solução para o crédito da foto (IMAGES.md §3); até lá, sem miniatura | 1:1 |
 
 Card inteiro clicável via link no título (`::after` cobrindo o card) para manter semântica e permitir botões internos (favoritar).
 

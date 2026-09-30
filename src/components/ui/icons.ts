@@ -4,6 +4,7 @@
 export { ArrowClockwiseIcon } from "@phosphor-icons/react/dist/ssr/ArrowClockwise";
 export { CaretDownIcon } from "@phosphor-icons/react/dist/ssr/CaretDown";
 export { CaretLeftIcon } from "@phosphor-icons/react/dist/ssr/CaretLeft";
+export { CaretRightIcon } from "@phosphor-icons/react/dist/ssr/CaretRight";
 export { CheckIcon } from "@phosphor-icons/react/dist/ssr/Check";
 export { CircleNotchIcon } from "@phosphor-icons/react/dist/ssr/CircleNotch";
 export { CompassIcon } from "@phosphor-icons/react/dist/ssr/Compass";
