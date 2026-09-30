@@ -2,7 +2,7 @@ import { NoResults } from "@/components/states/NoResults";
 import { FilterChipLink } from "@/components/ui/Chip";
 import { Pagination } from "@/components/ui/Pagination";
 import { SEARCH_KIND_LABELS } from "@/lib/labels";
-import { SEARCH_PAGE_SIZE, searchHref, type SearchPageParams } from "@/lib/search/params";
+import { SEARCH_PAGE_SIZE, searchHref, type SearchPageParams } from "@/lib/search/url";
 import { searchKinds, type SearchResult } from "@/lib/search/types";
 
 import { CompactResult } from "./CompactResult";

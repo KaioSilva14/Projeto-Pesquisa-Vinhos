@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import { CompactResult } from "@/components/search/CompactResult";
 import { SearchResults } from "@/components/search/SearchResults";
-import { SEARCH_PAGE_SIZE } from "@/lib/search/params";
+import { SEARCH_PAGE_SIZE } from "@/lib/search/url";
 import type { SearchDocument, SearchKind, SearchResult } from "@/lib/search/types";
 
 // Documentos fictícios: só testam a exibição
