@@ -6,6 +6,7 @@ import { createGeographyService } from "./geography";
 import { createGrapePagesService } from "./grape-pages";
 import { createGrapeService } from "./grapes";
 import { createPlacePagesService } from "./place-pages";
+import { createProducerPagesService } from "./producer-pages";
 import { createProducerService } from "./producers";
 import { createReferenceService } from "./references";
 import { createSearchService } from "./search";
@@ -21,6 +22,7 @@ export function createCatalogService(adapter: DataAdapter) {
     ...createGrapeService(adapter),
     ...createGrapePagesService(adapter),
     ...createProducerService(adapter),
+    ...createProducerPagesService(adapter),
     ...createWineService(adapter),
     ...createReferenceService(adapter),
     ...createSearchService(adapter),
