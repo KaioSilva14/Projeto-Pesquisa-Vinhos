@@ -314,6 +314,7 @@ Card inteiro clicável via link no título (`::after` cobrindo o card) para mant
 | `ImageUnavailable` | Painel `sunken` na mesma proporção da imagem esperada, ícone Phosphor `ImageBroken` (light), texto "Imagem indisponível" e, opcionalmente, "Ainda não temos uma foto com licença verificada". **Nunca** desenha garrafa ou silhueta |
 | `ImageCredit` | Legenda `text-caption`: autor · licença (link) · origem (link). Em cards, fica acessível via botão "Créditos" para não poluir |
 | `SourceList` | Seção "Fontes" numerada: rótulo, tipo, link externo (`rel="noopener noreferrer"`), data de consulta |
+| `Cite` | Número da fonte ao lado de cada fato (sobrescrito, cor de destaque), com link para `#fonte-N` da lista; área de toque de 24 px (WCAG 2.5.8) |
 | `SensoryProfile` | Corpo, acidez, taninos, doçura, intensidade aromática. Cada atributo: rótulo + **5 segmentos discretos** (sem trilho cheio) + valor em texto ("Médio +") + fonte. Atributo sem fonte → não é exibido. Alternativa textual completa para leitor de tela (lista `dl`) |
 | `FactSheet` (ficha técnica) | Agrupada em 2–3 blocos (Origem · Composição · Serviço), com `dl`; campo ausente não aparece; grupo vazio não aparece |
 | `GrapeComposition` | Uvas do vinho; percentuais **só se confirmados**; sem percentuais → lista simples |

@@ -74,7 +74,7 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 | `@testing-library/react` + `dom` + `jest-dom` + `user-event` | 16.3.3 + 10.4.2 + 7.0.1 + 14.6.7 | Testes de componente centrados no usuário. `@testing-library/dom` é peer dependency obrigatória das outras três |
 | `@playwright/test` + `@axe-core/playwright` | 1.63.0 + 4.13.0 | E2E + acessibilidade automatizada |
 | `@next/bundle-analyzer` | 16.3.6 | Tamanho dos bundles (fase 10) |
-| `schema-dts` | 2.0.0 | Tipos para JSON-LD (fase 10) |
+| `schema-dts` | 2.0.0 | Tipos para JSON-LD (fase 10) — ainda não instalado: o JSON-LD do vinho (F4-01, `lib/seo/wine.ts`) é pequeno e testado; reavaliar na fase 10 |
 | `tsx` | 4.23.15 | Rodar scripts TypeScript (validação de dados: `npm run validate:data`) |
 
 > **Regra**: nenhuma dependência entra sem linha nesta tabela (nome, versão, motivo, alternativa). Pedir confirmação ao usuário antes de instalar.

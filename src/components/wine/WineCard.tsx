@@ -4,7 +4,7 @@ import type { WineListItem } from "@/lib/wines/list-item";
 
 type WineCardProps = {
   wine: WineListItem;
-  headingLevel?: "h2" | "h3";
+  headingLevel?: "h2" | "h3" | "h4";
 };
 
 /**

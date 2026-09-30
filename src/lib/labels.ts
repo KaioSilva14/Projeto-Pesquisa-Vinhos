@@ -1,5 +1,6 @@
 import type { SearchKind } from "@/lib/search/types";
 import type { WineType } from "@/schemas/common";
+import type { Source } from "@/schemas/source";
 import type { SparklingSweetness } from "@/schemas/wine";
 
 /** Rótulos dos tipos de vinho na interface (DATA_MODEL.md §4). */
@@ -31,4 +32,15 @@ export const SEARCH_KIND_LABELS: Record<SearchKind, { one: string; many: string 
   region: { one: "Região", many: "Regiões" },
   country: { one: "País", many: "Países" },
   producer: { one: "Produtor", many: "Produtores" },
+};
+
+/** Tipo de fonte, na lista "Fontes" (DATA_SOURCES.md §1). */
+export const SOURCE_KIND_LABELS: Record<Source["kind"], string> = {
+  producer: "Produtor",
+  winery: "Vinícola",
+  "official-distributor": "Distribuidor oficial",
+  institution: "Instituição",
+  "specialized-database": "Base especializada",
+  technical: "Documento técnico",
+  other: "Outra fonte",
 };
