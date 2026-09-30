@@ -3,6 +3,7 @@ import "server-only";
 import type { DataAdapter } from "@/adapters/types";
 
 import { createGeographyService } from "./geography";
+import { createGrapePagesService } from "./grape-pages";
 import { createGrapeService } from "./grapes";
 import { createProducerService } from "./producers";
 import { createReferenceService } from "./references";
@@ -16,6 +17,7 @@ export function createCatalogService(adapter: DataAdapter) {
   return {
     ...createGeographyService(adapter),
     ...createGrapeService(adapter),
+    ...createGrapePagesService(adapter),
     ...createProducerService(adapter),
     ...createWineService(adapter),
     ...createReferenceService(adapter),

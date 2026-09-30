@@ -11,7 +11,8 @@ import {
   formatVolume,
 } from "@/lib/format";
 import { wineDescription, wineJsonLd } from "@/lib/seo/wine";
-import { numberCitations, wineCitationIds } from "@/lib/wines/citations";
+import { numberCitations } from "@/lib/citations";
+import { wineCitationIds } from "@/lib/wines/citations";
 import { relatedWines } from "@/lib/wines/related";
 import { createCatalogService } from "@/services/catalog-service";
 

@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Cite } from "@/components/sources/Cite";
 import { SourceList } from "@/components/sources/SourceList";
-import { FactList } from "@/components/wine/FactList";
+import { FactList } from "@/components/facts/FactList";
 import { GrapeComposition } from "@/components/wine/GrapeComposition";
 import { SensoryProfile } from "@/components/wine/SensoryProfile";
 import { WineHeader } from "@/components/wine/WineHeader";

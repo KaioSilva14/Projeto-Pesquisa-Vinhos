@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 import { Cite } from "@/components/sources/Cite";
 import { formatList, formatTemperatureRange, formatVolume } from "@/lib/format";
 import { SPARKLING_SWEETNESS_LABELS, WINE_TYPE_LABELS } from "@/lib/labels";
-import type { CitationNumbers } from "@/lib/wines/citations";
+import type { CitationNumbers } from "@/lib/citations";
 import type { WinePageData } from "@/lib/wines/page-data";
 
-import { FactList, presentFacts, type MaybeFact } from "./FactList";
+import { FactList, presentFacts, type MaybeFact } from "@/components/facts/FactList";
 import { GrapeComposition } from "./GrapeComposition";
 
 const linkClass = "underline decoration-border-strong underline-offset-4 hover:decoration-accent";
