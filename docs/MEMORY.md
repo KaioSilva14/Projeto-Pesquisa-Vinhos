@@ -27,12 +27,14 @@
 - **F2-07 concluída** (branch `data/regioes`, PR #8 a abrir): 6 países (`src/data/countries.ts`) e 10 regiões (`src/data/regions.ts`) com fontes oficiais (MASAF, CIVB, Comité Champagne, DOCa Rioja, BOE, TTB, INV, Embrapa; NVV como secundária). `mainRegionIds` das uvas derivado das regiões. Pendência: Torrontés Riojano ↔ Valle de Cafayate sem fonte específica.
 - **F2-08 concluída** (branch `data/produtores`, PR #9 a abrir): 7 produtores (`src/data/producers.ts`), 13 vinhos (`src/data/wines.ts`) e 12 safras (`src/data/vintages.ts`), com 14 fontes de fichas técnicas e páginas oficiais. Uvas fora do catálogo (Cabernet Franc, Petit Verdot, Meunier, Graciano) só aparecem nas notas das composições. Sem teor alcoólico quando a ficha não informa (Vajra, Palmer, Roederer, La Rioja Alta, Miolo). Sem perfil sensorial (termos em outras línguas; F2-09).
 - **F2-09 concluída — Fase 2 concluída** (branch `data/termos-sensoriais`, PR #10 a abrir; ADR-025): as fichas descrevem os vinhos em prosa, sem termos de escala, então a tabela sensorial não ganhou termos e os vinhos reais ficam sem corpo/acidez/taninos. Novo campo `Wine.sparklingSweetness` (só espumantes, termo declarado pelo produtor): só o Brut Nature da Roederer tem. Faixas de açúcar em g/l **não** registradas: o EUR-Lex bloqueia acesso automático (HTTP 202 vazio). Descritores em prosa dos produtores ficam para a Fase 4.
-- **Fase 3 em andamento** (branch `feat/busca`, PR #11 a abrir): F3-01, F3-02 e F3-04 concluídas.
+- **Fase 3 em andamento**: F3-01, F3-02 e F3-04 no `main` (PR #11). F3-03 concluída no branch `feat/autocomplete` (PR #12 a abrir): `SearchCombobox`, `SuggestionList`, `SearchShortcuts`, hooks `useSearchIndex` e `useDebouncedValue`.
   - Busca própria palavra por palavra em `src/lib/search/search.ts` (ADR-026). O Fuse.js foi testado e removido: ele achava trechos dentro das palavras ("tinto" trazia "argentino").
   - Índice em `/api/search-index` (estático, 46 documentos, ~9 KB), montado por `lib/search/documents.ts` com os gentílicos de `lib/search/demonyms.ts`.
   - Página `/pesquisa` (dinâmica, noindex) com filtro por tipo (`?tipo=`) e paginação (`?pagina=`), funcionando sem JavaScript. Componentes em `src/components/search/`, `Pagination` e `FilterChipLink` em `ui/`.
   - `CompactResult` sem miniatura (foto exige crédito visível).
-- **Próxima tarefa**: F3-03 (autocomplete `SearchCombobox`), depois F3-05/F3-06 (filtros de `/vinhos`) e F3-07 (cards).
+- **Próxima tarefa**: F3-07 (WineCard/EntityCard) e F3-05/F3-06 (página `/vinhos` com filtros).
+- **Cuidado com o Zod no navegador**: importar um módulo com Zod num Client Component leva o Zod ao bundle e dispara violação de CSP (`script-src: eval`, o Zod 4 testa `new Function`). Módulos com Zod usados só no servidor levam `import "server-only"`.
+- **E2E contra build de produção** sem parar o dev: `$env:PW_PORT = "3200"; npm run test:e2e`. Contra o dev (3100), a compilação lenta gera falhas falsas.
 - O usuário roda o próprio `npm run dev` (porta 3001). O Next 16 só permite um `next dev` por projeto: para prints em modo dev, usar o servidor dele em vez de iniciar outro (nunca encerrá-lo sem pedir).
 - O usuário prefere que eu explique cada passo **enquanto** faço, em linguagem simples (pedido em 2026-09-28, após não entender onde estavam os commits).
 
@@ -64,7 +66,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- PR #11 (`feat/busca` → `main`) a ser aberto e mesclado pelo usuário.
+- PR #12 (`feat/autocomplete` → `main`) a ser aberto e mesclado pelo usuário.
 - Fontes pendentes: anexo III do Regulamento (UE) 2019/33 (faixas de açúcar dos espumantes; EUR-Lex bloqueia acesso automático); fonte específica para Torrontés Riojano ↔ Valle de Cafayate; alteração de 2023 do disciplinare do Chianti Classico; versões posteriores a 1997 do regulamento de Rías Baixas.
 - Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
@@ -82,7 +84,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Depois do merge do PR #11: `git switch main`, `git pull`, apagar o branch local e criar um branch para a F3-03.
+1. Depois do merge do PR #12: `git switch main`, `git pull`, apagar o branch local e criar um branch para a F3-07.
 2. Na curadoria (F2-06+): só itens do `docs/CURATION.md`; cada fato conferido na fonte original, texto sempre próprio, commit do tipo `data:` citando as fontes.
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 

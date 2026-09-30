@@ -59,6 +59,8 @@ npm run test:e2e         # Playwright (faz build + start automaticamente via web
 npm run test:e2e:ui      # Playwright com interface visual para depurar
 ```
 
+**Servidor dos E2E**: localmente, se já houver um servidor na porta 3100 (ex.: o `npm run dev`), o Playwright o reaproveita, e o modo dev compila cada página na primeira visita (lento, pode causar falhas falsas). Para testar o build de produção sem parar o `dev`: `$env:PW_PORT = "3200"; npm run test:e2e` (sobe build + start na 3200). O CI sempre usa build de produção.
+
 Cobertura (`test:coverage`) ainda não está configurada: exige o pacote `@vitest/coverage-v8`, a aprovar quando for útil.
 
 **Firefox local**: o Controle Inteligente de Aplicativos do Windows 11 bloqueia o Firefox baixado pelo Playwright nesta máquina (erro `spawn UNKNOWN`; confirmado em 2026-09-29 com "Uma política de Controle de Aplicativo bloqueou este arquivo"). Por isso, localmente os testes E2E rodam em Chromium e WebKit, e o **Firefox roda sempre no CI**. Para forçar o Firefox localmente (ex.: em outra máquina): `$env:PW_FIREFOX = "1"; npm run test:e2e`. Não desligar o Controle Inteligente de Aplicativos por causa disso: é uma proteção do sistema que só volta com reinstalação do Windows.

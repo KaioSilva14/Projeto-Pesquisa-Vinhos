@@ -1,6 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const PORT = 3100;
+// PW_PORT permite testar um build de produção sem parar o `next dev` que já usa a 3100
+const PORT = Number(process.env.PW_PORT ?? 3100);
 const baseURL = `http://localhost:${PORT}`;
 
 // Larguras de referência do DESIGN.md: 360 (celular), 768 (tablet), 1440 (desktop)

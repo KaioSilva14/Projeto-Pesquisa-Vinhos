@@ -5,6 +5,7 @@ import { BottomNav } from "@/components/layout/BottomNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { MAIN_CONTENT_ID, SkipLink } from "@/components/layout/SkipLink";
+import { SearchShortcuts } from "@/components/search/SearchShortcuts";
 import { env } from "@/config/env";
 import { SITE } from "@/config/site";
 import { hankenGrotesk, newsreader } from "@/styles/fonts";
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </main>
         <SiteFooter />
         <BottomNav />
+        <SearchShortcuts />
       </body>
     </html>
   );

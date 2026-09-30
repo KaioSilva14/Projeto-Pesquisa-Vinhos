@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import { parseSearchPageParams, searchHref } from "@/lib/search/params";
+import { parseSearchPageParams } from "@/lib/search/params";
 import { MAX_QUERY_LENGTH } from "@/lib/search/search";
+import { searchHref } from "@/lib/search/url";
 
 describe("parseSearchPageParams", () => {
   it("lê consulta, tipo e página", () => {

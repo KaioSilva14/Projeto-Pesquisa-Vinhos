@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
-import { SearchInput } from "@/components/ui/SearchInput";
-import { MAX_QUERY_LENGTH } from "@/lib/search/search";
+
+import { SearchCombobox } from "./SearchCombobox";
 
 type SearchFormProps = {
   /** Texto já pesquisado, para o visitante ajustar a busca. */
@@ -11,15 +11,17 @@ type SearchFormProps = {
 export function SearchForm({ query }: SearchFormProps) {
   return (
     <form action="/pesquisa" role="search" className="flex max-w-2xl gap-2">
-      <SearchInput
+      <SearchCombobox
         // Recria o campo quando a busca muda, para mostrar o texto novo
         key={query}
-        name="q"
         label="Pesquisar vinhos, uvas, regiões, países e produtores"
         placeholder="Vinho, uva, região ou produtor"
         defaultValue={query}
-        maxLength={MAX_QUERY_LENGTH}
+        // Quem chega sem busca (ex.: "Pesquisar" da barra inferior) já pode digitar
+        focusOnMount={!query}
         className="flex-1"
+        // Sugestões com a largura do formulário inteiro (campo + botão)
+        popupClassName="left-0 w-[min(42rem,calc(100vw-2rem))]"
       />
       <Button type="submit" size="lg">
         Pesquisar

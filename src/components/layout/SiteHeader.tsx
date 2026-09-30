@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { HeartIcon, MagnifyingGlassIcon } from "@/components/ui/icons";
-import { SearchInput } from "@/components/ui/SearchInput";
+import { SearchCombobox } from "@/components/search/SearchCombobox";
 import { MAIN_NAV } from "@/config/nav";
 import { SITE } from "@/config/site";
 
@@ -39,13 +39,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
-          {/* Formulário GET comum: a busca funciona mesmo sem JavaScript (F3-03 adiciona o autocomplete) */}
+          {/* Formulário GET comum: sem JavaScript, o Enter leva a /pesquisa; com ele, há sugestões */}
           <form action="/pesquisa" role="search" className="hidden w-72 lg:block">
-            <SearchInput
-              name="q"
+            <SearchCombobox
               label="Pesquisar vinhos, uvas, regiões e produtores"
               placeholder="Pesquisar"
-              maxLength={100}
+              shortcutHint="/"
+              popupClassName="right-0 w-[min(28rem,calc(100vw-2rem))]"
             />
           </form>
           <NavLink href="/pesquisa" aria-label="Pesquisar" className={`${iconLink} lg:hidden`}>

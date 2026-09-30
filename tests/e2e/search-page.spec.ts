@@ -7,12 +7,12 @@ test.describe("Página de pesquisa", () => {
   test("pesquisa com erro de digitação e chega ao resultado certo", async ({ page }) => {
     await page.goto("/pesquisa");
     const main = page.getByRole("main");
-    await main.getByRole("searchbox").fill("malbek");
+    await main.getByRole("combobox").fill("malbek");
     await main.getByRole("button", { name: "Pesquisar" }).click();
 
     await expect(page).toHaveURL(/\/pesquisa\?q=malbek$/);
     await expect(page).toHaveTitle("Pesquisa: malbek | Vinum");
-    await expect(page.getByRole("status")).toContainText("para “malbek”");
+    await expect(page.getByRole("status").filter({ hasText: "para “malbek”" })).toBeVisible();
     const results = page.getByRole("list", { name: "Resultados da pesquisa" });
     await expect(results.getByRole("link").first()).toHaveAttribute("href", "/uvas/malbec");
   });
@@ -25,12 +25,14 @@ test.describe("Página de pesquisa", () => {
       .click();
 
     await expect(page).toHaveURL(/tipo=vinhos/);
-    await expect(page.getByRole("status")).toContainText("em vinhos");
+    await expect(page.getByRole("status").filter({ hasText: "em vinhos" })).toBeVisible();
   });
 
   test("sem resultados mostra a mensagem de ajuda", async ({ page }) => {
     await page.goto("/pesquisa?q=xylofone");
-    await expect(page.getByRole("status")).toHaveText(/Nenhum resultado para “xylofone”/);
+    await expect(
+      page.getByRole("status").filter({ hasText: "Nenhum resultado para “xylofone”" }),
+    ).toBeVisible();
   });
 
   test("fica fora dos buscadores", async ({ page }) => {
