@@ -192,7 +192,7 @@ type WineGrape = {
   isMain?: boolean;      // só se a fonte indicar "principal"/"majoritária" ou % for a maior
 };
 ```
-Validação: se houver percentuais, soma ≤ 100 (tolerância para arredondamento: 99–101 quando todos informados).
+Validação: soma dos percentuais ≤ 101 (tolerância de arredondamento). Se todas as uvas listadas têm percentual e a soma fica abaixo de 99%, a `notes` da composição é obrigatória e explica o que completa os 100% (ex.: uva ainda fora do catálogo). Sem nota, a soma baixa é tratada como erro de digitação (ajuste da F2-08).
 
 ### 3.9 `Vintage` (dados que mudam por safra)
 | Campo | Tipo | Obrig. | Observação |

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { editorialTextSchema, httpsUrlSchema, idSchema, sourced } from "./common";
-import { wineGrapesSchema } from "./wine";
+import { sourcedWineGrapesSchema } from "./wine";
 
 /**
  * Vintage: dados que mudam a cada safra (DATA_MODEL.md §3.9).
@@ -20,7 +20,7 @@ export const vintageSchema = z
     /** Só confirmado em ficha técnica ou rótulo. */
     alcoholPercent: sourced(z.number().gt(0).max(25)).optional(),
     /** Composição desta safra; substitui a do vinho. */
-    grapes: sourced(wineGrapesSchema).optional(),
+    grapes: sourcedWineGrapesSchema.optional(),
     residualSugarGL: sourced(z.number().min(0).max(500)).optional(),
     totalAcidityGL: sourced(z.number().gt(0).max(20)).optional(),
     ph: sourced(z.number().gt(2).lt(5)).optional(),
