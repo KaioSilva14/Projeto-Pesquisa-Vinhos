@@ -3,8 +3,8 @@ import type { Wine } from "@/schemas/wine";
 
 // Vinhos dos produtores aprovados (docs/CURATION.md). Fatos das fichas técnicas e páginas
 // oficiais (src/data/sources.ts), lidos em 2026-09-30. Perfil sensorial fica vazio: as fichas
-// usam termos em inglês/francês/espanhol que não estão na tabela de src/lib/sensory-map.ts
-// (revisão na F2-09). Dados que mudam por safra ficam em ./vintages.ts.
+// descrevem o vinho em prosa, sem termos de escala (ADR-025). Dados que mudam por safra ficam
+// em ./vintages.ts.
 
 type WineData = Omit<Wine, "status" | "createdAt" | "updatedAt" | "slug" | "type" | "sourceIds"> & {
   type: WineType;
@@ -114,6 +114,8 @@ export const wines: Wine[] = [
     regionId: "champagne",
     type: "espumante",
     sourceId: "src-roederer-brut-nature-2015",
+    // A ficha declara "BRUT NATURE" e "DOSAGE: 0g/l". O Collection 245 não declara categoria.
+    sparklingSweetness: { value: "brut-nature", ...src("src-roederer-brut-nature-2015") },
   }),
   wine({
     id: "la-rioja-alta-gran-reserva-904",

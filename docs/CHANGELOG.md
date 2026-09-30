@@ -17,6 +17,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - 2026-09-30: F2-07, 6 países e 10 regiões com fontes oficiais (regulamentos, interprofissões, TTB, INV, Embrapa) e ligação uva ↔ região nos dois sentidos.
 - 2026-09-30: F2-08, 7 produtores, 13 vinhos e 12 safras com dados das fichas técnicas oficiais (teor alcoólico, composição de uvas, estágio), sem estimar campos que a ficha não informa.
 
+- 2026-09-30: F2-09, tabela sensorial revisada contra as fichas reais (nenhum termo novo; ADR-025) e campo `sparklingSweetness` para a categoria de doçura declarada dos espumantes. **Fase 2 concluída.**
+
 ### Alterado
 - 2026-09-30: composição de uvas com soma abaixo de 99% passa a ser aceita quando a nota explica o que falta (uva fora do catálogo), em vez de ser sempre rejeitada.
 - 2026-09-28: ESLint 9.39.5 no lugar do 10.11.0 previsto (ADR-022); `vite` e `@testing-library/dom` incluídos como peer dependencies obrigatórias.

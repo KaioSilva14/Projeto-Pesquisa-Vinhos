@@ -4,7 +4,7 @@
 
 ---
 
-## Estado atual (2026-09-28)
+## Estado atual (2026-09-30)
 
 - **Fase 0 concluída e APROVADA pelo usuário** em 2026-09-28. Todas as decisões (ADR-001 a ADR-020) estão aceitas. Na Fase 1 entraram ADR-021 (`AGENTS.md`) e ADR-022 (ESLint 9).
 - **Fase 1 concluída** (F1-01 a F1-16) em 2026-09-28. Projeto em `C:\dev\Projeto-Vinhos` (o Windows exibe `C:\Dev`). Repositório: https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos.
@@ -26,7 +26,8 @@
 - **F2-06 e F2-06b concluídas**: 10 uvas reais em `src/data/grapes.ts` (fontes: fichas do VIVC em `src/data/sources.ts`) e 9 fotos do VIVC/JKI em `public/images/grapes/` com crédito exato (`src/data/images.ts`, `public/images/CREDITOS.md`, ADR-024). A janela de cada foto no VIVC diz "This photo can be reproduced. Please quote the source". Torrontés Riojano sem foto. Dados extraídos do HTML bruto do VIVC (não do resumo da WebFetch, que pode errar).
 - **F2-07 concluída** (branch `data/regioes`, PR #8 a abrir): 6 países (`src/data/countries.ts`) e 10 regiões (`src/data/regions.ts`) com fontes oficiais (MASAF, CIVB, Comité Champagne, DOCa Rioja, BOE, TTB, INV, Embrapa; NVV como secundária). `mainRegionIds` das uvas derivado das regiões. Pendência: Torrontés Riojano ↔ Valle de Cafayate sem fonte específica.
 - **F2-08 concluída** (branch `data/produtores`, PR #9 a abrir): 7 produtores (`src/data/producers.ts`), 13 vinhos (`src/data/wines.ts`) e 12 safras (`src/data/vintages.ts`), com 14 fontes de fichas técnicas e páginas oficiais. Uvas fora do catálogo (Cabernet Franc, Petit Verdot, Meunier, Graciano) só aparecem nas notas das composições. Sem teor alcoólico quando a ficha não informa (Vajra, Palmer, Roederer, La Rioja Alta, Miolo). Sem perfil sensorial (termos em outras línguas; F2-09).
-- **Próxima tarefa**: F2-09 (tabela de termos sensoriais, com os termos reais das fichas; exige ADR para ampliar). Depois a Fase 3 (busca e catálogo).
+- **F2-09 concluída — Fase 2 concluída** (branch `data/termos-sensoriais`, PR #10 a abrir; ADR-025): as fichas descrevem os vinhos em prosa, sem termos de escala, então a tabela sensorial não ganhou termos e os vinhos reais ficam sem corpo/acidez/taninos. Novo campo `Wine.sparklingSweetness` (só espumantes, termo declarado pelo produtor): só o Brut Nature da Roederer tem. Faixas de açúcar em g/l **não** registradas: o EUR-Lex bloqueia acesso automático (HTTP 202 vazio). Descritores em prosa dos produtores ficam para a Fase 4.
+- **Próxima tarefa**: Fase 3 (busca e catálogo), começando pela F3-01.
 - O usuário roda o próprio `npm run dev` (porta 3001). O Next 16 só permite um `next dev` por projeto: para prints em modo dev, usar o servidor dele em vez de iniciar outro (nunca encerrá-lo sem pedir).
 - O usuário prefere que eu explique cada passo **enquanto** faço, em linguagem simples (pedido em 2026-09-28, após não entender onde estavam os commits).
 
@@ -58,7 +59,8 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- PR #9 (`data/produtores` → `main`) a ser aberto e mesclado pelo usuário.
+- PR #10 (`data/termos-sensoriais` → `main`) a ser aberto e mesclado pelo usuário.
+- Fontes pendentes: anexo III do Regulamento (UE) 2019/33 (faixas de açúcar dos espumantes; EUR-Lex bloqueia acesso automático); fonte específica para Torrontés Riojano ↔ Valle de Cafayate; alteração de 2023 do disciplinare do Chianti Classico; versões posteriores a 1997 do regulamento de Rías Baixas.
 - Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
 ## Problemas conhecidos
@@ -75,7 +77,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Depois do merge do PR #9: `git switch main`, `git pull`, apagar o branch local e criar um branch para a F2-09.
+1. Depois do merge do PR #10: `git switch main`, `git pull`, apagar o branch local e criar um branch para a Fase 3 (F3-01).
 2. Na curadoria (F2-06+): só itens do `docs/CURATION.md`; cada fato conferido na fonte original, texto sempre próprio, commit do tipo `data:` citando as fontes.
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 

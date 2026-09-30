@@ -56,7 +56,7 @@
 | F2-06b | Imagens licenciadas das uvas | Foto real e correspondente a cada uva, com licença confirmada na fonte (`IMAGES.md`); sem isso, "Imagem indisponível" | P1 | F2-06 | done (9 fotos do VIVC/JKI com permissão de reprodução e crédito, ADR-024; Torrontés Riojano sem foto no VIVC) |
 | F2-07 | Curadoria lote 1b: 6 países (Itália, França, Espanha, EUA, Argentina, Brasil) e 6–12 regiões | Idem | P0 | F2-06 | done (6 países e 10 regiões com fonte oficial; ligação Torrontés Riojano ↔ Valle de Cafayate pendente de fonte específica) |
 | F2-08 | Curadoria lotes 2 e 3: produtores (6–12) e vinhos (12–30) com safras | Idem | P0 | F2-07 | done (7 produtores, 13 vinhos, 12 safras; Miolo com 1 vinho, o único com ficha ligada a uma safra) |
-| F2-09 | Tabela de mapeamento sensorial (`lib/sensory-map.ts`) revisada | Termos das fontes reais cobertos | P1 | F2-08 | todo |
+| F2-09 | Tabela de mapeamento sensorial (`lib/sensory-map.ts`) revisada | Termos das fontes reais cobertos | P1 | F2-08 | done (ADR-025: fichas em prosa, sem termos de escala; campo `sparklingSweetness` criado; faixas em g/l pendentes do texto oficial da UE) |
 
 ## Fase 3 — Busca e catálogo
 

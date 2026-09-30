@@ -3,7 +3,9 @@ import type { SensoryProfile } from "@/schemas/wine";
 // Tabela de mapeamento "termo da fonte → nível 1 a 5" (DATA_MODEL.md §5).
 // Regra anti-invenção: um atributo sensorial só pode ter nível se o termo EXATO usado pela
 // fonte estiver aqui. Termo fora da tabela → o atributo não é preenchido. Ampliar a tabela
-// exige ADR. Revisão com os termos reais das fontes: tarefa F2-09.
+// exige ADR. Revisada na F2-09 (ADR-025): as fichas reais descrevem o vinho em prosa, sem termos
+// de escala, então nenhum termo foi acrescentado. Categorias de espumante (brut, extra brut…) não
+// ficam aqui: são um campo próprio do vinho (sparklingSweetness).
 
 type SensoryKey = keyof SensoryProfile;
 
@@ -21,7 +23,7 @@ export const SENSORY_MAP: Record<SensoryKey, Readonly<Record<string, number>>> =
     altos: 5,
   },
   sweetness: { seco: 1, "meio seco": 2, "demi-sec": 2, "meio doce": 3, doce: 4, "muito doce": 5 },
-  // Ainda sem termos definidos: nenhum vinho pode ter intensidade aromática até a F2-09
+  // Sem termos definidos: nenhuma fonte usada até agora gradua a intensidade aromática
   aromaIntensity: {},
 };
 

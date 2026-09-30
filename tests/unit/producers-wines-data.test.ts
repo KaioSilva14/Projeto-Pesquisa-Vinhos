@@ -41,8 +41,17 @@ describe("vinhos reais", () => {
     }
   });
 
-  it("não têm perfil sensorial (termos das fichas fora da tabela até a F2-09)", () => {
+  it("não têm perfil sensorial (as fichas descrevem em prosa, sem termos de escala; ADR-025)", () => {
     expect(wines.filter((wine) => wine.sensory)).toEqual([]);
+  });
+
+  it("só o Brut Nature tem categoria de doçura, tirada da própria ficha", () => {
+    const withCategory = wines.filter((wine) => wine.sparklingSweetness);
+    expect(withCategory.map((wine) => wine.id)).toEqual(["roederer-brut-nature"]);
+    expect(withCategory[0]?.sparklingSweetness).toEqual({
+      value: "brut-nature",
+      sourceIds: ["src-roederer-brut-nature-2015"],
+    });
   });
 
   it("Miolo só tem o Lote 43, o único com ficha ligada a uma safra", () => {
