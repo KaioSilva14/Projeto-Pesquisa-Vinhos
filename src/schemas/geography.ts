@@ -49,3 +49,4 @@ export const regionSchema = z.strictObject({
 
 export type Country = z.infer<typeof countrySchema>;
 export type Region = z.infer<typeof regionSchema>;
+export type RegionLevel = (typeof regionLevels)[number];

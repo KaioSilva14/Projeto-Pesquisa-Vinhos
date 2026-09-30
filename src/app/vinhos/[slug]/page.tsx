@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { Container } from "@/components/layout/Container";
 import { ContentSection } from "@/components/layout/ContentSection";
+import { EntityLayout } from "@/components/layout/EntityLayout";
 import { EntityImage } from "@/components/media/EntityImage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Cite } from "@/components/sources/Cite";
@@ -67,12 +66,9 @@ export default async function WinePage({ params }: WinePageProps) {
   return (
     <>
       <JsonLd data={wineJsonLd(data, breadcrumbs, env.NEXT_PUBLIC_SITE_URL)} />
-      <Container className="pt-6 md:pt-10">
-        <Breadcrumbs items={breadcrumbs} />
-      </Container>
-      <Container className="grid gap-10 pt-6 pb-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-        {/* Foto real ou aviso honesto; fixa ao rolar no desktop, no topo no celular (DESIGN.md §8, §12) */}
-        <div className="lg:sticky lg:top-24 lg:self-start">
+      <EntityLayout
+        breadcrumbs={breadcrumbs}
+        media={
           <EntityImage
             image={data.image}
             variant="bottle"
@@ -81,61 +77,59 @@ export default async function WinePage({ params }: WinePageProps) {
             showCredit
             className="mx-auto w-full max-w-64 lg:max-w-none"
           />
-        </div>
+        }
+      >
+        <WineHeader data={data} numbers={numbers} />
 
-        <div className="grid min-w-0 content-start gap-14">
-          <WineHeader data={data} numbers={numbers} />
+        <ContentSection title="Ficha técnica">
+          <WineFactSheet data={data} numbers={numbers} />
+        </ContentSection>
 
-          <ContentSection title="Ficha técnica">
-            <WineFactSheet data={data} numbers={numbers} />
-          </ContentSection>
-
-          {hasTasting && (
-            <ContentSection title="Perfil sensorial">
-              <SensoryProfile profile={wine.sensory} numbers={numbers} />
-              {wine.aromaNotes && (
-                <p>
-                  <span className="text-text-muted">Aromas: </span>
-                  {formatList(wine.aromaNotes.value)}
-                  <Cite ids={wine.aromaNotes.sourceIds} numbers={numbers} />
-                </p>
-              )}
-              {wine.flavorNotes && (
-                <p>
-                  <span className="text-text-muted">Boca: </span>
-                  {formatList(wine.flavorNotes.value)}
-                  <Cite ids={wine.flavorNotes.sourceIds} numbers={numbers} />
-                </p>
-              )}
-            </ContentSection>
-          )}
-
-          {data.vintages.length > 0 && (
-            <ContentSection title={data.vintages.length === 1 ? "Safra" : "Safras"}>
-              <VintageList vintages={data.vintages} grapes={data.grapes} numbers={numbers} />
-            </ContentSection>
-          )}
-
-          {wine.history && (
-            <ContentSection title="História">
-              <p className="max-w-prose">
-                {wine.history.text}
-                <Cite ids={wine.history.basedOnSourceIds} numbers={numbers} />
+        {hasTasting && (
+          <ContentSection title="Perfil sensorial">
+            <SensoryProfile profile={wine.sensory} numbers={numbers} />
+            {wine.aromaNotes && (
+              <p>
+                <span className="text-text-muted">Aromas: </span>
+                {formatList(wine.aromaNotes.value)}
+                <Cite ids={wine.aromaNotes.sourceIds} numbers={numbers} />
               </p>
-            </ContentSection>
-          )}
-
-          {data.related.length > 0 && (
-            <ContentSection title="Continue explorando">
-              <RelatedWines groups={data.related} />
-            </ContentSection>
-          )}
-
-          <ContentSection title="Fontes" id="fontes">
-            <SourceList sources={data.sources} />
+            )}
+            {wine.flavorNotes && (
+              <p>
+                <span className="text-text-muted">Boca: </span>
+                {formatList(wine.flavorNotes.value)}
+                <Cite ids={wine.flavorNotes.sourceIds} numbers={numbers} />
+              </p>
+            )}
           </ContentSection>
-        </div>
-      </Container>
+        )}
+
+        {data.vintages.length > 0 && (
+          <ContentSection title={data.vintages.length === 1 ? "Safra" : "Safras"}>
+            <VintageList vintages={data.vintages} grapes={data.grapes} numbers={numbers} />
+          </ContentSection>
+        )}
+
+        {wine.history && (
+          <ContentSection title="História">
+            <p className="max-w-prose">
+              {wine.history.text}
+              <Cite ids={wine.history.basedOnSourceIds} numbers={numbers} />
+            </p>
+          </ContentSection>
+        )}
+
+        {data.related.length > 0 && (
+          <ContentSection title="Continue explorando">
+            <RelatedWines groups={data.related} />
+          </ContentSection>
+        )}
+
+        <ContentSection title="Fontes" id="fontes">
+          <SourceList sources={data.sources} />
+        </ContentSection>
+      </EntityLayout>
     </>
   );
 }

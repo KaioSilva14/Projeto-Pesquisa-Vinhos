@@ -1,5 +1,6 @@
 import type { SearchKind } from "@/lib/search/types";
 import type { WineType } from "@/schemas/common";
+import type { RegionLevel } from "@/schemas/geography";
 import type { GrapeColor } from "@/schemas/grape";
 import type { Source } from "@/schemas/source";
 import type { SparklingSweetness } from "@/schemas/wine";
@@ -52,4 +53,11 @@ export const GRAPE_COLOR_LABELS: Record<GrapeColor, string> = {
   branca: "Uva branca",
   rosada: "Uva rosada",
   cinza: "Uva cinza",
+};
+
+/** Nível da região (DATA_MODEL.md §3.2), quando ela não tem denominação oficial. */
+export const REGION_LEVEL_LABELS: Record<RegionLevel, string> = {
+  region: "Região vinícola",
+  subregion: "Sub-região",
+  appellation: "Denominação de origem",
 };

@@ -6,29 +6,29 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { catalogService } from "@/services";
 
 const DESCRIPTION =
-  "Uvas viníferas com origem, sinônimos e regiões confirmados no catálogo internacional de variedades (VIVC), e os vinhos do catálogo feitos com cada uma.";
+  "Os países do catálogo do Vinum, com suas regiões vinícolas, produtores e vinhos.";
 
 export const metadata: Metadata = {
-  title: "Uvas",
+  title: "Países",
   description: DESCRIPTION,
-  alternates: { canonical: "/uvas" },
+  alternates: { canonical: "/paises" },
 };
 
-export default async function GrapesPage() {
-  const grapes = await catalogService.getGrapeList();
+export default async function CountriesPage() {
+  const countries = await catalogService.getCountryList();
 
   return (
     <>
       <PageHeader
-        title="Uvas"
+        title="Países"
         description={DESCRIPTION}
         breadcrumbs={[
           { label: "Início", href: "/" },
-          { label: "Uvas", href: "/uvas" },
+          { label: "Países", href: "/paises" },
         ]}
       />
       <Container className="pb-16">
-        <EntityGrid items={grapes} label="Lista de uvas" imageVariant="grape" />
+        <EntityGrid items={countries} label="Lista de países" imageVariant="landscape" />
       </Container>
     </>
   );

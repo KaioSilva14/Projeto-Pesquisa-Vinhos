@@ -31,7 +31,7 @@ Regras: minúsculas, sem acento, hífen como separador, sem barra final, slugs e
 | Vinho | `{nome} ({produtor})` | "{Tipo} de {região}, {país}, elaborado com {uvas}. Ficha técnica, perfil e fontes." (só partes existentes) | ✔ |
 | Uva | `{nome}: uva, origem e vinhos` | Resumo próprio truncado | ✔ |
 | Região | `{nome}, {país}: região vinícola` | Resumo | ✔ |
-| País | `Vinhos de {país}` | Resumo | ✔ |
+| País | `Vinhos {da/do/dos} {país}` ("Vinhos da Itália", `lib/places/grammar.ts`) | Resumo (sem resumo: regiões, produtores e vinhos do catálogo) | ✔ |
 | Produtor | `{nome}: produtor em {região}` | Resumo | ✔ |
 | Listas | `Vinhos`, `Uvas`… | Descrição fixa | ✔ |
 | `/vinhos?filtros` | Conforme filtros | | ✘ `noindex, follow` + canonical para `/vinhos` |

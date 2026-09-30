@@ -1,6 +1,7 @@
 import { CreditButton } from "@/components/media/CreditButton";
 import { EntityImage } from "@/components/media/EntityImage";
 import { Card, CardLink } from "@/components/ui/Card";
+import { cn } from "@/lib/cn";
 import type { ImageAsset } from "@/schemas/image-asset";
 
 type EntityCardProps = {
@@ -12,6 +13,11 @@ type EntityCardProps = {
   /** Quantos vinhos do catálogo se ligam a esta entidade. */
   wineCount?: number | undefined;
   imageVariant?: "grape" | "landscape" | "producer";
+  /**
+   * Reserva a área da foto mesmo sem foto ("Imagem indisponível"). Em uma grade em que nenhum
+   * card tem foto, desligue: repetir o aviso em todos não informa nada (ADR-027).
+   */
+  reserveImage?: boolean;
   headingLevel?: "h2" | "h3";
 };
 
@@ -29,17 +35,21 @@ export function EntityCard({
   image,
   wineCount,
   imageVariant = "grape",
+  reserveImage = true,
   headingLevel: Heading = "h2",
 }: EntityCardProps) {
+  const showImage = Boolean(image) || reserveImage;
   return (
-    <Card className="h-full overflow-hidden p-0 md:p-0">
-      <EntityImage
-        image={image}
-        variant={imageVariant}
-        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 45vw, 100vw"
-        // A foto encosta nas bordas do card (o card recorta os cantos)
-        className="rounded-none [&>div]:rounded-none"
-      />
+    <Card className={cn("h-full overflow-hidden p-0 md:p-0", !showImage && "pt-4 md:pt-5")}>
+      {showImage && (
+        <EntityImage
+          image={image}
+          variant={imageVariant}
+          sizes="(min-width: 1280px) 25vw, (min-width: 640px) 45vw, 100vw"
+          // A foto encosta nas bordas do card (o card recorta os cantos)
+          className="rounded-none [&>div]:rounded-none"
+        />
+      )}
       <div className="flex flex-1 flex-col gap-1 px-4 pb-4 md:px-5 md:pb-5">
         <Heading className="font-serif text-h4">
           <CardLink href={href}>{name}</CardLink>
