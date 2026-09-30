@@ -1,6 +1,8 @@
 import type { WineType } from "@/schemas/common";
 import type { Wine } from "@/schemas/wine";
 
+import { imageIdsOf } from "./images";
+
 // Vinhos dos produtores aprovados (docs/CURATION.md). Fatos das fichas técnicas e páginas
 // oficiais (src/data/sources.ts), lidos em 2026-09-30. Perfil sensorial fica vazio: as fichas
 // descrevem o vinho em prosa, sem termos de escala (ADR-025). Dados que mudam por safra ficam
@@ -12,8 +14,10 @@ type WineData = Omit<Wine, "status" | "createdAt" | "updatedAt" | "slug" | "type
 };
 
 function wine({ type, sourceId, ...data }: WineData): Wine {
+  const imageIds = imageIdsOf("wine", data.id);
   return {
     ...data,
+    ...(imageIds.length > 0 && { imageIds }),
     slug: data.id,
     status: "published",
     createdAt: "2026-09-30",

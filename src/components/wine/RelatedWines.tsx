@@ -1,6 +1,6 @@
 import type { RelatedGroup } from "@/lib/wines/related";
 
-import { WineCard } from "./WineCard";
+import { WineGrid } from "./WineGrid";
 
 type RelatedWinesProps = {
   groups: readonly RelatedGroup[];
@@ -13,13 +13,7 @@ export function RelatedWines({ groups }: RelatedWinesProps) {
       {groups.map((group) => (
         <div key={group.key} className="grid gap-4">
           <h3 className="font-semibold">{group.title}</h3>
-          <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {group.items.map((wine) => (
-              <li key={wine.id}>
-                <WineCard wine={wine} headingLevel="h4" />
-              </li>
-            ))}
-          </ul>
+          <WineGrid wines={group.items} headingLevel="h4" />
         </div>
       ))}
     </div>

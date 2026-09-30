@@ -9,6 +9,8 @@ import { WineCard } from "@/components/wine/WineCard";
 import type { FacetRecord, FilterOptions } from "@/lib/filters/wine-filters";
 import type { WineListItem } from "@/lib/wines/list-item";
 
+import { exampleImage } from "../fixtures/images";
+
 const push = vi.fn();
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push }) }));
 
@@ -60,6 +62,19 @@ describe("WineCard", () => {
     expect(screen.getByText("Produtor Exemplo")).toBeInTheDocument();
     expect(screen.getByText("Região Exemplo, País A")).toBeInTheDocument();
     expect(screen.getByText("Safra 2020")).toBeInTheDocument();
+  });
+
+  it("com foto: mostra a garrafa e o botão de créditos", () => {
+    render(<WineCard wine={{ ...wine, image: exampleImage }} />);
+    expect(screen.getByRole("img", { name: exampleImage.alt })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Créditos da foto/ })).toBeInTheDocument();
+  });
+
+  it("sem foto, só reserva a área (aviso honesto) quando a grade pede", () => {
+    const { rerender } = render(<WineCard wine={wine} />);
+    expect(screen.queryByText("Imagem indisponível")).not.toBeInTheDocument();
+    rerender(<WineCard wine={wine} reserveImage />);
+    expect(screen.getByText("Imagem indisponível")).toBeInTheDocument();
   });
 
   it("multissafra no lugar da safra; campos ausentes não aparecem", () => {

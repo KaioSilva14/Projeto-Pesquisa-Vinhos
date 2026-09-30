@@ -14,6 +14,11 @@ test.describe("Página do vinho", () => {
     await expect(page.getByRole("heading", { level: 1, name: "Château Palmer" })).toBeVisible();
     await expect(page.getByRole("heading", { level: 2, name: "Ficha técnica" })).toBeVisible();
     await expect(page.getByRole("heading", { level: 3, name: "Safra 2022" })).toBeVisible();
+    await expect(page.getByText(/Foto: Château Palmer \(site oficial\)/)).toBeVisible();
+  });
+
+  test("vinho sem foto conferida mostra o aviso honesto", async ({ page }) => {
+    await page.goto("/vinhos/catena-malbec", { waitUntil: "domcontentloaded" });
     await expect(page.getByText("Imagem indisponível")).toBeVisible();
   });
 

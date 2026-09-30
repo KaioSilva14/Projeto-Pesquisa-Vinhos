@@ -1,4 +1,5 @@
 import type { FacetRecord, WineSort } from "@/lib/filters/wine-filters";
+import type { ImageAsset } from "@/schemas/image-asset";
 
 /** O que a lista de vinhos precisa de cada vinho: texto do card + valores dos filtros. */
 export type WineListItem = FacetRecord & {
@@ -11,6 +12,8 @@ export type WineListItem = FacetRecord & {
   /** Safra mais recente registrada (com ficha). */
   latestYear?: number;
   isNonVintage: boolean;
+  /** Foto da garrafa (só do vinho certo, IMAGES.md §2). */
+  image?: ImageAsset;
 };
 
 /** Ordena sem alterar a lista original. Sem safra conhecida vai para o fim em "safra". */
