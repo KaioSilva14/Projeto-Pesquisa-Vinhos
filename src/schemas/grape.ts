@@ -34,3 +34,4 @@ export const grapeSchema = z.strictObject({
 });
 
 export type Grape = z.infer<typeof grapeSchema>;
+export type GrapeColor = (typeof grapeColors)[number];

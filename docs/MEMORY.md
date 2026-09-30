@@ -33,7 +33,9 @@
   - Página `/pesquisa` (dinâmica, noindex) com filtro por tipo (`?tipo=`) e paginação (`?pagina=`), funcionando sem JavaScript. Componentes em `src/components/search/`, `Pagination` e `FilterChipLink` em `ui/`.
   - `CompactResult` sem miniatura (foto exige crédito visível).
 - **Fase 4 em andamento** (branch `feat/pagina-vinho`, PR #14 a abrir): F4-01 (página do vinho, `src/app/vinhos/[slug]/page.tsx`, service `wine-page.ts`, componentes em `components/wine/` e `components/sources/`) e F4-07 (`lib/wines/related.ts`). Cada fato mostra o número da fonte (`Cite`), na ordem de `lib/wines/citations.ts`.
-- **Próxima tarefa**: F4-02 (uvas), F4-03 (regiões e países) e F4-04 (produtores); os links da página do vinho já apontam para essas rotas. Pendências da Fase 3: filtro "uva principal"; foco após remover um chip (ACCESSIBILITY.md §3.2).
+- F4-02 (uvas) concluída no branch `feat/uvas` (PR #15 a abrir): `/uvas`, `/uvas/[slug]`, `services/grape-pages.ts`, `components/entity/EntityCard.tsx`, `components/media/CreditButton.tsx`. Citações genéricas em `lib/citations.ts`; `FactList` em `components/facts/`.
+- **Próxima tarefa**: F4-03 (regiões e países), F4-04 (produtores) e depois F4-08 (imagens de regiões, produtores e vinhos, pedido do usuário).
+- **E2E com fotos**: com o servidor frio (sempre no CI), a primeira otimização de cada tamanho de foto é lenta. Páginas com foto usam `goto(..., { waitUntil: "domcontentloaded" })` e navegação com prazo maior; cliques em componentes Radix logo após o carregamento usam `toPass` (a página pode ainda não ter ativado o JavaScript). Ver `tests/e2e/grapes.spec.ts`. Pendências da Fase 3: filtro "uva principal"; foco após remover um chip (ACCESSIBILITY.md §3.2).
 - **Cuidado com o Zod no navegador**: importar um módulo com Zod num Client Component leva o Zod ao bundle e dispara violação de CSP (`script-src: eval`, o Zod 4 testa `new Function`). Módulos com Zod usados só no servidor levam `import "server-only"`.
 - **E2E contra build de produção** sem parar o dev: `$env:PW_PORT = "3200"; npm run test:e2e`. Contra o dev (3100), a compilação lenta gera falhas falsas.
 - O usuário roda o próprio `npm run dev` (porta 3001). O Next 16 só permite um `next dev` por projeto: para prints em modo dev, usar o servidor dele em vez de iniciar outro (nunca encerrá-lo sem pedir).
@@ -67,7 +69,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- PR #14 (`feat/pagina-vinho` → `main`) a ser aberto e mesclado pelo usuário.
+- PR #15 (`feat/uvas` → `main`) a ser aberto e mesclado pelo usuário.
 - Fontes pendentes: anexo III do Regulamento (UE) 2019/33 (faixas de açúcar dos espumantes; EUR-Lex bloqueia acesso automático); fonte específica para Torrontés Riojano ↔ Valle de Cafayate; alteração de 2023 do disciplinare do Chianti Classico; versões posteriores a 1997 do regulamento de Rías Baixas.
 - Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
@@ -85,7 +87,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Depois do merge do PR #14: `git switch main`, `git pull`, apagar o branch local e criar um branch para a F4-02.
+1. Depois do merge do PR #15: `git switch main`, `git pull`, apagar o branch local e criar um branch para a F4-03.
 2. Na curadoria (F2-06+): só itens do `docs/CURATION.md`; cada fato conferido na fonte original, texto sempre próprio, commit do tipo `data:` citando as fontes.
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 

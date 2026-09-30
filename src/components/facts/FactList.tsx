@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import { Cite } from "@/components/sources/Cite";
-import type { CitationNumbers } from "@/lib/wines/citations";
+import type { CitationNumbers } from "@/lib/citations";
 
 export type Fact = {
   label: string;

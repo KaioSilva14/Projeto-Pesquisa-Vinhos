@@ -1,8 +1,7 @@
 import { formatList } from "@/lib/format";
+import { type BreadcrumbItem, absoluteUrl, breadcrumbJsonLd } from "@/lib/seo/common";
 import { WINE_TYPE_LABELS } from "@/lib/labels";
 import type { WinePageData } from "@/lib/wines/page-data";
-
-type BreadcrumbItem = { label: string; href: string };
 
 /** Nomes das uvas do rótulo ou, sem ele, da safra mais recente. */
 export function wineGrapeNames({ wine, vintages, grapes }: WinePageData): string[] {
@@ -33,7 +32,7 @@ export function wineJsonLd(
   breadcrumbs: readonly BreadcrumbItem[],
   siteUrl: string,
 ): Record<string, unknown> {
-  const url = (path: string) => new URL(path, siteUrl).toString();
+  const url = (path: string) => absoluteUrl(path, siteUrl);
   const pageUrl = url(`/vinhos/${data.wine.slug}`);
   return {
     "@context": "https://schema.org",
@@ -56,15 +55,7 @@ export function wineJsonLd(
           ...(data.image && { image: url(data.image.src) }),
         },
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: breadcrumbs.map((item, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: item.label,
-          item: url(item.href),
-        })),
-      },
+      breadcrumbJsonLd(breadcrumbs, siteUrl),
     ],
   };
 }

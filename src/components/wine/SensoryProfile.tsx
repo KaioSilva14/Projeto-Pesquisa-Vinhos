@@ -1,6 +1,6 @@
 import { Cite } from "@/components/sources/Cite";
 import { cn } from "@/lib/cn";
-import type { CitationNumbers } from "@/lib/wines/citations";
+import type { CitationNumbers } from "@/lib/citations";
 import type { SensoryProfile as SensoryProfileData } from "@/schemas/wine";
 
 const ATTRIBUTES = [

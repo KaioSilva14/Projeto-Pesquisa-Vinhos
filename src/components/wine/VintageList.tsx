@@ -1,10 +1,10 @@
 import { Cite } from "@/components/sources/Cite";
 import { formatNumber, formatPercent } from "@/lib/format";
-import type { CitationNumbers } from "@/lib/wines/citations";
+import type { CitationNumbers } from "@/lib/citations";
 import type { GrapeRef } from "@/lib/wines/page-data";
 import type { Vintage } from "@/schemas/vintage";
 
-import { FactList } from "./FactList";
+import { FactList } from "@/components/facts/FactList";
 import { GrapeComposition } from "./GrapeComposition";
 
 type VintageListProps = {

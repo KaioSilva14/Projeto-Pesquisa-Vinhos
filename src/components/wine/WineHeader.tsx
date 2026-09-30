@@ -6,7 +6,7 @@ import { DemoBadge } from "@/components/states/DemoBadge";
 import { IncompleteDataNote } from "@/components/states/IncompleteDataNote";
 import { Badge } from "@/components/ui/Badge";
 import { SPARKLING_SWEETNESS_LABELS, WINE_TYPE_LABELS } from "@/lib/labels";
-import type { CitationNumbers } from "@/lib/wines/citations";
+import type { CitationNumbers } from "@/lib/citations";
 import type { WinePageData } from "@/lib/wines/page-data";
 
 const linkClass = "underline decoration-border-strong underline-offset-4 hover:decoration-accent";

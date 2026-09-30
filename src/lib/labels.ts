@@ -1,5 +1,6 @@
 import type { SearchKind } from "@/lib/search/types";
 import type { WineType } from "@/schemas/common";
+import type { GrapeColor } from "@/schemas/grape";
 import type { Source } from "@/schemas/source";
 import type { SparklingSweetness } from "@/schemas/wine";
 
@@ -43,4 +44,12 @@ export const SOURCE_KIND_LABELS: Record<Source["kind"], string> = {
   "specialized-database": "Base especializada",
   technical: "Documento técnico",
   other: "Outra fonte",
+};
+
+/** Cor da uva (VIVC), para "Uva tinta", "Uva branca"… */
+export const GRAPE_COLOR_LABELS: Record<GrapeColor, string> = {
+  tinta: "Uva tinta",
+  branca: "Uva branca",
+  rosada: "Uva rosada",
+  cinza: "Uva cinza",
 };

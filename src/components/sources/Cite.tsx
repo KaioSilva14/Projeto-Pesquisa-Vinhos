@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import type { CitationNumbers } from "@/lib/wines/citations";
+import type { CitationNumbers } from "@/lib/citations";
 
 type CiteProps = {
   ids: readonly string[] | undefined;

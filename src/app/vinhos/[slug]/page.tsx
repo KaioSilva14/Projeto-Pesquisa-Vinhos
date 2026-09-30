@@ -16,7 +16,7 @@ import { WineHeader } from "@/components/wine/WineHeader";
 import { env } from "@/config/env";
 import { formatList } from "@/lib/format";
 import { wineDescription, wineJsonLd } from "@/lib/seo/wine";
-import { numberCitations } from "@/lib/wines/citations";
+import { numberCitations } from "@/lib/citations";
 import { catalogService } from "@/services";
 
 type WinePageProps = { params: Promise<{ slug: string }> };
