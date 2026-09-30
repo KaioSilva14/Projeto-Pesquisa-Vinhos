@@ -46,6 +46,11 @@ describe("queryTerms", () => {
     expect(queryTerms("Tinto  TINTO, d'Asti")).toEqual(["tinto", "asti"]);
   });
 
+  it('ignora palavras genéricas como "vinho" e "de", a menos que só haja elas', () => {
+    expect(queryTerms("vinhos tintos de Itália")).toEqual(["tintos", "italia"]);
+    expect(queryTerms("vinho")).toEqual(["vinho"]);
+  });
+
   it("limita o tamanho da consulta e o número de termos", () => {
     expect(queryTerms("a".repeat(MAX_QUERY_LENGTH + 50))[0]).toHaveLength(MAX_QUERY_LENGTH);
     expect(queryTerms("aa bb cc dd ee ff gg hh ii jj")).toHaveLength(8);

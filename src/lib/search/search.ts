@@ -29,15 +29,27 @@ const OPTIONS: IFuseOptions<Entry> = {
   includeScore: true,
 };
 
+/** Palavras genéricas que não ajudam a achar nada: "vinho argentino" = "argentino". */
+const STOPWORDS = new Set(
+  ["vinho", "vinhos", "uva", "uvas", "de", "da", "do", "das", "dos", "em", "com", "para"].map(
+    normalize,
+  ),
+);
+
 /**
  * Termos da consulta, já normalizados e sem repetição. Termos de uma letra são ignorados
- * (combinariam com quase tudo).
+ * (combinariam com quase tudo); palavras genéricas também, a menos que a consulta só tenha elas.
  */
 export function queryTerms(query: string): string[] {
-  const terms = normalize(query.slice(0, MAX_QUERY_LENGTH))
-    .split(" ")
-    .filter((term) => term.length > 1);
-  return [...new Set(terms)].slice(0, MAX_TERMS);
+  const terms = [
+    ...new Set(
+      normalize(query.slice(0, MAX_QUERY_LENGTH))
+        .split(" ")
+        .filter((term) => term.length > 1),
+    ),
+  ];
+  const meaningful = terms.filter((term) => !STOPWORDS.has(term));
+  return (meaningful.length > 0 ? meaningful : terms).slice(0, MAX_TERMS);
 }
 
 export type Searcher = (query: string, limit?: number) => SearchResult[];
