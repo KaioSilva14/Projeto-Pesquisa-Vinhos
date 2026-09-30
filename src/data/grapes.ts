@@ -1,6 +1,6 @@
 import type { Grape } from "@/schemas/grape";
 
-import { images } from "./images";
+import { imageIdsOf } from "./images";
 import { regions } from "./regions";
 
 // Uvas aprovadas em docs/CURATION.md (ADR-023). Fonte de todos os fatos: ficha da variedade
@@ -27,9 +27,7 @@ type GrapeFacts = {
 function fromVivc(facts: GrapeFacts): Grape {
   const source = [`src-vivc-${facts.vivcId}`] as [string];
   // Fotos da própria uva cadastradas em ./images.ts (sem foto → "Imagem indisponível")
-  const imageIds = images
-    .filter((image) => image.subjectType === "grape" && image.subjectId === facts.id)
-    .map((image) => image.id);
+  const imageIds = imageIdsOf("grape", facts.id);
   // Regiões que citam esta uva como principal, e as fontes dessas ligações
   const linked = regions.filter((region) => region.mainGrapeIds?.value.includes(facts.id));
   const regionSources = [

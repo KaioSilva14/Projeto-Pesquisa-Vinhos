@@ -36,7 +36,8 @@
 - F4-02 (uvas) concluída no branch `feat/uvas` (PR #15 a abrir): `/uvas`, `/uvas/[slug]`, `services/grape-pages.ts`, `components/entity/EntityCard.tsx`, `components/media/CreditButton.tsx`. Citações genéricas em `lib/citations.ts`; `FactList` em `components/facts/`.
 - F4-03 concluída no branch `feat/regioes-paises` (PR #16 a abrir): `/regioes`, `/regioes/[slug]`, `/paises`, `/paises/[slug]`, `services/place-pages.ts`, `components/entity/` (EntityGrid, LinkList), `components/layout/EntityLayout.tsx` (esqueleto comum das páginas de entidade).
 - F4-04 concluída no branch `feat/produtores` (PR #17 a abrir): `/produtores`, `/produtores/[slug]`, `services/producer-pages.ts`. F4-05 não se aplica (sem vinícolas distintas). Todos os links entre entidades funcionam.
-- **Próxima tarefa**: F4-08 (imagens de regiões, produtores e vinhos, pedido do usuário), depois F4-06 (harmonizações).
+- F4-08 (1ª parte) no branch `data/imagens` (PR #18 a abrir): 16 fotos do Wikimedia Commons em `public/images/regions/` e `producers/`, registradas em `src/data/images.ts` (`commonsPhoto`); entidades acham as próprias fotos com `imageIdsOf`. Busca e metadados pela API do Commons (espaçar pedidos: HTTP 429 com rajadas). Redimensionar com System.Drawing usando `[double]` (o `[math]::Min(1, 0.8)` do PowerShell arredonda para inteiro).
+- **Próxima tarefa**: F4-08 (2ª parte: garrafas dos vinhos, do site oficial de cada produtor, com ADR sobre uso sem autorização escrita em projeto de estudo), depois F4-06 (harmonizações).
 - **E2E com fotos**: com o servidor frio (sempre no CI), a primeira otimização de cada tamanho de foto é lenta. Páginas com foto usam `goto(..., { waitUntil: "domcontentloaded" })` e navegação com prazo maior; cliques em componentes Radix logo após o carregamento usam `toPass` (a página pode ainda não ter ativado o JavaScript). Ver `tests/e2e/grapes.spec.ts`. Pendências da Fase 3: filtro "uva principal"; foco após remover um chip (ACCESSIBILITY.md §3.2).
 - **Cuidado com o Zod no navegador**: importar um módulo com Zod num Client Component leva o Zod ao bundle e dispara violação de CSP (`script-src: eval`, o Zod 4 testa `new Function`). Módulos com Zod usados só no servidor levam `import "server-only"`.
 - **E2E contra build de produção** sem parar o dev: `$env:PW_PORT = "3200"; npm run test:e2e`. Contra o dev (3100), a compilação lenta gera falhas falsas.
@@ -71,7 +72,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- PR #17 (`feat/produtores` → `main`) a ser aberto e mesclado pelo usuário.
+- PR #18 (`data/imagens` → `main`) a ser aberto e mesclado pelo usuário.
 - Fontes pendentes: anexo III do Regulamento (UE) 2019/33 (faixas de açúcar dos espumantes; EUR-Lex bloqueia acesso automático); fonte específica para Torrontés Riojano ↔ Valle de Cafayate; alteração de 2023 do disciplinare do Chianti Classico; versões posteriores a 1997 do regulamento de Rías Baixas.
 - Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
@@ -89,7 +90,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Depois do merge do PR #17: `git switch main`, `git pull`, apagar o branch local e criar um branch para a F4-08.
+1. Depois do merge do PR #18: `git switch main`, `git pull`, apagar o branch local e criar um branch para as garrafas (F4-08, 2ª parte).
 2. Na curadoria (F2-06+): só itens do `docs/CURATION.md`; cada fato conferido na fonte original, texto sempre próprio, commit do tipo `data:` citando as fontes.
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 

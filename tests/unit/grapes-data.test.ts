@@ -85,8 +85,8 @@ describe("fotos das uvas (F2-06b, ADR-024)", () => {
     }
   });
 
-  it("toda foto cita o JKI e registra a permissão e a modificação", () => {
-    for (const image of images) {
+  it("toda foto de uva cita o JKI e registra a permissão e a modificação", () => {
+    for (const image of images.filter((item) => item.subjectType === "grape")) {
       expect(image.credit, image.id).toContain("Julius Kühn-Institut (JKI)");
       expect(image.license, image.id).toMatch(/permitida pelo JKI/);
       expect(image.modified, image.id).toBeDefined();

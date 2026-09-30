@@ -1,5 +1,7 @@
 import type { Region } from "@/schemas/geography";
 
+import { imageIdsOf } from "./images";
+
 // Regiões aprovadas em docs/CURATION.md (ADR-023). Cada fato foi lido no texto bruto da fonte
 // oficial citada (src/data/sources.ts) em 2026-09-30.
 // - mainGrapeIds: só uvas do catálogo que a fonte aponta como principais/obrigatórias/
@@ -20,9 +22,11 @@ function region(
   },
 ): Region {
   const { grapes, ...rest } = data;
+  const imageIds = imageIdsOf("region", data.id);
   return {
     ...rest,
     slug: data.id,
+    ...(imageIds.length > 0 && { imageIds }),
     status: "published",
     createdAt: "2026-09-30",
     updatedAt: "2026-09-30",
