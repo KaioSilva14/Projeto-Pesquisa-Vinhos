@@ -8,6 +8,7 @@ export { CaretRightIcon } from "@phosphor-icons/react/dist/ssr/CaretRight";
 export { CheckIcon } from "@phosphor-icons/react/dist/ssr/Check";
 export { CircleNotchIcon } from "@phosphor-icons/react/dist/ssr/CircleNotch";
 export { CompassIcon } from "@phosphor-icons/react/dist/ssr/Compass";
+export { FunnelSimpleIcon } from "@phosphor-icons/react/dist/ssr/FunnelSimple";
 export { HeartIcon } from "@phosphor-icons/react/dist/ssr/Heart";
 export { HouseIcon } from "@phosphor-icons/react/dist/ssr/House";
 export { ImageBrokenIcon } from "@phosphor-icons/react/dist/ssr/ImageBroken";

@@ -100,6 +100,8 @@ type ActiveFilterChipProps = Omit<ComponentProps<"button">, "children" | "aria-l
   label: string;
 };
 
+const activeChipClass = "border-transparent bg-accent-soft text-accent hover:border-accent";
+
 /** Filtro aplicado: o chip inteiro é o botão de remover. */
 export function ActiveFilterChip({
   label,
@@ -111,15 +113,29 @@ export function ActiveFilterChip({
     <button
       type={type}
       aria-label={`Remover filtro: ${label}`}
-      className={cn(
-        chipBase,
-        "border-transparent bg-accent-soft text-accent hover:border-accent",
-        className,
-      )}
+      className={cn(chipBase, activeChipClass, className)}
       {...props}
     >
       {label}
       <XIcon aria-hidden />
     </button>
+  );
+}
+
+type ActiveFilterChipLinkProps = Omit<ComponentProps<typeof Link>, "children" | "aria-label"> & {
+  label: string;
+};
+
+/** Filtro aplicado como link para a URL sem ele: funciona sem JavaScript. */
+export function ActiveFilterChipLink({ label, className, ...props }: ActiveFilterChipLinkProps) {
+  return (
+    <Link
+      aria-label={`Remover filtro: ${label}`}
+      className={cn(chipBase, activeChipClass, className)}
+      {...props}
+    >
+      {label}
+      <XIcon aria-hidden />
+    </Link>
   );
 }
