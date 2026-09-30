@@ -46,7 +46,7 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 | `zod` | 4.6.5 | Schemas das entidades, searchParams, favoritos | Tipos derivados com `z.infer`; valida dados no build e no CI |
 | `server-only` | 0.0.1 | Marcar `services/` como exclusivo do servidor | Garante que o catálogo inteiro nunca vá para o bundle do cliente (testado: import num Client Component derruba o build) |
 | `zustand` | 5.0.15 | Favoritos com `persist` | Leve, sem provider, API simples para iniciante |
-| `nuqs` | 2.10.1 | Estado de filtros/busca na URL | Tipado, compatível com App Router, evita bugs de sincronização |
+| ~~`nuqs`~~ | — | Não instalado (F3-05) | `router.push` + `lib/filters/wine-filters.ts` bastam: a lista é renderizada no servidor a partir da URL (ADR-027) |
 | TanStack Query | — | **Não usar** enquanto os dados forem locais | Regra do CLAUDE.md 5.3 |
 
 ### 2.4 Busca
@@ -245,9 +245,9 @@ Next 16: `params` e `searchParams` são **assíncronos** (`await params`). Turbo
 
 ## 9. Estratégia de filtros
 
-- Schema Zod `schemas/filters.ts` valida `searchParams` (valores desconhecidos são ignorados, não quebram).
-- Filtragem e **facetas** (contagem por opção) calculadas em `services/facets.ts` sobre os dados reais → só aparecem opções existentes.
-- No cliente, `nuqs` sincroniza os controles com a URL (`shallow: false` para o servidor re-renderizar).
+- `lib/filters/params.ts` (Zod, `server-only`) lê `searchParams` (`tipo`, `pais`, `regiao`, `uva`, `produtor`, repetíveis; `ordem`; `mostrar`); valores inválidos ou inexistentes nos dados são ignorados.
+- `services/wine-list.ts` monta a lista e as **opções** a partir dos dados reais (só aparecem opções com vinho); `lib/filters/wine-filters.ts` (puro, sem Zod) filtra, conta (facetas) e monta a URL, no servidor e no navegador.
+- No cliente, cada mudança faz `router.push` para a nova URL (ADR-027); no celular, o painel inferior guarda um rascunho e conta "Ver N vinhos" ao vivo.
 - Combinação: **E** entre grupos, **OU** dentro do mesmo grupo (ex.: País = Itália OU França, E Tipo = Tinto).
 - "Feito principalmente com a uva X" = uva com maior percentual **confirmado** ou marcada como principal na fonte; sem dado confirmado, o vinho entra apenas no filtro "contém a uva X".
 
