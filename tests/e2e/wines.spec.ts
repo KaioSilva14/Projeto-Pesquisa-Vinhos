@@ -9,6 +9,8 @@ import { expectNoSeriousA11yViolations } from "./helpers/a11y";
 // Recarregar/voltar esperam só o HTML: filtros e resultados já vêm prontos do servidor, e as
 // fotos (1ª com prioridade) podem demorar no servidor frio do CI
 const html = { waitUntil: "domcontentloaded" } as const;
+// /vinhos é gerada a cada pedido: com o servidor ocupado, voltar pode passar de 5 s
+const navigation = { timeout: 15_000 };
 
 const isDesktop = (page: Page) => (page.viewportSize()?.width ?? 0) >= 1024;
 const results = (page: Page) =>
@@ -34,8 +36,8 @@ test.describe("Lista de vinhos", () => {
     await expect(results(page)).toHaveCount(2);
 
     await page.goBack(html);
-    await expect(page).toHaveURL(/\/vinhos\?tipo=tinto&pais=italia$/);
-    await expect(filters.getByRole("checkbox", { name: /^Nebbiolo/ })).not.toBeChecked();
+    await expect(page).toHaveURL(/\/vinhos\?tipo=tinto&pais=italia$/, navigation);
+    await expect(filters.getByRole("checkbox", { name: /^Nebbiolo/ })).not.toBeChecked(navigation);
   });
 
   // E2E-04 (TESTING.md)

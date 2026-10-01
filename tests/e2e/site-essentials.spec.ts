@@ -51,9 +51,11 @@ test.describe("Sugerir uma correção", () => {
 
     // Enviar sem descrever o erro: mensagem útil no lugar certo
     await page.getByRole("button", { name: "Continuar no GitHub" }).click();
-    await expect(page.getByRole("alert").filter({ hasText: "Falta corrigir" })).toContainText(
-      "O que está errado?",
-    );
+    const summary = page.getByRole("alert").filter({ hasText: "Falta corrigir" });
+    await expect(summary).toContainText("O que está errado?");
+    // O resumo recebe o foco no quadro seguinte da tela: só depois disso dá para digitar
+    // (senão o foco pula no meio da digitação e o texto se perde, visto no WebKit)
+    await expect(summary).toBeFocused();
 
     await page
       .getByLabel("O que está errado?")

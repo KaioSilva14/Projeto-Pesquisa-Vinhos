@@ -230,3 +230,9 @@
   - **Testes**: os testes E2E nunca baixam o mapa de verdade (`tests/e2e/helpers/test.ts` responde com um PNG em branco).
 - **Consequências**: sem variáveis de ambiente nem chaves para mapas. Contornos oficiais (GeoJSON) ficam como melhoria futura, um a um, quando houver fonte com licença clara. Antes de publicar com tráfego alto, reavaliar o uso dos servidores do OSM (a política deles proíbe uso intensivo).
 - **Data**: 2026-10-01 · **Status**: aceita (decisão técnica delegada pelo usuário); substitui a escolha de biblioteca do ADR-015
+
+## ADR-034 — Testes E2E com fotos sem otimização e cache dos navegadores no CI
+- **Contexto**: desde que a primeira foto das listas e das páginas passou a ser carregada com prioridade (PR #24), os testes E2E no GitHub Actions começaram a estourar o tempo: a navegação esperava o servidor de teste, ainda "frio", converter cada foto para AVIF, o que leva segundos por foto num computador de 2 núcleos com dois testes em paralelo. Além disso, a instalação dos navegadores do Playwright levava de 4 a 9 minutos, e o job foi cancelado ao bater no limite de 20 minutos (execução do `main` depois do PR #24).
+- **Decisão**: no build dos testes E2E, o Playwright define `VINUM_E2E=1` e o `next.config.ts` liga `images.unoptimized`: as fotos são servidas como estão em `public/images`, sem conversão. Os testes verificam conteúdo, navegação e acessibilidade, que não dependem da otimização. A otimização real continua no build normal e é medida pelo Lighthouse (Fase 10). No CI, os navegadores do Playwright ficam em cache (`actions/cache`, chave pelo `package-lock.json`) e o limite do job E2E subiu para 30 minutos. O teste "Sugerir uma correção" espera o foco chegar ao resumo de erros antes de digitar.
+- **Consequências**: menos testes instáveis sem remendos teste a teste; o E2E não cobre a otimização de imagens (coberta pelo Lighthouse).
+- **Data**: 2026-10-01 · **Status**: aceita (decisão técnica delegada pelo usuário)

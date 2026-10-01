@@ -43,6 +43,7 @@ export default defineConfig({
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
-    env: { NEXT_TELEMETRY_DISABLED: "1" },
+    // VINUM_E2E: build de teste com as fotos sem otimização (next.config.ts, ADR-034)
+    env: { NEXT_TELEMETRY_DISABLED: "1", VINUM_E2E: "1" },
   },
 });
