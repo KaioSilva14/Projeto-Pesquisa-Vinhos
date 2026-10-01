@@ -17,7 +17,7 @@ const iconLink =
  */
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-bg">
+    <header className="sticky top-0 z-30 border-b border-border bg-bg transition-shadow duration-(--duration-fast) in-data-scrolled:shadow-sm">
       <Container className="flex h-14 items-center gap-4 md:h-16 lg:gap-8">
         <Link href="/" className="font-serif text-h3 leading-none">
           {SITE.name}

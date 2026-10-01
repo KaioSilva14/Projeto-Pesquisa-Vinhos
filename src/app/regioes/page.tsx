@@ -41,6 +41,7 @@ export default async function RegionsPage() {
               label={`Regiões: ${country.name}`}
               imageVariant="landscape"
               headingLevel="h3"
+              favoriteKind="region"
             />
           </section>
         ))}

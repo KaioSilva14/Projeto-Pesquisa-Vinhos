@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { GrapeFacts } from "@/components/grape/GrapeFacts";
 import { ContentSection } from "@/components/layout/ContentSection";
 import { EntityLayout } from "@/components/layout/EntityLayout";
+import { EntityTitle } from "@/components/layout/EntityTitle";
 import { EntityImage } from "@/components/media/EntityImage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Cite } from "@/components/sources/Cite";
@@ -75,7 +76,7 @@ export default async function GrapePage({ params }: GrapePageProps) {
         }
       >
         <header className="grid gap-4">
-          <h1 className="font-serif text-h1 text-balance">{grape.name}</h1>
+          <EntityTitle title={grape.name} favorite={{ kind: "grape", id: grape.id }} />
           {grape.color && (
             <Badge className="justify-self-start">{GRAPE_COLOR_LABELS[grape.color.value]}</Badge>
           )}

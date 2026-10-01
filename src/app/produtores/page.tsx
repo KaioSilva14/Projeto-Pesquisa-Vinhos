@@ -28,7 +28,12 @@ export default async function ProducersPage() {
         ]}
       />
       <Container className="pb-16">
-        <EntityGrid items={producers} label="Lista de produtores" imageVariant="producer" />
+        <EntityGrid
+          items={producers}
+          label="Lista de produtores"
+          imageVariant="producer"
+          favoriteKind="producer"
+        />
       </Container>
     </>
   );

@@ -12,7 +12,7 @@ export function Card({ className, ...props }: ComponentProps<"article">) {
   return (
     <article
       className={cn(
-        "relative flex flex-col gap-3 rounded-sm border border-border bg-surface p-4 md:p-5",
+        "group/card relative flex flex-col gap-3 rounded-sm border border-border bg-surface p-4 md:p-5",
         "transition-colors duration-(--duration-fast) ease-out",
         "has-[[data-card-link]:hover]:border-border-strong",
         // O anel de foco aparece no card inteiro, não só no texto do link

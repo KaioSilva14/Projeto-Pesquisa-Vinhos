@@ -45,7 +45,7 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 |---|---|---|---|
 | `zod` | 4.6.5 | Schemas das entidades, searchParams, favoritos | Tipos derivados com `z.infer`; valida dados no build e no CI |
 | `server-only` | 0.0.1 | Marcar `services/` como exclusivo do servidor | Garante que o catálogo inteiro nunca vá para o bundle do cliente (testado: import num Client Component derruba o build) |
-| `zustand` | 5.0.15 | Favoritos com `persist` | Leve, sem provider, API simples para iniciante |
+| `zustand` | 5.0.15 | Favoritos com `persist` | Leve, sem provider, API simples para iniciante. Instalado na F6-01; o que volta do `localStorage` é validado por `lib/favorites/favorites.ts` (sem Zod: o código vai para o navegador) |
 | ~~`nuqs`~~ | — | Não instalado (F3-05) | `router.push` + `lib/filters/wine-filters.ts` bastam: a lista é renderizada no servidor a partir da URL (ADR-027) |
 | TanStack Query | — | **Não usar** enquanto os dados forem locais | Regra do CLAUDE.md 5.3 |
 
@@ -59,7 +59,7 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 
 | Pacote | Versão | Fase | Justificativa |
 |---|---|---|---|
-| `motion` | 13.4.4 | 7 (uso pontual antes, se necessário) | Biblioteca **única** de animação JS (ADR-007). GSAP e Lenis **não** serão usados |
+| `motion` | 13.4.4 | 7 (uso pontual antes, se necessário) | Biblioteca **única** de animação JS (ADR-007). GSAP e Lenis **não** serão usados. **Não instalado na Fase 7: CSS bastou (ADR-029)** |
 | `three` · `@react-three/fiber` · `@react-three/drei` | 0.186.1 · 9.8.1 · 10.7.9 | 8 | Padrão do ecossistema React para 3D; R3F 9.8 suporta React `>=19 <19.4` ✔ |
 | `maplibre-gl` | 6.11.2 | 9 | Mapas vetoriais open source, sem chave obrigatória (provedor de tiles a decidir — ADR-015) |
 

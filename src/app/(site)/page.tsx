@@ -6,6 +6,7 @@ import { HomeHero } from "@/components/home/HomeHero";
 import { ProducerIndex } from "@/components/home/ProducerIndex";
 import { RegionShowcase } from "@/components/home/RegionShowcase";
 import { Section } from "@/components/layout/Section";
+import { Reveal } from "@/components/motion/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { WineGrid } from "@/components/wine/WineGrid";
 import { env } from "@/config/env";
@@ -50,41 +51,58 @@ export default async function HomePage() {
         ]}
       />
 
-      {grapes.length > 0 && <GrapeStrip grapes={grapes} />}
+      {grapes.length > 0 && (
+        <Reveal>
+          <GrapeStrip grapes={grapes} />
+        </Reveal>
+      )}
 
       {featuredItem && (
-        <RegionShowcase
-          groups={regionGroups}
-          featured={{
-            name: featuredItem.name,
-            href: featuredItem.href,
-            ...(featuredItem.image && { image: featuredItem.image }),
-            ...(featuredPage?.region.summary && {
-              summary: truncate(featuredPage.region.summary.text, 220),
-            }),
-          }}
-        />
+        <Reveal>
+          <RegionShowcase
+            groups={regionGroups}
+            featured={{
+              name: featuredItem.name,
+              href: featuredItem.href,
+              ...(featuredItem.image && { image: featuredItem.image }),
+              ...(featuredPage?.region.summary && {
+                summary: truncate(featuredPage.region.summary.text, 220),
+              }),
+            }}
+          />
+        </Reveal>
       )}
 
       {wines.length > 0 && (
-        <Section
-          title="Descubra um vinho"
-          description="As safras mais recentes do catálogo, com ficha técnica e fontes."
-          rhythm="editorial"
-        >
-          <WineGrid wines={sortWines(wines, "safra").slice(0, FEATURED_WINES)} headingLevel="h3" />
-          <Link
-            href="/vinhos"
-            className="mt-6 inline-flex min-h-11 items-center text-accent underline-offset-4 hover:underline"
+        <Reveal>
+          <Section
+            title="Descubra um vinho"
+            description="As safras mais recentes do catálogo, com ficha técnica e fontes."
+            rhythm="editorial"
           >
-            Ver todos os vinhos
-          </Link>
-        </Section>
+            <WineGrid
+              wines={sortWines(wines, "safra").slice(0, FEATURED_WINES)}
+              headingLevel="h3"
+            />
+            <Link
+              href="/vinhos"
+              className="mt-6 inline-flex min-h-11 items-center text-accent underline-offset-4 hover:underline"
+            >
+              Ver todos os vinhos
+            </Link>
+          </Section>
+        </Reveal>
       )}
 
-      {producers.length > 0 && <ProducerIndex producers={producers} />}
+      {producers.length > 0 && (
+        <Reveal>
+          <ProducerIndex producers={producers} />
+        </Reveal>
+      )}
 
-      <ExploreBand />
+      <Reveal>
+        <ExploreBand />
+      </Reveal>
     </>
   );
 }

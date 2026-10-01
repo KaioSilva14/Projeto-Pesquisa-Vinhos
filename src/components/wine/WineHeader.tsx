@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
 
+import { EntityTitle } from "@/components/layout/EntityTitle";
 import { Cite } from "@/components/sources/Cite";
 import { DemoBadge } from "@/components/states/DemoBadge";
 import { IncompleteDataNote } from "@/components/states/IncompleteDataNote";
@@ -42,7 +43,7 @@ export function WineHeader({ data, numbers }: WineHeaderProps) {
   return (
     <header className="grid gap-4">
       {wine.isDemo && <DemoBadge className="justify-self-start" />}
-      <h1 className="font-serif text-h1 text-balance">{wine.name}</h1>
+      <EntityTitle title={wine.name} favorite={{ kind: "wine", id: wine.id }} />
       {origin.length > 0 && (
         <p className="text-lead text-text-muted">
           {origin.map((item, index) => (

@@ -63,7 +63,11 @@ export function EntityImage({
           fill
           sizes={sizes}
           priority={priority}
-          className={fit}
+          // A02: dentro de um card, a foto cresce 3% no hover (só com mouse, sem movimento reduzido)
+          className={cn(
+            fit,
+            "transition-transform duration-(--duration-base) ease-out motion-safe:group-hover/card:scale-[1.03]",
+          )}
           // Ponto focal da foto (valor dinâmico: por isso style em vez de classe)
           style={
             image.focalPoint && {

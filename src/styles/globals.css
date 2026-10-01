@@ -115,6 +115,9 @@
   --animate-pop-out: fade-out 150ms cubic-bezier(0.65, 0, 0.35, 1);
   --animate-accordion-down: accordion-down 220ms cubic-bezier(0.65, 0, 0.35, 1);
   --animate-accordion-up: accordion-up 220ms cubic-bezier(0.65, 0, 0.35, 1);
+  /* A01: entrada de seção editorial; A12: confirmação ao favoritar (ANIMATIONS.md §3) */
+  --animate-reveal: reveal 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-heart-pop: heart-pop 220ms cubic-bezier(0.22, 1, 0.36, 1);
 
   @keyframes fade-in {
     from {
@@ -146,6 +149,17 @@
   @keyframes sheet-out {
     to {
       transform: translateY(100%);
+    }
+  }
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+  @keyframes heart-pop {
+    50% {
+      transform: scale(1.15);
     }
   }
   @keyframes pop-in {
