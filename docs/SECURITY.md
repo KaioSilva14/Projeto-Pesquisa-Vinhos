@@ -43,10 +43,10 @@ const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline'" + (isDev ? " 'unsafe-eval'" : ""),
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://tile.openstreetmap.org", // mapas (ADR-033)
   "font-src 'self'",
-  "connect-src 'self'",          // + provedor de tiles na fase 9
-  "worker-src 'self' blob:",     // MapLibre usa workers (fase 9)
+  "connect-src 'self'",
+  "worker-src 'self' blob:",
   "frame-ancestors 'none'",
   "object-src 'none'",
   "base-uri 'self'",

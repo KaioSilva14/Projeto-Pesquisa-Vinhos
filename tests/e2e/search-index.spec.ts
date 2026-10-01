@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./helpers/test";
 
 // F3-02: o índice do autocomplete é um JSON estático, pequeno e só com dados publicados
 test.describe("Índice de busca", () => {

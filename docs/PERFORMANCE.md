@@ -26,7 +26,7 @@
 | JS de primeiro carregamento, `/vinhos` com filtros | ≤ 180 KB |
 | Chunk do autocomplete (busca + UI), sob demanda | ≤ 25 KB |
 | Índice de busca (`/api/search-index`) | ≤ 150 KB na v1 (alerta no CI acima de 300 KB) |
-| Chunk de mapa (MapLibre), sob demanda | carregado só na página de região ao entrar na viewport |
+| Chunk de mapa (Leaflet, ~40 KB) | só quando a pessoa clica em "Mostrar o mapa" (ADR-033) |
 | CSS total | ≤ 35 KB |
 | Fontes | 2 famílias, só `latin`, sem itálico e sem eixo óptico: ≤ 120 KB no total (hoje 90 KB pré-carregados, ADR-032) |
 | Imagem LCP (mobile) | ≤ 200 KB |

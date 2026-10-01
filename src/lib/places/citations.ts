@@ -11,6 +11,8 @@ export const regionCitationIds = (region: Region) =>
     region.terroir,
     region.mainGrapeIds,
     region.history,
+    // Ponto do mapa, na seção "Onde fica"
+    region.coordinates,
   ]);
 
 export const countryCitationIds = (country: Country) =>

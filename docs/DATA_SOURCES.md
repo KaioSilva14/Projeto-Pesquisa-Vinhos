@@ -63,6 +63,7 @@ Usar sempre a fonte mais alta disponível. Fonte inferior só complementa, nunca
 - Delimitações oficiais de denominações publicadas por órgãos oficiais (ex.: dados abertos do INAO), respeitando a licença de cada conjunto.
 - **OpenStreetMap** (ODbL) — base cartográfica; atribuição obrigatória "© OpenStreetMap contributors".
 - **Wikidata** (CC0) — coordenadas de apoio, sempre conferidas.
+- Pontos dos mapas das regiões (ADR-033): coordenadas gravadas na foto do **Wikimedia Commons** ou do lugar citado na descrição da foto, no **OpenStreetMap**. Sempre `secondary` e citadas na página.
 
 ### 2.7 Imagens
 Ver `IMAGES.md`.

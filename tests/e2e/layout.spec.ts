@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./helpers/test";
 
 test.describe("Layout", () => {
   test("o primeiro Tab mostra o 'Pular para o conteúdo', que leva ao conteúdo principal", async ({

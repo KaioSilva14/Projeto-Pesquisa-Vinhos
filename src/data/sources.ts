@@ -12,6 +12,33 @@ const vivc = (id: number, primeName: string): Source => ({
   reliability: "primary",
 });
 
+/** Lugar no OpenStreetMap (ODbL): coordenada do ponto de referência do mapa (fase 9). */
+const osm = (
+  slug: string,
+  type: "node" | "way" | "relation",
+  osmId: number,
+  name: string,
+): Source => ({
+  id: `src-osm-${slug}`,
+  kind: "specialized-database",
+  label: `OpenStreetMap: ${name}`,
+  publisher: "Colaboradores do OpenStreetMap (licença ODbL)",
+  url: `https://www.openstreetmap.org/${type}/${osmId}`,
+  accessedAt: "2026-10-01",
+  reliability: "secondary",
+});
+
+/** Coordenadas gravadas na própria foto do Wikimedia Commons (fase 9). */
+const commonsGeo = (slug: string, file: string): Source => ({
+  id: `src-commons-geo-${slug}`,
+  kind: "other",
+  label: `Coordenadas da foto “${file}”`,
+  publisher: "Wikimedia Commons",
+  url: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(file.replaceAll(" ", "_"))}`,
+  accessedAt: "2026-10-01",
+  reliability: "secondary",
+});
+
 export const sources: Source[] = [
   // F2-06: fichas das 10 uvas aprovadas em docs/CURATION.md
   vivc(10680, "SANGIOVESE"),
@@ -250,6 +277,17 @@ export const sources: Source[] = [
     "Miolo Wine Group",
     "https://institucional.miolo.com.br/wp-content/uploads/2017/12/Miolo-Lote-43.pdf",
   ),
+  // Fase 9: pontos dos mapas das regiões (lugar retratado na foto de cada região)
+  osm("radda-in-chianti", "relation", 42446, "Radda in Chianti"),
+  osm("barolo", "relation", 43376, "Barolo"),
+  osm("begadan", "relation", 1279411, "Bégadan"),
+  osm("rodezno", "relation", 345678, "Rodezno"),
+  osm("castrelo-cambados", "relation", 12660430, "Castrelo (Cambados)"),
+  osm("napa-valley-ava", "relation", 5261894, "Napa Valley AVA"),
+  osm("cafayate", "relation", 2280909, "Cafayate"),
+  osm("vale-dos-vinhedos", "relation", 7349902, "Vale dos Vinhedos"),
+  commonsGeo("champagne", "Blick von Châtillon-sur-Marne über die Weinberge der Champagne 08.jpg"),
+  commonsGeo("mendoza", "Vineyard in Mendoza, Argentina.jpg"),
 ];
 
 function producer(id: string, label: string, publisher: string, url: string): Source {

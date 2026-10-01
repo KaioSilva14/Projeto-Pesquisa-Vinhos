@@ -1,4 +1,5 @@
 import type { EntityListItem, EntityRef } from "@/lib/entity-list";
+import type { MapPoint } from "@/lib/maps/map-points";
 import type { WineListItem } from "@/lib/wines/list-item";
 import type { Country, Region } from "@/schemas/geography";
 import type { ImageAsset } from "@/schemas/image-asset";
@@ -26,6 +27,8 @@ export type RegionPageData = {
 export type CountryPageData = {
   country: Country;
   regions: EntityListItem[];
+  /** Regiões com ponto de mapa (as sem coordenada com fonte ficam fora do mapa). */
+  mapPoints: MapPoint[];
   producers: EntityRef[];
   wines: WineListItem[];
   image?: ImageAsset;
