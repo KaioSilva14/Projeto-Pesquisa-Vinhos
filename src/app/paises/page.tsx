@@ -28,7 +28,12 @@ export default async function CountriesPage() {
         ]}
       />
       <Container className="pb-16">
-        <EntityGrid items={countries} label="Lista de países" imageVariant="landscape" />
+        <EntityGrid
+          items={countries}
+          label="Lista de países"
+          imageVariant="landscape"
+          priorityFirst
+        />
       </Container>
     </>
   );

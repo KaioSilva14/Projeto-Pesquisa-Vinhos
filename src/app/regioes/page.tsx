@@ -29,7 +29,7 @@ export default async function RegionsPage() {
         ]}
       />
       <Container className="grid gap-14 pb-16">
-        {groups.map(({ country, regions }) => (
+        {groups.map(({ country, regions }, groupIndex) => (
           <section key={country.href} aria-label={country.name} className="grid gap-6">
             <h2 className="font-serif text-h2">
               <Link href={country.href} className="hover:text-accent">
@@ -42,6 +42,7 @@ export default async function RegionsPage() {
               imageVariant="landscape"
               headingLevel="h3"
               favoriteKind="region"
+              priorityFirst={groupIndex === 0}
             />
           </section>
         ))}

@@ -4,9 +4,19 @@ import { ImageResponse } from "next/og";
 
 import { BRAND, loadBrandFonts } from "./og-image";
 
-/** Ícone do site (favicon e ícone do iPhone): "V" em serifa sobre bordô. */
-export async function renderBrandIcon(sizePx: number, { rounded }: { rounded: boolean }) {
+/**
+ * Formato do ícone:
+ * - rounded: aba do navegador e resultados de busca (cantos arredondados no próprio desenho);
+ * - square: iPhone, que arredonda o ícone sozinho;
+ * - maskable: Android, que recorta em círculo ou outras formas; o "V" fica dentro da zona
+ *   segura (80% centrais) e o fundo vai até a borda.
+ */
+export type BrandIconShape = "rounded" | "square" | "maskable";
+
+/** Ícone do Vinum: "V" em serifa (Newsreader) sobre o bordô da marca. */
+export async function renderBrandIcon(sizePx: number, shape: BrandIconShape) {
   const [serif] = await loadBrandFonts();
+  const glyph = shape === "maskable" ? 0.56 : 0.78;
   return new ImageResponse(
     <div
       style={{
@@ -16,13 +26,12 @@ export async function renderBrandIcon(sizePx: number, { rounded }: { rounded: bo
         alignItems: "center",
         justifyContent: "center",
         background: BRAND.accent,
-        // O iPhone já arredonda o próprio ícone; o favicon vem arredondado
-        borderRadius: rounded ? sizePx * 0.22 : 0,
+        borderRadius: shape === "rounded" ? sizePx * 0.22 : 0,
         color: BRAND.onAccent,
         fontFamily: "Newsreader",
-        fontSize: sizePx * 0.78,
+        fontSize: sizePx * glyph,
         // Compensa o espaço da fonte abaixo da linha de base, para o V ficar centrado
-        paddingTop: sizePx * 0.06,
+        paddingTop: sizePx * glyph * 0.16,
       }}
     >
       V

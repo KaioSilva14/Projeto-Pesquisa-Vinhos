@@ -104,7 +104,11 @@ test.describe("SEO técnico", () => {
 
   test("favicon e imagem para redes sociais existem e são PNG", async ({ page, request }) => {
     await page.goto("/vinhos/miolo-lote-43", html);
-    const icon = await page.locator('link[rel="icon"]').getAttribute("href");
+    // Há vários ícones (favicon.ico + tamanhos em PNG): confere o primeiro PNG
+    const icon = await page
+      .locator('link[rel="icon"][type="image/png"]')
+      .first()
+      .getAttribute("href");
     const og = await page.locator('meta[property="og:image"]').getAttribute("content");
     expect(icon).toBeTruthy();
     expect(og).toContain("/vinhos/miolo-lote-43/opengraph-image");
@@ -116,6 +120,27 @@ test.describe("SEO técnico", () => {
       "content",
       "summary_large_image",
     );
+  });
+
+  test("ícones completos: favicon.ico, tamanhos, iPhone, maskable e manifesto", async ({
+    request,
+  }) => {
+    const favicon = await request.get("/favicon.ico");
+    expect(favicon.ok()).toBe(true);
+    for (const path of ["/icon/32", "/icon/192", "/icon/512", "/apple-icon", "/icone-maskable"]) {
+      const response = await request.get(path);
+      expect(response.headers()["content-type"], path).toBe("image/png");
+    }
+    const manifest = (await (await request.get("/manifest.webmanifest")).json()) as {
+      short_name: string;
+      lang: string;
+      icons: { src: string; purpose: string }[];
+    };
+    expect(manifest.short_name).toBe("Vinum");
+    expect(manifest.lang).toBe("pt-BR");
+    expect(manifest.icons.map((icon) => icon.purpose)).toContain("maskable");
+    for (const icon of manifest.icons)
+      expect((await request.get(icon.src)).ok(), icon.src).toBe(true);
   });
 
   test("títulos e descrições de todas as páginas do sitemap dentro do limite", async ({

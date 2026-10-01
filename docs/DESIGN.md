@@ -109,7 +109,7 @@ Contrastes calculados com a fórmula WCAG 2.x em 2026-09-28. **Revalidar com fer
 
 | Papel | Fonte | Por quê |
 |---|---|---|
-| **Títulos editoriais** (display, h1–h3, citações) | **Newsreader** (variável, eixo de tamanho óptico `opsz`, licença OFL, via `next/font/google`) | Serifada desenhada para leitura editorial em tela; o eixo `opsz` ajusta o desenho para tamanhos grandes (títulos) e pequenos; tem itálico real. Justificativa editorial explícita (publicação de referência sobre um tema de tradição) |
+| **Títulos editoriais** (display, h1–h3, citações) | **Newsreader** (variável no peso, licença OFL, via `next/font/google`) | Serifada desenhada para leitura editorial em tela. Sem o eixo `opsz` e sem itálico, para caber no orçamento de fontes (ADR-032). Justificativa editorial explícita (publicação de referência sobre um tema de tradição) |
 | **Interface e dados** (texto corrido, botões, filtros, fichas) | **Hanken Grotesk** (variável, OFL) | Sans neutra e calorosa, boa legibilidade em tamanhos pequenos, suporte completo a acentos do português; alternativa ao Inter (evitado por ser padrão de template) |
 | **Números em fichas** | Hanken Grotesk com `font-variant-numeric: tabular-nums` | Alinhamento de safras, percentuais e teores |
 
@@ -118,13 +118,13 @@ Regras:
 - Ênfase dentro de um título: **itálico da mesma família** (Newsreader itálico), nunca troca de família no meio da frase.
 - Evitar pesos ≤ 300 em textos < 20 px.
 - Proibidos como padrão: Inter, Fraunces, Instrument Serif.
-- Carregar apenas os subconjuntos `latin` + `latin-ext`, `display: swap`, variáveis CSS `--font-serif` e `--font-sans`.
+- Carregar apenas o subconjunto `latin` (cobre português, espanhol, francês e italiano), `display: swap`, variáveis CSS `--font-serif` e `--font-sans` (ADR-032).
 
 ### 3.2 Escala tipográfica (fluida, base 16 px)
 
 | Token | Tamanho | Altura de linha | Família / peso | Uso |
 |---|---|---|---|---|
-| `text-display` | `clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem)` (40→72 px) | 1.05 (1.1 se houver itálico com descendentes) | Serif 400, `opsz` automático, tracking -0.02em | Título da home / abertura de região |
+| `text-display` | `clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem)` (40→72 px) | 1.05 (1.1 se houver itálico com descendentes) | Serif 400, tracking -0.02em | Título da home / abertura de região |
 | `text-h1` | `clamp(2.125rem, 1.6rem + 2.2vw, 3.25rem)` (34→52 px) | 1.1 | Serif 400 | Título da página (nome do vinho) |
 | `text-h2` | `clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem)` (28→40 px) | 1.15 | Serif 400 | Títulos de seção |
 | `text-h3` | `1.5rem` (24 px) | 1.25 | Serif 500 | Subseções, título de card grande |
@@ -352,7 +352,9 @@ Imagem ambiente (genérica) só em contexto editorial genérico e com legenda "I
 
 Tokens: `--duration-instant 100ms` · `--duration-fast 150ms` · `--duration-base 220ms` · `--duration-slow 320ms` · `--duration-editorial 600ms`. Easing padrão `--ease-out: cubic-bezier(0.22, 1, 0.36, 1)`; `--ease-in-out: cubic-bezier(0.65, 0, 0.35, 1)`. Animar apenas `transform` e `opacity`. Tudo desligado com `prefers-reduced-motion: reduce`.
 
-## 11. Diretrizes 3D (resumo — fase 8)
+## 11. Diretrizes 3D (resumo — fase 8): sem 3D no site (ADR-032)
+
+> Testado na Fase 8 e removido a pedido do usuário. A abertura da home usa uma foto real de vinhedo. Diretrizes mantidas só como referência.
 
 - Um único uso com propósito (ex.: garrafa genérica interativa na seção educativa "anatomia de uma garrafa" ou elemento abstrato no hero). **Nunca** representa um rótulo específico nem substitui uma fotografia.
 - Materiais sóbrios (vidro escuro, sem rótulo ou com rótulo neutro "Vinum"), luz suave, fundo transparente sobre `--color-bg`.

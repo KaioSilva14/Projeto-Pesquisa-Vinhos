@@ -1,9 +1,17 @@
 import { renderBrandIcon } from "@/lib/seo/brand-icon";
 
-// Favicon (aba do navegador e resultados de busca). 96 px: múltiplo de 48, como o Google pede.
-export const size = { width: 96, height: 96 };
-export const contentType = "image/png";
+// Ícones da aba do navegador, dos resultados de busca e do Android (manifest.ts).
+// 96 px: múltiplo de 48, como o Google pede para o favicon nos resultados.
+const SIZES = [32, 96, 192, 512] as const;
 
-export default function Icon() {
-  return renderBrandIcon(size.width, { rounded: true });
+export function generateImageMetadata() {
+  return SIZES.map((px) => ({
+    id: String(px),
+    size: { width: px, height: px },
+    contentType: "image/png",
+  }));
+}
+
+export default async function Icon({ id }: { id: Promise<string> }) {
+  return renderBrandIcon(Number(await id), "rounded");
 }

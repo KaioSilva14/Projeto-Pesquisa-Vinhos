@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ExploreBand } from "@/components/home/ExploreBand";
 import { GrapeStrip } from "@/components/home/GrapeStrip";
 import { HomeFaq } from "@/components/home/HomeFaq";
+import { HeroVisual } from "@/components/home/HeroVisual";
 import { HomeHero } from "@/components/home/HomeHero";
 import { ProducerIndex } from "@/components/home/ProducerIndex";
 import { RegionShowcase } from "@/components/home/RegionShowcase";
@@ -17,19 +18,24 @@ import { homeJsonLd } from "@/lib/seo/home";
 import { sortWines } from "@/lib/wines/list-item";
 import { catalogService } from "@/services";
 
+/** Região cuja foto real abre a home (diferente da região em destaque, mais abaixo). */
+const HERO_REGION_SLUG = "mendoza";
+
 /** Quantos vinhos aparecem em "Descubra um vinho" (os de safra mais recente). */
 const FEATURED_WINES = 6;
 
 // Home editorial (F5-01, DESIGN.md §8). Tudo vem dos dados publicados: nenhum texto sobre
 // vinhos escrito aqui. "Estilos" e "Aprenda" ficam de fora até existirem dados com fonte.
 export default async function HomePage() {
-  const [grapes, regionGroups, { items: wines }, producers, countries] = await Promise.all([
-    catalogService.getGrapeList(),
-    catalogService.getRegionGroups(),
-    catalogService.getWineList(),
-    catalogService.getProducerList(),
-    catalogService.getCountryList(),
-  ]);
+  const [grapes, regionGroups, { items: wines }, producers, countries, heroRegion] =
+    await Promise.all([
+      catalogService.getGrapeList(),
+      catalogService.getRegionGroups(),
+      catalogService.getWineList(),
+      catalogService.getProducerList(),
+      catalogService.getCountryList(),
+      catalogService.getRegionPage(HERO_REGION_SLUG),
+    ]);
   const regions = regionGroups.flatMap((group) => group.regions);
 
   // Região em destaque: a com mais vinhos no catálogo (empate: ordem alfabética), com foto
@@ -51,6 +57,18 @@ export default async function HomePage() {
           { label: "países", count: countries.length, href: "/paises" },
           { label: "produtores", count: producers.length, href: "/produtores" },
         ]}
+        // Sem foto real da região, a abertura fica só com o texto (nada inventado)
+        {...(heroRegion?.image && {
+          visual: (
+            <HeroVisual
+              image={heroRegion.image}
+              place={{
+                name: [heroRegion.region.name, heroRegion.country?.name].filter(Boolean).join(", "),
+                href: `/regioes/${heroRegion.region.slug}`,
+              }}
+            />
+          ),
+        })}
       />
 
       {grapes.length > 0 && (

@@ -28,7 +28,13 @@ export function GrapeStrip({ grapes }: GrapeStripProps) {
       >
         {grapes.map((grape) => (
           <li key={grape.id} className="w-64 shrink-0 snap-start md:w-auto">
-            <EntityCard {...grape} imageVariant="grape" headingLevel="h3" />
+            <EntityCard
+              {...grape}
+              imageVariant="grape"
+              headingLevel="h3"
+              // Celular: cards de 16rem; tablet: 3 colunas; desktop: 5 colunas
+              imageSizes="(min-width: 1024px) 18vw, (min-width: 768px) 30vw, 16rem"
+            />
           </li>
         ))}
       </ul>

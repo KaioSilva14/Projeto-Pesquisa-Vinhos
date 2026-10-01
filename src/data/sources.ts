@@ -36,7 +36,17 @@ export const sources: Source[] = [
     accessedAt: "2026-09-30",
     reliability: "primary",
     notes:
-      "Endereço original (só http): http://catalogoviti.politicheagricole.it/scheda_denom.php?t=dsc&q=1023. Versão com alterações até o DM 07.03.2014. A alteração publicada na Gazzetta Ufficiale em 2023 não foi conferida: o site da Gazzetta e o do consórcio estavam inacessíveis em 2026-09-30.",
+      "Endereço original (só http): http://catalogoviti.politicheagricole.it/scheda_denom.php?t=dsc&q=1023. Versão com alterações até o DM 07.03.2014. A alteração de 2023 está em src-consorzio-chianti-classico-2023.",
+  },
+  {
+    id: "src-consorzio-chianti-classico-2023",
+    kind: "institution",
+    label:
+      "Disciplinare consolidato da DOCG Chianti Classico, com as alterações do DM de 22 de junho de 2023",
+    publisher: "Consorzio Vino Chianti Classico",
+    url: "https://www.chianticlassico.com/wp-content/uploads/2024/01/DOCG_Chianti_Classico_disciplinare_consolidato_con_modifiche_DM_22_giugno_2023.pdf",
+    accessedAt: "2026-10-01",
+    reliability: "primary",
   },
   {
     id: "src-masaf-barolo",
@@ -95,15 +105,15 @@ export const sources: Source[] = [
     reliability: "primary",
   },
   {
-    id: "src-boe-rias-baixas-1997",
+    id: "src-mapa-rias-baixas-pliego",
     kind: "institution",
-    label:
-      "Reglamento de la Denominación de Origen «Rías Baixas» (Orden de 11 de septiembre de 1997)",
-    publisher: "Boletín Oficial del Estado (BOE-A-1997-20459)",
-    url: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-1997-20459",
-    accessedAt: "2026-09-30",
+    label: "Pliego de condiciones de la DOP «Rías Baixas» (versão de julho de 2024)",
+    publisher: "Ministerio de Agricultura, Pesca y Alimentación (MAPA) / AGACAL",
+    url: "https://www.mapa.gob.es/dam/mapa/contenido/alimentacion/temas/calidad-agroalimentaria/2017-calidad-diferenciada/nuevo_denominaciones/pliegos-de-condiciones/pliego-condiciones-vinos/dops/rias_baixas_2024_09_30.pdf",
+    accessedAt: "2026-10-01",
     reliability: "primary",
-    notes: "Regulamento de 1997; versões posteriores do caderno de especificações não conferidas.",
+    notes:
+      "Caderno de especificações vigente (modificação aprovada pela Xunta de Galicia em 2 de agosto de 2024); substitui o regulamento de 1997.",
   },
   {
     id: "src-ttb-avas",

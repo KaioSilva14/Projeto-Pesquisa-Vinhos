@@ -14,6 +14,8 @@ type WineCardProps = {
    * quando algum vinho da lista tem foto, para os cards ficarem alinhados (ADR-027).
    */
   reserveImage?: boolean;
+  /** Foto carregada com prioridade (1º card de uma lista no topo da página). */
+  priority?: boolean;
 };
 
 const creditClass =
@@ -24,6 +26,7 @@ export function WineCard({
   wine,
   headingLevel: Heading = "h2",
   reserveImage = false,
+  priority = false,
 }: WineCardProps) {
   const showImage = Boolean(wine.image) || reserveImage;
 
@@ -34,6 +37,7 @@ export function WineCard({
           image={wine.image}
           variant="bottle"
           sizes="(min-width: 1280px) 25vw, (min-width: 640px) 45vw, 100vw"
+          priority={priority}
           // A foto encosta nas bordas do card (o card recorta os cantos)
           className="rounded-none [&>div]:rounded-none"
         />
