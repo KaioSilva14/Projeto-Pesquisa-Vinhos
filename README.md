@@ -7,6 +7,7 @@
 
 <br>
 
+[![Site no ar](https://img.shields.io/badge/site_no_ar-vinum--vinhos.vercel.app-6b1d2f?logo=vercel&logoColor=white)](https://vinum-vinhos.vercel.app)
 [![CI](https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos/actions/workflows/ci.yml/badge.svg)](https://github.com/KaioSilva14/Projeto-Pesquisa-Vinhos/actions/workflows/ci.yml)
 ![Next.js 16](https://img.shields.io/badge/Next.js-16-1c1c1f?logo=nextdotjs&logoColor=white)
 ![React 19](https://img.shields.io/badge/React-19-1c1c1f?logo=react&logoColor=61DAFB)
@@ -17,10 +18,13 @@
 **Plataforma de pesquisa, descoberta e consulta de vinhos.**<br>
 Catálogo premium + enciclopédia moderna, em que **cada informação mostra de onde veio**.
 
+### [🍷 Abrir o Vinum → vinum-vinhos.vercel.app](https://vinum-vinhos.vercel.app)
+
 [O que dá para fazer](#o-que-dá-para-fazer) ·
 [Telas](#telas) ·
 [Princípios](#princípios) ·
 [Como funciona](#como-funciona) ·
+[Qualidade](#qualidade-medida) ·
 [Como rodar](#como-rodar) ·
 [Documentação](#documentação)
 
@@ -129,26 +133,26 @@ Catálogo premium + enciclopédia moderna, em que **cada informação mostra de 
 ## Como funciona
 
 ```mermaid
-flowchart LR
+flowchart TB
   subgraph Dados["Dados (src/data)"]
+    direction LR
     D1["Vinhos, uvas, regiões,<br>países, produtores"]
     D2["Fontes e fotos<br>(crédito e licença)"]
   end
-  V{{"Validação<br>Zod + regras de integridade"}}
-  S["Serviços<br>(src/services)"]
-  P["Páginas estáticas<br>Next.js App Router"]
-  subgraph Navegador["No navegador (ilhas interativas)"]
-    B["Busca"]
-    F["Filtros"]
+  V{{"Validação: Zod + regras de integridade"}}
+  S["Serviços (src/services)"]
+  P["Páginas estáticas (Next.js App Router)"]
+  CDN["Vercel: HTTPS + CDN"]
+  subgraph Navegador["No navegador"]
+    direction LR
+    B["Busca e filtros"]
     FV["Favoritos<br>(localStorage)"]
     M["Mapa<br>(Leaflet + OSM)"]
   end
-  D1 --> V
-  D2 --> V
-  V --> S --> P --> Navegador
+  Dados --> V --> S --> P --> CDN --> Navegador
 ```
 
-Os dados ficam em arquivos TypeScript e passam por uma validação (`npm run validate:data`): fonte citada que não existe, foto pequena demais ou ligação quebrada entre entidades bloqueiam o build. As páginas são geradas no build e só a busca, os filtros, os favoritos e o mapa rodam JavaScript no navegador.
+Os dados ficam em arquivos TypeScript e passam por uma validação (`npm run validate:data`): fonte citada que não existe, foto pequena demais ou ligação quebrada entre entidades bloqueiam o build. As páginas são geradas no build, servidas pela Vercel, e só a busca, os filtros, os favoritos e o mapa rodam JavaScript no navegador.
 
 <details>
 <summary><b>Tecnologias</b></summary>
@@ -184,6 +188,22 @@ tests/           unitários, componentes e E2E
 ```
 
 </details>
+
+## Qualidade medida
+
+Lighthouse no celular simulado, build de produção, mediana de 3 rodadas (outubro de 2026). O CI repete essa medição em todo pull request e bloqueia o merge se as notas caírem ([ADR-035](docs/DECISIONS.md)).
+
+| Página | Performance | Acessibilidade | Boas práticas | SEO |
+|---|:---:|:---:|:---:|:---:|
+| Home | 98 | 100 | 100 | 100 |
+| Lista de vinhos | 90 | 100 | 100 | 100 |
+| Vinho | 91 | 100 | 100 | 100 |
+| Uva | 92 | 100 | 100 | 100 |
+| Região | 92 | 100 | 100 | 100 |
+| País | 97 | 100 | 100 | 100 |
+| Sobre | 95 | 100 | 100 | 100 |
+
+Além do Lighthouse: verificação automática de acessibilidade (axe) em todas as páginas, nos temas claro e escuro, e testes de teclado, foco e zoom até 400%.
 
 ## Como rodar
 
@@ -233,6 +253,18 @@ Use `build` + `start` para medir performance (Lighthouse): o modo `dev` é mais 
 </details>
 
 <details>
+<summary><b>Publicação (Vercel)</b></summary>
+<br>
+
+O site está em [vinum-vinhos.vercel.app](https://vinum-vinhos.vercel.app), publicado pela Vercel a partir deste repositório:
+
+- todo merge no `main` publica a versão de produção sozinho;
+- cada pull request ganha um endereço de prévia, que não aparece no Google;
+- única variável de ambiente: `NEXT_PUBLIC_SITE_URL=https://vinum-vinhos.vercel.app` (sem barra no final).
+
+</details>
+
+<details>
 <summary><b>Problemas comuns no Windows</b></summary>
 <br>
 
@@ -248,14 +280,14 @@ Extensões recomendadas do VS Code: **ESLint**, **Prettier**, **Tailwind CSS Int
 
 ## Situação
 
-| Fase | | Fase | |
+| Fase | Situação | Fase | Situação |
 |---|---|---|---|
 | 0 · Documentação | ✅ | 6 · Favoritos | ✅ |
 | 1 · Fundação e design system | ✅ | 7 · Animações | ✅ |
 | 2 · Dados e serviços | ✅ | 8 · 3D | ⏭️ testado e removido ([ADR-032](docs/DECISIONS.md)) |
 | 3 · Busca e catálogo | ✅ | 9 · Mapas | ✅ |
-| 4 · Páginas de vinho, uva, região, país e produtor | ✅ | 10 · Auditorias (acessibilidade, performance, segurança) | 🔄 em andamento |
-| 5 · Home e narrativa | ✅ | 11 · Publicação | ⏳ |
+| 4 · Páginas de vinho, uva, região, país e produtor | ✅ | 10 · Auditorias (acessibilidade, performance, segurança) | ✅ (falta o teste manual com leitor de tela) |
+| 5 · Home e narrativa | ✅ | 11 · Publicação | ✅ [no ar](https://vinum-vinhos.vercel.app) |
 
 Estado detalhado e próximos passos: [`docs/MEMORY.md`](docs/MEMORY.md) e [`docs/TASKS.md`](docs/TASKS.md).
 
