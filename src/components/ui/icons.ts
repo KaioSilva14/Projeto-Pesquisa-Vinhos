@@ -2,6 +2,7 @@
 // individual evita carregar a biblioteca inteira; a versão "ssr" funciona em Server e Client
 // Components. Para usar um ícone novo, adicione-o aqui.
 export { ArrowClockwiseIcon } from "@phosphor-icons/react/dist/ssr/ArrowClockwise";
+export { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr/ArrowRight";
 export { CaretDownIcon } from "@phosphor-icons/react/dist/ssr/CaretDown";
 export { CaretLeftIcon } from "@phosphor-icons/react/dist/ssr/CaretLeft";
 export { CaretRightIcon } from "@phosphor-icons/react/dist/ssr/CaretRight";

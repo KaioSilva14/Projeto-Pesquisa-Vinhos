@@ -259,7 +259,8 @@ Tamanhos: `sm` 36 px de altura (somente desktop, nunca como alvo principal de to
 
 ### 7.3 Campos
 
-- `Input`, `SearchInput`, `Select` (Radix), `Checkbox` (Radix), `RadioGroup`, `Switch` (se necessário).
+- `Input`, `SearchInput`, `Textarea` (com contador "N de M caracteres"), `Select` (Radix), `Checkbox` (Radix), `RadioGroup`, `Switch` (se necessário).
+- Formulários: validação ao enviar, mensagem de erro abaixo do campo dizendo **o que fazer** (com exemplo) e resumo dos erros no topo, com `role="alert"` e foco (ADR-031).
 - Label **acima** do campo (nunca placeholder como label), texto de ajuda opcional abaixo, erro abaixo.
 - Altura 44 px (48 px no `SearchInput` principal). Fonte ≥ 16 px.
 - `SearchInput`: ícone de lupa à esquerda, botão limpar à direita, dica de atalho (`/`) visível no desktop.
@@ -339,7 +340,7 @@ Card inteiro clicável via link no título (`::after` cobrindo o card) para mant
 
 | Contexto | Proporção | Tratamento |
 |---|---|---|
-| Garrafa/rótulo | 3:4 | `object-contain` sobre `sunken`, sem recorte do rótulo |
+| Garrafa/rótulo | 3:4 | `object-contain` sobre moldura branca (`bottle-frame`, ADR-030), sem recorte do rótulo e nunca maior que o arquivo |
 | Região/paisagem | 3:2 (card) · 21:9 (hero desktop) · 4:5 (hero mobile) | `object-cover`, ponto focal definido no `ImageAsset` |
 | Uva | 4:3 | `object-cover` |
 | Produtor/vinícola | 3:2 | `object-cover` |

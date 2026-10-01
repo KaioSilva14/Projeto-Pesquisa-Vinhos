@@ -33,6 +33,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - 2026-10-01: Fase 5, home editorial com busca em destaque e seções do catálogo, página Sobre com todos os créditos de imagens e página Explorar. **Fase 5 concluída.**
 - 2026-10-01: Fase 6, favoritos no navegador (sem conta): coração nas páginas e cards de vinho, uva, região e produtor, página `/favoritos`, proteção contra dado corrompido ou armazenamento bloqueado. **Fase 6 concluída.**
 - 2026-10-01: Fase 7, animações só com CSS (ADR-029): entrada suave das seções da home, foto do card crescendo no hover, coração que pulsa ao favoritar e sombra do cabeçalho ao rolar; tudo desligado com movimento reduzido e visível sem JavaScript. **Fase 7 concluída.**
+- 2026-10-01: itens básicos de site profissional (F10-05, ADR-031): chamada para explorar na primeira seção da home, 5 perguntas frequentes, política de privacidade, página "Sugerir uma correção" (abre uma issue no GitHub) com página de agradecimento, mensagens de erro úteis e limite de caracteres com contador.
+- 2026-10-01: SEO técnico (F10-01): `sitemap.xml`, `robots.txt`, imagem para redes sociais em todas as páginas, favicon e ícone do iPhone, perguntas frequentes nos dados estruturados; títulos e descrições dentro do limite de caracteres.
+- 2026-10-01: qualidade das imagens (F10-06, ADR-030): garrafas pequenas trocadas por versões maiores (Miolo Lote 43 2012, Catena Malbec, Catena Zapata Malbec Argentino), tamanho mínimo barrado pelo validador, fotos nunca esticadas, compressão com qualidade 85 e moldura branca para garrafas.
 
 ### Alterado
 - 2026-09-30: composição de uvas com soma abaixo de 99% passa a ser aceita quando a nota explica o que falta (uva fora do catálogo), em vez de ser sempre rejeitada.

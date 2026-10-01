@@ -16,10 +16,10 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-accent text-on-accent enabled:hover:bg-accent-hover",
-        secondary: "border border-border-strong text-text enabled:hover:bg-sunken",
-        ghost: "text-text enabled:hover:bg-sunken",
-        link: "text-accent underline-offset-4 enabled:hover:underline",
+        primary: "bg-accent text-on-accent not-disabled:hover:bg-accent-hover",
+        secondary: "border border-border-strong text-text not-disabled:hover:bg-sunken",
+        ghost: "text-text not-disabled:hover:bg-sunken",
+        link: "text-accent underline-offset-4 not-disabled:hover:underline",
       },
       size: {
         sm: "h-9 px-3 text-small", // só desktop: abaixo do alvo de toque de 44 px

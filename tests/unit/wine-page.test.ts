@@ -10,7 +10,8 @@ import {
   formatTemperatureRange,
   formatVolume,
 } from "@/lib/format";
-import { wineDescription, wineJsonLd } from "@/lib/seo/wine";
+import { SEO_LIMITS } from "@/lib/seo/common";
+import { wineDescription, wineJsonLd, wineTitle } from "@/lib/seo/wine";
 import { numberCitations } from "@/lib/citations";
 import { wineCitationIds } from "@/lib/wines/citations";
 import { relatedWines } from "@/lib/wines/related";
@@ -97,6 +98,21 @@ describe("dados da página do vinho", () => {
 });
 
 describe("SEO do vinho", () => {
+  it("título com o produtor, sem repetir quando o nome já começa com ele", async () => {
+    const montelena = await service().getWinePage("montelena-napa-valley-cabernet-sauvignon");
+    expect(wineTitle(montelena!)).toBe("Napa Valley Cabernet Sauvignon (Chateau Montelena)");
+    const argentino = await service().getWinePage("catena-zapata-malbec-argentino");
+    expect(wineTitle(argentino!)).toBe("Catena Zapata Malbec Argentino");
+  });
+
+  it("todo título de vinho cabe no limite, com o nome do site", async () => {
+    for (const slug of await service().listWineSlugs()) {
+      const data = await service().getWinePage(slug);
+      expect(`${wineTitle(data!)} | Vinum`.length).toBeLessThanOrEqual(SEO_LIMITS.title);
+      expect(wineDescription(data!).length).toBeLessThanOrEqual(SEO_LIMITS.description);
+    }
+  });
+
   it("descrição só com as partes que existem", async () => {
     const data = await service().getWinePage("chateau-palmer");
     expect(wineDescription(data!)).toBe(

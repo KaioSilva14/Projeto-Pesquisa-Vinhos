@@ -54,7 +54,9 @@ export function EntityImage({
         className={cn(
           "relative overflow-hidden rounded-media",
           aspect,
-          fit === "object-contain" && "bg-sunken",
+          // Moldura branca: o fundo branco das fotos de produtor se funde a ela. No tema escuro,
+          // moldura e foto escurecem juntas, para não ofuscar
+          fit === "object-contain" && "bg-bottle-frame dark:brightness-[0.88]",
         )}
       >
         <Image
@@ -62,18 +64,26 @@ export function EntityImage({
           alt={image.alt}
           fill
           sizes={sizes}
+          quality={85}
           priority={priority}
           // A02: dentro de um card, a foto cresce 3% no hover (só com mouse, sem movimento reduzido)
           className={cn(
             fit,
             "transition-transform duration-(--duration-base) ease-out motion-safe:group-hover/card:scale-[1.03]",
           )}
-          // Ponto focal da foto (valor dinâmico: por isso style em vez de classe)
-          style={
-            image.focalPoint && {
+          // Valores que dependem da foto: por isso style em vez de classe
+          style={{
+            // Ponto focal
+            ...(image.focalPoint && {
               objectPosition: `${image.focalPoint.x * 100}% ${image.focalPoint.y * 100}%`,
-            }
-          }
+            }),
+            // Garrafa nunca maior que o arquivo: esticada, ficaria borrada (IMAGES.md §4)
+            ...(fit === "object-contain" && {
+              maxWidth: image.width,
+              maxHeight: image.height,
+              margin: "auto",
+            }),
+          }}
           {...(image.blurDataURL && { placeholder: "blur", blurDataURL: image.blurDataURL })}
           onError={() => setFailed(true)}
         />

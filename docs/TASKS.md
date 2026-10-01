@@ -124,7 +124,9 @@
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F10-01 | Sitemap, robots, OG, JSON-LD completos | Checklist `SEO.md` §8 | P0 | F4-* | todo |
+| F10-01 | Sitemap, robots, OG, JSON-LD completos | Checklist `SEO.md` §8 | P0 | F4-* | done (sitemap, robots, imagem OG por página, favicon, FAQPage) |
+| F10-05 | Itens básicos pedidos pelo usuário: CTA na 1ª seção, 5 perguntas frequentes, política de privacidade, sugerir correção + agradecimento, mensagens de erro úteis, limite de caracteres | E2E `site-essentials.spec.ts` | P0 | — | done (ADR-031) |
+| F10-06 | Qualidade mínima das imagens: trocar fotos pequenas, validador, nunca esticar, qualidade 85 | `validate:data` regra 13 | P0 | F4-08 | done (ADR-030) |
 | F10-02 | Auditoria axe + manual (NVDA, teclado, zoom) | 0 violações sérias | P0 | F5-01 | todo |
 | F10-03 | Lighthouse CI + bundle analyzer + orçamentos | Metas `PERFORMANCE.md` | P0 | F5-01 | todo |
 | F10-04 | Revisão de segurança (skill `security-review`) + avaliar CSP com SRI | Relatório e correções | P1 | F1-11 | todo |

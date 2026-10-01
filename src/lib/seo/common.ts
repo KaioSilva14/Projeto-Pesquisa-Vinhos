@@ -2,6 +2,12 @@
 
 export type BreadcrumbItem = { label: string; href: string };
 
+/**
+ * Limites de caracteres (SEO.md §2): acima disso, o Google corta o texto no resultado.
+ * O título conta com o " | Vinum" que o modelo do layout acrescenta.
+ */
+export const SEO_LIMITS = { title: 60, description: 155 } as const;
+
 export const absoluteUrl = (path: string, siteUrl: string) => new URL(path, siteUrl).toString();
 
 /** Trilha de navegação para os buscadores (BreadcrumbList). */
@@ -17,8 +23,8 @@ export function breadcrumbJsonLd(items: readonly BreadcrumbItem[], siteUrl: stri
   };
 }
 
-/** Corta o texto no fim de uma palavra, com "…", para caber na descrição (~160 caracteres). */
-export function truncate(text: string, max = 160): string {
+/** Corta o texto no fim de uma palavra, com "…", para caber na descrição. */
+export function truncate(text: string, max: number = SEO_LIMITS.description): string {
   if (text.length <= max) return text;
   const cut = text.slice(0, max - 1);
   return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.]$/, "")}…`;

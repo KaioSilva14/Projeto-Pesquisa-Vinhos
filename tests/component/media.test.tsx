@@ -28,6 +28,13 @@ describe("EntityImage", () => {
     expect(screen.getByRole("img", { name: "Imagem indisponível" })).toBeInTheDocument();
   });
 
+  it("garrafa nunca aparece maior que o arquivo (foto esticada fica borrada)", () => {
+    const bottle = { ...exampleImage, width: 400, height: 1000, subjectType: "wine" as const };
+    render(<EntityImage image={bottle} variant="bottle" sizes="100vw" />);
+    const img = screen.getByRole("img", { name: exampleImage.alt });
+    expect(img).toHaveStyle({ maxWidth: "400px", maxHeight: "1000px" });
+  });
+
   it("mostra o crédito quando pedido", () => {
     render(<EntityImage image={exampleImage} variant="grape" sizes="100vw" showCredit />);
     expect(screen.getByText(/Foto: Autor Exemplo/)).toBeInTheDocument();

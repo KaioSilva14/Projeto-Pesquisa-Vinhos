@@ -1,12 +1,13 @@
+import type { FaqItem } from "@/config/faq";
 import { SITE } from "@/config/site";
 
 import { absoluteUrl } from "./common";
 
 /**
  * Home (SEO.md §6): WebSite com a ação de busca (os buscadores podem oferecer a pesquisa do
- * Vinum direto nos resultados) e Organization (o próprio Vinum).
+ * Vinum direto nos resultados), Organization (o próprio Vinum) e FAQPage (perguntas da home).
  */
-export function homeJsonLd(siteUrl: string): Record<string, unknown> {
+export function homeJsonLd(siteUrl: string, faq: readonly FaqItem[] = []): Record<string, unknown> {
   const home = absoluteUrl("/", siteUrl);
   return {
     "@context": "https://schema.org",
@@ -29,6 +30,20 @@ export function homeJsonLd(siteUrl: string): Record<string, unknown> {
         },
       },
       { "@type": "Organization", "@id": `${home}#organizacao`, name: SITE.name, url: home },
+      // Perguntas frequentes da própria home (o mesmo texto que aparece na página)
+      ...(faq.length > 0
+        ? [
+            {
+              "@type": "FAQPage",
+              "@id": `${home}#perguntas`,
+              mainEntity: faq.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: { "@type": "Answer", text: item.answer },
+              })),
+            },
+          ]
+        : []),
     ],
   };
 }

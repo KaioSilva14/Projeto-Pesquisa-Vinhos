@@ -193,3 +193,20 @@
   - **Fora, com motivo**: A09 (chips com animação de layout: os filtros trocam de página no servidor), A10 (escurecer a lista ao filtrar: a lista e os filtros são partes separadas da página), A16 (View Transitions: ainda experimental no Next 16, reavaliar depois), A17 (foto aparecendo aos poucos: sem JavaScript ela ficaria invisível, e a foto principal não pode ser animada) e A18 (perfil sensorial: nenhum vinho real tem perfil com fonte).
 - **Consequências**: zero KB de biblioteca de animação no site; menos risco para o INP e o LCP. O ADR-007 continua valendo se um dia uma animação exigir JavaScript de verdade (layout animado, sequências).
 - **Data**: 2026-10-01 · **Status**: aceita (decisão técnica delegada pelo usuário)
+
+## ADR-030 — Qualidade mínima das imagens
+- **Contexto**: o usuário pediu que nenhuma imagem fosse de baixa qualidade. Algumas garrafas tinham poucos pixels (Catena Malbec 160×597, Miolo Lote 43 259×783, Catena Zapata Malbec Argentino 400×600) e o navegador as esticava até ~770 px de altura na página do vinho, deixando o rótulo borrado.
+- **Decisão**:
+  - **Trocar as fotos pequenas** por versões maiores do mesmo vinho: Miolo Lote 43 **2012** (892×1626), tirada da ficha completa em PDF do próprio produtor, com o fundo transparente do PDF; Catena Malbec (300×1275) e Catena Zapata Malbec Argentino (300×1217), publicadas pela Winebow, importador oficial da Catena nos EUA (mesmas condições do ADR-028: crédito, projeto de estudo, retirada a pedido). A foto nova do Catena Malbec não mostra a safra no rótulo, e o texto alternativo diz isso.
+  - **Tamanho mínimo** barrado pelo validador (regra 13 do `DATA_MODEL.md` §6): garrafa ≥ 950 px de altura; demais fotos com lado maior ≥ 1100 px e lado menor ≥ 700 px.
+  - **Nunca esticar**: a garrafa (`contain`) é exibida no máximo no tamanho real do arquivo (`EntityImage`).
+  - **Qualidade 85** na compressão do `next/image` (padrão 75).
+  - **Moldura branca** para garrafas (`--color-bottle-frame`), nos dois temas: o fundo branco das fotos de produtor se funde a ela, sem editar a foto; no tema escuro, moldura e foto escurecem 12% juntas. `mix-blend-multiply` foi testado e descartado (problemas de pintura no Chromium dentro da coluna `sticky`).
+- **Consequências**: foto nova precisa passar no mínimo; sem versão grande o bastante, a entidade fica com "Imagem indisponível". As fotos da Vajra (362×976) passam no mínimo e são exibidas sem esticar.
+- **Data**: 2026-10-01 · **Status**: aceita (pedido do usuário; detalhes técnicos delegados)
+
+## ADR-031 — Sugerir correção pelo GitHub, página de agradecimento e política de privacidade
+- **Contexto**: o usuário pediu, entre os itens básicos de um site profissional, página de agradecimento, política de privacidade, mensagens de erro úteis e limite de caracteres. O site não tinha formulário, e o projeto não tem servidor de dados nem banco (ADR-005).
+- **Decisão**: criar `/sugerir-correcao`, um formulário alinhado à regra de veracidade: página com o erro, o que está errado (20 a 1000 caracteres, com contador) e a fonte que confirma (opcional, `https://`). Ele valida no navegador, com mensagens que dizem o que fazer e um resumo dos erros que recebe o foco. Ao enviar, abre uma **issue pública já preenchida no GitHub** do projeto, numa nova aba, e leva a `/sugerir-correcao/obrigado` (noindex). **Nada é enviado ao Vinum**: sem servidor, sem banco, sem dado pessoal guardado. Se o navegador bloquear a nova aba, o formulário mostra o link. Cada lista de fontes ganhou "Encontrou um erro? Sugira uma correção", com o endereço da página preenchido. A `/privacidade` descreve exatamente o que o código faz: só os favoritos no `localStorage`, sem cookies, análise de visitas ou publicidade.
+- **Consequências**: enviar exige conta no GitHub (dito na página). Se um dia houver API própria, o formulário troca o destino sem mudar a interface; a política de privacidade muda junto com qualquer novo dado guardado.
+- **Data**: 2026-10-01 · **Status**: aceita (decisão técnica delegada pelo usuário)

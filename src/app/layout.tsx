@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   // Cada página define só o próprio título; o modelo acrescenta o nome do site (SEO.md)
   title: { default: `${SITE.name}: pesquise e descubra vinhos`, template: `%s | ${SITE.name}` },
   description: SITE.description,
+  // Padrão para redes sociais; as páginas de conteúdo trocam type, título e imagem (SEO.md §4)
+  openGraph: { type: "website", siteName: SITE.name, locale: "pt_BR" },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

@@ -305,7 +305,8 @@ type SensoryProfile = {
 10. Nenhuma entidade `published` com `isDemo: true` fora de `src/data/demo/`.
 11. Nenhum `EditorialText` sem `basedOnSourceIds`.
 12. `SensoryAttribute.sourceTerm` pertence à tabela de mapeamento.
-13. Falha em qualquer regra → CI vermelho, build bloqueado.
+13. `ImageAsset` com tamanho mínimo (`IMAGES.md` §4): garrafa (`subjectType: 'wine'`) com ≥ 950 px de altura; demais fotos com lado maior ≥ 1100 px e lado menor ≥ 700 px. Foto menor que isso fica borrada na tela.
+14. Falha em qualquer regra → CI vermelho, build bloqueado.
 
 ---
 

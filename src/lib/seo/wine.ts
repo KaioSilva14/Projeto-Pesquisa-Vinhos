@@ -9,6 +9,23 @@ export function wineGrapeNames({ wine, vintages, grapes }: WinePageData): string
   return (composition?.value ?? []).flatMap((item) => grapes[item.grapeId]?.name ?? []);
 }
 
+/** Palavras genéricas no começo do nome do produtor ("Bodega Catena Zapata" → "Catena Zapata"). */
+const GENERIC_PREFIX =
+  /^(bodegas?|château|chateau|domaine|champagne|cantina|tenuta|vinícola|quinta|weingut)\s+/i;
+
+/**
+ * Título "{nome} ({produtor})" (SEO.md §2), sem repetir o produtor quando o nome do vinho já
+ * começa com ele: "Catena Zapata Malbec Argentino", não "... (Bodega Catena Zapata)".
+ */
+export function wineTitle({ wine, producer }: Pick<WinePageData, "wine" | "producer">): string {
+  if (!producer) return wine.name;
+  const name = wine.name.toLocaleLowerCase("pt-BR");
+  const repeats = [producer.name, producer.name.replace(GENERIC_PREFIX, "")].some((candidate) =>
+    name.startsWith(candidate.toLocaleLowerCase("pt-BR")),
+  );
+  return repeats ? wine.name : `${wine.name} (${producer.name})`;
+}
+
 /**
  * Descrição para buscadores (SEO.md §2): "Tinto de Bordeaux, França, elaborado com Merlot e
  * Cabernet Sauvignon. Ficha técnica e fontes oficiais." Só com as partes que existem.

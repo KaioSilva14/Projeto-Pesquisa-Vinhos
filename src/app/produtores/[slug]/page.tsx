@@ -100,7 +100,7 @@ export default async function ProducerPage({ params }: ProducerPageProps) {
         </ContentSection>
 
         <ContentSection title="Fontes" id="fontes">
-          <SourceList sources={data.sources} />
+          <SourceList sources={data.sources} correctionPath={`/produtores/${producer.slug}`} />
         </ContentSection>
       </EntityLayout>
     </>

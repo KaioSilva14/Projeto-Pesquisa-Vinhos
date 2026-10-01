@@ -333,6 +333,8 @@ type ProducerSitePhoto = {
   /** Endereço exato do arquivo no site do produtor. */
   fileUrl: string;
   producer: string;
+  /** Quem publicou a foto, quando não é o site do produtor (ex.: o importador oficial). */
+  publishedBy?: string;
   width: number;
   height: number;
   alt: string;
@@ -346,7 +348,7 @@ function producerSitePhoto(photo: ProducerSitePhoto): ImageAsset {
     alt: photo.alt,
     width: photo.width,
     height: photo.height,
-    credit: `${photo.producer} (site oficial)`,
+    credit: photo.publishedBy ?? `${photo.producer} (site oficial)`,
     license: PRODUCER_SITE_LICENSE,
     sourceUrl: photo.fileUrl,
     subjectType: photo.subjectType ?? "wine",
@@ -426,12 +428,14 @@ const bottlePhotos: ImageAsset[] = [
   }),
   producerSitePhoto({
     wineId: "miolo-lote-43",
-    ext: "png",
-    fileUrl: "https://institucional.miolo.com.br/wp-content/uploads/2017/08/lote-43.png",
+    ext: "webp",
+    fileUrl: "https://institucional.miolo.com.br/wp-content/uploads/2017/12/Miolo-Lote-43.pdf",
     producer: "Miolo Wine Group",
-    width: 259,
-    height: 783,
-    alt: "Garrafa do Miolo Lote 43 (a safra não é legível na foto).",
+    width: 892,
+    height: 1626,
+    alt: "Garrafa do Miolo Lote 43 2012, de vidro escuro, com o rótulo branco que mostra o desenho de um vinhedo.",
+    modified:
+      "copiada de dentro da ficha completa em PDF, com o fundo transparente do próprio PDF e recortada nas margens",
   }),
   producerSitePhoto({
     wineId: "montelena-napa-valley-chardonnay",
@@ -468,24 +472,24 @@ const bottlePhotos: ImageAsset[] = [
   }),
   producerSitePhoto({
     wineId: "catena-malbec",
-    ext: "png",
-    fileUrl: "https://catenazapata.com/wp-content/uploads/2025/05/catenamalbec-2022.png",
+    ext: "jpg",
+    fileUrl: "https://winebow-files.s3.amazonaws.com/public/2024-08/catena-malbec-sc_web.jpg",
     producer: "Bodega Catena Zapata",
-    width: 160,
-    height: 597,
-    alt: "Garrafa do Catena Malbec 2022, com o rótulo claro e o desenho dos Andes.",
-    modified: "girada 90° para ficar em pé e recortada nas margens brancas",
+    publishedBy: "Winebow (importador oficial da Catena nos EUA)",
+    width: 300,
+    height: 1275,
+    alt: "Garrafa do Catena Malbec, com o rótulo claro e o desenho dos Andes (o rótulo da foto não mostra a safra).",
   }),
   producerSitePhoto({
     wineId: "catena-zapata-malbec-argentino",
     ext: "jpg",
     fileUrl:
-      "https://catenazapata.com/wp-content/uploads/2025/03/Catena-Zapata-Malbec-Argentino.jpg",
+      "https://winebow-files.s3.amazonaws.com/public/2022-08/Catena_Zapata%20Malbec%20Argentino_HR.jpg",
     producer: "Bodega Catena Zapata",
-    width: 400,
-    height: 600,
+    publishedBy: "Winebow (importador oficial da Catena nos EUA)",
+    width: 300,
+    height: 1217,
     alt: "Garrafa do Catena Zapata Malbec Argentino, com o rótulo ilustrado (a safra não é legível na foto).",
-    modified: "recodificada em JPEG, no mesmo tamanho",
   }),
   producerSitePhoto({
     subjectType: "producer",

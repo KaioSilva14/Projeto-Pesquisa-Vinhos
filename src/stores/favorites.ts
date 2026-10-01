@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { persist, type PersistStorage, type StorageValue } from "zustand/middleware";
 
 import {
+  FAVORITES_STORAGE_KEY,
   MAX_FAVORITES,
   sameFavorite,
   sanitizeFavorites,
@@ -13,11 +14,16 @@ import {
 // Favoritos no localStorage (F6-01, ADR-005): sem conta, sem banco. Se o armazenamento estiver
 // indisponível (aba anônima, bloqueio do navegador), os favoritos valem só até fechar a aba.
 
-export const FAVORITES_STORAGE_KEY = "vinum-favoritos";
+export { FAVORITES_STORAGE_KEY };
 
 type PersistedFavorites = { items: FavoriteItem[] };
 
 const memory = new Map<string, string>();
+
+/** Avisa a interface que o navegador bloqueou o localStorage (favoritos só até fechar a aba). */
+const markBlocked = () => {
+  if (!useFavorites.getState().storageBlocked) useFavorites.setState({ storageBlocked: true });
+};
 
 /** localStorage com plano B em memória e leitura que não quebra com JSON corrompido. */
 const safeStorage: PersistStorage<PersistedFavorites> = {
@@ -26,6 +32,7 @@ const safeStorage: PersistStorage<PersistedFavorites> = {
     try {
       raw = window.localStorage.getItem(name);
     } catch {
+      markBlocked();
       raw = memory.get(name) ?? null;
     }
     if (raw === null) return null;
@@ -40,6 +47,7 @@ const safeStorage: PersistStorage<PersistedFavorites> = {
     try {
       window.localStorage.setItem(name, raw);
     } catch {
+      markBlocked();
       memory.set(name, raw);
     }
   },
@@ -53,6 +61,8 @@ const safeStorage: PersistStorage<PersistedFavorites> = {
 };
 
 type FavoritesState = PersistedFavorites & {
+  /** true quando o navegador bloqueia o localStorage: a lista vale só até fechar a aba. */
+  storageBlocked: boolean;
   /** Salva ou remove; devolve se o item ficou salvo. */
   toggle: (kind: FavoriteKind, id: string) => boolean;
   remove: (kind: FavoriteKind, id: string) => void;
@@ -63,6 +73,7 @@ export const useFavorites = create<FavoritesState>()(
   persist(
     (set, get) => ({
       items: [],
+      storageBlocked: false,
       toggle: (kind, id) => {
         const saved = get().items.some((item) => sameFavorite(item, { kind, id }));
         if (saved) {
