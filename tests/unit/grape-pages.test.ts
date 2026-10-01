@@ -21,12 +21,9 @@ describe("lista de uvas", () => {
     for (const grape of list) expect(grape.href, grape.id).toMatch(/^\/uvas\/[a-z0-9-]+$/);
   });
 
-  it("foto só da própria uva; sem foto no VIVC, sem imagem", async () => {
+  it("cada uva mostra a foto dela mesma", async () => {
     const list = await service().getGrapeList();
-    for (const grape of list) {
-      if (grape.image) expect(grape.image.subjectId, grape.id).toBe(grape.id);
-    }
-    expect(list.find((grape) => grape.id === "torrontes-riojano")?.image).toBeUndefined();
+    for (const grape of list) expect(grape.image?.subjectId, grape.id).toBe(grape.id);
   });
 
   it("conta os vinhos do catálogo com cada uva", async () => {

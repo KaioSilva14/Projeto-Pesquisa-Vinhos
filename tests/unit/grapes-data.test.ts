@@ -74,27 +74,32 @@ describe("dados reais das uvas", () => {
 });
 
 describe("fotos das uvas (F2-06b, ADR-024)", () => {
-  it("cada foto é da própria uva e vem da página de fotos da mesma variedade no VIVC", () => {
+  it("cada foto é da própria uva; as do VIVC vêm da página de fotos da mesma variedade", () => {
     for (const grape of grapes) {
       for (const imageId of grape.imageIds ?? []) {
         const image = images.find((item) => item.id === imageId);
         expect(image?.subjectType, imageId).toBe("grape");
         expect(image?.subjectId, imageId).toBe(grape.id);
-        expect(image?.sourceUrl, imageId).toMatch(new RegExp(`id=${grape.vivcId}$`));
+        if (image?.sourceUrl.includes("vivc.de")) {
+          expect(image.sourceUrl, imageId).toMatch(new RegExp(`id=${grape.vivcId}$`));
+        }
       }
     }
   });
 
-  it("toda foto de uva cita o JKI e registra a permissão e a modificação", () => {
-    for (const image of images.filter((item) => item.subjectType === "grape")) {
+  it("toda foto do VIVC cita o JKI e registra a permissão e a modificação", () => {
+    for (const image of images.filter((item) => item.sourceUrl.includes("vivc.de"))) {
       expect(image.credit, image.id).toContain("Julius Kühn-Institut (JKI)");
       expect(image.license, image.id).toMatch(/permitida pelo JKI/);
       expect(image.modified, image.id).toBeDefined();
     }
   });
 
-  it("9 uvas têm foto; a Torrontés Riojano não (o VIVC não tem foto dela)", () => {
-    expect(grapes.filter((grape) => grape.imageIds?.length).length).toBe(9);
-    expect(grapes.find((grape) => grape.id === "torrontes-riojano")?.imageIds).toBeUndefined();
+  it("todas as uvas têm foto; a da Torrontés Riojano vem do INV (CC BY 4.0), não do VIVC", () => {
+    expect(grapes.filter((grape) => grape.imageIds?.length).length).toBe(grapes.length);
+    const torrontes = images.find((image) => image.subjectId === "torrontes-riojano");
+    expect(torrontes?.license).toBe("CC BY 4.0");
+    expect(torrontes?.credit).toMatch(/Instituto Nacional de Vitivinicultura/);
+    expect(torrontes?.alt).toMatch(/relatório de variedade do INV/);
   });
 });

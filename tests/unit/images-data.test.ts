@@ -7,9 +7,7 @@ import { wines } from "@/data/wines";
 
 // Fotos de regiões e produtores (F4-08): Wikimedia Commons, licença livre, foto da entidade certa
 
-const commons = images.filter(
-  (image) => image.subjectType === "region" || image.subjectType === "producer",
-);
+const commons = images.filter((image) => image.sourceUrl.includes("commons.wikimedia.org"));
 
 describe("fotos de regiões e produtores", () => {
   it("vêm do Wikimedia Commons com licença livre, link da licença e crédito", () => {
@@ -39,10 +37,18 @@ describe("fotos de regiões e produtores", () => {
     }
   });
 
-  it("as 10 regiões têm foto; La Rioja Alta não (nenhuma no Commons)", () => {
-    expect(regions.filter((region) => region.imageIds?.length)).toHaveLength(10);
-    expect(producers.filter((producer) => producer.imageIds?.length)).toHaveLength(6);
-    expect(producers.find((producer) => producer.id === "la-rioja-alta")?.imageIds).toBeUndefined();
+  it("todas as regiões e todos os produtores têm foto", () => {
+    expect(regions.filter((region) => region.imageIds?.length)).toHaveLength(regions.length);
+    expect(producers.filter((producer) => producer.imageIds?.length)).toHaveLength(
+      producers.length,
+    );
+  });
+
+  it("a foto da La Rioja Alta vem do site oficial (não há no Commons; ADR-028)", () => {
+    const image = images.find((item) => item.subjectId === "la-rioja-alta");
+    expect(image?.subjectType).toBe("producer");
+    expect(image?.sourceUrl).toMatch(/^https:\/\/www\.riojalta\.com\//);
+    expect(image?.license).toMatch(/ADR-028/);
   });
 });
 
@@ -65,16 +71,13 @@ describe("fotos de garrafas (ADR-028)", () => {
     }
   });
 
-  it("8 vinhos com foto; os sem foto conferida continuam sem", () => {
-    expect(wines.filter((wine) => wine.imageIds?.length)).toHaveLength(8);
-    for (const id of [
-      "montelena-napa-valley-chardonnay",
-      "roederer-collection-245",
-      "roederer-brut-nature",
-      "catena-malbec",
-      "catena-zapata-malbec-argentino",
-    ]) {
-      expect(wines.find((wine) => wine.id === id)?.imageIds, id).toBeUndefined();
+  it("todos os vinhos têm foto da garrafa", () => {
+    expect(wines.filter((wine) => wine.imageIds?.length)).toHaveLength(wines.length);
+  });
+
+  it("fotos tiradas de fichas técnicas em PDF apontam para o PDF e dizem isso", () => {
+    for (const image of bottles.filter((item) => item.sourceUrl.endsWith(".pdf"))) {
+      expect(image.modified, image.id).toMatch(/ficha técnica em PDF/);
     }
   });
 });

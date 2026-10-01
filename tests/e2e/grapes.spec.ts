@@ -47,9 +47,9 @@ test.describe("Uvas", () => {
     await expect(page).toHaveURL(/\/vinhos\/vajra-barolo-bricco-delle-viole$/, navigation);
   });
 
-  test("uva sem foto mostra o aviso honesto", async ({ page }) => {
-    await page.goto("/uvas/torrontes-riojano");
-    await expect(page.getByText("Imagem indisponível")).toBeVisible();
+  test("Torrontés Riojano: foto do INV com crédito; sem vinhos no catálogo", async ({ page }) => {
+    await page.goto("/uvas/torrontes-riojano", html);
+    await expect(page.getByText(/Foto: Instituto Nacional de Vitivinicultura/)).toBeVisible();
     await expect(page.getByText("Ainda não há vinhos com esta uva no catálogo.")).toBeVisible();
   });
 

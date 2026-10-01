@@ -70,7 +70,9 @@ test.describe("Lista de vinhos", () => {
   test("funciona sem JavaScript", async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
-    await page.goto("/vinhos?tipo=espumante");
+    // Só o HTML: sem JavaScript, Chromium e Firefox ignoram o loading="lazy" e baixam todas as
+    // fotos de uma vez; com o servidor frio (CI), o evento "load" passaria do tempo limite
+    await page.goto("/vinhos?tipo=espumante", { waitUntil: "domcontentloaded" });
     await expect(results(page)).toHaveCount(2);
     await expect(page.getByRole("link", { name: "Remover filtro: Espumante" })).toBeVisible();
     await context.close();

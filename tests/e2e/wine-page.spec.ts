@@ -17,9 +17,9 @@ test.describe("Página do vinho", () => {
     await expect(page.getByText(/Foto: Château Palmer \(site oficial\)/)).toBeVisible();
   });
 
-  test("vinho sem foto conferida mostra o aviso honesto", async ({ page }) => {
-    await page.goto("/vinhos/catena-malbec", { waitUntil: "domcontentloaded" });
-    await expect(page.getByText("Imagem indisponível")).toBeVisible();
+  test("foto tirada da ficha técnica em PDF diz de onde veio", async ({ page }) => {
+    await page.goto("/vinhos/roederer-brut-nature", { waitUntil: "domcontentloaded" });
+    await expect(page.getByText(/copiada de dentro da ficha técnica em PDF/)).toBeVisible();
   });
 
   test("a nota de fonte leva à fonte certa na lista", async ({ page }) => {
