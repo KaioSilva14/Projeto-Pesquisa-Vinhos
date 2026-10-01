@@ -80,7 +80,8 @@
 | Ferramenta | Como | Quando |
 |---|---|---|
 | Lighthouse (Chrome DevTools) | Aba Lighthouse → Mobile → Navegação. Rodar em janela anônima, com `npm run build` + `npm run start` (nunca no `dev`) | A cada tarefa de UI relevante |
-| Lighthouse CI | GitHub Actions nas rotas principais, com orçamentos acima | Fase 10 |
+| Lighthouse CI | `npm run lighthouse` (local) e job no GitHub Actions, com `lighthouserc.json` (ADR-035) | Todo PR |
+| Tamanho do código | `npm run analyze` (analisador do próprio Next 16) | Ao adicionar dependência |
 | `@next/bundle-analyzer` | `ANALYZE=true npm run build` → relatório dos bundles | Fase 10 e ao adicionar dependência |
 | Relatório do build | `npm run build` mostra o tamanho por rota | Toda build |
 | Web Vitals reais | Vercel Speed Insights (a decidir; sem cookies) | Após deploy |
@@ -90,6 +91,22 @@ No PowerShell, para o analisador:
 ```powershell
 $env:ANALYZE = "true"; npm run build; Remove-Item Env:ANALYZE
 ```
+
+## 4.1 Medição de referência (Lighthouse CI, 2026-10-01)
+
+Celular simulado, mediana de 3 rodadas, build de produção:
+
+| Página | Performance | Acessibilidade | Boas práticas | SEO | LCP | JavaScript |
+|---|---|---|---|---|---|---|
+| `/` | 98 | 100 | 100 | 100 | 2,2 s | 209 KB |
+| `/vinhos` | 90 | 100 | 100 | 100 | 3,6 s | 229 KB |
+| `/vinhos/miolo-lote-43` | 91 | 100 | 100 | 100 | 3,5 s | 215 KB |
+| `/uvas/malbec` | 92 | 100 | 100 | 100 | 3,3 s | 209 KB |
+| `/regioes/mendoza` | 92 | 100 | 100 | 100 | 3,4 s | 215 KB |
+| `/paises/argentina` | 97 | 100 | 100 | 100 | 2,6 s | 215 KB |
+| `/sobre` | 95 | 100 | 100 | 100 | 3,0 s | 207 KB |
+
+O CI falha se: performance < 85 (piso: a simulação oscila alguns pontos), acessibilidade, boas práticas ou SEO < 95, CLS > 0,1, ou JavaScript > 225 KB (> 245 KB em `/vinhos`, que tem os filtros).
 
 ## 5. Checklist por tarefa
 

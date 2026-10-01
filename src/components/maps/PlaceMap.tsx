@@ -28,6 +28,13 @@ type PlaceMapProps = {
 
 type Status = "idle" | "loading" | "ready" | "failed";
 
+/** Elemento com o texto como conteúdo (nunca interpretado como HTML). */
+function textElement(text: string): HTMLElement {
+  const element = document.createElement("span");
+  element.textContent = text;
+  return element;
+}
+
 /**
  * Mapa real (Leaflet + OpenStreetMap), carregado só quando a pessoa pede (ADR-033): nenhuma
  * imagem de mapa atrasa a página, e o navegador só contata o OpenStreetMap com o clique.
@@ -70,7 +77,8 @@ export function PlaceMap({ points, label, className }: PlaceMapProps) {
           fillColor: dark.matches ? MARKER.dark : MARKER.light,
           fillOpacity: 1,
         })
-          .bindTooltip(point.name, { direction: "top", offset: [0, -8] })
+          // Texto puro: o Leaflet trataria uma string como HTML (proteção contra XSS)
+          .bindTooltip(textElement(point.name), { direction: "top", offset: [0, -8] })
           .addTo(map),
       );
 

@@ -73,3 +73,29 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+
+  lighthouse:
+    name: Lighthouse (performance, acessibilidade, SEO)
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      # Build normal (com a otimização de imagens), como no site publicado
+      - run: npm run build
+      # Notas mínimas e orçamentos em lighthouserc.json (PERFORMANCE.md). O @lhci/cli roda
+      # via npx, fora do package.json: as dependências dele têm alertas de segurança (ADR-035)
+      - name: Lighthouse CI
+        run: npm run lighthouse
+      - name: Relatórios do Lighthouse
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lighthouse
+          path: .lighthouseci/
+          retention-days: 7

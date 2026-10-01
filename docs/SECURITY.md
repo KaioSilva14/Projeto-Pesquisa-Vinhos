@@ -89,3 +89,16 @@ const csp = [
 - Skill `security-review` antes de cada release.
 - Revisão de segurança específica ao adicionar: mapas (fase 9), qualquer API própria, qualquer autenticação.
 - Reportar vulnerabilidades: contato em `/sobre` (e `SECURITY.md` do repositório público, se houver).
+
+## 7. Revisão de segurança da Fase 10 (2026-10-01, F10-04)
+
+| Ponto | Resultado |
+|---|---|
+| Injeção de HTML (XSS) | O único `dangerouslySetInnerHTML` é o JSON-LD, que troca todo `<` por `<`. O nome no marcador do mapa passava ao Leaflet como HTML: **corrigido** (agora é texto puro). O React escapa todo o resto. |
+| Entradas | Busca validada com Zod e limitada a 100 caracteres e poucos termos; filtros de `/vinhos` ignoram valores que não existem nos dados; formulário de correção aceita só caminhos internos do Vinum e links `https://`; favoritos lidos do `localStorage` são validados e limitados. |
+| API | `/api/search-index` é um arquivo estático gerado no build (só `GET`, sem parâmetros). |
+| Links externos | Fontes, créditos e o link do GitHub com `rel="noopener noreferrer"` quando abrem outra aba; `Referrer-Policy: strict-origin-when-cross-origin`. |
+| Cabeçalhos | CSP, `X-Content-Type-Options`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy` e HSTS (em HTTPS). Única origem externa: `tile.openstreetmap.org` em `img-src`, e só depois do clique em "Mostrar o mapa". |
+| Dependências | `npm audit` sem vulnerabilidades; `@lhci/cli` fora do `package.json` por ter dependências com alertas (ADR-035). |
+| `'unsafe-inline'` em `script-src` (risco R14) | **Mantido.** O SRI experimental do Next 16 foi testado: com o Turbopack, só 5 de 11 scripts externos ganham `integrity`, e os 4 scripts embutidos por página (dados da renderização) mudam a cada página, então a CSP fixa não consegue listá-los. Nonces exigiriam renderizar cada página a cada visita, perdendo o site estático. Compensações: nenhum ponto injeta HTML vindo de fora, nenhum script de terceiros, `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`, `frame-ancestors 'none'`. Reavaliar quando o SRI do Next sair do modo experimental. |
+

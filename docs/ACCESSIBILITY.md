@@ -96,11 +96,48 @@
 |---|---|---|
 | Lint | `eslint-plugin-jsx-a11y` | Todo commit |
 | Automatizado | `@axe-core/playwright` em todas as rotas principais, tema claro e escuro | CI (fase 3+) |
+| Automatizado — além do axe | `tests/e2e/a11y-wcag.spec.ts`: 1.4.10 reflow em 320 px (11 páginas), 1.4.12 espaçamento de texto, 2.4.7 foco visível e 2.4.11 foco não escondido pelo cabeçalho (percorrendo com Tab) | CI (fase 10) |
 | Lighthouse | Acessibilidade ≥ 90 (meta interna: 100) | Fase 10 / CI |
 | Manual — teclado | Percorrer busca, filtros, favoritos, modais só com teclado | Toda tarefa de UI |
 | Manual — leitor de tela | NVDA + Chrome/Firefox (Windows); VoiceOver (iOS) se disponível | Fim de cada fase |
 | Manual — zoom | 200% e 400% (reflow 320 px) | Fim de cada fase |
 | Manual — movimento reduzido | Ativar no Windows (Configurações → Acessibilidade → Efeitos visuais → Efeitos de animação desligado) | Fase 7 |
+
+### 5.2 Roteiro de teste com leitor de tela (NVDA), para fazer à mão (F10-02)
+
+O NVDA é um leitor de tela gratuito para Windows, usado por pessoas cegas. Leva uns 20 minutos.
+
+**Preparar**
+1. Baixe e instale em [nvaccess.org](https://www.nvaccess.org/download/) (gratuito).
+2. Rode o site: `npm run build` e `npm run start` (ou use o site publicado) e abra no Chrome.
+3. Ligue o NVDA (`Ctrl + Alt + N`). A tecla **NVDA** é o `Insert`. `Ctrl` faz ele parar de falar.
+
+**Teclas que você vai usar**
+
+| Tecla | O que faz |
+|---|---|
+| `Tab` / `Shift + Tab` | Próximo / anterior elemento clicável |
+| `H` / `Shift + H` | Próximo / anterior título |
+| `D` | Próxima região (cabeçalho, conteúdo principal, rodapé) |
+| `Insert + F7` | Lista de títulos, links e regiões da página |
+| `Enter` / `Espaço` | Ativa link ou botão; marca caixa de seleção |
+| Setas | Lê linha a linha; dentro de listas de opções, muda a opção |
+
+**Tarefas e o que deve acontecer**
+
+| # | Tarefa | Resultado esperado |
+|---|---|---|
+| 1 | Abrir a home e apertar `Tab` uma vez | Anuncia "Pular para o conteúdo, link"; `Enter` leva ao título principal |
+| 2 | `Insert + F7` → Títulos | Um único título de nível 1 por página, seguido de títulos de nível 2 com nomes que fazem sentido |
+| 3 | Na busca do cabeçalho, digitar "malbec" | Anuncia que há sugestões; as setas para baixo leem cada sugestão; `Enter` abre a escolhida |
+| 4 | Em `/vinhos`, marcar o filtro "Tinto" | Anuncia o filtro marcado e a nova quantidade de vinhos |
+| 5 | Na página de um vinho, ir ao número de fonte ao lado de um dado | Anuncia "Fonte 1, link"; `Enter` leva à fonte certa na lista "Fontes" |
+| 6 | Apertar o coração de favorito | Anuncia "Salvar … nos favoritos, botão, não pressionado"; depois de apertar, "… salvo nos favoritos" |
+| 7 | Em uma região, apertar "Mostrar o mapa" | O mapa recebe o foco e é anunciado como "mapa" com a descrição; o texto abaixo diz o lugar marcado |
+| 8 | Em "Sugerir uma correção", enviar vazio | Anuncia o resumo dos erros; cada campo com erro é lido como "inválido", com a mensagem |
+| 9 | Fotos | Cada foto tem uma descrição que faz sentido (não "imagem" nem o nome do arquivo) |
+
+Anote em `docs/MEMORY.md` (seção "Problemas conhecidos") qualquer coisa que soou confusa, faltou ou travou, com a página e o passo.
 
 ### 5.1 Alertas conhecidos do axe (analisados)
 

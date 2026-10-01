@@ -236,3 +236,10 @@
 - **Decisão**: no build dos testes E2E, o Playwright define `VINUM_E2E=1` e o `next.config.ts` liga `images.unoptimized`: as fotos são servidas como estão em `public/images`, sem conversão. Os testes verificam conteúdo, navegação e acessibilidade, que não dependem da otimização. A otimização real continua no build normal e é medida pelo Lighthouse (Fase 10). No CI, os navegadores do Playwright ficam em cache (`actions/cache`, chave pelo `package-lock.json`) e o limite do job E2E subiu para 30 minutos. O teste "Sugerir uma correção" espera o foco chegar ao resumo de erros antes de digitar.
 - **Consequências**: menos testes instáveis sem remendos teste a teste; o E2E não cobre a otimização de imagens (coberta pelo Lighthouse).
 - **Data**: 2026-10-01 · **Status**: aceita (decisão técnica delegada pelo usuário)
+
+## ADR-035 — Lighthouse CI via npx, com notas mínimas e orçamentos no PR
+- **Contexto**: a F10-03 pede Lighthouse automático no CI. O `@lhci/cli` 0.15.1 (versão mais nova) traz dependências com vulnerabilidades altas (`basic-ftp`, `extract-zip`, `tmp`) e faria o `npm audit --audit-level=high` do CI falhar. O pacote `@next/bundle-analyzer`, previsto no plano, só funciona com webpack; o Next 16 usa Turbopack e já tem o analisador próprio `next experimental-analyze`.
+- **Decisão**: o Lighthouse CI roda **via npx** (`npm run lighthouse` → `npx --yes @lhci/cli@0.15.1 autorun`), fora do `package.json`: o projeto continua sem vulnerabilidades e a ferramenta só roda numa máquina descartável. Configuração em `lighthouserc.json`: 7 páginas principais, 3 rodadas cada (mediana), celular simulado; o PR falha se acessibilidade, boas práticas ou SEO < 95, performance < 85 (meta continua 90; a simulação oscila 85–92 nas páginas de região), CLS > 0,1 ou JavaScript > 225 KB. Relatórios ficam como arquivo do job (7 dias), sem upload público. Tamanho do código: `npm run analyze`.
+- **Consequências**: um terceiro job no CI (paralelo ao E2E). Revisar a versão do `@lhci/cli` quando sair uma sem os alertas.
+- **Data**: 2026-10-01 · **Status**: aceita (decisão técnica delegada pelo usuário)
+

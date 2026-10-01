@@ -41,6 +41,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - 2026-10-01: Fase 8 encerrada sem 3D (ADR-032): a garrafa 3D foi testada e removida a pedido do usuário; a abertura da home ganhou uma foto real de vinhedo (Mendoza) em telas largas.
 - 2026-10-01: Fase 9, mapas reais (ADR-033): seção "Onde fica" nas regiões e mapa com os pontos das regiões nos países (Leaflet + OpenStreetMap, só quando a pessoa clica em "Mostrar o mapa"); cada marcador indica o lugar retratado na foto da região, com fonte, e o texto deixa claro que os limites não estão desenhados. Política de privacidade atualizada. **Fase 9 concluída.**
 - 2026-10-01: README novo: banner animado (claro e escuro, parado com "reduzir movimento"), demonstração animada da busca gravada do site, capturas reais (home, vinho, mapa, celular), diagrama da arquitetura e instruções de instalação recolhíveis. Arquivos em `.github/readme/`; banner gerado por `scripts/readme-banner.mjs`.
+- 2026-10-01: Fase 10 (F10-02 a F10-04): Lighthouse CI no PR com notas mínimas e orçamento de JavaScript por página (ADR-035), testes automáticos de reflow, espaçamento de texto e foco, roteiro de teste com NVDA e revisão de segurança (nome no marcador do mapa agora é texto puro; SRI testado e não adotado).
 
 ### Alterado
 - 2026-09-30: composição de uvas com soma abaixo de 99% passa a ser aceita quando a nota explica o que falta (uva fora do catálogo), em vez de ser sempre rejeitada.

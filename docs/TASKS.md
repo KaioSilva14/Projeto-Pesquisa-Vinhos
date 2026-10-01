@@ -129,9 +129,9 @@
 | F10-06 | Qualidade mínima das imagens: trocar fotos pequenas, validador, nunca esticar, qualidade 85 | `validate:data` regra 13 | P0 | F4-08 | done (ADR-030) |
 | F10-07 | Ícones completos (favicon.ico, 32–512 px, iPhone, maskable) e manifesto do app | E2E `site-essentials.spec.ts` | P1 | F10-01 | done (ADR-032) |
 | F10-08 | Revisão geral: fontes no orçamento, fontes de dados vigentes (Rías Baixas 2024, Chianti Classico 2023), README e docs atualizados, varredura de links e acessibilidade | 0 links quebrados; 0 violações axe | P0 | — | done (ADR-032) |
-| F10-02 | Auditoria axe + manual (NVDA, teclado, zoom) | 0 violações sérias | P0 | F5-01 | todo |
-| F10-03 | Lighthouse CI + bundle analyzer + orçamentos | Metas `PERFORMANCE.md` | P0 | F5-01 | todo |
-| F10-04 | Revisão de segurança (skill `security-review`) + avaliar CSP com SRI | Relatório e correções | P1 | F1-11 | todo |
+| F10-02 | Auditoria axe + manual (NVDA, teclado, zoom) | 0 violações sérias | P0 | F5-01 | doing (automático feito: axe em todas as páginas e `a11y-wcag.spec.ts` com reflow 320 px, espaçamento de texto e foco visível/não escondido; falta o teste manual com NVDA, roteiro em `ACCESSIBILITY.md` §5.2) |
+| F10-03 | Lighthouse CI + bundle analyzer + orçamentos | Metas `PERFORMANCE.md` | P0 | F5-01 | done (ADR-035: job no CI via npx, `lighthouserc.json`, `npm run analyze`; 7 páginas com performance 90–98 e 100 no resto) |
+| F10-04 | Revisão de segurança (skill `security-review`) + avaliar CSP com SRI | Relatório e correções | P1 | F1-11 | done (`SECURITY.md` §7: tooltip do mapa corrigido; SRI testado e não adotado) |
 
 ## Fase 11 — Deploy
 
