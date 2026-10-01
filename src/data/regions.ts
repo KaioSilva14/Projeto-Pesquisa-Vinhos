@@ -55,12 +55,13 @@ export const regions: Region[] = [
     },
     grapes: {
       ids: ["sangiovese"],
-      sourceId: "src-masaf-chianti-classico",
-      notes: "Sangiovese de 80% a 100% dos vinhedos (art. 2 do disciplinare).",
+      sourceId: "src-consorzio-chianti-classico-2023",
+      notes:
+        "Sangiovese de 80% a 100% dos vinhedos; de 90% a 100% na Gran Selezione (art. 2 do disciplinare, com as alterações de 2023).",
     },
     summary: text(
-      "Denominação de origem controlada e garantida (DOCG) da Itália. O regulamento de produção exige vinhedos com 80% a 100% de Sangiovese; outras uvas tintas aptas ao cultivo na Toscana podem completar até 20%.",
-      ["src-masaf-chianti-classico"],
+      "Denominação de origem controlada e garantida (DOCG) da Itália. Para o Chianti Classico e o Riserva, o disciplinare exige vinhedos com 80% a 100% de Sangiovese; outras uvas tintas aptas ao cultivo na Toscana podem completar até 20%. Para a Gran Selezione, a alteração de 2023 exige de 90% a 100% de Sangiovese, completados só por uvas de uma lista fechada, como Colorino e Canaiolo, a partir da quinta safra depois da aprovação.",
+      ["src-consorzio-chianti-classico-2023"],
     ),
   }),
   region({
@@ -145,19 +146,20 @@ export const regions: Region[] = [
     name: "Rías Baixas",
     countryId: "es",
     level: "appellation",
-    sourceIds: ["src-boe-rias-baixas-1997"],
+    sourceIds: ["src-mapa-rias-baixas-pliego"],
     appellation: {
       value: { system: "Denominaciones de origen (Espanha)", category: "DO" },
-      sourceIds: ["src-boe-rias-baixas-1997"],
+      sourceIds: ["src-mapa-rias-baixas-pliego"],
     },
     grapes: {
       ids: ["albarino"],
-      sourceId: "src-boe-rias-baixas-1997",
-      notes: "Albariño entre as variedades brancas preferentes (art. 5 do regulamento de 1997).",
+      sourceId: "src-mapa-rias-baixas-pliego",
+      notes:
+        "Albariño é, com grande diferença, a variedade majoritária; o vinho Rías Baixas Albariño é 100% Albariño (caderno de especificações de 2024).",
     },
     summary: text(
-      "Denominação de origem (DO) da Espanha. O regulamento publicado no BOE em 1997 inclui a Albariño entre as variedades preferentes para a elaboração dos vinhos protegidos.",
-      ["src-boe-rias-baixas-1997"],
+      "Denominação de origem protegida da Espanha, nas províncias de Pontevedra e A Coruña, dividida em cinco subzonas. Segundo o caderno de especificações, a Albariño é, com grande diferença, a uva mais cultivada na região, e boa parte dos vinhos é feita só com ela, vendida como Rías Baixas Albariño.",
+      ["src-mapa-rias-baixas-pliego"],
     ),
   }),
   region({

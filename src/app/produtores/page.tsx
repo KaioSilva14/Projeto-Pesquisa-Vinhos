@@ -31,6 +31,7 @@ export default async function ProducersPage() {
         <EntityGrid
           items={producers}
           label="Lista de produtores"
+          priorityFirst
           imageVariant="producer"
           favoriteKind="producer"
         />

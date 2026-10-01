@@ -22,14 +22,13 @@
 | Recurso | Orçamento (gzip) |
 |---|---|
 | JS de primeiro carregamento, páginas de entidade | ≤ 150 KB |
-| JS de primeiro carregamento, home | ≤ 170 KB |
+| JS de primeiro carregamento, home | ≤ 200 KB (medido em 2026-10-01: ~190 KB, dos quais ~117 KB são o próprio React + Next 16; o orçamento original de 170 KB não cabia no framework). Lighthouse no celular: home 98, demais páginas ≥ 90 (ADR-032) |
 | JS de primeiro carregamento, `/vinhos` com filtros | ≤ 180 KB |
 | Chunk do autocomplete (busca + UI), sob demanda | ≤ 25 KB |
 | Índice de busca (`/api/search-index`) | ≤ 150 KB na v1 (alerta no CI acima de 300 KB) |
-| Chunk 3D (three + R3F + drei usado), sob demanda | ≤ 250 KB, nunca no primeiro carregamento |
 | Chunk de mapa (MapLibre), sob demanda | carregado só na página de região ao entrar na viewport |
 | CSS total | ≤ 35 KB |
-| Fontes | 2 famílias variáveis, `latin` + `latin-ext`, ≤ 120 KB no total |
+| Fontes | 2 famílias, só `latin`, sem itálico e sem eixo óptico: ≤ 120 KB no total (hoje 90 KB pré-carregados, ADR-032) |
 | Imagem LCP (mobile) | ≤ 200 KB |
 | Requisições no primeiro carregamento (home) | ≤ 30 |
 
@@ -38,7 +37,7 @@
 ### 3.1 Renderização e JavaScript
 - Server Components por padrão; ilhas client pequenas e folha.
 - SSG para páginas de entidade (HTML pronto na CDN).
-- `next/dynamic` para: autocomplete completo (carrega no foco), bottom sheet de filtros, 3D, mapas.
+- `next/dynamic` para: autocomplete completo (carrega no foco), bottom sheet de filtros, mapas.
 - Import de ícones por ícone (`@phosphor-icons/react/dist/ssr/...`), nunca o pacote inteiro.
 - Evitar bibliotecas de data/utilitários grandes; usar `Intl`.
 - Nenhum script de terceiros na v1.
@@ -58,7 +57,8 @@
 ### 3.5 Cache
 - Ver `ARCHITECTURE.md` §10.
 
-### 3.6 3D (fase 8)
+### 3.6 3D (fase 8): removido (ADR-032)
+> O 3D foi testado e removido a pedido do usuário. As regras abaixo ficam só como referência caso o assunto volte.
 - Carregar **depois** do LCP e só quando a seção entra na viewport (`IntersectionObserver`, `rootMargin` 200 px).
 - `frameloop="demand"` (renderiza só quando algo muda) ou pausar com `IntersectionObserver` quando fora da tela.
 - `dpr={[1, 1.5]}`; `antialias` só se necessário; sombras desligadas ou "baked".

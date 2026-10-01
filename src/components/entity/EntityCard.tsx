@@ -23,7 +23,13 @@ type EntityCardProps = {
   headingLevel?: "h2" | "h3";
   /** Mostra o botão de favorito para esta entidade. */
   favorite?: { kind: FavoriteKind; id: string } | undefined;
+  /** Largura da foto em cada tela, quando o card não segue a grade padrão (IMAGES.md §4). */
+  imageSizes?: string;
+  /** Foto carregada com prioridade (1º card de uma lista no topo da página). */
+  priority?: boolean;
 };
+
+const GRID_SIZES = "(min-width: 1280px) 25vw, (min-width: 640px) 45vw, 100vw";
 
 const vinhos = (count: number) =>
   count === 0 ? "Nenhum vinho no catálogo" : count === 1 ? "1 vinho" : `${count} vinhos`;
@@ -42,6 +48,8 @@ export function EntityCard({
   reserveImage = true,
   headingLevel: Heading = "h2",
   favorite,
+  imageSizes = GRID_SIZES,
+  priority = false,
 }: EntityCardProps) {
   const showImage = Boolean(image) || reserveImage;
   return (
@@ -50,7 +58,8 @@ export function EntityCard({
         <EntityImage
           image={image}
           variant={imageVariant}
-          sizes="(min-width: 1280px) 25vw, (min-width: 640px) 45vw, 100vw"
+          sizes={imageSizes}
+          priority={priority}
           // A foto encosta nas bordas do card (o card recorta os cantos)
           className="rounded-none [&>div]:rounded-none"
         />

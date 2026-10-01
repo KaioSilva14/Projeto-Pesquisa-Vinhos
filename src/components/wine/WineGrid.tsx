@@ -7,20 +7,32 @@ type WineGridProps = {
   /** Nome da lista para leitores de tela, ex.: "Lista de vinhos". */
   label?: string;
   headingLevel?: "h2" | "h3" | "h4";
+  /** Lista no topo da página: a 1ª foto carrega com prioridade (é o maior elemento, LCP). */
+  priorityFirst?: boolean;
 };
 
 /**
  * Grade de cards de vinho. Se algum vinho tem foto da garrafa, todos reservam a área (os sem
  * foto mostram "Imagem indisponível"); se nenhum tem, os cards ficam só com texto.
  */
-export function WineGrid({ wines, label, headingLevel = "h2" }: WineGridProps) {
+export function WineGrid({
+  wines,
+  label,
+  headingLevel = "h2",
+  priorityFirst = false,
+}: WineGridProps) {
   const reserveImage = wines.some((wine) => wine.image);
 
   return (
     <ul aria-label={label} className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-      {wines.map((wine) => (
+      {wines.map((wine, index) => (
         <li key={wine.id}>
-          <WineCard wine={wine} headingLevel={headingLevel} reserveImage={reserveImage} />
+          <WineCard
+            wine={wine}
+            headingLevel={headingLevel}
+            reserveImage={reserveImage}
+            priority={priorityFirst && index === 0}
+          />
         </li>
       ))}
     </ul>

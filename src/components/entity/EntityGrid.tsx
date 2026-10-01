@@ -11,6 +11,8 @@ type EntityGridProps = {
   headingLevel?: "h2" | "h3";
   /** Tipo da entidade, para o botão de favorito em cada card (sem ele, não há botão). */
   favoriteKind?: FavoriteKind;
+  /** Lista no topo da página: a 1ª foto carrega com prioridade (é o maior elemento, LCP). */
+  priorityFirst?: boolean;
 };
 
 /**
@@ -23,15 +25,17 @@ export function EntityGrid({
   imageVariant,
   headingLevel = "h2",
   favoriteKind,
+  priorityFirst = false,
 }: EntityGridProps) {
   const reserveImage = items.some((item) => item.image);
 
   return (
     <ul aria-label={label} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {items.map((item) => (
+      {items.map((item, index) => (
         <li key={item.id}>
           <EntityCard
             {...item}
+            priority={priorityFirst && index === 0}
             imageVariant={imageVariant}
             reserveImage={reserveImage}
             headingLevel={headingLevel}

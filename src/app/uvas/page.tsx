@@ -31,6 +31,7 @@ export default async function GrapesPage() {
         <EntityGrid
           items={grapes}
           label="Lista de uvas"
+          priorityFirst
           imageVariant="grape"
           favoriteKind="grape"
         />

@@ -36,6 +36,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - 2026-10-01: itens básicos de site profissional (F10-05, ADR-031): chamada para explorar na primeira seção da home, 5 perguntas frequentes, política de privacidade, página "Sugerir uma correção" (abre uma issue no GitHub) com página de agradecimento, mensagens de erro úteis e limite de caracteres com contador.
 - 2026-10-01: SEO técnico (F10-01): `sitemap.xml`, `robots.txt`, imagem para redes sociais em todas as páginas, favicon e ícone do iPhone, perguntas frequentes nos dados estruturados; títulos e descrições dentro do limite de caracteres.
 - 2026-10-01: qualidade das imagens (F10-06, ADR-030): garrafas pequenas trocadas por versões maiores (Miolo Lote 43 2012, Catena Malbec, Catena Zapata Malbec Argentino), tamanho mínimo barrado pelo validador, fotos nunca esticadas, compressão com qualidade 85 e moldura branca para garrafas.
+- 2026-10-01: ícones completos (F10-07, ADR-032): `favicon.ico`, ícones de 32 a 512 px, ícone do iPhone, ícone "maskable" do Android e manifesto do app.
+- 2026-10-01: revisão geral (F10-08): fontes dentro do orçamento (de ~508 KB para 90 KB pré-carregados), Rías Baixas com o caderno de especificações vigente (2024), Chianti Classico com as regras de 2023 (Gran Selezione), README atualizado; varredura sem links quebrados nem violações de acessibilidade.
+- 2026-10-01: Fase 8 encerrada sem 3D (ADR-032): a garrafa 3D foi testada e removida a pedido do usuário; a abertura da home ganhou uma foto real de vinhedo (Mendoza) em telas largas.
 
 ### Alterado
 - 2026-09-30: composição de uvas com soma abaixo de 99% passa a ser aceita quando a nota explica o que falta (uva fora do catálogo), em vez de ser sempre rejeitada.

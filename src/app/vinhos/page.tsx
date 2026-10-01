@@ -88,7 +88,7 @@ export default async function WinesPage({ searchParams }: WinesPageProps) {
             <NoResults clearHref={winesHref({ sort: state.sort })} />
           ) : (
             <>
-              <WineGrid wines={visible} label="Lista de vinhos" />
+              <WineGrid wines={visible} label="Lista de vinhos" priorityFirst />
               {visible.length < filtered.length && (
                 <div className="grid justify-items-center gap-3">
                   <p className="text-small text-text-muted">

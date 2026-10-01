@@ -18,6 +18,7 @@ const variants = {
   grape: { aspect: "aspect-[4/3]", fit: "object-cover" },
   producer: { aspect: "aspect-[3/2]", fit: "object-cover" },
   editorial: { aspect: "aspect-video", fit: "object-cover" },
+  portrait: { aspect: "aspect-[4/5]", fit: "object-cover" },
   thumbnail: { aspect: "aspect-square", fit: "object-cover" },
 } as const;
 

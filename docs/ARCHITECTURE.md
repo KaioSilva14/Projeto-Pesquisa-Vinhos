@@ -7,7 +7,7 @@
 
 ## 1. Visão geral
 
-Site **Next.js (App Router)** com renderização **estática por padrão** (SSG), dados **locais tipados e validados** com Zod, uma camada de **serviços** que esconde de onde os dados vêm, e poucas **ilhas interativas** no cliente (busca, filtros, favoritos, animações, 3D, mapas).
+Site **Next.js (App Router)** com renderização **estática por padrão** (SSG), dados **locais tipados e validados** com Zod, uma camada de **serviços** que esconde de onde os dados vêm, e poucas **ilhas interativas** no cliente (busca, filtros, favoritos, animações, mapas).
 
 Princípio: **servidor faz o trabalho pesado, cliente só o que precisa ser interativo.**
 
@@ -60,7 +60,7 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 | Pacote | Versão | Fase | Justificativa |
 |---|---|---|---|
 | `motion` | 13.4.4 | 7 (uso pontual antes, se necessário) | Biblioteca **única** de animação JS (ADR-007). GSAP e Lenis **não** serão usados. **Não instalado na Fase 7: CSS bastou (ADR-029)** |
-| `three` · `@react-three/fiber` · `@react-three/drei` | 0.186.1 · 9.8.1 · 10.7.9 | 8 | Padrão do ecossistema React para 3D; R3F 9.8 suporta React `>=19 <19.4` ✔ |
+| ~~`three` · `@react-three/fiber`~~ | — | 8 | Instalados e **removidos** na Fase 8: o 3D foi rejeitado pelo usuário (ADR-032) |
 | `maplibre-gl` | 6.11.2 | 9 | Mapas vetoriais open source, sem chave obrigatória (provedor de tiles a decidir — ADR-015) |
 
 ### 2.6 Qualidade (dev)
@@ -273,7 +273,7 @@ Next 16: `params` e `searchParams` são **assíncronos** (`await params`). Turbo
 - CSS transitions para microinterações; **Motion** apenas onde CSS não basta (layout, presença, sequência).
 - Componentes de animação são **folhas client** isoladas; conteúdo continua renderizado no servidor.
 - `prefers-reduced-motion` → sem movimento, conteúdo completo.
-- 3D (fase 8): `next/dynamic` com `ssr: false`, montado por `IntersectionObserver` fora do LCP, `frameloop="demand"`, DPR ≤ 1,5, pausa fora da viewport, fallback de imagem real estática em mobile/dispositivo fraco/movimento reduzido.
+- 3D: **não há** (testado e removido na Fase 8, ADR-032).
 
 ## 13. Deploy
 
@@ -317,7 +317,7 @@ Pastas de referências visuais (`/design`, `/references`, `/docs/design`, `/asse
 | R1 | **Obter dados reais verificados** com licença adequada | Alta | Crítico | Começar pequeno (catálogo curado); hierarquia de fontes (`DATA_SOURCES.md`); validação automática; campos ausentes em vez de inventados |
 | R2 | **Direitos de imagem** — muitos vinhos sem foto licenciada | Alta | Alto | `ImageUnavailable` elegante; Wikimedia Commons; pedir autorização a produtores (modelo de e-mail em `IMAGES.md`) |
 | R3 | Direitos autorais de texto | Média | Alto | Texto sempre próprio + citação da fonte; revisão no checklist |
-| R4 | Performance do 3D em aparelhos fracos | Média | Médio | Sob demanda, fallback estático, orçamento em `PERFORMANCE.md` |
+| R4 | Performance do 3D em aparelhos fracos | — | — | Encerrado: sem 3D no site (ADR-032) |
 | R5 | Índice de busca crescer demais | Baixa (v1) | Médio | Monitorar tamanho no CI; plano de migração (§8) |
 | R6 | SEO com muitas páginas geradas | Baixa (v1) | Médio | SSG, sitemap com `generateSitemaps` acima de 50 mil URLs, canonical em páginas filtradas |
 | R7 | Mapas: licença de tiles e peso da lib | Média | Médio | MapLibre carregado sob demanda; provedor com licença clara; atribuição obrigatória (ADR-015) |

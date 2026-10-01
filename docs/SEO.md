@@ -61,7 +61,7 @@ Helper único `src/lib/seo.ts` monta metadata a partir da entidade para evitar d
 - Acima de 50.000 URLs → `generateSitemaps` (sitemaps paginados).
 - `src/app/robots.ts`: `allow: /`, `disallow: /pesquisa, /favoritos, /sugerir-correcao/obrigado, /api/, /dev/`, `sitemap: {SITE_URL}/sitemap.xml`. Em ambiente de preview: `disallow: /` inteiro.
 - Implementado (F10-01): páginas fixas + entidades publicadas e não demo (`services/sitemap.ts`).
-- Imagens OG implementadas (F10-01): `src/app/opengraph-image.tsx` (padrão) e uma por página de entidade (`[slug]/opengraph-image.tsx`), tipográficas, geradas no build com as fontes do site (`lib/seo/og-image.tsx`, fontes OFL em `src/assets/fonts`). Favicon e ícone do iPhone: `src/app/icon.tsx` e `apple-icon.tsx`.
+- Imagens OG implementadas (F10-01): `src/app/opengraph-image.tsx` (padrão) e uma por página de entidade (`[slug]/opengraph-image.tsx`), tipográficas, geradas no build com as fontes do site (`lib/seo/og-image.tsx`, fontes OFL em `src/assets/fonts`). Ícones (ADR-032): `src/app/favicon.ico` (16/32/48 px), `icon.tsx` (32, 96, 192 e 512 px), `apple-icon.tsx` (180 px), `/icone-maskable` (Android) e `manifest.ts`.
 - Limites de caracteres (`SEO_LIMITS` em `lib/seo/common.ts`): título ≤ 60 (com " | Vinum"), descrição ≤ 155; conferidos em todas as páginas do sitemap pelo E2E `site-essentials.spec.ts`.
 
 ## 6. Dados estruturados (JSON-LD)

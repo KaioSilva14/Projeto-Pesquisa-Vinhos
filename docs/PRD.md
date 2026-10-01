@@ -72,7 +72,7 @@ Legenda: **MVP** = necessário para o primeiro lançamento · **v1** = logo apó
 | F15 | Glossário / conteúdo educativo | v1 | Texto próprio com fontes |
 | F16 | Mapas reais de regiões | v1 | MapLibre + dados geográficos licenciados |
 | F17 | Animações refinadas e transições | v1 | Sempre com movimento reduzido |
-| F18 | Elemento 3D sob demanda | v1 | Decorativo, com fallback |
+| F18 | Elemento 3D sob demanda | — | Testado e removido a pedido do usuário (ADR-032) |
 | F19 | Comparar vinhos lado a lado | Futuro | |
 | F20 | Conta de usuário + favoritos sincronizados | Futuro | Exige backend |
 | F21 | Motor de busca dedicado (Meilisearch/Typesense) | Futuro | Só se o catálogo crescer |
