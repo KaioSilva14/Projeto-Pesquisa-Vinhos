@@ -215,7 +215,7 @@ Validação: soma dos percentuais ≤ 101 (tolerância de arredondamento). Se to
 ### 3.10 `Pairing`
 | Campo | Tipo | Obrig. | Observação |
 |---|---|---|---|
-| `category` | `'carnes' \| 'aves' \| 'peixes-e-frutos-do-mar' \| 'massas' \| 'queijos' \| 'vegetarianos' \| 'sobremesas' \| 'culinarias'` | ✔ | |
+| `category` | `'entradas' \| 'carnes' \| 'aves' \| 'peixes-e-frutos-do-mar' \| 'massas' \| 'queijos' \| 'vegetarianos' \| 'culinarias' \| 'sobremesas'` | ✔ | Na ordem de uma refeição; `entradas` (entradas e aperitivos) incluída na F4-06 |
 | `name` | `string` | ✔ | Prato/ingrediente ("Queijos de massa dura") |
 | `cuisine` | `string` | | Ex.: "Culinária italiana" |
 | `guidance` | `EditorialText` | | Sempre como orientação |

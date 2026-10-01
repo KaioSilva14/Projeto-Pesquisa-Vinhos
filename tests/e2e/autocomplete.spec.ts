@@ -30,7 +30,8 @@ test.describe("Autocomplete no cabeçalho", () => {
 
   // E2E-02 (TESTING.md)
   test("/ e Ctrl+K focam a busca; Esc fecha; setas navegam", async ({ page }) => {
-    await page.goto("/");
+    // Página sem busca própria nem fotos: o atalho vai para o campo do cabeçalho
+    await page.goto("/harmonizacoes");
     await page.keyboard.press("/");
     await expect(headerSearch(page)).toBeFocused();
 
@@ -48,6 +49,12 @@ test.describe("Autocomplete no cabeçalho", () => {
     await page.getByRole("link", { name: "Vinum", exact: true }).first().focus();
     await page.keyboard.press("Control+k");
     await expect(headerSearch(page)).toBeFocused();
+  });
+
+  test("na home, / foca a busca em destaque, não a do cabeçalho", async ({ page }) => {
+    await page.goto("/");
+    await page.keyboard.press("/");
+    await expect(page.getByRole("main").getByRole("combobox")).toBeFocused();
   });
 
   test("Enter sem escolher opção leva à página de resultados", async ({ page }) => {

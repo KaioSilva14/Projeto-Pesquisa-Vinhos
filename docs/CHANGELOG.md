@@ -29,6 +29,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - 2026-09-30: F4-08 (1ª parte), fotos reais das 10 regiões e de 6 dos 7 produtores, do Wikimedia Commons (CC BY, CC BY-SA, CC0), com autor, licença e origem no site e em `public/images/CREDITOS.md`.
 - 2026-09-30: F4-08 (2ª parte), fotos das garrafas de 8 vinhos tiradas dos sites oficiais dos produtores, com crédito (ADR-028); cards de vinho passam a mostrar a garrafa (`WineGrid`).
 - 2026-09-30: todas as entidades com foto: garrafas dos 5 vinhos que faltavam (biblioteca de mídia dos sites e fichas técnicas em PDF), vinícola La Rioja Alta (site oficial) e Torrontés Riojano (relatório do INV, CC BY 4.0).
+- 2026-10-01: F4-06, harmonizações sugeridas pelos produtores (`/harmonizacoes` e seção na página do vinho). **Fase 4 concluída.**
+- 2026-10-01: Fase 5, home editorial com busca em destaque e seções do catálogo, página Sobre com todos os créditos de imagens e página Explorar. **Fase 5 concluída.**
 
 ### Alterado
 - 2026-09-30: composição de uvas com soma abaixo de 99% passa a ser aceita quando a nota explica o que falta (uva fora do catálogo), em vez de ser sempre rejeitada.

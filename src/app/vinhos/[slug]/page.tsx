@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { LinkList } from "@/components/entity/LinkList";
 import { ContentSection } from "@/components/layout/ContentSection";
 import { EntityLayout } from "@/components/layout/EntityLayout";
 import { EntityImage } from "@/components/media/EntityImage";
@@ -102,6 +103,19 @@ export default async function WinePage({ params }: WinePageProps) {
                 <Cite ids={wine.flavorNotes.sourceIds} numbers={numbers} />
               </p>
             )}
+          </ContentSection>
+        )}
+
+        {wine.pairingIds && data.pairings.length > 0 && (
+          <ContentSection title="Harmonização">
+            <p>
+              <span className="text-text-muted">O produtor sugere: </span>
+              <LinkList items={data.pairings} />
+              <Cite ids={wine.pairingIds.sourceIds} numbers={numbers} />
+            </p>
+            <p className="text-small text-text-muted">
+              São orientações, não regras: outras combinações também podem funcionar.
+            </p>
           </ContentSection>
         )}
 

@@ -2,15 +2,17 @@ import { z } from "zod";
 
 import { editorialTextSchema, entityBaseShape, idSchema, sourced } from "./common";
 
+/** Na ordem de uma refeição (é a ordem dos grupos na página /harmonizacoes). */
 export const pairingCategories = [
+  "entradas",
   "carnes",
   "aves",
   "peixes-e-frutos-do-mar",
   "massas",
   "queijos",
   "vegetarianos",
-  "sobremesas",
   "culinarias",
+  "sobremesas",
 ] as const;
 
 /** Pairing (DATA_MODEL.md §3.10): sempre orientação, nunca "a única combinação correta". */
@@ -26,3 +28,4 @@ export const pairingSchema = z.strictObject({
 });
 
 export type Pairing = z.infer<typeof pairingSchema>;
+export type PairingCategory = (typeof pairingCategories)[number];

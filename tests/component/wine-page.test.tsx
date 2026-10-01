@@ -107,6 +107,7 @@ describe("WineHeader", () => {
     vintages: [],
     sources: [],
     related: [],
+    pairings: [],
   };
 
   it("vinho com poucos dados verificados mostra o aviso honesto", () => {

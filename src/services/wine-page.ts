@@ -20,7 +20,7 @@ export function createWinePageService(adapter: DataAdapter) {
     const wine = (await publishedOf(adapter, "wines")).find((item) => item.slug === slug);
     if (!wine) return undefined;
 
-    const [producers, regions, countries, grapes, vintages, sources, images, list] =
+    const [producers, regions, countries, grapes, vintages, sources, images, list, pairings] =
       await Promise.all([
         publishedOf(adapter, "producers"),
         publishedOf(adapter, "regions"),
@@ -30,6 +30,7 @@ export function createWinePageService(adapter: DataAdapter) {
         adapter.getAll("sources"),
         adapter.getAll("images"),
         wineList.getWineList(),
+        publishedOf(adapter, "pairings"),
       ]);
 
     const wineVintages = vintages
@@ -59,6 +60,10 @@ export function createWinePageService(adapter: DataAdapter) {
       ...(image && { image }),
       sources: pickByIds(sources, wineCitationIds(wine, wineVintages)),
       related: relatedWines(wine.id, list.items),
+      pairings: pickByIds(pairings, wine.pairingIds?.value ?? []).map((pairing) => ({
+        name: pairing.name,
+        href: `/harmonizacoes#${pairing.slug}`,
+      })),
     };
   }
 

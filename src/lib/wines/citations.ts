@@ -25,6 +25,7 @@ export function wineCitationIds(wine: Wine, vintages: readonly Vintage[]): strin
     sensory.aromaIntensity,
     wine.aromaNotes,
     wine.flavorNotes,
+    wine.pairingIds,
     ...vintages.flatMap((vintage) => [
       vintage.alcoholPercent,
       vintage.grapes,

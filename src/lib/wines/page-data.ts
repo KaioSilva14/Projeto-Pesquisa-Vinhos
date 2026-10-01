@@ -5,6 +5,8 @@ import type { Source } from "@/schemas/source";
 import type { Vintage } from "@/schemas/vintage";
 import type { Wine } from "@/schemas/wine";
 
+import type { EntityRef } from "@/lib/entity-list";
+
 import type { RelatedGroup } from "./related";
 
 // Dados da página /vinhos/[slug], montados em services/wine-page.ts.
@@ -25,4 +27,6 @@ export type WinePageData = {
   /** Fontes citadas, na ordem em que aparecem na página (numeração da lista "Fontes"). */
   sources: Source[];
   related: RelatedGroup[];
+  /** Pratos que o produtor sugere, com link para a página de harmonizações. */
+  pairings: EntityRef[];
 };

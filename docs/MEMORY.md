@@ -39,7 +39,9 @@
 - F4-08 (1ª parte) no branch `data/imagens` (PR #18 a abrir): 16 fotos do Wikimedia Commons em `public/images/regions/` e `producers/`, registradas em `src/data/images.ts` (`commonsPhoto`); entidades acham as próprias fotos com `imageIdsOf`. Busca e metadados pela API do Commons (espaçar pedidos: HTTP 429 com rajadas). Redimensionar com System.Drawing usando `[double]` (o `[math]::Min(1, 0.8)` do PowerShell arredonda para inteiro).
 - F4-08 (2ª parte) no branch `data/garrafas` (PR #19 a abrir): 8 garrafas em `public/images/wines/` (`producerSitePhoto` em `src/data/images.ts`, ADR-028). Sites da Roederer montam imagens com JavaScript e não entregaram nenhuma; Catena só tem fotos de outra safra. Cards de vinho com garrafa via `components/wine/WineGrid.tsx`.
 - Imagens completas no branch `data/imagens-faltantes` (PR #20 a abrir): todas as uvas, regiões, produtores e vinhos têm foto. Técnicas que funcionaram: API de mídia do WordPress (`/wp-json/wp/v2/media?search=`) e copiar o JPEG de dentro de PDFs com `pypdf` (objeto `/DCTDecode`, `obj._data`; o `page.images` exige Pillow, que não está instalado). argentina.gob.ar é CC BY 4.0.
-- **Próxima tarefa**: F4-06 (harmonizações), depois a Fase 5 (home e storytelling). Antes de qualquer publicação: rever ADR-024 e ADR-028 (imagens sem licença livre).
+- **Fases 4 e 5 concluídas** no branch `feat/harmonizacoes-e-home` (PR #21 a abrir): `/harmonizacoes` (só sugestões dos produtores: 3 vinhos), home editorial, `/sobre` (créditos de todas as imagens, gerados dos dados) e `/explorar`.
+- **Combinado de 2026-10-01: menos commits e PRs.** Um branch por parte grande (fase inteira ou bloco grande de tarefas); commit, push e instruções de PR só no fim dessa parte ou quando o usuário pedir.
+- **Próxima tarefa**: Fase 6 (favoritos). Antes de qualquer publicação: rever ADR-024 e ADR-028 (imagens sem licença livre).
 - **E2E com fotos**: com o servidor frio (sempre no CI), a primeira otimização de cada tamanho de foto é lenta. Páginas com foto usam `goto(..., { waitUntil: "domcontentloaded" })` e navegação com prazo maior; cliques em componentes Radix logo após o carregamento usam `toPass` (a página pode ainda não ter ativado o JavaScript). Ver `tests/e2e/grapes.spec.ts`. Pendências da Fase 3: filtro "uva principal"; foco após remover um chip (ACCESSIBILITY.md §3.2).
 - **Cuidado com o Zod no navegador**: importar um módulo com Zod num Client Component leva o Zod ao bundle e dispara violação de CSP (`script-src: eval`, o Zod 4 testa `new Function`). Módulos com Zod usados só no servidor levam `import "server-only"`.
 - **E2E contra build de produção** sem parar o dev: `$env:PW_PORT = "3200"; npm run test:e2e`. Contra o dev (3100), a compilação lenta gera falhas falsas.
@@ -74,7 +76,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- PR #20 (`data/imagens-faltantes` → `main`) a ser aberto e mesclado pelo usuário.
+- PR #21 (`feat/harmonizacoes-e-home` → `main`) a ser aberto e mesclado pelo usuário.
 - Fontes pendentes: anexo III do Regulamento (UE) 2019/33 (faixas de açúcar dos espumantes; EUR-Lex bloqueia acesso automático); fonte específica para Torrontés Riojano ↔ Valle de Cafayate; alteração de 2023 do disciplinare do Chianti Classico; versões posteriores a 1997 do regulamento de Rías Baixas.
 - Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
@@ -92,7 +94,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Depois do merge do PR #20: `git switch main`, `git pull`, apagar o branch local e criar um branch para a F4-06.
+1. Depois do merge do PR #21: `git switch main`, `git pull`, apagar o branch local e criar um branch para a Fase 6 (e seguir nele até o fim da fase).
 2. Na curadoria (F2-06+): só itens do `docs/CURATION.md`; cada fato conferido na fonte original, texto sempre próprio, commit do tipo `data:` citando as fontes.
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 

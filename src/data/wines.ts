@@ -129,6 +129,14 @@ export const wines: Wine[] = [
     regionId: "rioja",
     type: "tinto",
     sourceId: "src-riojalta-904",
+    pairingIds: {
+      value: [
+        "carnes-pouco-condimentadas",
+        "peixes-pouco-condimentados",
+        "sobremesas-com-chocolate",
+      ],
+      ...src("src-riojalta-904"),
+    },
   }),
   wine({
     id: "lagar-de-cervera",
@@ -138,6 +146,19 @@ export const wines: Wine[] = [
     regionId: "rias-baixas",
     type: "branco",
     sourceId: "src-riojalta-lagar-de-cervera",
+    pairingIds: {
+      value: [
+        "aperitivos",
+        "frutos-do-mar",
+        "peixes",
+        "saladas",
+        "arroz-com-peixe",
+        "aves",
+        "queijos-frescos",
+        "sushi-e-sashimi",
+      ],
+      ...src("src-riojalta-lagar-de-cervera"),
+    },
   }),
   wine({
     id: "catena-zapata-malbec-argentino",
@@ -167,5 +188,9 @@ export const wines: Wine[] = [
     sourceId: "src-miolo-lote-43-ficha",
     volumeMl: { value: [750], ...src("src-miolo-lote-43-pagina") },
     servingTemperature: { value: { minC: 16, maxC: 18 }, ...src("src-miolo-lote-43-ficha") },
+    pairingIds: {
+      value: ["culinarias-francesa-e-italiana", "carnes-de-caca-assadas", "churrasco"],
+      ...src("src-miolo-lote-43-ficha"),
+    },
   }),
 ];
