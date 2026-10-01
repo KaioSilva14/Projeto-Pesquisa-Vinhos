@@ -243,3 +243,9 @@
 - **Consequências**: um terceiro job no CI (paralelo ao E2E). Revisar a versão do `@lhci/cli` quando sair uma sem os alertas.
 - **Data**: 2026-10-01 · **Status**: aceita (decisão técnica delegada pelo usuário)
 
+## ADR-036 — Publicação na Vercel, pública e com todas as fotos
+- **Contexto**: na Fase 11 o site foi publicado. As fotos de garrafas e da vinícola La Rioja Alta tiradas dos sites dos produtores e do importador (ADR-028, ADR-030) não têm autorização por escrito; o uso tinha sido aceito para um projeto de estudo **sem público**. O usuário recebeu três opções: público só com as fotos licenciadas (recomendado), fechado só para ele, ou público com todas as fotos.
+- **Decisão (do usuário, 2026-10-01)**: **público, com todas as fotos**, em `https://vinum-vinhos.vercel.app` (projeto `vinum-vinhos` na Vercel, plano Hobby, ligado ao repositório do GitHub). Todo merge no `main` publica a produção; cada PR ganha uma prévia. Única variável: `NEXT_PUBLIC_SITE_URL=https://vinum-vinhos.vercel.app`. As fotos sem licença livre continuam com crédito, origem e o aviso de retirada a pedido; o projeto segue sem fins comerciais.
+- **Consequências**: risco de pedido de remoção ou reclamação de direitos de imagem, assumido pelo usuário; se houver pedido, a foto sai e a página mostra "Imagem indisponível". O uso dos servidores do OpenStreetMap (ADR-033) deve ser revisto se o tráfego crescer. A conexão do Claude com a Vercel só tem permissão de leitura nesta conta: o projeto foi importado pelo usuário no site da Vercel.
+- **Data**: 2026-10-01 · **Status**: aceita (decisão do usuário)
+

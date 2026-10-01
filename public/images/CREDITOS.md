@@ -57,7 +57,7 @@ A La Rioja Alta, S.A. não tem foto no Commons: a foto dela vem do site oficial 
 
 ## Fotos dos sites oficiais dos produtores (`wines/` e `producers/la-rioja-alta-01.jpg`)
 
-**Fonte:** o site oficial de cada produtor ou do importador oficial (páginas, biblioteca de mídia ou fichas técnicas em PDF, de onde a imagem foi copiada). **Estas fotos não têm licença livre:** os direitos são dos produtores. Foram reproduzidas **sem autorização expressa**, com crédito, porque o Vinum é um projeto de estudo sem público e sem fins comerciais (decisão registrada no ADR-028). Se você é o produtor e deseja a remoção, abra uma issue: a foto será retirada.
+**Fonte:** o site oficial de cada produtor ou do importador oficial (páginas, biblioteca de mídia ou fichas técnicas em PDF, de onde a imagem foi copiada). **Estas fotos não têm licença livre:** os direitos são dos produtores. Foram reproduzidas **sem autorização expressa**, com crédito, porque o Vinum é um projeto de estudo sem fins comerciais (ADR-028); o site foi publicado com elas por decisão do autor do projeto (ADR-036). Se você é o produtor e deseja a remoção, abra uma issue: a foto será retirada.
 **Correspondência:** cada foto é do vinho da página; foto de outra safra não foi usada. Quando a safra não é legível na foto, o texto alternativo diz isso.
 
 | Arquivo | Produtor | Origem | Modificação |

@@ -137,5 +137,5 @@
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F11-01 | Projeto na Vercel + variáveis de ambiente (**só com autorização do usuário**) | Preview funcionando, com `noindex` em previews | P0 | F10-* | todo |
-| F11-02 | Domínio + produção | Site publicado; checklist de deploy | P1 | F11-01 | todo |
+| F11-01 | Projeto na Vercel + variáveis de ambiente (**só com autorização do usuário**) | Preview funcionando, com `noindex` em previews | P0 | F10-* | done (ADR-036: projeto `vinum-vinhos`, importado pelo usuário; `NEXT_PUBLIC_SITE_URL`) |
+| F11-02 | Domínio + produção | Site publicado; checklist de deploy | P1 | F11-01 | done (produção em `vinum-vinhos.vercel.app`; sitemap, robots, HSTS e CSP conferidos no site publicado; domínio próprio não contratado) |
