@@ -5,6 +5,8 @@ import { BottomNav } from "@/components/layout/BottomNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { MAIN_CONTENT_ID, SkipLink } from "@/components/layout/SkipLink";
+import { FavoritesHydrator } from "@/components/favorites/FavoritesHydrator";
+import { ScrollSentinel } from "@/components/motion/ScrollSentinel";
 import { SearchShortcuts } from "@/components/search/SearchShortcuts";
 import { env } from "@/config/env";
 import { SITE } from "@/config/site";
@@ -33,6 +35,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR" className={`${newsreader.variable} ${hankenGrotesk.variable}`}>
       <body className="flex min-h-dvh flex-col">
+        <ScrollSentinel />
         <SkipLink />
         <SiteHeader />
         {/* tabIndex -1: o SkipLink consegue mover o foco para cá */}
@@ -42,6 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <SiteFooter />
         <BottomNav />
         <SearchShortcuts />
+        <FavoritesHydrator />
       </body>
     </html>
   );

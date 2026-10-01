@@ -53,6 +53,8 @@
 | A17 | Imagem carregando | `EntityImage` | Evitar "pulo" | Blur placeholder → imagem (`opacity` 0→1) | 320 ms | Sem transição |
 | A18 | Perfil sensorial | `SensoryProfile` | Leitura | Segmentos aparecem em sequência ao entrar na viewport | 40 ms por segmento, total ≤ 300 ms | Estático |
 
+> **Situação (Fase 7, ADR-029):** feitas em CSS, sem o Motion: A01 (`components/motion/Reveal.tsx`), A02, A03, A05, A07, A08, A11, A12, A14, A15 (`components/motion/ScrollSentinel.tsx`). Fora, com motivo no ADR-029: A09, A10, A16, A17, A18.
+
 ## 4. Implementação
 
 - **CSS**: tokens de duração/easing em `globals.css`; utilitário base:

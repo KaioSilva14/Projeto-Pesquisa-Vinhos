@@ -31,6 +31,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - 2026-09-30: todas as entidades com foto: garrafas dos 5 vinhos que faltavam (biblioteca de mídia dos sites e fichas técnicas em PDF), vinícola La Rioja Alta (site oficial) e Torrontés Riojano (relatório do INV, CC BY 4.0).
 - 2026-10-01: F4-06, harmonizações sugeridas pelos produtores (`/harmonizacoes` e seção na página do vinho). **Fase 4 concluída.**
 - 2026-10-01: Fase 5, home editorial com busca em destaque e seções do catálogo, página Sobre com todos os créditos de imagens e página Explorar. **Fase 5 concluída.**
+- 2026-10-01: Fase 6, favoritos no navegador (sem conta): coração nas páginas e cards de vinho, uva, região e produtor, página `/favoritos`, proteção contra dado corrompido ou armazenamento bloqueado. **Fase 6 concluída.**
+- 2026-10-01: Fase 7, animações só com CSS (ADR-029): entrada suave das seções da home, foto do card crescendo no hover, coração que pulsa ao favoritar e sombra do cabeçalho ao rolar; tudo desligado com movimento reduzido e visível sem JavaScript. **Fase 7 concluída.**
 
 ### Alterado
 - 2026-09-30: composição de uvas com soma abaixo de 99% passa a ser aceita quando a nota explica o que falta (uva fora do catálogo), em vez de ser sempre rejeitada.

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { LinkList } from "@/components/entity/LinkList";
 import { ContentSection } from "@/components/layout/ContentSection";
 import { EntityLayout } from "@/components/layout/EntityLayout";
+import { EntityTitle } from "@/components/layout/EntityTitle";
 import { EntityImage } from "@/components/media/EntityImage";
 import { RegionFacts } from "@/components/place/RegionFacts";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -75,7 +76,7 @@ export default async function RegionPage({ params }: RegionPageProps) {
         }
       >
         <header className="grid gap-4">
-          <h1 className="font-serif text-h1 text-balance">{region.name}</h1>
+          <EntityTitle title={region.name} favorite={{ kind: "region", id: region.id }} />
           {region.appellation && (
             <Badge className="justify-self-start">{region.appellation.value.category}</Badge>
           )}

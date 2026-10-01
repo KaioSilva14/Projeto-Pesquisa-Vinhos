@@ -1,3 +1,4 @@
+import { FavoriteButton } from "@/components/favorites/FavoriteButton";
 import { CreditButton } from "@/components/media/CreditButton";
 import { EntityImage } from "@/components/media/EntityImage";
 import { Badge } from "@/components/ui/Badge";
@@ -16,7 +17,7 @@ type WineCardProps = {
 };
 
 const creditClass =
-  "relative z-10 ml-auto inline-flex min-h-11 items-center text-caption text-text-subtle underline underline-offset-2 hover:text-text md:min-h-6";
+  "relative z-10 inline-flex min-h-11 items-center text-caption text-text-subtle underline underline-offset-2 hover:text-text md:min-h-6";
 
 /** Card de vinho (DESIGN.md §7.5): garrafa, nome, produtor, região · país, tipo e safra. */
 export function WineCard({
@@ -52,7 +53,17 @@ export function WineCard({
           ) : (
             wine.latestYear !== undefined && <Badge>Safra {wine.latestYear}</Badge>
           )}
-          {wine.image && <CreditButton image={wine.image} className={creditClass} />}
+          {/* Acima do link do card (z-10): clicar aqui não abre a página do vinho */}
+          <div className="ml-auto flex items-center gap-1">
+            {wine.image && <CreditButton image={wine.image} className={creditClass} />}
+            <FavoriteButton
+              kind="wine"
+              id={wine.id}
+              name={wine.name}
+              variant="ghost"
+              className="relative z-10"
+            />
+          </div>
         </div>
       </div>
     </Card>

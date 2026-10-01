@@ -28,7 +28,12 @@ export default async function GrapesPage() {
         ]}
       />
       <Container className="pb-16">
-        <EntityGrid items={grapes} label="Lista de uvas" imageVariant="grape" />
+        <EntityGrid
+          items={grapes}
+          label="Lista de uvas"
+          imageVariant="grape"
+          favoriteKind="grape"
+        />
       </Container>
     </>
   );

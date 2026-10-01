@@ -95,16 +95,16 @@
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F6-01 | Store Zustand `persist` com versão, validação Zod e storage seguro | Testes: corrompido, indisponível, ids inválidos | P1 | F2-01 | todo |
-| F6-02 | FavoriteButton + página `/favoritos` com EmptyState | E2E-06 | P1 | F6-01 | todo |
+| F6-01 | Store Zustand `persist` com versão, validação Zod e storage seguro | Testes: corrompido, indisponível, ids inválidos | P1 | F2-01 | done (validação escrita à mão em vez de Zod: o código vai para o navegador; Zustand 5.0.15) |
+| F6-02 | FavoriteButton + página `/favoritos` com EmptyState | E2E-06 | P1 | F6-01 | done (coração nas páginas e cards de vinho, uva, região e produtor) |
 
 ## Fase 7 — Animações
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F7-01 | Instalar Motion (LazyMotion) + MotionConfig reduzido | Bundle dentro do orçamento | P2 | F5-01 | todo |
-| F7-02 | Implementar catálogo A01–A18 onde aplicável | E2E-09; sem regressão de INP | P2 | F7-01 | todo |
-| F7-03 | Avaliar View Transitions (A16) | Decisão registrada | P3 | F7-02 | todo |
+| F7-01 | Instalar Motion (LazyMotion) + MotionConfig reduzido | Bundle dentro do orçamento | P2 | F5-01 | done (Motion não instalado: CSS bastou, ADR-029) |
+| F7-02 | Implementar catálogo A01–A18 onde aplicável | E2E-09; sem regressão de INP | P2 | F7-01 | done (A01, A02, A12, A15 novos; A09, A10, A17, A18 fora com motivo no ADR-029) |
+| F7-03 | Avaliar View Transitions (A16) | Decisão registrada | P3 | F7-02 | done (adiado: experimental no Next 16, ADR-029) |
 
 ## Fase 8 — 3D
 

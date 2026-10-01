@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { ContentSection } from "@/components/layout/ContentSection";
 import { EntityLayout } from "@/components/layout/EntityLayout";
+import { EntityTitle } from "@/components/layout/EntityTitle";
 import { EntityImage } from "@/components/media/EntityImage";
 import { ProducerFacts } from "@/components/producer/ProducerFacts";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -73,7 +74,7 @@ export default async function ProducerPage({ params }: ProducerPageProps) {
         }
       >
         <header className="grid gap-4">
-          <h1 className="font-serif text-h1 text-balance">{producer.name}</h1>
+          <EntityTitle title={producer.name} favorite={{ kind: "producer", id: producer.id }} />
           {!producer.history && <IncompleteDataNote subject="este produtor" />}
         </header>
 

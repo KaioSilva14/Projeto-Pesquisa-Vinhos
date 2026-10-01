@@ -1,7 +1,9 @@
+import { FavoriteButton } from "@/components/favorites/FavoriteButton";
 import { CreditButton } from "@/components/media/CreditButton";
 import { EntityImage } from "@/components/media/EntityImage";
 import { Card, CardLink } from "@/components/ui/Card";
 import { cn } from "@/lib/cn";
+import type { FavoriteKind } from "@/lib/favorites/favorites";
 import type { ImageAsset } from "@/schemas/image-asset";
 
 type EntityCardProps = {
@@ -19,6 +21,8 @@ type EntityCardProps = {
    */
   reserveImage?: boolean;
   headingLevel?: "h2" | "h3";
+  /** Mostra o botão de favorito para esta entidade. */
+  favorite?: { kind: FavoriteKind; id: string } | undefined;
 };
 
 const vinhos = (count: number) =>
@@ -37,6 +41,7 @@ export function EntityCard({
   imageVariant = "grape",
   reserveImage = true,
   headingLevel: Heading = "h2",
+  favorite,
 }: EntityCardProps) {
   const showImage = Boolean(image) || reserveImage;
   return (
@@ -59,7 +64,19 @@ export function EntityCard({
           {wineCount !== undefined && (
             <p className="text-small text-text-muted">{vinhos(wineCount)}</p>
           )}
-          {image && <CreditButton image={image} />}
+          {/* Acima do link do card (z-10): clicar aqui não abre a página */}
+          <div className="ml-auto flex items-center gap-1">
+            {image && <CreditButton image={image} />}
+            {favorite && (
+              <FavoriteButton
+                kind={favorite.kind}
+                id={favorite.id}
+                name={name}
+                variant="ghost"
+                className="relative z-10"
+              />
+            )}
+          </div>
         </div>
       </div>
     </Card>
