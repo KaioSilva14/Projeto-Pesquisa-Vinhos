@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ExploreBand } from "@/components/home/ExploreBand";
 import { GrapeStrip } from "@/components/home/GrapeStrip";
+import { HomeFaq } from "@/components/home/HomeFaq";
 import { HomeHero } from "@/components/home/HomeHero";
 import { ProducerIndex } from "@/components/home/ProducerIndex";
 import { RegionShowcase } from "@/components/home/RegionShowcase";
@@ -10,6 +11,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { WineGrid } from "@/components/wine/WineGrid";
 import { env } from "@/config/env";
+import { HOME_FAQ } from "@/config/faq";
 import { truncate } from "@/lib/seo/common";
 import { homeJsonLd } from "@/lib/seo/home";
 import { sortWines } from "@/lib/wines/list-item";
@@ -40,7 +42,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <JsonLd data={homeJsonLd(env.NEXT_PUBLIC_SITE_URL)} />
+      <JsonLd data={homeJsonLd(env.NEXT_PUBLIC_SITE_URL, HOME_FAQ)} />
       <HomeHero
         counts={[
           { label: "vinhos", count: wines.length, href: "/vinhos" },
@@ -99,6 +101,10 @@ export default async function HomePage() {
           <ProducerIndex producers={producers} />
         </Reveal>
       )}
+
+      <Reveal>
+        <HomeFaq items={HOME_FAQ} />
+      </Reveal>
 
       <Reveal>
         <ExploreBand />

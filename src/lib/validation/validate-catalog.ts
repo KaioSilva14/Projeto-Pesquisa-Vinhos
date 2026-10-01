@@ -122,6 +122,35 @@ function checkSensory(catalog: Catalog): Issue[] {
   return issues;
 }
 
+/** Tamanho mínimo das fotos (IMAGES.md §4): abaixo disso, a foto fica borrada na tela. */
+export const MIN_IMAGE_SIZE = {
+  /** Garrafa: altura, porque ela é exibida em pé (até ~770 px de altura na página do vinho). */
+  bottleHeight: 950,
+  /** Demais fotos: lado maior e lado menor. */
+  longSide: 1100,
+  shortSide: 700,
+} as const;
+
+/** Regra 13: foto pequena demais (baixa qualidade) não entra no catálogo. */
+function checkImageQuality(catalog: Catalog): Issue[] {
+  return catalog.images.flatMap((image) => {
+    const long = Math.max(image.width, image.height);
+    const short = Math.min(image.width, image.height);
+    const tooSmall =
+      image.subjectType === "wine"
+        ? image.height < MIN_IMAGE_SIZE.bottleHeight
+        : long < MIN_IMAGE_SIZE.longSide || short < MIN_IMAGE_SIZE.shortSide;
+    if (!tooSmall) return [];
+    return [
+      {
+        level: "error" as const,
+        where: `images[${image.id}]`,
+        message: `foto pequena demais (${image.width}×${image.height}): procure uma versão maior`,
+      },
+    ];
+  });
+}
+
 /** DATA_SOURCES.md §6: fonte consultada há mais de 12 meses gera aviso de revisão. */
 function checkStaleSources(catalog: Catalog, today: Date): Issue[] {
   const limit = new Date(today);
@@ -135,7 +164,7 @@ function checkStaleSources(catalog: Catalog, today: Date): Issue[] {
     }));
 }
 
-/** Aplica as 13 regras de integridade do DATA_MODEL.md §6. Lista vazia = catálogo válido. */
+/** Aplica as 14 regras de integridade do DATA_MODEL.md §6. Lista vazia = catálogo válido. */
 export function validateCatalog(
   catalog: Catalog,
   { isDemoSet, today = new Date() }: Options,
@@ -148,5 +177,6 @@ export function validateCatalog(
     ...checkDemo(catalog, isDemoSet),
     ...checkSensory(catalog),
     ...checkStaleSources(catalog, today),
+    ...checkImageQuality(catalog),
   ];
 }

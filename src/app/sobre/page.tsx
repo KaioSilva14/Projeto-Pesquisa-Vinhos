@@ -62,8 +62,8 @@ export default async function AboutPage() {
               As fotos pertencem aos seus autores e instituições. As do Wikimedia Commons e do
               Instituto Nacional de Vitivinicultura (Argentina) têm licença livre; as do catálogo
               VIVC têm permissão de reprodução com citação. As fotos tiradas dos sites oficiais dos
-              produtores não têm licença livre: são usadas com crédito, só enquanto este for um
-              projeto de estudo sem fins comerciais.
+              produtores e dos importadores oficiais não têm licença livre: são usadas com crédito,
+              só enquanto este for um projeto de estudo sem fins comerciais.
             </p>
             {credits.map((group) => (
               <div key={group.title} className="grid gap-3">

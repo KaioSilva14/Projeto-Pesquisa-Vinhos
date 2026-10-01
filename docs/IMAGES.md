@@ -37,7 +37,9 @@ Antes de aceitar uma imagem:
 | Item | Regra |
 |---|---|
 | Arquivo de origem em `public/images/` | JPEG/WebP de alta qualidade, lado maior ≥ 1600 px (garrafas ≥ 1200 px de altura) |
-| Entrega | `next/image` gera AVIF/WebP automaticamente (`images.formats: ['image/avif','image/webp']`) |
+| Mínimo aceito (barrado pelo `npm run validate:data`, regra 13 do `DATA_MODEL.md` §6) | Garrafa ≥ 950 px de altura; demais fotos com lado maior ≥ 1100 px e lado menor ≥ 700 px. Abaixo disso, procurar versão maior (site do produtor, ficha técnica em PDF, importador oficial) |
+| Nunca esticar | A garrafa (`contain`) nunca é exibida maior que o tamanho real do arquivo (`EntityImage`): foto esticada fica borrada |
+| Entrega | `next/image` gera AVIF/WebP automaticamente (`images.formats: ['image/avif','image/webp']`), com qualidade 85 (`images.qualities`; o padrão 75 deixava rótulos menos nítidos) |
 | Peso alvo entregue | Hero ≤ 200 KB (mobile) · card ≤ 60 KB · miniatura ≤ 15 KB |
 | Nomes de arquivo | `{subjectType}/{subjectId}-{nn}.{ext}` → `grapes/malbec-01.jpg` |
 | Metadados EXIF | Remover localização/dados pessoais de fotos próprias |

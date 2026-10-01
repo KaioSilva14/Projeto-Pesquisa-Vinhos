@@ -1,6 +1,9 @@
 // Favoritos (F6-01): o que é guardado no navegador e como validar o que volta de lá.
 // Sem Zod de propósito: este código vai para o navegador (o Zod pesa e esbarra na CSP).
 
+/** Nome da chave no localStorage (citado também na política de privacidade). */
+export const FAVORITES_STORAGE_KEY = "vinum-favoritos";
+
 export const favoriteKinds = ["wine", "grape", "region", "producer"] as const;
 export type FavoriteKind = (typeof favoriteKinds)[number];
 

@@ -60,7 +60,7 @@ describe("SEO da uva", () => {
   it("descrição é o resumo próprio, cortado no fim de uma palavra", async () => {
     const data = await service().getGrapePage("sangiovese");
     const description = grapeDescription(data!);
-    expect(description.length).toBeLessThanOrEqual(160);
+    expect(description.length).toBeLessThanOrEqual(155);
     expect(data!.grape.summary?.text.startsWith(description.replace(/…$/, ""))).toBe(true);
   });
 

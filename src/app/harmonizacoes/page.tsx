@@ -66,7 +66,7 @@ export default async function PairingsPage() {
 
           {sources.length > 0 && (
             <ContentSection title="Fontes" id="fontes">
-              <SourceList sources={sources} />
+              <SourceList sources={sources} correctionPath="/harmonizacoes" />
             </ContentSection>
           )}
         </div>

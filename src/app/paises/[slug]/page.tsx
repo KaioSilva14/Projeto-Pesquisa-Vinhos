@@ -104,7 +104,7 @@ export default async function CountryPage({ params }: CountryPageProps) {
 
         {data.sources.length > 0 && (
           <ContentSection title="Fontes" id="fontes">
-            <SourceList sources={data.sources} />
+            <SourceList sources={data.sources} correctionPath={`/paises/${country.slug}`} />
           </ContentSection>
         )}
       </EntityLayout>

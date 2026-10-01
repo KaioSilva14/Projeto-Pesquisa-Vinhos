@@ -28,6 +28,8 @@ export const FOOTER_NAV: readonly { title: string; items: readonly NavItem[] }[]
     items: [
       { label: "Sobre o Vinum", href: "/sobre" },
       { label: "Favoritos", href: "/favoritos" },
+      { label: "Sugerir uma correção", href: "/sugerir-correcao" },
+      { label: "Privacidade", href: "/privacidade" },
     ],
   },
 ];

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { EntityGrid } from "@/components/entity/EntityGrid";
 import { EmptyState } from "@/components/states/EmptyState";
 import { buttonVariants } from "@/components/ui/Button";
-import { HeartIcon } from "@/components/ui/icons";
+import { HeartIcon, InfoIcon } from "@/components/ui/icons";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { WineGrid } from "@/components/wine/WineGrid";
 import type { EntityListItem } from "@/lib/entity-list";
@@ -38,6 +38,7 @@ function pick<T extends { id: string }>(
 export function FavoritesView({ catalog }: { catalog: FavoritesCatalog }) {
   const hydrated = useFavoritesHydrated();
   const saved = useFavorites((state) => state.items);
+  const storageBlocked = useFavorites((state) => state.storageBlocked);
 
   if (!hydrated) {
     return (
@@ -77,23 +78,42 @@ export function FavoritesView({ catalog }: { catalog: FavoritesCatalog }) {
     },
   ] as const;
 
+  // Mensagem útil: diz o que aconteceu, a consequência e o que fazer
+  const blockedNote = storageBlocked && (
+    <p
+      role="status"
+      className="flex items-start gap-2 rounded-sm bg-sunken px-4 py-3 text-small text-text-muted"
+    >
+      <InfoIcon aria-hidden className="mt-0.5 size-4 shrink-0 text-info" />
+      <span>
+        Seu navegador está bloqueando o armazenamento deste site (comum em janelas anônimas). Os
+        favoritos funcionam, mas somem quando você fechar esta aba. Para guardá-los, permita os
+        dados do site nas configurações do navegador.
+      </span>
+    </p>
+  );
+
   if (wines.length + groups.reduce((total, group) => total + group.items.length, 0) === 0) {
     return (
-      <EmptyState
-        icon={<HeartIcon aria-hidden weight="light" />}
-        title="Nenhum favorito ainda"
-        description="Toque no coração de um vinho, uva, região ou produtor para guardar aqui."
-        action={
-          <Link href="/explorar" className={buttonVariants({ variant: "secondary" })}>
-            Explorar o catálogo
-          </Link>
-        }
-      />
+      <div className="grid gap-6">
+        {blockedNote}
+        <EmptyState
+          icon={<HeartIcon aria-hidden weight="light" />}
+          title="Nenhum favorito ainda"
+          description="Toque no coração de um vinho, uva, região ou produtor para guardar aqui."
+          action={
+            <Link href="/explorar" className={buttonVariants({ variant: "secondary" })}>
+              Explorar o catálogo
+            </Link>
+          }
+        />
+      </div>
     );
   }
 
   return (
     <div className="grid gap-12">
+      {blockedNote}
       {wines.length > 0 && (
         <section aria-labelledby="favoritos-vinhos" className="grid gap-4">
           <h2 id="favoritos-vinhos" className="font-serif text-h2">

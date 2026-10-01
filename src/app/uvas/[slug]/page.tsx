@@ -101,7 +101,7 @@ export default async function GrapePage({ params }: GrapePageProps) {
         </ContentSection>
 
         <ContentSection title="Fontes" id="fontes">
-          <SourceList sources={data.sources} />
+          <SourceList sources={data.sources} correctionPath={`/uvas/${grape.slug}`} />
         </ContentSection>
       </EntityLayout>
     </>

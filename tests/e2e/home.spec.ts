@@ -28,6 +28,7 @@ test.describe("Home", () => {
       "Regiões",
       "Descubra um vinho",
       "Produtores",
+      "Perguntas frequentes",
       "Continue explorando",
     ]) {
       await expect(page.getByRole("heading", { level: 2, name: title })).toBeVisible();

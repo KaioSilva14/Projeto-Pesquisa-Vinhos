@@ -35,6 +35,9 @@
   --color-surface: #fbfaf8;
   --color-surface-raised: #fbfaf8;
   --color-sunken: #eceae4;
+  /* Moldura das garrafas: branca nos dois temas, como em foto de produto. O fundo branco das
+     fotos de produtor se funde a ela, sem editar a foto (IMAGES.md §4) */
+  --color-bottle-frame: #ffffff;
   --color-text: #1c1c1f;
   --color-text-muted: #4f4f55;
   --color-text-subtle: #66666c;

@@ -15,7 +15,7 @@ import { WineFactSheet } from "@/components/wine/WineFactSheet";
 import { WineHeader } from "@/components/wine/WineHeader";
 import { env } from "@/config/env";
 import { formatList } from "@/lib/format";
-import { wineDescription, wineJsonLd } from "@/lib/seo/wine";
+import { wineDescription, wineJsonLd, wineTitle } from "@/lib/seo/wine";
 import { numberCitations } from "@/lib/citations";
 import { catalogService } from "@/services";
 
@@ -31,7 +31,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: WinePageProps): Promise<Metadata> {
   const data = await catalogService.getWinePage((await params).slug);
   if (!data) return {};
-  const title = data.producer ? `${data.wine.name} (${data.producer.name})` : data.wine.name;
+  const title = wineTitle(data);
   const description = wineDescription(data);
   const path = `/vinhos/${data.wine.slug}`;
   return {
@@ -141,7 +141,7 @@ export default async function WinePage({ params }: WinePageProps) {
         )}
 
         <ContentSection title="Fontes" id="fontes">
-          <SourceList sources={data.sources} />
+          <SourceList sources={data.sources} correctionPath={`/vinhos/${wine.slug}`} />
         </ContentSection>
       </EntityLayout>
     </>

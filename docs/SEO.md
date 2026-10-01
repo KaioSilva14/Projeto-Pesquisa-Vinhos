@@ -59,7 +59,10 @@ Helper único `src/lib/seo.ts` monta metadata a partir da entidade para evitar d
 
 - `src/app/sitemap.ts`: todas as páginas indexáveis publicadas (exclui demo, filtros, pesquisa, favoritos), com `lastModified` = `updatedAt` da entidade.
 - Acima de 50.000 URLs → `generateSitemaps` (sitemaps paginados).
-- `src/app/robots.ts`: `allow: /`, `disallow: /pesquisa, /favoritos, /api/`, `sitemap: {SITE_URL}/sitemap.xml`. Em ambiente de preview: `disallow: /` inteiro.
+- `src/app/robots.ts`: `allow: /`, `disallow: /pesquisa, /favoritos, /sugerir-correcao/obrigado, /api/, /dev/`, `sitemap: {SITE_URL}/sitemap.xml`. Em ambiente de preview: `disallow: /` inteiro.
+- Implementado (F10-01): páginas fixas + entidades publicadas e não demo (`services/sitemap.ts`).
+- Imagens OG implementadas (F10-01): `src/app/opengraph-image.tsx` (padrão) e uma por página de entidade (`[slug]/opengraph-image.tsx`), tipográficas, geradas no build com as fontes do site (`lib/seo/og-image.tsx`, fontes OFL em `src/assets/fonts`). Favicon e ícone do iPhone: `src/app/icon.tsx` e `apple-icon.tsx`.
+- Limites de caracteres (`SEO_LIMITS` em `lib/seo/common.ts`): título ≤ 60 (com " | Vinum"), descrição ≤ 155; conferidos em todas as páginas do sitemap pelo E2E `site-essentials.spec.ts`.
 
 ## 6. Dados estruturados (JSON-LD)
 
@@ -67,7 +70,7 @@ Tipados com `schema-dts`; inseridos com `<script type="application/ld+json">` co
 
 | Página | Tipos |
 |---|---|
-| Todas | `WebSite` (na home) com `potentialAction` `SearchAction` → `/pesquisa?q={search_term_string}`; `Organization` (o Vinum) |
+| Todas | `WebSite` (na home) com `potentialAction` `SearchAction` → `/pesquisa?q={search_term_string}`; `Organization` (o Vinum); `FAQPage` com as 5 perguntas frequentes da home (`config/faq.ts`) |
 | Páginas internas | `BreadcrumbList` |
 | Vinho | `WebPage` com `about` → `Product` com `name`, `brand` (produtor), `image` (se houver), `countryOfOrigin`. **Sem `offers`, sem `aggregateRating`, sem `review`** |
 | Produtor | `WebPage` com `about` → `Organization` (produtor) com `url` e `sameAs` = site oficial |

@@ -12,6 +12,7 @@ import { createProducerPagesService } from "./producer-pages";
 import { createProducerService } from "./producers";
 import { createReferenceService } from "./references";
 import { createSearchService } from "./search";
+import { createSitemapService } from "./sitemap";
 import { createWineListService } from "./wine-list";
 import { createWinePageService } from "./wine-page";
 import { createWineService } from "./wines";
@@ -30,6 +31,7 @@ export function createCatalogService(adapter: DataAdapter) {
     ...createReferenceService(adapter),
     ...createImageCreditsService(adapter),
     ...createSearchService(adapter),
+    ...createSitemapService(adapter),
     ...createWineListService(adapter),
     ...createWinePageService(adapter),
   };

@@ -10,7 +10,8 @@ test.describe("Página do vinho", () => {
     await page.getByRole("link", { name: "Château Palmer", exact: true }).first().click();
 
     await expect(page).toHaveURL(/\/vinhos\/chateau-palmer$/);
-    await expect(page).toHaveTitle("Château Palmer (Château Palmer) | Vinum");
+    // O nome do vinho já é o do produtor: o título não repete (wineTitle)
+    await expect(page).toHaveTitle("Château Palmer | Vinum");
     await expect(page.getByRole("heading", { level: 1, name: "Château Palmer" })).toBeVisible();
     await expect(page.getByRole("heading", { level: 2, name: "Ficha técnica" })).toBeVisible();
     await expect(page.getByRole("heading", { level: 3, name: "Safra 2022" })).toBeVisible();
@@ -33,7 +34,7 @@ test.describe("Página do vinho", () => {
 
   test("campos que a ficha não informa não aparecem", async ({ page }) => {
     // A ficha do Palmer 2022 não informa teor alcoólico nem perfil sensorial
-    await page.goto("/vinhos/chateau-palmer");
+    await page.goto("/vinhos/chateau-palmer", { waitUntil: "domcontentloaded" });
     await expect(page.getByText("Teor alcoólico")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Perfil sensorial" })).toHaveCount(0);
   });

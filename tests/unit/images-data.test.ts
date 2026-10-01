@@ -55,9 +55,9 @@ describe("fotos de regiões e produtores", () => {
 describe("fotos de garrafas (ADR-028)", () => {
   const bottles = images.filter((image) => image.subjectType === "wine");
 
-  it("vêm do site do próprio produtor, com crédito e a observação de uso", () => {
+  it("vêm do site do produtor ou do importador oficial, com crédito e a observação de uso", () => {
     for (const image of bottles) {
-      expect(image.credit, image.id).toMatch(/\(site oficial\)$/);
+      expect(image.credit, image.id).toMatch(/\(site oficial\)$|importador oficial/);
       expect(image.license, image.id).toMatch(/sem autorização expressa.*ADR-028/);
       expect(image.sourceUrl, image.id).toMatch(/^https:\/\//);
     }
@@ -77,7 +77,7 @@ describe("fotos de garrafas (ADR-028)", () => {
 
   it("fotos tiradas de fichas técnicas em PDF apontam para o PDF e dizem isso", () => {
     for (const image of bottles.filter((item) => item.sourceUrl.endsWith(".pdf"))) {
-      expect(image.modified, image.id).toMatch(/ficha técnica em PDF/);
+      expect(image.modified, image.id).toMatch(/ficha (técnica|completa) em PDF/);
     }
   });
 });

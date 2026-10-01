@@ -117,7 +117,7 @@ export default async function RegionPage({ params }: RegionPageProps) {
         </ContentSection>
 
         <ContentSection title="Fontes" id="fontes">
-          <SourceList sources={data.sources} />
+          <SourceList sources={data.sources} correctionPath={`/regioes/${region.slug}`} />
         </ContentSection>
       </EntityLayout>
     </>

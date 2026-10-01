@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { Container } from "@/components/layout/Container";
 import { SearchForm } from "@/components/search/SearchForm";
+import { buttonVariants } from "@/components/ui/Button";
+import { ArrowRightIcon } from "@/components/ui/icons";
 
 export type CatalogCount = { label: string; count: number; href: string };
 
@@ -11,8 +13,8 @@ type HomeHeroProps = {
 };
 
 /**
- * Abertura da home (DESIGN.md §8): título de até 2 linhas, subtítulo curto e uma ação principal,
- * a busca. Os números vêm dos dados publicados, não de texto fixo.
+ * Abertura da home (DESIGN.md §8): título de até 2 linhas, subtítulo curto, a busca e a chamada
+ * para explorar (CTA). Os números vêm dos dados publicados, não de texto fixo.
  */
 export function HomeHero({ counts }: HomeHeroProps) {
   return (
@@ -28,6 +30,15 @@ export function HomeHero({ counts }: HomeHeroProps) {
           </p>
         </div>
         <SearchForm query="" focusWhenEmpty={false} />
+        <div className="flex flex-wrap gap-3">
+          <Link href="/explorar" className={buttonVariants({ size: "lg" })}>
+            Explorar o catálogo
+            <ArrowRightIcon aria-hidden className="size-5" />
+          </Link>
+          <Link href="/vinhos" className={buttonVariants({ variant: "secondary", size: "lg" })}>
+            Ver os vinhos
+          </Link>
+        </div>
         <nav aria-label="O que há no catálogo">
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-small">
             {counts.map((item) => (

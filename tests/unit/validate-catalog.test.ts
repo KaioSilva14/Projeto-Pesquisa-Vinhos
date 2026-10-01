@@ -81,6 +81,28 @@ describe("validateCatalog", () => {
     expect(errorsOf(validCatalog())).toEqual([]);
   });
 
+  it("regra 13: foto pequena demais (baixa qualidade)", () => {
+    const catalog = validCatalog();
+    catalog.images[0] = { ...catalog.images[0]!, width: 600, height: 450 };
+    expect(errorsOf(catalog)).toEqual([expect.stringContaining("foto pequena demais (600×450)")]);
+  });
+
+  it("regra 13: garrafa precisa de altura, não de largura", () => {
+    const catalog = validCatalog();
+    const bottle = {
+      ...catalog.images[0]!,
+      width: 300,
+      height: 1200,
+      subjectType: "wine" as const,
+    };
+    catalog.images[0] = bottle;
+    expect(errorsOf(catalog).filter((message) => message.includes("pequena"))).toEqual([]);
+    catalog.images[0] = { ...bottle, height: 600 };
+    expect(errorsOf(catalog)).toEqual(
+      expect.arrayContaining([expect.stringContaining("foto pequena demais (300×600)")]),
+    );
+  });
+
   it("regra 1: fonte citada que não existe", () => {
     const catalog = validCatalog();
     catalog.grapes[0]!.color = { value: "tinta", sourceIds: ["src-inexistente"] };

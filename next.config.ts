@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
   images: {
     // AVIF primeiro (menor), WebP como alternativa (IMAGES.md §4)
     formats: ["image/avif", "image/webp"],
+    // Qualidade 85 (padrão 75): rótulos e texturas ficam nítidos (IMAGES.md §4)
+    qualities: [85],
     // Fotos raramente mudam: 31 dias de cache das versões otimizadas (ARCHITECTURE.md §10)
     minimumCacheTTL: 60 * 60 * 24 * 31,
     // Sem origens remotas: todas as imagens ficam em public/images (ADR-013)

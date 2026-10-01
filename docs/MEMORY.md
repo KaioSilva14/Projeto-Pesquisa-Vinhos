@@ -41,7 +41,8 @@
 - Imagens completas no branch `data/imagens-faltantes` (PR #20 a abrir): todas as uvas, regiões, produtores e vinhos têm foto. Técnicas que funcionaram: API de mídia do WordPress (`/wp-json/wp/v2/media?search=`) e copiar o JPEG de dentro de PDFs com `pypdf` (objeto `/DCTDecode`, `obj._data`; o `page.images` exige Pillow, que não está instalado). argentina.gob.ar é CC BY 4.0.
 - **Fases 4 e 5 concluídas** no branch `feat/harmonizacoes-e-home` (PR #21 a abrir): `/harmonizacoes` (só sugestões dos produtores: 3 vinhos), home editorial, `/sobre` (créditos de todas as imagens, gerados dos dados) e `/explorar`.
 - **Combinado de 2026-10-01: menos commits e PRs.** Um branch por parte grande (fase inteira ou bloco grande de tarefas); commit, push e instruções de PR só no fim dessa parte ou quando o usuário pedir.
-- **Fases 6 e 7 concluídas** no branch `feat/favoritos-e-animacoes` (PR #22 a abrir): favoritos no navegador (Zustand 5.0.15, `stores/favorites.ts`, `components/favorites/`, `/favoritos`) e animações só com CSS (ADR-029, `components/motion/`; Motion não instalado).
+- **Fases 6 e 7 concluídas** (PR #22 mesclado): favoritos no navegador (Zustand 5.0.15) e animações só com CSS (ADR-029).
+- **Itens básicos de site + qualidade de imagens** no branch `feat/seo-e-qualidade` (PR #23 a abrir): F10-01 (sitemap, robots, imagens OG, favicon), F10-05 (CTA, perguntas frequentes, privacidade, sugerir correção + agradecimento, ADR-031) e F10-06 (qualidade mínima das imagens, ADR-030).
 - **Próxima tarefa**: Fase 8 (3D). Antes de qualquer publicação: rever ADR-024 e ADR-028 (imagens sem licença livre).
 - **E2E com fotos**: com o servidor frio (sempre no CI), a primeira otimização de cada tamanho de foto é lenta. Páginas com foto usam `goto(..., { waitUntil: "domcontentloaded" })` e navegação com prazo maior; cliques em componentes Radix logo após o carregamento usam `toPass` (a página pode ainda não ter ativado o JavaScript). Ver `tests/e2e/grapes.spec.ts`. Pendências da Fase 3: filtro "uva principal"; foco após remover um chip (ACCESSIBILITY.md §3.2).
 - **Cuidado com o Zod no navegador**: importar um módulo com Zod num Client Component leva o Zod ao bundle e dispara violação de CSP (`script-src: eval`, o Zod 4 testa `new Function`). Módulos com Zod usados só no servidor levam `import "server-only"`.
@@ -77,7 +78,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Pendências
 
-- PR #22 (`feat/favoritos-e-animacoes` → `main`) a ser aberto e mesclado pelo usuário.
+- PR #23 (`feat/seo-e-qualidade` → `main`) a ser aberto e mesclado pelo usuário.
 - Fontes pendentes: anexo III do Regulamento (UE) 2019/33 (faixas de açúcar dos espumantes; EUR-Lex bloqueia acesso automático); fonte específica para Torrontés Riojano ↔ Valle de Cafayate; alteração de 2023 do disciplinare do Chianti Classico; versões posteriores a 1997 do regulamento de Rías Baixas.
 - Antes do lançamento público: consulta jurídica simples sobre conteúdo de bebidas alcoólicas (ADR-012).
 
@@ -95,7 +96,7 @@ npm · Next 16.3.6 · React 19.3.0 · **TypeScript 6.0.3** (7.x ainda incompatí
 
 ## Próximos passos
 
-1. Depois do merge do PR #22: `git switch main`, `git pull`, apagar o branch local e criar um branch para a Fase 8 (e seguir nele até o fim de uma parte grande).
+1. Depois do merge do PR #23: `git switch main`, `git pull`, apagar o branch local e criar um branch para a Fase 8 (e seguir nele até o fim de uma parte grande).
 2. Na curadoria (F2-06+): só itens do `docs/CURATION.md`; cada fato conferido na fonte original, texto sempre próprio, commit do tipo `data:` citando as fontes.
 3. Cada componente novo entra também na página `/dev/design-system` e passa pelo axe nos dois temas (o jsdom não aplica o CSS: problemas como `visibility: hidden` só aparecem no navegador).
 
