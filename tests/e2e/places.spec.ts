@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./helpers/test";
 
 import { expectNoSeriousA11yViolations } from "./helpers/a11y";
 
@@ -36,7 +36,9 @@ test.describe("Regiões e países", () => {
     await expect(
       page.getByText("Ainda estamos verificando mais informações sobre este país."),
     ).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Fontes" })).toHaveCount(0);
+    // A única fonte é a do ponto do mapa (Vale dos Vinhedos), não um texto sobre o país
+    await expect(page.locator("#fontes ol > li")).toHaveCount(1);
+    await expect(page.locator("#fonte-1")).toContainText("OpenStreetMap: Vale dos Vinhedos");
   });
 
   test("lista de países", async ({ page }) => {

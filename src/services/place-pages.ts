@@ -105,17 +105,33 @@ export function createPlacePagesService(adapter: DataAdapter) {
     if (!country) return undefined;
 
     const image = imageOf(country.imageIds);
+    const own = sortByName(regions.filter((region) => region.countryId === country.id));
+    const mapPoints = own.flatMap((region) =>
+      region.coordinates
+        ? [
+            {
+              name: region.name,
+              href: `/regioes/${region.slug}`,
+              ...region.coordinates.value,
+              sourceIds: region.coordinates.sourceIds,
+            },
+          ]
+        : [],
+    );
     return {
       country,
-      regions: sortByName(regions.filter((region) => region.countryId === country.id)).map(
-        regionItem,
-      ),
+      regions: own.map(regionItem),
+      mapPoints,
       producers: sortByName(producers.filter((producer) => producer.countryId === country.id)).map(
         ref((producer) => `/produtores/${producer.slug}`),
       ),
       wines: applyFilters(list.items, { pais: [country.slug] }),
       ...(image && { image }),
-      sources: pickByIds(sources, countryCitationIds(country)),
+      // Fontes do texto do país e, depois, dos pontos do mapa (na ordem da página)
+      sources: pickByIds(sources, [
+        ...countryCitationIds(country),
+        ...mapPoints.flatMap((point) => point.sourceIds),
+      ]),
     };
   }
 

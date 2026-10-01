@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./helpers/test";
 
 test.describe("Headers de segurança", () => {
   test("são enviados pelo servidor de produção", async ({ request }) => {

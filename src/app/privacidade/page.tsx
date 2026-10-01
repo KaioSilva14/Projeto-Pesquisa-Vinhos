@@ -47,6 +47,9 @@ export default function PrivacyPage() {
               <li>Você pesquisa e navega sem conta e sem cadastro.</li>
               <li>O Vinum não usa cookies, publicidade nem ferramentas de análise de visitas.</li>
               <li>
+                Só os mapas das páginas de regiões e países vêm de outro serviço (OpenStreetMap).
+              </li>
+              <li>
                 Os favoritos ficam só no seu navegador: não são enviados ao Vinum nem a ninguém.
               </li>
             </ul>
@@ -85,8 +88,16 @@ export default function PrivacyPage() {
             <p>
               Como em qualquer site, o serviço de hospedagem pode registrar dados técnicos de cada
               acesso, como o endereço IP e a página pedida, para manter o site funcionando e seguro.
-              Fotos e fontes de letra são servidas pelo próprio Vinum: abrir uma página não faz seu
-              navegador contatar outros sites.
+              Fotos e fontes de letra são servidas pelo próprio Vinum.
+            </p>
+          </ContentSection>
+
+          <ContentSection title="Mapas">
+            <p>
+              Nas páginas de regiões e países, o mapa é montado com imagens do OpenStreetMap. Quando
+              o mapa aparece na tela, seu navegador baixa essas imagens dos servidores da Fundação
+              OpenStreetMap, que recebem dados técnicos do pedido, como o endereço IP e a página de
+              origem. Nas outras páginas, abrir o Vinum não faz seu navegador contatar outros sites.
             </p>
           </ContentSection>
 

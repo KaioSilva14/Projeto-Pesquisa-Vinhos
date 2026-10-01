@@ -105,7 +105,7 @@ type EditorialText = {
 | `terroir` | `Sourced<string>` | | Solos, relevo, altitude |
 | `mainGrapeIds` | `Sourced<string[]>` | | |
 | `mainStyleIds` | `Sourced<string[]>` | | |
-| `coordinates` | `Sourced<{ lat: number; lng: number }>` | | Ponto representativo |
+| `coordinates` | `Sourced<{ lat: number; lng: number; place: string }>` | | Ponto do mapa: lugar retratado na foto da região (`place`), com fonte (ADR-033) |
 | `geo` | `{ geojsonPath: string; sourceIds: string[] }` | | Delimitação oficial (fase 9) |
 | `wikidataId` | `string` | | |
 

@@ -14,6 +14,7 @@ export { HeartIcon } from "@phosphor-icons/react/dist/ssr/Heart";
 export { HouseIcon } from "@phosphor-icons/react/dist/ssr/House";
 export { ImageBrokenIcon } from "@phosphor-icons/react/dist/ssr/ImageBroken";
 export { InfoIcon } from "@phosphor-icons/react/dist/ssr/Info";
+export { MapPinIcon } from "@phosphor-icons/react/dist/ssr/MapPin";
 export { MapTrifoldIcon } from "@phosphor-icons/react/dist/ssr/MapTrifold";
 export { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr/MagnifyingGlass";
 export { WarningCircleIcon } from "@phosphor-icons/react/dist/ssr/WarningCircle";

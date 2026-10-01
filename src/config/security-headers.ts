@@ -16,7 +16,8 @@ export function buildContentSecurityPolicy({ isDev, isHttps }: SecurityOptions):
     // (SECURITY.md §3, risco R14). Reavaliar na fase 10.
     `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob:",
+    // Mapas das regiões e países: imagens do mapa padrão do OpenStreetMap (ADR-033)
+    "img-src 'self' data: blob: https://tile.openstreetmap.org",
     "font-src 'self'",
     "connect-src 'self'",
     "worker-src 'self' blob:",

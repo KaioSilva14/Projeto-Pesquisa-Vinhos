@@ -7,6 +7,7 @@ import { ContentSection } from "@/components/layout/ContentSection";
 import { EntityLayout } from "@/components/layout/EntityLayout";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Cite } from "@/components/sources/Cite";
+import { PlaceMap } from "@/components/maps/PlaceMap";
 import { SourceList } from "@/components/sources/SourceList";
 import { IncompleteDataNote } from "@/components/states/IncompleteDataNote";
 import { WineGrid } from "@/components/wine/WineGrid";
@@ -77,6 +78,22 @@ export default async function CountryPage({ params }: CountryPageProps) {
 
         {data.regions.length > 0 && (
           <ContentSection title="Regiões">
+            {data.mapPoints.length > 0 && (
+              <>
+                <PlaceMap
+                  points={data.mapPoints}
+                  label={`Mapa ${ofCountry(country)}, com um marcador por região: ${data.mapPoints.map((point) => point.name).join(", ")}`}
+                />
+                <p className="text-text-muted">
+                  Cada marcador indica o lugar retratado na foto da região
+                  <Cite
+                    ids={data.mapPoints.flatMap((point) => point.sourceIds)}
+                    numbers={numbers}
+                  />
+                  . São localizações aproximadas: os limites das denominações não estão desenhados.
+                </p>
+              </>
+            )}
             <EntityGrid
               items={data.regions}
               label={`Regiões: ${country.name}`}

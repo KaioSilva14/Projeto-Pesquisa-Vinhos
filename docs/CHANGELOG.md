@@ -39,6 +39,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - 2026-10-01: ícones completos (F10-07, ADR-032): `favicon.ico`, ícones de 32 a 512 px, ícone do iPhone, ícone "maskable" do Android e manifesto do app.
 - 2026-10-01: revisão geral (F10-08): fontes dentro do orçamento (de ~508 KB para 90 KB pré-carregados), Rías Baixas com o caderno de especificações vigente (2024), Chianti Classico com as regras de 2023 (Gran Selezione), README atualizado; varredura sem links quebrados nem violações de acessibilidade.
 - 2026-10-01: Fase 8 encerrada sem 3D (ADR-032): a garrafa 3D foi testada e removida a pedido do usuário; a abertura da home ganhou uma foto real de vinhedo (Mendoza) em telas largas.
+- 2026-10-01: Fase 9, mapas reais (ADR-033): seção "Onde fica" nas regiões e mapa com os pontos das regiões nos países (Leaflet + OpenStreetMap, só quando a pessoa clica em "Mostrar o mapa"); cada marcador indica o lugar retratado na foto da região, com fonte, e o texto deixa claro que os limites não estão desenhados. Política de privacidade atualizada. **Fase 9 concluída.**
 
 ### Alterado
 - 2026-09-30: composição de uvas com soma abaixo de 99% passa a ser aceita quando a nota explica o que falta (uva fora do catálogo), em vez de ser sempre rejeitada.

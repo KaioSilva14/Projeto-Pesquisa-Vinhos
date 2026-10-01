@@ -9,10 +9,12 @@ import { EntityImage } from "@/components/media/EntityImage";
 import { RegionFacts } from "@/components/place/RegionFacts";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Cite } from "@/components/sources/Cite";
+import { PlaceMap } from "@/components/maps/PlaceMap";
 import { SourceList } from "@/components/sources/SourceList";
 import { Badge } from "@/components/ui/Badge";
 import { WineGrid } from "@/components/wine/WineGrid";
 import { env } from "@/config/env";
+import { openStreetMapUrl } from "@/lib/maps/map-points";
 import { numberCitations } from "@/lib/citations";
 import { regionDescription, regionJsonLd } from "@/lib/seo/place";
 import { catalogService } from "@/services";
@@ -91,6 +93,34 @@ export default async function RegionPage({ params }: RegionPageProps) {
         <ContentSection title="Ficha da região">
           <RegionFacts data={data} numbers={numbers} />
         </ContentSection>
+
+        {region.coordinates && (
+          <ContentSection title="Onde fica">
+            <PlaceMap
+              points={[
+                {
+                  name: region.name,
+                  ...region.coordinates.value,
+                  sourceIds: region.coordinates.sourceIds,
+                },
+              ]}
+              label={`Mapa de ${region.name}, com um marcador em ${region.coordinates.value.place}`}
+            />
+            {/* Alternativa em texto: o mapa nunca é a única forma de saber onde fica */}
+            <p className="text-text-muted">
+              O marcador indica {region.coordinates.value.place}, lugar retratado na foto acima
+              <Cite ids={region.coordinates.sourceIds} numbers={numbers} />. É uma localização
+              aproximada: os limites da denominação não estão desenhados.
+            </p>
+            <a
+              href={openStreetMapUrl(region.coordinates.value)}
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center text-accent underline-offset-4 hover:underline"
+            >
+              Ver no OpenStreetMap
+            </a>
+          </ContentSection>
+        )}
 
         {data.children.length > 0 && (
           <ContentSection title="Sub-regiões e denominações">

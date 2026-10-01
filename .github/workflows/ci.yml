@@ -44,7 +44,7 @@ jobs:
     name: E2E e acessibilidade (Playwright + axe)
     needs: quality
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -52,8 +52,19 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
+      # Navegadores do Playwright guardados entre execuções: reinstalar levava de 4 a 9 minutos
+      - name: Cache dos navegadores do Playwright
+        id: playwright-cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Instalar navegadores do Playwright
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium firefox webkit
+      - name: Dependências do sistema para os navegadores (com cache)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium firefox webkit
       - run: npm run test:e2e
       - name: Relatório do Playwright (em caso de falha)
         if: failure()

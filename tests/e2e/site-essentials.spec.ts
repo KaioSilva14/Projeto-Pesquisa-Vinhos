@@ -1,10 +1,12 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./helpers/test";
 
 import { expectNoSeriousA11yViolations } from "./helpers/a11y";
 
 // Itens básicos de um site profissional: CTA, perguntas frequentes, privacidade, correção com
 // agradecimento, sitemap, robots, imagem para redes sociais e favicon.
 const html = { waitUntil: "domcontentloaded" } as const;
+// Com o servidor ocupado (rodada completa, CI), a 1ª visita a uma página pode passar de 5 s
+const navigation = { timeout: 15_000 };
 
 test.describe("Home: chamada e perguntas", () => {
   test("a primeira seção tem a chamada para explorar", async ({ page }) => {
@@ -40,15 +42,20 @@ test.describe("Sugerir uma correção", () => {
     );
     await page.goto("/vinhos/miolo-lote-43", html);
     await page.getByRole("link", { name: "Sugira uma correção" }).click();
-    await expect(page).toHaveURL(/\/sugerir-correcao\?pagina=%2Fvinhos%2Fmiolo-lote-43/);
+    await expect(page).toHaveURL(
+      /\/sugerir-correcao\?pagina=%2Fvinhos%2Fmiolo-lote-43/,
+      navigation,
+    );
     const pageField = page.getByLabel("Página com o erro");
-    await expect(pageField).toHaveValue("/vinhos/miolo-lote-43");
+    await expect(pageField).toHaveValue("/vinhos/miolo-lote-43", navigation);
 
     // Enviar sem descrever o erro: mensagem útil no lugar certo
     await page.getByRole("button", { name: "Continuar no GitHub" }).click();
-    await expect(page.getByRole("alert").filter({ hasText: "Falta corrigir" })).toContainText(
-      "O que está errado?",
-    );
+    const summary = page.getByRole("alert").filter({ hasText: "Falta corrigir" });
+    await expect(summary).toContainText("O que está errado?");
+    // O resumo recebe o foco no quadro seguinte da tela: só depois disso dá para digitar
+    // (senão o foco pula no meio da digitação e o texto se perde, visto no WebKit)
+    await expect(summary).toBeFocused();
 
     await page
       .getByLabel("O que está errado?")
@@ -60,7 +67,10 @@ test.describe("Sugerir uma correção", () => {
     expect(new URL(popup.url()).searchParams.get("title")).toBe(
       "Correção de dados: /vinhos/miolo-lote-43",
     );
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Obrigado pela sugestão");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      "Obrigado pela sugestão",
+      navigation,
+    );
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
   });
 

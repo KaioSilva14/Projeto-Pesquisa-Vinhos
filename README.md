@@ -2,7 +2,7 @@
 
 Plataforma digital de **pesquisa, descoberta e consulta de vinhos**, com a sensação de catálogo premium e enciclopédia moderna. **Não é loja**: não há preços, carrinho nem venda. Toda informação exibida tem fonte registrada.
 
-> **Status**: Fases 0 a 8 concluídas: busca com autocomplete, catálogo com filtros, páginas de vinho, uva, região, país e produtor com fontes, harmonizações, favoritos no navegador, animações, SEO técnico (sitemap, robots, imagens para redes sociais, ícones) e política de privacidade. A Fase 8 (3D) foi testada e removida (ADR-032). Próximas: mapas (Fase 9), auditorias (Fase 10) e publicação (Fase 11). Estado detalhado em [`docs/MEMORY.md`](docs/MEMORY.md).
+> **Status**: Fases 0 a 9 concluídas: busca com autocomplete, catálogo com filtros, páginas de vinho, uva, região, país e produtor com fontes, harmonizações, favoritos no navegador, animações, mapas reais das regiões (OpenStreetMap), SEO técnico (sitemap, robots, imagens para redes sociais, ícones) e política de privacidade. A Fase 8 (3D) foi testada e removida (ADR-032). Próximas: auditorias (Fase 10) e publicação (Fase 11). Estado detalhado em [`docs/MEMORY.md`](docs/MEMORY.md).
 > Consumo responsável: bebida alcoólica é proibida para menores de 18 anos.
 
 ---

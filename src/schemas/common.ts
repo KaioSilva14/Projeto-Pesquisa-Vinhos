@@ -47,6 +47,8 @@ export const geoSchema = z.strictObject({
 export const coordinatesSchema = z.strictObject({
   lat: z.number().min(-90).max(90),
   lng: z.number().min(-180).max(180),
+  /** Que lugar o ponto marca (ex.: "Radda in Chianti"): o mapa diz isso em texto (fase 9). */
+  place: z.string().trim().min(2),
 });
 
 export const wikidataIdSchema = z.string().regex(/^Q\d+$/, "Use o formato Q123.");

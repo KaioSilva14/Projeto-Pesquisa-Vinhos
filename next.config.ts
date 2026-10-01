@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
     // Fotos raramente mudam: 31 dias de cache das versões otimizadas (ARCHITECTURE.md §10)
     minimumCacheTTL: 60 * 60 * 24 * 31,
     // Sem origens remotas: todas as imagens ficam em public/images (ADR-013)
+    // Só no build dos testes E2E (VINUM_E2E=1, definido pelo Playwright): fotos sem otimização.
+    // Converter cada foto para AVIF no servidor "frio" dos testes estourava o tempo no CI; a
+    // otimização real é medida pelo Lighthouse CI no build normal (ADR-034).
+    unoptimized: process.env.VINUM_E2E === "1",
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

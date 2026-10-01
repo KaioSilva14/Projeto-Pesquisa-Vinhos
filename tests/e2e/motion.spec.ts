@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./helpers/test";
 
 // F7-02: animações em CSS, sempre com conteúdo completo (ANIMATIONS.md)
 

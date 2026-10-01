@@ -48,6 +48,11 @@ export const regions: Region[] = [
     name: "Chianti Classico",
     countryId: "it",
     level: "appellation",
+    // Ponto do mapa: lugar retratado na foto da região (fase 9)
+    coordinates: {
+      value: { lat: 43.4871, lng: 11.3747, place: "Radda in Chianti" },
+      sourceIds: ["src-osm-radda-in-chianti"],
+    },
     sourceIds: ["src-masaf-chianti-classico"],
     appellation: {
       value: { system: "Denominazioni di origine (Itália)", category: "DOCG" },
@@ -69,6 +74,11 @@ export const regions: Region[] = [
     name: "Barolo",
     countryId: "it",
     level: "appellation",
+    // Ponto do mapa: lugar retratado na foto da região (fase 9)
+    coordinates: {
+      value: { lat: 44.6147, lng: 7.9394, place: "Barolo" },
+      sourceIds: ["src-osm-barolo"],
+    },
     sourceIds: ["src-masaf-barolo"],
     appellation: {
       value: { system: "Denominazioni di origine (Itália)", category: "DOCG" },
@@ -89,6 +99,11 @@ export const regions: Region[] = [
     name: "Bordeaux",
     countryId: "fr",
     level: "region",
+    // Ponto do mapa: lugar retratado na foto da região (fase 9)
+    coordinates: {
+      value: { lat: 45.3563, lng: -0.8953, place: "Bégadan" },
+      sourceIds: ["src-osm-begadan"],
+    },
     sourceIds: ["src-civb-cepages"],
     grapes: {
       ids: ["merlot", "cabernet-sauvignon"],
@@ -105,6 +120,11 @@ export const regions: Region[] = [
     name: "Champagne",
     countryId: "fr",
     level: "appellation",
+    // Ponto do mapa: lugar retratado na foto da região (fase 9)
+    coordinates: {
+      value: { lat: 49.0994, lng: 3.7572, place: "Châtillon-sur-Marne" },
+      sourceIds: ["src-commons-geo-champagne"],
+    },
     sourceIds: ["src-comite-champagne-appellation", "src-comite-champagne-cepages"],
     appellation: {
       value: { system: "Appellations d'origine (França)", category: "AOC" },
@@ -126,6 +146,11 @@ export const regions: Region[] = [
     name: "Rioja",
     countryId: "es",
     level: "appellation",
+    // Ponto do mapa: lugar retratado na foto da região (fase 9)
+    coordinates: {
+      value: { lat: 42.5259, lng: -2.8448, place: "Rodezno" },
+      sourceIds: ["src-osm-rodezno"],
+    },
     sourceIds: ["src-doca-rioja-clasificacion", "src-doca-rioja-variedades"],
     appellation: {
       value: { system: "Denominaciones de origen (Espanha)", category: "DOCa" },
@@ -146,6 +171,11 @@ export const regions: Region[] = [
     name: "Rías Baixas",
     countryId: "es",
     level: "appellation",
+    // Ponto do mapa: lugar retratado na foto da região (fase 9)
+    coordinates: {
+      value: { lat: 42.4795, lng: -8.8127, place: "Santa Cruz de Castrelo, Cambados" },
+      sourceIds: ["src-osm-castrelo-cambados"],
+    },
     sourceIds: ["src-mapa-rias-baixas-pliego"],
     appellation: {
       value: { system: "Denominaciones de origen (Espanha)", category: "DO" },
@@ -167,6 +197,11 @@ export const regions: Region[] = [
     name: "Napa Valley",
     countryId: "us",
     level: "appellation",
+    // Ponto do mapa: lugar retratado na foto da região (fase 9)
+    coordinates: {
+      value: { lat: 38.4617, lng: -122.3142, place: "Napa Valley" },
+      sourceIds: ["src-osm-napa-valley-ava"],
+    },
     sourceIds: ["src-ttb-avas", "src-nvv-fast-facts"],
     appellation: {
       value: { system: "American Viticultural Areas (EUA)", category: "AVA" },
@@ -187,6 +222,11 @@ export const regions: Region[] = [
     name: "Mendoza",
     countryId: "ar",
     level: "region",
+    // Ponto do mapa: lugar retratado na foto da região (fase 9)
+    coordinates: {
+      value: { lat: -33.4897, lng: -69.2604, place: "Los Árboles, no Valle de Uco" },
+      sourceIds: ["src-commons-geo-mendoza"],
+    },
     sourceIds: ["src-inv-ig-doc", "src-inv-malbec-2021"],
     appellation: {
       value: { system: "Indicaciones Geográficas (Argentina)", category: "IG" },
@@ -208,6 +248,11 @@ export const regions: Region[] = [
     name: "Valle de Cafayate",
     countryId: "ar",
     level: "appellation",
+    // Ponto do mapa: lugar retratado na foto da região (fase 9)
+    coordinates: {
+      value: { lat: -26.0729, lng: -65.976, place: "Cafayate" },
+      sourceIds: ["src-osm-cafayate"],
+    },
     sourceIds: ["src-inv-ig-doc"],
     appellation: {
       value: { system: "Indicaciones Geográficas (Argentina)", category: "IG" },
@@ -223,6 +268,11 @@ export const regions: Region[] = [
     name: "Vale dos Vinhedos",
     countryId: "br",
     level: "appellation",
+    // Ponto do mapa: lugar retratado na foto da região (fase 9)
+    coordinates: {
+      value: { lat: -29.179, lng: -51.579, place: "Vale dos Vinhedos" },
+      sourceIds: ["src-osm-vale-dos-vinhedos"],
+    },
     sourceIds: ["src-embrapa-do-vale-dos-vinhedos"],
     appellation: {
       value: { system: "Indicações Geográficas (Brasil, INPI)", category: "DO" },

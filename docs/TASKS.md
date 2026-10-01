@@ -117,8 +117,8 @@
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F9-01 | Escolher provedor de tiles (ADR-015) + dados GeoJSON com fonte | ADR atualizado | P2 | F4-03 | todo |
-| F9-02 | RegionMap (MapLibre sob demanda, atribuição, alternativa textual) | a11y §3.6 | P2 | F9-01 | todo |
+| F9-01 | Escolher provedor de tiles (ADR-015) + dados GeoJSON com fonte | ADR atualizado | P2 | F4-03 | done (ADR-033: OpenStreetMap sem chave; pontos de referência com fonte em vez de contornos) |
+| F9-02 | RegionMap (MapLibre sob demanda, atribuição, alternativa textual) | a11y §3.6 | P2 | F9-01 | done (Leaflet a pedido em regiões e países, texto alternativo e link; E2E `maps.spec.ts`) |
 
 ## Fase 10 — SEO, acessibilidade, performance e segurança
 

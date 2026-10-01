@@ -61,7 +61,7 @@ Versões consultadas no registro do npm em **2026-09-28**. Fixar versões exatas
 |---|---|---|---|
 | `motion` | 13.4.4 | 7 (uso pontual antes, se necessário) | Biblioteca **única** de animação JS (ADR-007). GSAP e Lenis **não** serão usados. **Não instalado na Fase 7: CSS bastou (ADR-029)** |
 | ~~`three` · `@react-three/fiber`~~ | — | 8 | Instalados e **removidos** na Fase 8: o 3D foi rejeitado pelo usuário (ADR-032) |
-| `maplibre-gl` | 6.11.2 | 9 | Mapas vetoriais open source, sem chave obrigatória (provedor de tiles a decidir — ADR-015) |
+| `leaflet` · `@types/leaflet` (dev) | 1.9.4 · 1.9.22 | 9 | Mapas com marcador (~40 KB), carregados só quando a pessoa pede; mapa do OpenStreetMap sem chave (ADR-033). A `maplibre-gl` foi testada e descartada: ~450 KB e worker separado |
 
 ### 2.6 Qualidade (dev)
 
@@ -289,8 +289,6 @@ Ver `.env.example`. Na v1 **não há segredos**.
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | Sim | URLs absolutas (canonical, OG, sitemap) |
 | `NEXT_PUBLIC_ENABLE_DEMO_DATA` | Sim | Carregar dados demo (só desenvolvimento) |
-| `NEXT_PUBLIC_MAP_STYLE_URL` | Sim | Estilo de mapa (fase 9) |
-| `MAP_TILES_API_KEY` | **Não** | Somente se o provedor exigir chave privada (fase 9) |
 
 ## 15. Skills, MCPs e ferramentas do ambiente
 
@@ -320,7 +318,7 @@ Pastas de referências visuais (`/design`, `/references`, `/docs/design`, `/asse
 | R4 | Performance do 3D em aparelhos fracos | — | — | Encerrado: sem 3D no site (ADR-032) |
 | R5 | Índice de busca crescer demais | Baixa (v1) | Médio | Monitorar tamanho no CI; plano de migração (§8) |
 | R6 | SEO com muitas páginas geradas | Baixa (v1) | Médio | SSG, sitemap com `generateSitemaps` acima de 50 mil URLs, canonical em páginas filtradas |
-| R7 | Mapas: licença de tiles e peso da lib | Média | Médio | MapLibre carregado sob demanda; provedor com licença clara; atribuição obrigatória (ADR-015) |
+| R7 | Mapas: licença de tiles e peso da lib | Baixa | Médio | Leaflet (~40 KB) só a pedido; OpenStreetMap com atribuição; reavaliar o provedor antes de tráfego alto (ADR-033) |
 | R8 | Conteúdo sobre álcool (idade, publicidade) | Média | Alto | Aviso de consumo responsável; decisão de verificação de idade (ADR-012); sem linguagem publicitária |
 | R9 | Complexidade para iniciante | Alta | Médio | Stack enxuta, fases pequenas, explicação de cada comando, docs sempre atualizados |
 | R10 | Sobreposição de libs de animação | Baixa | Baixo | Motion é a única (ADR-007) |

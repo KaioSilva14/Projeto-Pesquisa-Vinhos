@@ -78,7 +78,10 @@ describe("países", () => {
       "Louis Roederer",
     ]);
     expect(data?.wines).toHaveLength(4);
-    expect(data?.sources).toHaveLength(countryCitationIds(data!.country).length);
+    // Fontes do texto do país + as dos pontos do mapa (uma por região)
+    expect(data?.sources).toHaveLength(
+      countryCitationIds(data!.country).length + data!.mapPoints.length,
+    );
   });
 
   it("endereço desconhecido → nada", async () => {

@@ -78,8 +78,8 @@
 - Confirmação via `role="status"`.
 
 ### 3.6 Mapas (fase 9)
-- Mapa não é a única forma de acessar a informação: lista textual de regiões/sub-regiões ao lado.
-- Controles de zoom por botão; foco no canvas com instruções; `aria-label` descritivo.
+- Mapa não é a única forma de acessar a informação: texto com o lugar marcado e link "Ver no OpenStreetMap"; nos países, a grade de regiões.
+- Controles de zoom por botão ("Aproximar"/"Afastar"); o mapa recebe o foco depois de "Mostrar o mapa" e tem `aria-label` descritivo; arrastar nunca é necessário (ADR-033).
 
 ### 3.7 3D (fase 8): sem 3D no site (ADR-032)
 - Canvas decorativo `aria-hidden="true"`; qualquer informação apresentada também existe em texto.
