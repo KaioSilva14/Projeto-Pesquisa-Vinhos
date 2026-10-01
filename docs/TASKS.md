@@ -79,7 +79,7 @@
 | F4-03 | Regiões e países (lista + individual, hierarquia) | E2E-05 | P0 | F4-01 | done (regiões agrupadas por país; E2E-05 vinho → região → país → vinho; mapas na Fase 9) |
 | F4-04 | Produtores (lista + individual) | E2E-05 | P0 | F4-01 | done (E2E-05 completo: vinho → uva → região → produtor → vinho) |
 | F4-05 | Vinícolas (só se houver dados reais distintos) | Sem páginas vazias | P2 | F4-04 | não se aplica por enquanto (catálogo sem vinícola distinta do produtor; reabrir quando houver) |
-| F4-06 | Harmonizações (básico) | Linguagem de orientação; fontes | P1 | F4-01 | todo |
+| F4-06 | Harmonizações (básico) | Linguagem de orientação; fontes | P1 | F4-01 | done (`/harmonizacoes` + seção na página do vinho; só sugestões dos produtores: 3 vinhos, 14 pratos; sem páginas por prato, poucos dados) |
 | F4-08 | Imagens licenciadas de regiões, produtores e vinhos | Foto real e correspondente a cada entidade, com autor, licença e origem registrados (`IMAGES.md`); regiões e produtores via Wikimedia Commons (CC) ou site oficial; garrafas só do site oficial do produtor, do vinho certo; sem confirmação → "Imagem indisponível" | P1 | F4-03, F4-04 | done (todas as entidades com foto: 16 do Commons, 13 garrafas e a vinícola La Rioja Alta dos sites oficiais (ADR-028), Torrontés Riojano do INV em CC BY 4.0) |
 | F4-07 | `services/related.ts` (mesma região, mesma uva, mesmo produtor) | Testes unitários | P0 | F2-03 | done (função pura em `lib/wines/related.ts`) |
 
@@ -87,9 +87,9 @@
 
 | ID | Descrição | Critério de aceite | Prior. | Depende de | Status |
 |---|---|---|---|---|---|
-| F5-01 | Home editorial (hero com busca + seções com layouts distintos) | Checklist `DESIGN.md` §14; LCP ≤ 2,5 s | P0 | F4-* | todo |
-| F5-02 | Sobre (projeto, fontes, créditos de imagens, consumo responsável) | Todos os créditos listados | P1 | F4-* | todo |
-| F5-03 | Explorar | Navegação visual por estilos/regiões/uvas | P2 | F4-* | todo |
+| F5-01 | Home editorial (hero com busca + seções com layouts distintos) | Checklist `DESIGN.md` §14; LCP ≤ 2,5 s | P0 | F4-* | done (busca + números do catálogo, uvas, regiões, vinhos, produtores, explorar; "Estilos" e "Aprenda" aguardam dados com fonte; LCP medido na Fase 10) |
+| F5-02 | Sobre (projeto, fontes, créditos de imagens, consumo responsável) | Todos os créditos listados | P1 | F4-* | done (`/sobre#creditos` gerado a partir dos dados) |
+| F5-03 | Explorar | Navegação visual por estilos/regiões/uvas | P2 | F4-* | done (atalhos com contagem para a lista filtrada; estilos aguardam dados) |
 
 ## Fase 6 — Favoritos
 

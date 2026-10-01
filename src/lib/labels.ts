@@ -2,6 +2,7 @@ import type { SearchKind } from "@/lib/search/types";
 import type { WineType } from "@/schemas/common";
 import type { RegionLevel } from "@/schemas/geography";
 import type { GrapeColor } from "@/schemas/grape";
+import type { PairingCategory } from "@/schemas/pairing";
 import type { Source } from "@/schemas/source";
 import type { SparklingSweetness } from "@/schemas/wine";
 
@@ -60,4 +61,17 @@ export const REGION_LEVEL_LABELS: Record<RegionLevel, string> = {
   region: "Região vinícola",
   subregion: "Sub-região",
   appellation: "Denominação de origem",
+};
+
+/** Categorias de harmonização (DATA_MODEL.md §3.10), na ordem de uma refeição. */
+export const PAIRING_CATEGORY_LABELS: Record<PairingCategory, string> = {
+  entradas: "Entradas e aperitivos",
+  carnes: "Carnes",
+  aves: "Aves",
+  "peixes-e-frutos-do-mar": "Peixes e frutos do mar",
+  massas: "Massas",
+  queijos: "Queijos",
+  vegetarianos: "Pratos vegetarianos",
+  culinarias: "Culinárias",
+  sobremesas: "Sobremesas",
 };
