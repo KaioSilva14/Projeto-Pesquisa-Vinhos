@@ -73,4 +73,4 @@ Cobertura (`test:coverage`) ainda não está configurada: exige o pacote `@vites
 
 ## 7. CI
 
-Ordem no GitHub Actions: `npm ci` → `lint` → `typecheck` → `validate:data` → `test` → `build` → `test:e2e` (fase 3+) → Lighthouse CI (fase 10). Qualquer falha bloqueia o merge.
+Ordem no GitHub Actions: job **qualidade** (`npm ci` → `audit` → `lint` → `format:check` → `typecheck` → `validate:data` → `test` → `build`); depois, em paralelo, os jobs **E2E** (Playwright + axe, build com fotos sem otimização, ADR-034) e **Lighthouse** (build normal, `lighthouserc.json`, ADR-035). Qualquer falha bloqueia o merge.
